@@ -1,7 +1,7 @@
 #ifndef __I_HEADER_H__
 #define __I_HEADER_H__
 
-#include "Doomdata.h"
+#include "DoomDef.h"
 
 //--------
 //SOUND IO

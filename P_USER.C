@@ -646,7 +646,7 @@ void P_PlayerThink(player_t *player)
 			player->mo->flags &= ~MF_SHADOW;
 		}
 	}
-	if(player->powers[pw_infrared])
+        if(player->powers[pw_infrared] && M_CheckParm("-oldrules")) // FS: Old rules!
 	{
 		player->powers[pw_infrared]--;
 	}
@@ -718,19 +718,21 @@ void P_PlayerThink(player_t *player)
 	{
 		if (player->powers[pw_infrared] <= BLINKTHRESHOLD)
 		{
-			if(player->powers[pw_infrared]&8)
-			{
-				player->fixedcolormap = 0;
-			}
-			else
+                        if(player->powers[pw_infrared]&8)
+                        {
+                                player->fixedcolormap = 0;
+                        }
+                        else
 			{
 				player->fixedcolormap = 1;
 			}
 		}
-		else if(!(leveltime&16) && player == &players[consoleplayer])
+
+                else if(!(leveltime&16) && player == &players[consoleplayer])
 		{
 			if(newtorch)
 			{
+
 				if(player->fixedcolormap+newtorchdelta > 7
 					|| player->fixedcolormap+newtorchdelta < 1
 					|| newtorch == player->fixedcolormap)
@@ -738,6 +740,7 @@ void P_PlayerThink(player_t *player)
 					newtorch = 0;
 				}
 				else
+
 				{
 					player->fixedcolormap += newtorchdelta;
 				}
@@ -749,6 +752,7 @@ void P_PlayerThink(player_t *player)
 						0 : ((newtorch > player->fixedcolormap) ? 1 : -1);
 			}
 		}
+
 	}
 	else
 	{

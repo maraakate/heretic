@@ -304,6 +304,7 @@ void P_GiveKey(player_t *player, keytype_t key)
 {
 	extern int playerkeys;
 	extern vertex_t KeyPoints[];
+        int i; // FS: Give keys to all players in Coop
 	
 	if(player->keys[key])
 	{
@@ -317,7 +318,35 @@ void P_GiveKey(player_t *player, keytype_t key)
 	}
 	player->bonuscount = BONUSADD;
 	player->keys[key] = true;
-}
+
+        if (netgame && !deathmatch) // FS: Give it to all in coop
+        {
+                for (i = 0; i < MAXPLAYERS; i++)
+                {
+                        player = &players[i];
+                        playerkeys |= 1<<key;
+                        KeyPoints[key].x = 0;
+                        KeyPoints[key].y = 0;
+
+                        player->bonuscount = BONUSADD;
+                        player->keys[key] = true;
+
+                        switch(key)
+                        {
+                                case key_blue:
+                                        P_SetMessage(player, "EVERYONE HAS THE BLUE KEY!", false);
+                                        break;
+                                case key_green:
+                                        P_SetMessage(player, "EVERYONE HAS THE GREEN KEY!", false);
+                                        break;
+                                case key_yellow:
+                                        P_SetMessage(player, "EVERYONE HAS THE YELLOW KEY!", false);
+                                        break;
+                                default:
+                                        break;
+                        }
+                }
+}       }
 
 //---------------------------------------------------------------------------
 //
@@ -457,7 +486,7 @@ boolean P_GiveArtifact(player_t *player, artitype_t arti, mobj_t *mo)
 void P_SetDormantArtifact(mobj_t *arti)
 {
 	arti->flags &= ~MF_SPECIAL;
-	if(deathmatch && (arti->type != MT_ARTIINVULNERABILITY)
+        if(netgame && (arti->type != MT_ARTIINVULNERABILITY) // FS: Was deathmatch
 		&& (arti->type != MT_ARTIINVISIBILITY))
 	{
 		P_SetMobjState(arti, S_DORMANTARTI1);
@@ -533,7 +562,7 @@ void A_RestoreSpecialThing2(mobj_t *thing)
 
 void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 {
-	int i;
+        int i;
 	player_t *player;
 	fixed_t delta;
 	int sound;
@@ -603,7 +632,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 		case SPR_BKYY: // Key_Blue
 			if(!player->keys[key_blue])
 			{
-				P_SetMessage(player, TXT_GOTBLUEKEY, false);
+                                P_SetMessage(player, TXT_GOTBLUEKEY, false);
 			}
 			P_GiveKey(player, key_blue);
 			sound = sfx_keyup;
@@ -615,9 +644,9 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 		case SPR_CKYY: // Key_Yellow
 			if(!player->keys[key_yellow])
 			{
-				P_SetMessage(player, TXT_GOTYELLOWKEY, false);
+                        	P_SetMessage(player, TXT_GOTYELLOWKEY, false);
 			}
-			sound = sfx_keyup;
+                        sound = sfx_keyup;
 			P_GiveKey(player, key_yellow);
 			if(!netgame)
 			{
@@ -851,7 +880,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	{
 		player->itemcount++;
 	}
-	if(deathmatch && respawn && !(special->flags&MF_DROPPED))
+        if(netgame && respawn && !(special->flags&MF_DROPPED)) // FS: Was deathmatch
 	{
 		P_HideSpecialThing(special);
 	}
@@ -1403,7 +1432,7 @@ void P_DamageMobj
 			damage -= saved;
 		}
 		if(damage >= player->health
-			&& ((gameskill == sk_baby) || deathmatch)
+                        && ((gameskill == sk_baby) || netgame) // FS: Was Deathmatch
 			&& !player->chickenTics)
 		{ // Try to use some inventory health
 			P_AutoUseHealth(player, damage-player->health+1);

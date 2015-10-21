@@ -227,8 +227,12 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 
 	strafe = gamekeydown[key_strafe] || mousebuttons[mousebstrafe]
 		|| joybuttons[joybstrafe];
-	speed = gamekeydown[key_speed] || joybuttons[joybspeed]
-		|| joybuttons[joybspeed];
+        speed = gamekeydown[key_speed] || joybuttons[joybspeed]
+                || joybuttons[joybspeed];
+
+        if (gamekeydown[key_speed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
+                speed = !speed;
+
 #ifdef __WATCOMC__
 	if(useexterndriver)
 	{
@@ -1125,10 +1129,14 @@ void G_PlayerFinishLevel(int player)
 */
 	// END HACK
 	p = &players[player];
-	for(i=0; i<p->inventorySlotNum; i++)
-	{
-		p->inventory[i].count = 1;
-	}
+
+        if(M_CheckParm("-oldrules")) // FS: Old Rules
+        {
+                for(i=0; i<p->inventorySlotNum; i++)
+                {
+                        p->inventory[i].count = 1;
+                }
+
 	p->artifactCount = p->inventorySlotNum;
 
 	if(!deathmatch)
@@ -1138,10 +1146,11 @@ void G_PlayerFinishLevel(int player)
 			P_PlayerUseArtifact(p, arti_fly);
 		}
 	}
-	memset(p->powers, 0, sizeof(p->powers));
+        }
+
+        memset(p->powers, 0, sizeof(p->powers));
 	memset(p->keys, 0, sizeof(p->keys));
 	playerkeys = 0;
-//      memset(p->inventory, 0, sizeof(p->inventory));
 	if(p->chickenTics)
 	{
 		p->readyweapon = p->mo->special1; // Restore weapon
@@ -1174,40 +1183,68 @@ void G_PlayerFinishLevel(int player)
 
 void G_PlayerReborn(int player)
 {
-	player_t *p;
-	int i;
+        player_t *p;
+        int i;
 	int frags[MAXPLAYERS];
 	int killcount, itemcount, secretcount;
 	boolean secret;
 
+        boolean coopkeys[NUMKEYS]; // FS: Keep keys in Coop
+        boolean coop; // FS: Is it coop?
+
+        coop = false;
 	secret = false;
 	memcpy(frags, players[player].frags, sizeof(frags));
-	killcount = players[player].killcount;
+
+        if(netgame && !deathmatch) // FS: Check for Coop
+        {
+                coop = true;
+                memcpy(coopkeys, players[player].keys, sizeof(coopkeys)); // FS: Keep keys in Coop
+        }
+
+        killcount = players[player].killcount;
 	itemcount = players[player].itemcount;
 	secretcount = players[player].secretcount;
 
 	p = &players[player];
-	if(p->didsecret)
+
+        if(p->didsecret)
 	{
 		secret = true;
 	}
-	memset(p, 0, sizeof(*p));
+
+        if(!coop) // FS: Check for Coop
+        {
+                memset(p, 0, sizeof(*p));
+        }
 
 	memcpy(players[player].frags, frags, sizeof(players[player].frags));
-	players[player].killcount = killcount;
+
+        if (coop)
+                memcpy(players[player].keys, coopkeys, sizeof(coopkeys)); // FS: Keep keys in Coop
+
+        players[player].killcount = killcount;
 	players[player].itemcount = itemcount;
 	players[player].secretcount = secretcount;
 
 	p->usedown = p->attackdown = true; // don't do anything immediately
 	p->playerstate = PST_LIVE;
 	p->health = MAXHEALTH;
-	p->readyweapon = p->pendingweapon = wp_goldwand;
-	p->weaponowned[wp_staff] = true;
-	p->weaponowned[wp_goldwand] = true;
+
+        p->readyweapon = p->pendingweapon = wp_goldwand;
+        p->weaponowned[wp_staff] = true;
+        p->weaponowned[wp_goldwand] = true;
 	p->messageTics = 0;
 	p->lookdir = 0;
 	p->ammo[am_goldwand] = 50;
-	for(i = 0; i < NUMAMMO; i++)
+
+        if (coop)
+        {
+                p->readyweapon = p->pendingweapon = wp_crossbow;
+                p->weaponowned[wp_crossbow] = true;
+                p->ammo[am_crossbow] = 15;
+        }
+        for(i = 0; i < NUMAMMO; i++)
 	{
 		p->maxammo[i] = maxammo[i];
 	}
@@ -1215,6 +1252,7 @@ void G_PlayerReborn(int player)
 	{
 		p->didsecret = true;
 	}
+
 	if(p == &players[consoleplayer])
 	{
 		SB_state = -1; // refresh the status bar

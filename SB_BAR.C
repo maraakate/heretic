@@ -57,6 +57,7 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat);
 static void CheatMassacreFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat);
+static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat); // FS: From Doom
 
 // Public Data
 
@@ -300,6 +301,17 @@ static byte CheatIDDQDSeq[] =
 	0xff, 0
 };
 
+// FS: From Doom
+static byte CheatIDMUSSeq[] =
+{
+        CHEAT_ENCRYPT('i'),
+        CHEAT_ENCRYPT('d'),
+        CHEAT_ENCRYPT('m'),
+        CHEAT_ENCRYPT('u'),
+        CHEAT_ENCRYPT('s'),
+	0, 0, 0xff, 0
+};
+
 static Cheat_t Cheats[] =
 {
 	{ CheatGodFunc, CheatGodSeq, NULL, 0, 0, 0 },
@@ -318,6 +330,7 @@ static Cheat_t Cheats[] =
 	{ CheatMassacreFunc, CheatMassacreSeq, NULL, 0, 0, 0 },
 	{ CheatIDKFAFunc, CheatIDKFASeq, NULL, 0, 0, 0 },
 	{ CheatIDDQDFunc, CheatIDDQDSeq, NULL, 0, 0, 0 },
+        { CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
 	{ NULL, NULL, NULL, 0, 0, 0 } // Terminator
 };
 
@@ -1507,4 +1520,23 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 {
 	P_DamageMobj(player->mo, NULL, player->mo, 10000);
 	P_SetMessage(player, TXT_CHEATIDDQD, true);
+}
+
+// FS: From Doom
+static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
+{
+        int     episode, map;
+
+	episode = cheat->args[0]-'0';
+	map = cheat->args[1]-'0';
+
+	if(M_ValidEpisodeMap(episode, map))
+	{
+                P_SetMessage(player, "MUSIC CHANGE", true);
+                S_StartSong((episode-1)*9 + map-1, true);
+        }
+        else
+        {
+                P_SetMessage(player, "IMPOSSIBLE SELECTION", true);
+        }
 }

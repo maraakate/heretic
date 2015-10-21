@@ -114,7 +114,7 @@ void S_StartSong(int song, boolean loop)
 	}
 	if(song < mus_e1m1 || song > NUMMUSIC)
 	{
-		return;
+                return;
 	}
 	mus_lumpnum = W_GetNumForName(S_music[song].name);
 	mus_sndptr = W_CacheLumpNum(mus_lumpnum, PU_MUSIC);

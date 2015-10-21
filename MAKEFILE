@@ -80,6 +80,8 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
  copy tic.exe striptic.exe
  wstrip striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
+ sb /R /O heretic.exe
+ upx -9 heretic.exe
 
 i_ibm.obj:
  wcc386 /zp1 /4r /zq /ei /j i_ibm.c
@@ -102,3 +104,5 @@ final : .SYMBOLIC
  wstrip striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
  sb /R /O heretic.exe
+ upx -9 heretic.exe
+

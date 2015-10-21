@@ -1,3 +1,25 @@
+01-12-13
+ - New game rules in coop:
+   * Players start with crossbow and 15 arrows.
+   * Players keep weapons, inventory, etc. after respawn.
+   * Keys are shared.
+   * Items respawn, sharing deathmatch rules for respawning.
+
+   "-oldrules" does not revert to old style coop, yet.
+ - Holding run doesn't allow ultrafast movement.  Thanks to DOSDOOM
+   for oneliner.
+
+01-11-13
+ - New game rules:
+   * Torch lighting will last for the duration of the level.
+   * Multiple artifacts will carry to the next level.
+ - "-oldrules" parameter to use older game rules.
+
+01-08-13
+ - Added IDMUS cheat from Doom.  Changes music with IDMUSXY
+   X being Episode, Y being Map.  i.e. IDMUS17 to play music from
+   Episode 1, Map 7.
+
 10-01-12
  - Mouse sensitivity raised from 20 to 50.  Great for trackballs!
  - Mousey (fwd+bckwd) capped to 20.  Things get silly if it's higher.
