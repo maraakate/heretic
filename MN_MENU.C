@@ -1347,7 +1347,7 @@ boolean MN_Responder(event_t *event)
 				}
 				return true;
 			case KEY_F10: // quit
-				if(gamestate == GS_LEVEL)
+//				if(gamestate == GS_LEVEL) // FS: Quit with F10 at title screen like Doom
 				{
 					SCQuitGame(0);
 					S_StartSound(NULL, sfx_chat);

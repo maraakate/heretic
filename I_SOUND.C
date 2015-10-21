@@ -270,6 +270,10 @@ void I_sndArbitrateCards(void)
   //
   if (gus)
   {
+	byte *gusbuffer; // FS: Allow an external GUS ini file
+	int	gusfilelength; // FS: Allow an external GUS ini file
+	int	p; // FS: Allow an external GUS ini file
+
 	if (GF1_Detect()) tprintf("Dude.  The GUS ain't responding.\n",1);
 	else
 	{
@@ -277,8 +281,29 @@ void I_sndArbitrateCards(void)
 		tprintf("SB_Init: Loading GUS patches.\n", 1); // FS
 		hgotoxy(17,9);
 		hprintf("Loading GUS patches.", 0x3f); // FS
-		dmxlump = W_GetNumForName("dmxgus");
-		GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
+
+		p = M_CheckParm("-usegusini"); // FS: Allow an external GUS ini file
+		if (p)
+		{
+			if(p < myargc-1)
+			{
+				char *gusfile = myargv[p+1];
+				gusfilelength = M_ReadFile(gusfile, &gusbuffer);
+				GF1_SetMap((char *)gusbuffer, gusfilelength);
+				Z_Free(gusbuffer); // FS: We're done with it
+			}
+			else
+			{
+				I_ShutdownKeyboard();
+				printf("ERROR: No external GUS file specified! Use -usegusini <filename.ini>.\n");
+				exit(1);
+			}
+		}
+		else
+		{
+			dmxlump = W_GetNumForName("dmxgus");
+			GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
+		}
 	}
 
   }

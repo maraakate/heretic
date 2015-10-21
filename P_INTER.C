@@ -907,8 +907,8 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 
 void P_KillMobj(mobj_t *source, mobj_t *target)
 {
-	int i, z; // FS
-	player_t *player, *playermsg; // FS
+	int i, z; // FS: For Player Died message
+	player_t *player, *playermsg; // FS: For Player Died message
 	char buffer[30]; // FS: For Player Died message
 	int playnum; // FS: For Player Died message
 
