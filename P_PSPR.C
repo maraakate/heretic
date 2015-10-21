@@ -13,7 +13,7 @@
 #define WEAPONTOP 32*FRACUNIT
 #define FLAME_THROWER_TICS 10*35
 #define MAGIC_JUNK 1234
-#define MAX_MACE_SPOTS 8
+#define MAX_MACE_SPOTS 32 // FS: WAS 8
 
 static int MaceSpotCount;
 static struct

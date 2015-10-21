@@ -7,7 +7,7 @@
 
 // Macros
 
-#define MAX_BOSS_SPOTS 8
+#define MAX_BOSS_SPOTS 32 // FS: WAS 8
 
 // Types
 

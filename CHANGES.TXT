@@ -1,3 +1,6 @@
+09-05-13
+ - Raised MAX_BOSS_SPOTS and MAX_MACE_SPOTS from 8 to 32.
+
 09-04-13
  - "-statcopy <filename.txt>" will make a file (or append to it) with the
    game statistics.  Works with all game modes.  If you do not specify a
