@@ -883,7 +883,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	{
 		player->itemcount++;
 	}
-        if(netgame && respawn && !(special->flags&MF_DROPPED) && !M_CheckParm("-oldrules")) // FS: Respawning Items Was deathmatch
+        if((netgame && respawn && !(special->flags&MF_DROPPED) && !M_CheckParm("-oldrules")) || M_CheckParm("-respawnitems")) // FS: Respawning Items Was deathmatch
 	{
 		P_HideSpecialThing(special);
 	}

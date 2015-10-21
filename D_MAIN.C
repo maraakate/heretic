@@ -47,6 +47,9 @@ void D_AdvanceDemo (void);
 void F_Drawer(void);
 boolean F_Responder(event_t *ev);
 
+extern int savestringsize; // FS: now a parameter
+extern int savegamesize; // FS: now a parameter
+
 //---------------------------------------------------------------------------
 //
 // FUNC FixedDiv
@@ -787,6 +790,12 @@ void D_DoomMain(void)
 	ravpic = M_CheckParm("-ravpic");
 	noartiskip = M_CheckParm("-noartiskip");
 	debugmode = M_CheckParm("-debug");
+
+	if(M_CheckParm("-oldsave")) // FS: Load old saves
+	{
+		savestringsize = 24;
+		savegamesize = 0x30000;
+	}
 
         startskill = sk_medium;
 	startepisode = 1;

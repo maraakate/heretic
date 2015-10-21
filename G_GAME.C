@@ -103,6 +103,8 @@ short            consistancy[MAXPLAYERS][BACKUPTICS];
 
 byte            *savebuffer, *save_p;
 
+int			savestringsize = 256; // FS: Now a parameter
+int			savegamesize = 0x100000; // FS: Now a parameter
 
 //
 // controls (have defaults)
@@ -123,7 +125,11 @@ int             joybstrafe;
 int             joybuse;
 int             joybspeed;
 
-
+int	use_wpnbinds; // FS: Custom weapon keys
+int	wpn_crossbow; // FS: Custom weapon keys
+int	wpn_dragon; // FS: Custom weapon keys
+int	wpn_hellstaff; // FS: Custom weapon keys
+int	wpn_phoenix; // FS: Custom weapon keys
 
 #define MAXPLMOVE       0x32
 
@@ -235,7 +241,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 
 	if (!M_CheckParm("-debug"))
 	{
-		if (gamekeydown[key_speed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
+                if (gamekeydown[key_speed] || joybuttons[joybspeed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
 			speed = !speed;
 	}
 
@@ -586,6 +592,30 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 	{
 		cmd->buttons |= BT_USE;
 		dclicks = 0;                    // clear double clicks if hit use button
+	}
+
+	if(use_wpnbinds) // FS: Custom weapon keys
+	{
+		if(gamekeydown[wpn_crossbow])
+		{
+				cmd->buttons |= BT_CHANGE;
+				cmd->buttons |= 2<<BT_WEAPONSHIFT;
+		}
+		if(gamekeydown[wpn_dragon])
+		{
+				cmd->buttons |= BT_CHANGE;
+				cmd->buttons |= 3<<BT_WEAPONSHIFT;
+		}
+		if(gamekeydown[wpn_hellstaff])
+		{
+				cmd->buttons |= BT_CHANGE;
+				cmd->buttons |= 4<<BT_WEAPONSHIFT;
+		}
+		if(gamekeydown[wpn_phoenix])
+		{
+				cmd->buttons |= BT_CHANGE;
+				cmd->buttons |= 5<<BT_WEAPONSHIFT;
+		}
 	}
 
 	for(i = 0; i < NUMWEAPONS-2; i++)
@@ -1572,7 +1602,7 @@ void G_DoLoadGame(void)
 	gameaction = ga_nothing;
 
 	length = M_ReadFile(savename, &savebuffer);
-	save_p = savebuffer+SAVESTRINGSIZE;
+	save_p = savebuffer+savestringsize;
 	// Skip the description field
 	memset(vcheck, 0, sizeof(vcheck));
 	sprintf(vcheck, "version %i", VERSION);
@@ -1950,7 +1980,7 @@ void G_DoSaveGame(void)
 	description = savedescription;
 
 	SV_Open(name);
-	SV_Write(description, SAVESTRINGSIZE);
+	SV_Write(description, savestringsize);
 	memset(verString, 0, sizeof(verString));
 	sprintf(verString, "version %i", VERSION);
 	SV_Write(verString, VERSIONSIZE);
@@ -1984,7 +2014,7 @@ void G_DoSaveGame(void)
 void SV_Open(char *fileName)
 {
 	MallocFailureOk = true;
-	save_p = savebuffer = Z_Malloc(SAVEGAMESIZE, PU_STATIC, NULL);
+	save_p = savebuffer = Z_Malloc(savegamesize, PU_STATIC, NULL);
 	MallocFailureOk = false;
 	if(savebuffer == NULL)
 	{ // Not enough memory - use file save method
@@ -2011,7 +2041,7 @@ void SV_Close(char *fileName)
 	if(SaveGameType == SVG_RAM)
 	{
 		length = save_p-savebuffer;
-		if(length > SAVEGAMESIZE)
+		if(length > savegamesize)
 		{
 			I_Error("Savegame buffer overrun");
 		}

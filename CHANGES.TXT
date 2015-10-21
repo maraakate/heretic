@@ -1,3 +1,15 @@
+09-15-13
+ - use_wpnbinds in HERETIC.CFG.  If set to 1, the following defaults are used:
+   * 'Q' for Phoenix Rod
+   * 'Z' for Crossbow
+   * 'X' for Dragon's Claw
+   * 'C' for Hellstaf
+   These binds can be customized via the HERETIC.CFG.  However, you must know
+   the appropriate scancode.
+
+09-14-13
+ - Fixed joystick super speed.
+
 09-08-13
  - Added checks for statcopy to work for episode ends.
 

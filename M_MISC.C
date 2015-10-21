@@ -258,7 +258,8 @@ void M_FindResponseFile(void)
 			handle = fopen(&myargv[i][1], "rb");
 			if(!handle)
 			{
-				printf("\nNo such response file!");
+
+				printf("\nNo such response file!");
 				exit(1);
 			}
 			printf("Found response file %s!\n",&myargv[i][1]);
@@ -367,6 +368,12 @@ extern  int     viewwidth, viewheight;
 
 int mouseSensitivity;
 int headBob; // FS: Head bob toggle
+
+extern int	use_wpnbinds; // FS: Custom weapon keys
+extern int	wpn_crossbow; // FS: Custom weapon keys
+extern int	wpn_dragon; // FS: Custom weapon keys
+extern int	wpn_hellstaff; // FS: Custom weapon keys
+extern int	wpn_phoenix; // FS: Custom weapon keys
 
 extern  int screenblocks;
 
@@ -492,6 +499,13 @@ default_t defaults[] =
 	{ "usegamma", &usegamma, 0 },
 	{ "usePalFlash", &usePalFlash, 1 }, // FS: Palette Flashing
 	{ "headBob", &headBob, 1 }, // FS: Head bob
+
+	// FS: Use custom weapon binds
+	{ "use_wpnbinds", &use_wpnbinds, 0},
+	{ "wpn_crossbow", &wpn_crossbow, 44, 1 }, // FS: Z
+	{ "wpn_dragon", &wpn_dragon, 45, 1 }, // FS: X
+	{ "wpn_hellstaff", &wpn_hellstaff, 46, 1 }, // FS: C
+	{ "wpn_phoenix", &wpn_phoenix, 16, 1 }, // FS: Q
 
 	{ "chatmacro0", (int *) &chat_macros[0], (int) HUSTR_CHATMACRO0 },
 	{ "chatmacro1", (int *) &chat_macros[1], (int) HUSTR_CHATMACRO1 },
