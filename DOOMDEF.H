@@ -1116,7 +1116,7 @@ extern boolean intermission;
 void IN_Start(void);
 void IN_Ticker(void);
 void IN_Drawer(void);
-
+char *IN_CheckStatArgv(void); // FS: For statcopy 
 //----------------------
 // Chat mode (CT_chat.c)
 //----------------------

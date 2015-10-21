@@ -1,3 +1,22 @@
+09-04-13
+ - "-statcopy <filename.txt>" will make a file (or append to it) with the
+   game statistics.  Works with all game modes.  If you do not specify a
+   filename it will default to STATS.TXT.  I did my best to make sure it
+   will default if not specified, but if you get some weirdness not
+   remembering parameters or desyncing games because of missing params it's
+   likely my checks aren't as good as I thought.
+  - Fixed P_SetMessage "ultimate messages" value to be cleared on death
+   and finish levels.  If you died and immediately respawned in a netgame
+   messages would be disabled unless you reset the value in the menu or
+   another "ultimate message" appeared.  In my stats testing I also found
+   that if you saved in front of an exit and "GAME RESTORED" was still on
+   the screen, flick the switch, messages again would be disabled.
+   If you find other weird situations where it happens let me know.
+
+09-03-13
+ - Nothing crazy, but the game will tell you that you can't load games
+   from older versions.
+
 09-02-13
  - "-noexit" to disable exits in netgames.  Useful for DM maps.  Only works
    for valid netgames.  You can test it out with IPXSETUP.EXE -NODES 1

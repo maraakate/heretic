@@ -44,6 +44,11 @@ void IN_DrawNumber(int val, int x, int y, int digits);
 void IN_DrawTime(int x, int y, int h, int m, int s);
 void IN_DrTextB(char *text, int x, int y);
 
+char *IN_CheckStatArgv(void); // FS: For statcopy
+void IN_PrintCoopStats(void);
+void IN_PrintSingleStats(void);
+void IN_PrintDMStats(void);
+
 static boolean skipintermission;
 static int interstate = 0;
 static int intertime = -1;
@@ -81,6 +86,8 @@ static fixed_t dSlideX[MAXPLAYERS];
 static fixed_t dSlideY[MAXPLAYERS];
 
 static char *KillersText[] = { "K", "I", "L", "L", "E", "R", "S" };
+
+static int didStatCopy; // FS: For statcopy
 
 extern char *LevelNames[];
 
@@ -194,6 +201,7 @@ void IN_InitStats(void)
 	int slaughtercount;
 	int playercount;
 
+	didStatCopy = 0; // FS: For statcopy
 
 	if(!netgame)
 	{
@@ -477,6 +485,7 @@ void IN_Drawer(void)
 		S_StartSound(NULL, sfx_pstop);
 	}
 	oldinterstate = interstate;
+
 	switch(interstate)
 	{
 		case 0: // draw stats
@@ -649,6 +658,8 @@ void IN_DrawSingleStats(void)
 	int x;
 	static int sounds;
 
+	IN_PrintSingleStats(); // FS: statcopy	
+
 	IN_DrTextB("KILLS", 50, 65);
 	IN_DrTextB("ITEMS", 50, 90);
 	IN_DrTextB("SECRETS", 50, 115);
@@ -657,7 +668,7 @@ void IN_DrawSingleStats(void)
 	IN_DrTextB(LevelNames[(gameepisode-1)*9+prevmap-1]+7, x, 3);
 	x = 160-MN_TextAWidth("FINISHED")/2;
 	MN_DrTextA("FINISHED", x, 25);
-
+	
 	if(intertime < 30)
 	{
 		sounds = 0;
@@ -734,6 +745,8 @@ void IN_DrawCoopStats(void)
 
 	static int sounds;
 
+	IN_PrintCoopStats(); // FS: statcopy	
+
 	IN_DrTextB("KILLS", 95, 35);
 	IN_DrTextB("BONUS", 155, 35);
 	IN_DrTextB("SECRET", 232, 35);
@@ -786,6 +799,8 @@ void IN_DrawDMStats(void)
 	int x;
 
 	static int sounds;
+
+	IN_PrintDMStats(); // FS: For statcopy
 
 	xpos = 90;
 	ypos = 55;
@@ -1003,5 +1018,131 @@ void IN_DrTextB(char *text, int x, int y)
 			V_DrawShadowedPatch(x, y, p);
 			x += p->width-1;
 		}
+	}
+}
+
+char *IN_CheckStatArgv(void) // FS: Check for -statcopy and default to stats.txt
+{
+	int p;
+	char	*statfile;
+
+	if(p = M_CheckParm("-statcopy"))
+	{
+		if(p && p<myargc-1)
+		{
+			statfile = myargv[p+1];
+			return(statfile);
+		}
+	}
+	return NULL; 
+}
+
+void IN_PrintSingleStats(void)
+{
+	FILE *f;
+	char	*statfile;
+	static char buffer[1024]; // FS: For statcopy
+
+	if(!IN_CheckStatArgv())
+		return;
+
+	if(didStatCopy < 1)
+	{
+		strcpy(statfile, IN_CheckStatArgv());
+
+		f = fopen(statfile, "a+");
+
+		if (!f)
+			I_Error("Unable to open stats file!");
+
+		sprintf(buffer,"MAP: E%iM%i  <SINGLE PLAYER>\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
+		gameepisode, prevmap, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
+		fseek(f,0, SEEK_END);
+		fputs(buffer, f);
+		fflush(f);
+		fclose(f);
+		didStatCopy = 1;
+	}
+}
+
+void IN_PrintCoopStats(void)
+{
+	int i;
+	FILE *f;
+	char	*statfile;
+	static char buffer[2048]; // FS: For statcopy
+
+	if(!IN_CheckStatArgv())
+		return;
+
+	if(didStatCopy < 1)
+	{
+		strcpy(statfile, IN_CheckStatArgv());
+
+		f = fopen(statfile, "a+");
+
+		if (!f)
+			I_Error("Unable to open stats file!");
+
+		sprintf(buffer,"MAP: E%iM%i  <COOPERATIVE>\n", gameepisode, prevmap);
+		fputs(buffer, f);
+		fflush(f);
+
+		for(i = 0; i < MAXPLAYERS; i++)
+		{
+			if(playeringame[i])
+			{
+				sprintf(buffer," - PLAYER %i\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n\n", i+1, players[i].killcount, totalkills, players[i].itemcount, totalitems, players[i].secretcount, totalsecret);
+
+				fseek(f,0, SEEK_END);
+				fputs(buffer, f);
+				fflush(f);
+			}
+		}
+
+		fclose(f);
+		didStatCopy = 1;
+	}
+}
+
+
+void IN_PrintDMStats(void)
+{
+	int i;
+	FILE *f;
+	char	*statfile;
+	static char buffer[2048]; // FS: For statcopy
+
+	if(!IN_CheckStatArgv())
+		return;
+
+	if(didStatCopy < 1)
+	{
+		strcpy(statfile, IN_CheckStatArgv());
+
+		f = fopen(statfile, "a+");
+
+		if (!f)
+			I_Error("Unable to open stats file!");
+
+		sprintf(buffer,"MAP: E%iM%i  <DEATHMATCH>\n", gameepisode, prevmap);
+		fputs(buffer, f);
+		fflush(f);
+
+		for(i = 0; i < MAXPLAYERS; i++)
+		{
+			totalFrags[i] = 0;
+			if(playeringame[i])
+			{
+				totalFrags[i] += players[i].frags[i];
+				sprintf(buffer," - PLAYER %i\n  * FRAGS: %i\n\n", i+1, totalFrags[i]);
+				fseek(f,0, SEEK_END);
+				fputs(buffer, f);
+				fflush(f);
+			}
+		}
+
+		fclose(f);
+		didStatCopy = 1;
 	}
 }

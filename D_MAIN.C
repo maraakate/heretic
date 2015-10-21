@@ -9,6 +9,8 @@
 #endif
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h> // FS: For Stat Copy
+
 #include "DoomDef.h"
 #include "P_local.h"
 #include "soundst.h"
@@ -992,15 +994,36 @@ void D_DoomMain(void)
 // start the apropriate game based on parms
 //
 
-	// FS: FROM DOOM check for a driver that wants intermission stats 
+	// FS: Idea from DOOM output intermission stats to a file 
 	p = M_CheckParm ("-statcopy");
 	if (p && p<myargc-1)
 	{
 		// for statistics driver
-		extern  void*	statcopy;                            
+		char	*statfile = myargv[p+1];
+		time_t nowtime;
+		struct tm *ptr_time;
+		char	timebuffer[128];
+		FILE	*f;
 
-		statcopy = (void*)atoi(myargv[p+1]);
-		printf ("External statistics registered.\n");
+		if(strstr(myargv[p+1], "-"))
+		{
+			strcpy(statfile, "stats.txt");
+		}
+
+		f = fopen(statfile, "a+");
+
+		if (!f)
+			I_Error("Unable to open stats file!");
+
+		time(&nowtime);
+		ptr_time = localtime(&nowtime);
+		strftime(timebuffer, 128, "\n------------------------------------------------------------\n%B %d, %Y %I:%M %p\n\n", ptr_time);
+		fseek(f,0,SEEK_END);
+		fputs(timebuffer, f);
+		fflush(f);
+		fclose(f);
+
+		tprintf ("External statistics registered.\n", 1);
 	}
 
 	D_CheckRecordFrom();

@@ -907,10 +907,12 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 
 void P_KillMobj(mobj_t *source, mobj_t *target)
 {
-        int i; // FS
-        player_t *player; // FS
+	int i, z; // FS
+	player_t *player, *playermsg; // FS
+	char buffer[30]; // FS: For Player Died message
+	int playnum; // FS: For Player Died message
 
-        target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY|MF_NOGRAVITY);
+	target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY|MF_NOGRAVITY);
 	target->flags |= MF_CORPSE|MF_DROPOFF;
 	target->flags2 &= ~MF2_PASSMOBJ;
 	target->height >>= 2;
@@ -960,10 +962,37 @@ void P_KillMobj(mobj_t *source, mobj_t *target)
 
 		if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Broadcast death in coop
 		{
+			for (z = 0; z <MAXPLAYERS; z++)
+			{
+				player = &players[z];
+				if(player == target->player)
+				{
+					playnum = z;
+
+				}
+			}
+			
 			for (i = 0; i < MAXPLAYERS; i++)
 			{
 				player = &players[i];
-				P_SetMessage(player, "PLAYER DIED!", true);
+				switch(playnum)
+				{
+					case 0:
+						P_SetMessage(player, "PLAYER 1 DIED!", true);
+						break;
+					case 1:
+						P_SetMessage(player, "PLAYER 2 DIED!", true);
+						break;
+					case 2:
+						P_SetMessage(player, "PLAYER 3 DIED!", true);
+						break;
+					case 3:
+						P_SetMessage(player, "PLAYER 4 DIED!", true);
+						break;
+					default: // FS: Shouldn't happen... but?
+						P_SetMessage(player, "PLAYER DIED!", true);
+						break;
+				}
 			}
 		}
 

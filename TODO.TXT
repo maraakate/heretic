@@ -3,6 +3,7 @@
 - Disney Sound source.
 - FOV.
 - Fix cheating in coop.
-- Fix SETUP.EXE to keep new values.
+- Make IDMUS and other harmless "cheats" work in netplay.
+- Fix friendly fire.
 - Fix demo desync.
-
+- Fix "skill 0" to be an invalid option.

@@ -158,7 +158,8 @@ int inventoryTics;
 extern externdata_t *i_ExternData;
 #endif
 
-void*	statcopy; // FS: for statistics driver
+extern boolean ultimatemsg; // FS: Was goofing
+
 
 //=============================================================================
 // Not used - ripped out for Heretic
@@ -1136,6 +1137,8 @@ void G_PlayerFinishLevel(int player)
 	player_t *p;
 	int i;
 
+	ultimatemsg = false; // FS: Clear it out
+
 /*      // BIG HACK
 	inv_ptr = 0;
 	curpos = 0;
@@ -1161,7 +1164,7 @@ void G_PlayerFinishLevel(int player)
 		}
         }
 
-        memset(p->powers, 0, sizeof(p->powers));
+	memset(p->powers, 0, sizeof(p->powers));
 	memset(p->keys, 0, sizeof(p->keys));
 	playerkeys = 0;
 	if(p->chickenTics)
@@ -1206,6 +1209,7 @@ void G_PlayerReborn(int player)
 	boolean coop; // FS: Is it coop?
 	boolean coopbackpack; // FS: Have a backpack?
 
+	ultimatemsg = false; // FS: Clear it out
 	coop = false; // FS: Clear it out
         coopbackpack = false; // FS: Clear it out
         coopkeys[NUMKEYS] = false; // FS: Clear it out
@@ -1562,6 +1566,7 @@ void G_DoLoadGame(void)
 	sprintf(vcheck, "version %i", VERSION);
 	if (strcmp ((char *)save_p, vcheck)) // FS: Compiler Warning
 	{ // Bad version
+		P_SetMessage(&players[consoleplayer],"SAVE GAME IS FROM AN OLD VERSION!", true); // FS: Tell us what's the deal
 		return;
 	}
 	save_p += VERSIONSIZE;
