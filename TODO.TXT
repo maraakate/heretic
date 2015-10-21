@@ -1,10 +1,11 @@
-- 640x480 SVGA (and other VESA modes).
-- 22kHz SB16.
-- Disney Sound source.
-- FOV.
 - Fix cheating in coop.
-- Make IDMUS and other harmless "cheats" work in netplay.
 - Fix demo desync.
 - HHE:
   * Find a solution to the Text parsing issue.
   * Cheat replacement.
+
+Out of my league:
+- 640x480 SVGA (and other VESA modes).
+- 22kHz SB16.
+- Disney Sound source.
+- FOV.

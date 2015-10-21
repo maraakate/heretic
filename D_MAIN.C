@@ -1137,7 +1137,13 @@ void D_DoomMain(void)
 	{
 		novert = 1;
 	}
-		
+
+	if (M_CheckParm("-noprecache")) // FS
+	{
+		extern int noprecache;
+		noprecache = 1;
+	}
+
 	DEH_Init(); // FS: HHE Files
 
 #ifdef __WATCOMC__

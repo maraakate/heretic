@@ -1233,7 +1233,8 @@ static boolean HandleCheats(byte key)
 {
 	int i;
 	boolean eat;
-	
+
+/*	
 	if (!M_CheckParm("-cheats")) // FS: Cheating in multiplayer
 	{
 		if(netgame || gameskill == sk_nightmare)
@@ -1241,7 +1242,7 @@ static boolean HandleCheats(byte key)
 			return(false);
 		}
 	}
-
+*/
 	if(players[consoleplayer].health <= 0)
 	{ // Dead players can't cheat
 		return(false);
@@ -1252,7 +1253,7 @@ static boolean HandleCheats(byte key)
 		if(CheatAddKey(&Cheats[i], key, &eat))
 		{
 			Cheats[i].func(&players[consoleplayer], &Cheats[i]);
-			S_StartSound(NULL, sfx_dorcls);
+//			S_StartSound(NULL, sfx_dorcls);
 		}
 	}
 	return(eat);
@@ -1305,6 +1306,13 @@ static boolean CheatAddKey(Cheat_t *cheat, byte key, boolean *eat)
 
 static void CheatGodFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	player->cheats ^= CF_GODMODE;
 	if(player->cheats&CF_GODMODE)
 	{
@@ -1319,6 +1327,13 @@ static void CheatGodFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatNoClipFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	player->cheats ^= CF_NOCLIP;
 	if(player->cheats&CF_NOCLIP)
 	{
@@ -1335,6 +1350,13 @@ static void CheatWeaponsFunc(player_t *player, Cheat_t *cheat)
 	int i;
 	//extern boolean *WeaponInShareware;
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	player->armorpoints = 200;
 	player->armortype = 2;
 	if(!player->backpack)
@@ -1364,6 +1386,13 @@ static void CheatWeaponsFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatPowerFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	if(player->powers[pw_weaponlevel2])
 	{
 		player->powers[pw_weaponlevel2] = 0;
@@ -1378,6 +1407,13 @@ static void CheatPowerFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatHealthFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	if(player->chickenTics)
 	{
 		player->health = player->mo->health = MAXCHICKENHEALTH;
@@ -1393,6 +1429,13 @@ static void CheatKeysFunc(player_t *player, Cheat_t *cheat)
 {
 	extern int playerkeys;
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	player->keys[key_yellow] = true;
 	player->keys[key_green] = true;
 	player->keys[key_blue] = true;
@@ -1402,6 +1445,13 @@ static void CheatKeysFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatSoundFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	DebugSound = !DebugSound;
 	if(DebugSound)
 	{
@@ -1417,6 +1467,13 @@ static void CheatTickerFunc(player_t *player, Cheat_t *cheat)
 {
 	extern int DisplayTicker;
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	DisplayTicker = !DisplayTicker;
 	if(DisplayTicker)
 	{
@@ -1430,11 +1487,25 @@ static void CheatTickerFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatArtifact1Func(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	P_SetMessage(player, TXT_CHEATARTIFACTS1, false);
 }
 
 static void CheatArtifact2Func(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	P_SetMessage(player, TXT_CHEATARTIFACTS2, false);
 }
 
@@ -1445,6 +1516,13 @@ static void CheatArtifact3Func(player_t *player, Cheat_t *cheat)
 	artitype_t type;
 	int count;
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	type = cheat->args[0]-'a'+1;
 	count = cheat->args[1]-'0';
 	if(type == 26 && count == 0)
@@ -1488,6 +1566,13 @@ static void CheatWarpFunc(player_t *player, Cheat_t *cheat)
 	int episode;
 	int map;
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	episode = cheat->args[0]-'0';
 	map = cheat->args[1]-'0';
 	if(M_ValidEpisodeMap(episode, map))
@@ -1501,6 +1586,13 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat)
 {
 	extern boolean P_UndoPlayerChicken(player_t *player);
 
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	if(player->chickenTics)
 	{
 		if(P_UndoPlayerChicken(player))
@@ -1516,6 +1608,13 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatMassacreFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	P_Massacre();
 	P_SetMessage(player, TXT_CHEATMASSACRE, false);
 }
@@ -1523,6 +1622,14 @@ static void CheatMassacreFunc(player_t *player, Cheat_t *cheat)
 static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat)
 {
 	int i;
+
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	if(player->chickenTics)
 	{
 		return;
@@ -1537,6 +1644,13 @@ static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+
+	S_StartSound(NULL, sfx_dorcls);
 	P_DamageMobj(player->mo, NULL, player->mo, 10000);
 	P_SetMessage(player, TXT_CHEATIDDQD, true);
 }
@@ -1544,7 +1658,9 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 // FS: From Doom
 static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 {
-        int     episode, map;
+	int	episode, map;
+
+	S_StartSound(NULL, sfx_dorcls);
 
 	episode = cheat->args[0]-'0';
 	map = cheat->args[1]-'0';
@@ -1583,5 +1699,12 @@ static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatFinishLevelFunc (player_t *player, Cheat_t *cheat)
 {
+	if (!M_CheckParm("-cheats")) // FS
+	{
+		if(netgame || gameskill == sk_nightmare)
+			return;
+	}
+	
+	S_StartSound(NULL, sfx_dorcls);
 	G_ExitLevel ();
 }

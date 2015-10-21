@@ -1,3 +1,7 @@
+10-05-13
+ - IDMUS cheat now works in netgames.
+ - noprecache and faststart are now in EXTEND.CFG.
+
 10-04-13
  - "-gus" paramater now loads the HT_GUS1M.WAD internally from the EXE.
    You no longer need the HT_GUS1M.WAD present to load it.

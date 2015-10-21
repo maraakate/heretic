@@ -518,7 +518,8 @@ void P_SetupLevel (int episode, int map, int playermask, skill_t skill)
 	char	lumpname[9];
 	int		lumpnum;
 	mobj_t	*mobj;
-	
+	extern int	noprecache; // FS: No graphics precaching
+
 	totalkills = totalitems = totalsecret = 0;
 	for (i=0 ; i<MAXPLAYERS ; i++)
 	{
@@ -600,7 +601,7 @@ void P_SetupLevel (int episode, int map, int playermask, skill_t skill)
 // preload graphics
 
 // preload graphics
-	if (!M_CheckParm("-noprecache")) // FS: No precache
+	if (!noprecache) // FS: No precache
 	{
 		if (precache)
 			R_PrecacheLevel ();

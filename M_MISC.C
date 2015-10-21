@@ -372,6 +372,7 @@ int headBob; // FS: Head bob toggle
 int	useIntGus; // FS: Internal HT_GUS1M.WAD
 int faststart; // FS: Always faststart if you want
 int novert; // FS: No vertical mouse movement
+int noprecache; // FS: No graphics precaching
 extern int	drawTime; // FS: Draw time clock
 
 extern int	use_wpnbinds; // FS: Custom weapon keys
@@ -527,7 +528,8 @@ default_t extendeddefaults[] =
 	{ "drawTime", &drawTime, 0}, // FS: Draw time clock
 	{ "useIntGus", &useIntGus, 0}, // FS: Use internal HT_GUS1M.WAD
 	{ "novert", &novert, 0}, // FS: No vertical mouse movement
-	
+	{ "noprecache", &noprecache, 0}, // FS: No graphics precaching
+
 	// FS: Use custom weapon binds
 	{ "use_wpnbinds", &use_wpnbinds, 0},
 	{ "wpn_crossbow", &wpn_crossbow, 44, 1 }, // FS: Z
