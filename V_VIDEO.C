@@ -90,7 +90,7 @@ void V_DrawFuzzPatch (int x, int y, patch_t *patch)
 	y -= SHORT(patch->topoffset);
 	x -= SHORT(patch->leftoffset);
 
-	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
+	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
 		I_Error ("Bad V_DrawPatch");
 
 	col = 0;
@@ -114,8 +114,7 @@ void V_DrawFuzzPatch (int x, int y, patch_t *patch)
 				*dest = tinttable[((*dest)<<8) + *source++];
 				dest += SCREENWIDTH;
 			}
-			column = (column_t *)(  (byte *)column + column->length
-+ 4 );
+			column = (column_t *)(  (byte *)column + column->length + 4 );
 		}
 	}			
 }
@@ -141,7 +140,7 @@ void V_DrawShadowedPatch(int x, int y, patch_t *patch)
 	y -= SHORT(patch->topoffset);
 	x -= SHORT(patch->leftoffset);
 
-	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
+	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
 		I_Error ("Bad V_DrawPatch");
 
 	col = 0;

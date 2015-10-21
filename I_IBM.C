@@ -706,7 +706,7 @@ boolean grmode;
 //==================================================
 
 boolean         joystickpresent;
-extern  unsigned        joystickx, joysticky;
+extern unsigned       joystickx, joysticky; // FS: Needed to be extern -- taniwha
 boolean I_ReadJoystick (void);          // returns false if not connected
 
 
@@ -1025,7 +1025,7 @@ void I_InitGraphics(void)
 	}
 	grmode = true;
 	regs.w.ax = 0x13;
-	int386(0x10, (const union REGS *)&regs, &regs);
+	int386(0x10, &regs, &regs);//(const union REGS *)&regs, &regs); // FS: Compiler Warning?
 	pcscreen = destscreen = (byte *)0xa0000;
 	I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
 	I_InitDiskFlash();
@@ -1864,7 +1864,7 @@ void I_Quit(void)
 	regs.h.bh = 0;
 	regs.h.dl = 0;
 	regs.h.dh = 23;
-	int386(0x10, (const union REGS *)&regs, &regs); // Set text pos
+	int386(0x10, &regs, &regs);//(const union REGS *)&regs, &regs); // Set text pos // FS: Compiler Warning?
 	_settextposition(24, 1);
 	exit(0);
 }

@@ -7,6 +7,7 @@
 #include "AM_data.h"
 #include <stdio.h>
 
+
 vertex_t KeyPoints[NUMKEYS];
 
 #define NUMALIAS 3 // Number of antialiased lines.
@@ -1327,6 +1328,7 @@ void AM_drawCrosshair(int color)
 void AM_Drawer(void)
 {
 	int highestEpisode;
+	char *secrets; // FS: For SECRETS FOUND count
 
 	if (!automapactive) return;
 
@@ -1345,8 +1347,11 @@ void AM_Drawer(void)
 	}
 	if((gameepisode < (ExtendedWAD ? 6 : 4)) && gamemap < 10)
 	{
-		MN_DrTextA(LevelNames[(gameepisode-1)*9+gamemap-1], 20, 145);
+		MN_DrTextA(LevelNames[(gameepisode-1)*9+gamemap-1], 20, 135);
 	}
+	sprintf(secrets, "SECRETS FOUND: %i/%i", players[consoleplayer].secretcount,totalsecret); // FS
+	MN_DrTextA(secrets, 20, 145); // FS
+
 //  I_Update();
 //  V_MarkRect(f_x, f_y, f_w, f_h);
 }

@@ -19,8 +19,8 @@ ENDIF
 ;
 ;================
 
-PROC  	I_DivException_
-PUBLIC 	I_DivException_
+I_DivException_ PROC
+PUBLIC	I_DivException_
 	mov	edx,03c9h
 	mov	al,63
 	out	dx,al
@@ -36,7 +36,7 @@ ENDP
 ;
 ;================
 
-PROC  	I_SetDivException_
+I_SetDivException_ PROC
 PUBLIC 	I_SetDivException_
 	pusha
 
@@ -75,7 +75,7 @@ PUBLIC	_joystickx, _joysticky
 
 .code
 
-PROC  	I_ReadJoystick_
+I_ReadJoystick_ PROC
 PUBLIC 	I_ReadJoystick_
 	pusha
 	pushf					; state of interrupt flag

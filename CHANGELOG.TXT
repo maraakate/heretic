@@ -1,0 +1,13 @@
+04-05-12
+ - Show ammo and armor in full screen.
+ - "You found a secret area!" message.
+ - "Secrets Found: x/x" in map mode.
+ - Version bump to "v1.3a".
+ - Mouse sensitivty raised from 10 to 20.
+ - Show keys in full screen.
+
+04-04-12
+ - First Compile.
+ - Walk speed == run speed.
+ - "Game restored" message.
+ 

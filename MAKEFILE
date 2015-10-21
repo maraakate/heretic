@@ -78,8 +78,7 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
  wlink @tic.lnk
  copy tic.exe striptic.exe
  wstrip striptic.exe
- 4gwbind 4gwpro.exe striptic.exe heretic.exe -V
- prsucc
+ 4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
 
 i_ibm.obj:
  wcc386 /zp1 /4r /zq /ei /j i_ibm.c
@@ -93,3 +92,12 @@ i_ibm.obj:
 clean : .SYMBOLIC
  del *.obj
  del tic.exe
+ del striptic.exe
+ del heretic.exe
+ 
+final : .SYMBOLIC
+ wlink @tic.lnk
+ copy tic.exe striptic.exe
+ wstrip striptic.exe
+ 4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
+ sb /R /O heretic.exe

@@ -863,6 +863,7 @@ void P_PlayerInSpecialSector(player_t *player)
 			break;
 		case 9: // SecretArea
 			player->secretcount++;
+			P_SetMessage(&players[consoleplayer], TXT_FOUNDSECRET, false); // FS: Alert me about a secret
 			sector->special = 0;
 			break;
 		case 11: // Exit_SuperDamage (DOOM E1M8 finale)

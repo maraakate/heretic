@@ -1069,6 +1069,55 @@ void DrawFullScreenStuff(void)
 	{
 		DrBNumber(0, 5, 180);
 	}
+
+	// FS: For Armor
+	if (!inventory)
+		DrBNumber(CPlayer->armorpoints, 240, 180);
+	
+	// FS: For Ammo
+	if (!inventory)
+	{	
+		temp = CPlayer->ammo[wpnlev1info[CPlayer->readyweapon].ammo];
+		{
+			if(temp && CPlayer->readyweapon > 0 && CPlayer->readyweapon < 7)
+			{
+				if (temp < 100)
+				{
+					switch(CPlayer->readyweapon)
+					{
+						case 1:
+						case 2:
+						case 5:
+							DrINumber(temp, 18, 162);
+							break;
+						default:
+							DrINumber(temp, 25, 162);
+							break;
+					}
+				}
+				else
+					DrINumber(temp, 25, 162);
+
+				V_DrawPatch(0, 162, W_CacheLumpName(
+					ammopic[CPlayer->readyweapon-1], PU_CACHE));			
+			}
+		}
+	}
+
+	// FS: Draw keys
+	if(CPlayer->keys[key_yellow])
+	{
+		V_DrawPatch(286, 162, W_CacheLumpName("ykeyicon", PU_CACHE));
+	}
+	if(CPlayer->keys[key_green])
+	{
+		V_DrawPatch(296, 162, W_CacheLumpName("gkeyicon", PU_CACHE));
+	}
+	if(CPlayer->keys[key_blue])
+	{
+		V_DrawPatch(306, 162, W_CacheLumpName("bkeyicon", PU_CACHE));
+	}
+
 	if(deathmatch)
 	{
 		temp = 0;

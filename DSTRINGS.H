@@ -144,6 +144,7 @@
 //---------------------------------------------------------------------------
 
 #define TXT_GAMESAVED			"GAME SAVED"
+#define TXT_GAMELOADED			"GAME RESTORED"
 
 //---------------------------------------------------------------------------
 //
@@ -351,56 +352,10 @@
 					"surrender without a fight. eyes\n"\
 					"wide, you go to meet your fate."
 
-/*
-#define E1TEXT	"Once you beat the big badasses and\n"\
-				"clean out the moon base you're supposed\n"\
-				"to win, aren't you? Aren't you? Where's\n"\
-				"your fat reward and ticket home? What\n"\
-				"the hell is this? It's not supposed to\n"\
-				"end this way!\n"\
-				"\n" \
-				"It stinks like rotten meat, but looks\n"\
-				"like the lost Deimos base.  Looks like\n"\
-				"you're stuck on The Shores of Hell.\n"\
-				"The only way out is through.\n"\
-				"\n"\
-				"To continue the DOOM experience, play\n"\
-				"The Shores of Hell and its amazing\n"\
-				"sequel, Inferno!\n"
+//---------------------------------------------------------------------------
+//
+// ST_stuff.c
+//
+//---------------------------------------------------------------------------
 
-#define E2TEXT	"You've done it! The hideous cyber-\n"\
-				"demon lord that ruled the lost Deimos\n"\
-				"moon base has been slain and you\n"\
-				"are triumphant! But ... where are\n"\
-				"you? You clamber to the edge of the\n"\
-				"moon and look down to see the awful\n"\
-				"truth.\n" \
-				"\n"\
-				"Deimos floats above Hell itself!\n"\
-				"You've never heard of anyone escaping\n"\
-				"from Hell, but you'll make the bastards\n"\
-				"sorry they ever heard of you! Quickly,\n"\
-				"you rappel down to  the surface of\n"\
-				"Hell.\n"\
-				"\n" \
-				"Now, it's on to the final chapter of\n"\
-				"DOOM! -- Inferno."
-
-#define E3TEXT	"The loathsome spiderdemon that\n"\
-				"masterminded the invasion of the moon\n"\
-				"bases and caused so much death has had\n"\
-				"its ass kicked for all time.\n"\
-				"\n"\
-				"A hidden doorway opens and you enter.\n"\
-				"You've proven too tough for Hell to\n"\
-				"contain, and now Hell at last plays\n"\
-				"fair -- for you emerge from the door\n"\
-				"to see the green fields of Earth!\n"\
-				"Home at last.\n" \
-				"\n"\
-				"You wonder what's been happening on\n"\
-				"Earth while you were battling evil\n"\
-				"unleashed. It's good that no Hell-\n"\
-				"spawn could have come through that\n"\
-				"door with you ..."
-*/
+#define TXT_FOUNDSECRET "YOU FOUND A SECRET AREA!" // FS

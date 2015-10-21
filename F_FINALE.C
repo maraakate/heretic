@@ -243,7 +243,7 @@ void F_Cast (void)
 
 	V_MarkRect (0, 0, SCREENWIDTH, SCREENHEIGHT);
 
-	V_DrawPatch (105,21,0, W_CacheLumpName ( "
+	V_DrawPatch (105,21,0, W_CacheLumpName ( "");
 }
 #endif
 

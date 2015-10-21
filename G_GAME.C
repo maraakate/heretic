@@ -1472,7 +1472,7 @@ void G_DoLoadGame(void)
 	// Skip the description field
 	memset(vcheck, 0, sizeof(vcheck));
 	sprintf(vcheck, "version %i", VERSION);
-	if (strcmp (save_p, vcheck))
+	if (strcmp ((char *)save_p, vcheck)) // FS: Compiler Warning
 	{ // Bad version
 		return;
 	}
@@ -1504,6 +1504,8 @@ void G_DoLoadGame(void)
 		I_Error("Bad savegame");
 	}
 	Z_Free(savebuffer);
+	P_SetMessage(&players[consoleplayer], TXT_GAMELOADED, true);
+		
 }
 
 

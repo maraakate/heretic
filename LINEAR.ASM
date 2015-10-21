@@ -47,7 +47,7 @@ ENDM
 ;
 ;================
 
-PROC   R_DrawColumn_
+R_DrawColumn_ PROC
 PUBLIC   R_DrawColumn_
 	PUSHR
 
@@ -162,7 +162,7 @@ returnpoint	dd	0
 ;================
 
 
-PROC   R_DrawSpan_
+R_DrawSpan_ PROC
 PUBLIC	R_DrawSpan_
 	PUSHR
 

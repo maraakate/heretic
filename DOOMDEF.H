@@ -12,7 +12,7 @@
 #endif
 
 #define VERSION 130
-#define VERSION_TEXT "v1.3"
+#define VERSION_TEXT "v1.3a" // FS: Raised
 
 // if rangecheck is undefined, most parameter validation debugging code
 // will not be compiled

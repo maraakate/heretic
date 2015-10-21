@@ -688,7 +688,7 @@ static void DrawOptionsMenu(void)
 	{
 		MN_DrTextB("OFF", 196, 50);
 	}
-	DrawSlider(&OptionsMenu, 3, 10, mouseSensitivity);
+	DrawSlider(&OptionsMenu, 3, 10, mouseSensitivity/2); // FS: We using 20 now
 }
 
 //---------------------------------------------------------------------------
@@ -914,7 +914,7 @@ static boolean SCMouseSensi(int option)
 {
 	if(option == RIGHT_DIR)
 	{
-		if(mouseSensitivity < 9)
+		if(mouseSensitivity < 20) // FS: Go up to 20
 		{
 			mouseSensitivity++;
 		}
@@ -1074,6 +1074,7 @@ boolean MN_Responder(event_t *event)
 	{
 		switch(key)
 		{
+			case KEY_ENTER: // FS: Wanted the option
 			case 'y':
 				if(askforquit)
 				{
