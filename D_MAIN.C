@@ -49,6 +49,8 @@ boolean F_Responder(event_t *ev);
 
 extern int savestringsize; // FS: now a parameter
 extern int savegamesize; // FS: now a parameter
+int	saveconvertslot; // FS: Convert Save
+boolean	convertsave = false; // FS: Convert Save
 
 //---------------------------------------------------------------------------
 //
@@ -1071,6 +1073,18 @@ void D_DoomMain(void)
 			sprintf(file, SAVEGAMENAME"%c.hsg", myargv[p+1][0]);
 		}
 		G_LoadGame(file);
+	}
+
+	p = M_CheckParm ("-convertsave");
+	if (p && p < myargc-1)
+	{
+		convertsave = true;
+		if (M_CheckParm("-cdrom"))
+			sprintf(file, "c:\\doomdata\\"SAVEGAMENAMECD"%c.hsg",myargv[p+1][0]);
+		else
+			sprintf(file, SAVEGAMENAME"%c.hsg",myargv[p+1][0]);
+		saveconvertslot = atoi(myargv[p+1]); // FS: For save convert slot
+		G_LoadGame (file);
 	}
 
 	// Check valid episode and map

@@ -1,3 +1,11 @@
+09-19-13
+ - -oldsave parameter to load older save games (i.e. not the 1MB and
+    256 string size games).
+ - Warning to use -oldsave.
+ - -convertsave <slot #> parameter.  Convert your old saves to the new ones!
+   I don't think it will corrupt it, but do a backup first just in case.
+ - Z_Free(&savebuffer) when you error out of incorrect versions.
+
 09-15-13
  - use_wpnbinds in HERETIC.CFG.  If set to 1, the following defaults are used:
    * 'Q' for Phoenix Rod

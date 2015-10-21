@@ -1575,6 +1575,8 @@ void G_DoWorldDone(void)
 //---------------------------------------------------------------------------
 
 char savename[256];
+extern int	saveconvertslot; // FS: Convert Save
+extern boolean	convertsave; // FS: Convert Save
 
 void G_LoadGame(char *name)
 {
@@ -1598,19 +1600,42 @@ void G_DoLoadGame(void)
 	int i;
 	int a, b, c;
 	char vcheck[VERSIONSIZE];
+	char		convertsavename[32]; // FS: For Convert Save
 
 	gameaction = ga_nothing;
 
+	if (convertsave) // FS: Convert old saves
+	{
+		savegamesize = 0x30000;
+		savestringsize = 24;
+	}
+
 	length = M_ReadFile(savename, &savebuffer);
 	save_p = savebuffer+savestringsize;
+
+	if (convertsave) // FS: Convert old saves
+	{
+		sprintf(convertsavename, (char *)save_p-savestringsize);
+	}
+
 	// Skip the description field
 	memset(vcheck, 0, sizeof(vcheck));
 	sprintf(vcheck, "version %i", VERSION);
-	if (strcmp ((char *)save_p, vcheck)) // FS: Compiler Warning
-	{ // Bad version
-		P_SetMessage(&players[consoleplayer],"SAVE GAME IS FROM AN OLD VERSION!", true); // FS: Tell us what's the deal
-		return;
+
+	if ((strcmp ((char *)save_p, vcheck))) // FS: Compiler warning
+	{
+		if(convertsave)
+			I_Error("ERROR: Save game is already new version!");
+
+		Z_Free(savebuffer);
+
+		if(M_CheckParm("-oldsave"))
+			P_SetMessage(&players[consoleplayer], "WRONG VERSION. TRY LOADING WITHOUT -OLDSAVE!", true);
+		else
+			P_SetMessage(&players[consoleplayer], "OLD VERSION! USE -OLDSAVE TO LOAD IT!", true); // FS: Warn us
+		return;				// bad version
 	}
+
 	save_p += VERSIONSIZE;
 	gameskill = *save_p++;
 	gameepisode = *save_p++;
@@ -1639,8 +1664,17 @@ void G_DoLoadGame(void)
 		I_Error("Bad savegame");
 	}
 	Z_Free(savebuffer);
-	P_SetMessage(&players[consoleplayer], TXT_GAMELOADED, true);
-		
+
+	if(convertsave) // FS: Convert Save
+	{
+		savegamesize = 0x100000; // FS: Normally 0x2c000
+		savestringsize = 256; // FS: Normally 24
+		G_SaveGame(saveconvertslot, convertsavename);
+	}
+
+	if(!convertsave) // FS: Don't print this message if we're converting a save
+		P_SetMessage(&players[consoleplayer], TXT_GAMELOADED, true);
+	
 }
 
 
@@ -2000,9 +2034,19 @@ void G_DoSaveGame(void)
 	P_ArchiveSpecials();
 	SV_Close(name);
 
+	if(convertsave) // FS: Convert Save
+		G_LoadGame(name);
+
 	gameaction = ga_nothing;
 	savedescription[0] = 0;
-	P_SetMessage(&players[consoleplayer], TXT_GAMESAVED, true);
+
+	if(convertsave) // FS: Convert old saves
+	{
+		P_SetMessage(&players[consoleplayer], "SAVE CONVERTED!", true);
+		convertsave = false;
+	}
+	else
+		P_SetMessage(&players[consoleplayer], TXT_GAMESAVED, true);
 }
 
 //==========================================================================
