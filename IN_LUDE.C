@@ -1055,8 +1055,8 @@ void IN_PrintSingleStats(void)
 		if (!f)
 			I_Error("Unable to open stats file!");
 
-		sprintf(buffer,"MAP: E%iM%i  <SINGLE PLAYER>\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
-		gameepisode, prevmap, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
+		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<SINGLE PLAYER>\n\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
+		gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7, gameskill+1, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
 		fseek(f,0, SEEK_END);
 		fputs(buffer, f);
 		fflush(f);
@@ -1084,7 +1084,7 @@ void IN_PrintCoopStats(void)
 		if (!f)
 			I_Error("Unable to open stats file!");
 
-		sprintf(buffer,"MAP: E%iM%i  <COOPERATIVE>\n", gameepisode, prevmap);
+		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7, gameskill+1);
 		fputs(buffer, f);
 		fflush(f);
 
@@ -1125,7 +1125,7 @@ void IN_PrintDMStats(void)
 		if (!f)
 			I_Error("Unable to open stats file!");
 
-		sprintf(buffer,"MAP: E%iM%i  <DEATHMATCH>\n", gameepisode, prevmap);
+		sprintf(buffer,"MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7);
 		fputs(buffer, f);
 		fflush(f);
 

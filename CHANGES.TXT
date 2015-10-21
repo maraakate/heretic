@@ -12,6 +12,8 @@
    that if you saved in front of an exit and "GAME RESTORED" was still on
    the screen, flick the switch, messages again would be disabled.
    If you find other weird situations where it happens let me know.
+  - New cheat "HHSCOTT" to immediately finish level.  Was originally for
+   testing the statcopy function, but figured I'd leave it in.
 
 09-03-13
  - Nothing crazy, but the game will tell you that you can't load games

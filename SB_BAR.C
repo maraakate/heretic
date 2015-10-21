@@ -58,6 +58,7 @@ static void CheatMassacreFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat); // FS: From Doom
+static void CheatFinishLevelFunc(player_t *player, Cheat_t *cheat); // FS
 
 // Public Data
 
@@ -312,6 +313,19 @@ static byte CheatIDMUSSeq[] =
 	0, 0, 0xff, 0
 };
 
+// FS
+static byte CheatFinishLevelSeq[] =
+{
+	CHEAT_ENCRYPT('h'),
+	CHEAT_ENCRYPT('h'),
+	CHEAT_ENCRYPT('s'),
+	CHEAT_ENCRYPT('c'),
+	CHEAT_ENCRYPT('o'),
+	CHEAT_ENCRYPT('t'),
+	CHEAT_ENCRYPT('t'),
+	0xff, 0
+};
+
 static Cheat_t Cheats[] =
 {
 	{ CheatGodFunc, CheatGodSeq, NULL, 0, 0, 0 },
@@ -330,7 +344,8 @@ static Cheat_t Cheats[] =
 	{ CheatMassacreFunc, CheatMassacreSeq, NULL, 0, 0, 0 },
 	{ CheatIDKFAFunc, CheatIDKFASeq, NULL, 0, 0, 0 },
 	{ CheatIDDQDFunc, CheatIDDQDSeq, NULL, 0, 0, 0 },
-        { CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
+	{ CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
+	{ CheatFinishLevelFunc, CheatFinishLevelSeq, NULL, 0, 0, 0 }, // FS
 	{ NULL, NULL, NULL, 0, 0, 0 } // Terminator
 };
 
@@ -1564,4 +1579,9 @@ static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 	{
 		P_SetMessage(player, "IMPOSSIBLE SELECTION", true);
 	}
+}
+
+static void CheatFinishLevelFunc (player_t *player, Cheat_t *cheat)
+{
+	G_ExitLevel ();
 }
