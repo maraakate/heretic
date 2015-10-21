@@ -230,8 +230,11 @@ void G_BuildTiccmd (ticcmd_t *cmd)
         speed = gamekeydown[key_speed] || joybuttons[joybspeed]
                 || joybuttons[joybspeed];
 
-        if (gamekeydown[key_speed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
-                speed = !speed;
+	if (!M_CheckParm("-debug"))
+	{
+		if (gamekeydown[key_speed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
+			speed = !speed;
+	}
 
 #ifdef __WATCOMC__
 	if(useexterndriver)
@@ -662,7 +665,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 	{
 		cmd->angleturn -= mousex*0x8;
 	}
-        forward += mousey;
+	forward += mousey;
 	mousex = mousey = 0;
 
 	if (forward > MAXPLMOVE)
@@ -1183,47 +1186,56 @@ void G_PlayerFinishLevel(int player)
 
 void G_PlayerReborn(int player)
 {
-        player_t *p;
-        int i;
+	player_t *p;
+	int i;
 	int frags[MAXPLAYERS];
 	int killcount, itemcount, secretcount;
 	boolean secret;
 
-        boolean coopkeys[NUMKEYS]; // FS: Keep keys in Coop
-        boolean coop; // FS: Is it coop?
+	boolean coopkeys[NUMKEYS]; // FS: Keep keys in Coop
+	boolean coop; // FS: Is it coop?
+	boolean coopbackpack; // FS: Have a backpack?
 
-        coop = false;
-	secret = false;
+	coop = false; // FS: Clear it out
+        coopbackpack = false; // FS: Clear it out
+        coopkeys[NUMKEYS] = false; // FS: Clear it out
+        secret = false;
 	memcpy(frags, players[player].frags, sizeof(frags));
 
-        if(netgame && !deathmatch) // FS: Check for Coop
-        {
-                coop = true;
-                memcpy(coopkeys, players[player].keys, sizeof(coopkeys)); // FS: Keep keys in Coop
-        }
+	if(netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Check for Coop
+	{
+		coop = true;
+		memcpy(coopkeys, players[player].keys, sizeof(coopkeys)); // FS: Keep keys in Coop
+		if (players[player].backpack)
+		{
+			coopbackpack = true;
+		}
+	}
 
-        killcount = players[player].killcount;
+	killcount = players[player].killcount;
 	itemcount = players[player].itemcount;
 	secretcount = players[player].secretcount;
 
 	p = &players[player];
 
-        if(p->didsecret)
+	if(p->didsecret)
 	{
 		secret = true;
 	}
 
-        if(!coop) // FS: Check for Coop
-        {
-                memset(p, 0, sizeof(*p));
-        }
+	if(!coop) // FS: Check for Coop
+	{
+		memset(p, 0, sizeof(*p));
+	}
 
 	memcpy(players[player].frags, frags, sizeof(players[player].frags));
 
-        if (coop)
-                memcpy(players[player].keys, coopkeys, sizeof(coopkeys)); // FS: Keep keys in Coop
-
-        players[player].killcount = killcount;
+	if (coop)
+	{
+		memcpy(players[player].keys, coopkeys, sizeof(coopkeys)); // FS: Keep keys in Coop
+	}
+	
+	players[player].killcount = killcount;
 	players[player].itemcount = itemcount;
 	players[player].secretcount = secretcount;
 
@@ -1231,26 +1243,45 @@ void G_PlayerReborn(int player)
 	p->playerstate = PST_LIVE;
 	p->health = MAXHEALTH;
 
-        p->readyweapon = p->pendingweapon = wp_goldwand;
-        p->weaponowned[wp_staff] = true;
-        p->weaponowned[wp_goldwand] = true;
+	p->readyweapon = p->pendingweapon = wp_goldwand;
+	p->weaponowned[wp_staff] = true;
+	p->weaponowned[wp_goldwand] = true;
 	p->messageTics = 0;
 	p->lookdir = 0;
-	p->ammo[am_goldwand] = 50;
 
-        if (coop)
-        {
-                p->readyweapon = p->pendingweapon = wp_crossbow;
-                p->weaponowned[wp_crossbow] = true;
-                p->ammo[am_crossbow] = 15;
-        }
-        for(i = 0; i < NUMAMMO; i++)
+	if (!coop)
+		p->ammo[am_goldwand] = 50;
+
+	if (coop)
+	{
+		p->readyweapon = p->pendingweapon = wp_crossbow;
+		p->weaponowned[wp_crossbow] = true;
+		if (p->ammo[am_crossbow] < 15) // FS: Always have at least 15 arrow to start with
+		{
+			p->ammo[am_crossbow] = 15;
+		}
+                if (p->ammo[am_goldwand] < 50)
+		{
+			p->ammo[am_goldwand] = 50;
+		}
+	}
+
+	for(i = 0; i < NUMAMMO; i++)
 	{
 		p->maxammo[i] = maxammo[i];
 	}
 	if(gamemap == 9 || secret)
 	{
 		p->didsecret = true;
+	}
+
+	if (coop && coopbackpack) // FS: Give the user their backpack if they had it
+	{
+		for(i = 0; i < NUMAMMO; i++)
+		{
+			p->maxammo[i] *= 2;
+		}
+		p->backpack = true;
 	}
 
 	if(p == &players[consoleplayer])

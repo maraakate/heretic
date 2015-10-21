@@ -6,6 +6,7 @@
 
 extern int snd_MaxVolume;
 extern int snd_MusicVolume;
+extern boolean hasGUS; // FS
 
 void S_Start(void);
 void S_StartSound(mobj_t *origin, int sound_id);

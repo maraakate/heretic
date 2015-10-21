@@ -29,6 +29,8 @@ int startepisode;
 int startmap;
 boolean autostart;
 extern boolean automapactive;
+extern int headBob; // FS: Head bob toggle
+extern boolean usePalFlash; // FS
 
 boolean advancedemo;
 
@@ -487,7 +489,7 @@ void wadprintf(void)
 	#endif
 }
 
-void D_AddFile(char *file)
+void D_AddFile(char *file, int flag)
 {
 	int numwadfiles;
 	char *new;
@@ -496,7 +498,7 @@ void D_AddFile(char *file)
 	for(numwadfiles = 0; wadfiles[numwadfiles]; numwadfiles++);
 	new = malloc(strlen(file)+1);
 	strcpy(new, file);
-	if(strlen(exrnwads)+strlen(file) < 78)
+        if(strlen(exrnwads)+strlen(file) < 78 && flag) // FS
 	{
 		if(strlen(exrnwads))
 		{
@@ -508,7 +510,7 @@ void D_AddFile(char *file)
 		}
 		strcat(exrnwads, file);
 	}
-	else if(strlen(exrnwads2)+strlen(file) < 79)
+        else if(strlen(exrnwads2)+strlen(file) < 79 && flag) // FS
 	{
 		if(strlen(exrnwads2))
 		{
@@ -782,7 +784,8 @@ void D_DoomMain(void)
 	ravpic = M_CheckParm("-ravpic");
 	noartiskip = M_CheckParm("-noartiskip");
 	debugmode = M_CheckParm("-debug");
-	startskill = sk_medium;
+
+        startskill = sk_medium;
 	startepisode = 1;
 	startmap = 1;
 	autostart = false;
@@ -816,9 +819,14 @@ void D_DoomMain(void)
 		// or another - preceded parm
 		while(++p != myargc && myargv[p][0] != '-')
 		{
-			D_AddFile(myargv[p]);
+                        D_AddFile(myargv[p], 1);
 		}
 	}
+
+        if (M_CheckParm("-gus")) // FS: GUS1M patches
+        {
+                D_AddFile("HT_GUS1M.WAD", 0);
+        }
 
 	// -DEVMAP <episode> <map>
 	// Adds a map wad from the development directory to the wad list,
@@ -830,7 +838,7 @@ void D_DoomMain(void)
 		e = myargv[p+1][0];
 		m = myargv[p+2][0];
 		sprintf(file, MAPDIR"E%cM%c.wad", e, m);
-		D_AddFile(file);
+                D_AddFile(file, 1);
 		printf("DEVMAP: Episode %c, Map %c.\n", e, m);
 		startepisode = e-'0';
 		startmap = m-'0';
@@ -846,7 +854,7 @@ void D_DoomMain(void)
 	if (p && p < myargc-1)
 	{
 		sprintf(file, "%s.lmp", myargv[p+1]);
-		D_AddFile(file);
+                D_AddFile(file, 1);
 		printf("Playing demo %s.lmp.\n", myargv[p+1]);
 	}
 
@@ -955,17 +963,27 @@ void D_DoomMain(void)
 	IncThermo();
 
 	tprintf("D_CheckNetGame: Checking network game status.\n",1);
-	hgotoxy(17,9);
+	if(hasGUS)
+	{
+		hgotoxy(17,10); // FS
+	}
+	else
+	{
+		hgotoxy(17,9); // FS
+	}
 	hprintf("Checking network game status.", 0x3f);
 	D_CheckNetGame();
-	IncThermo();
+        if(M_CheckParm("-fakenet")) // FS
+        {
+                netgame = true;
+        }
+        IncThermo();
 
 #ifdef __WATCOMC__
 	I_CheckExternDriver(); // Check for an external device driver
 #endif
 
 	tprintf("SB_Init: Loading patches.\n",1);
-	hprintf ("Loading MIDI patches.\n", 0x3f); // FS
 	SB_Init();
 	IncThermo();
 
@@ -1034,6 +1052,17 @@ void D_DoomMain(void)
 			D_StartTitle();
 		}
 	}
+
+        if (M_CheckParm("-noheadbob")) // FS
+        {
+                headBob = 0;
+        }
+
+        if (M_CheckParm("-nopalflash")) // FS
+        {
+                usePalFlash = 0;
+        }
+
 #ifdef __WATCOMC__
 	_settextcursor(0x0607); // bring the cursor back
 #endif

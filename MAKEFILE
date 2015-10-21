@@ -97,7 +97,11 @@ clean : .SYMBOLIC
  del tic.exe
  del striptic.exe
  del heretic.exe
- 
+ del tic.map
+ del out.txt
+ del heretic.cfg
+ del heretic.wad
+
 final : .SYMBOLIC
  wlink @tic.lnk
  copy tic.exe striptic.exe

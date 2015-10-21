@@ -16,6 +16,7 @@
 */
 
 int tsm_ID = -1;
+boolean hasGUS = false; // FS
 
 void I_StartupTimer (void)
 {
@@ -272,8 +273,12 @@ void I_sndArbitrateCards(void)
 	if (GF1_Detect()) tprintf("Dude.  The GUS ain't responding.\n",1);
 	else
 	{
-	  dmxlump = W_GetNumForName("dmxgus");
-	  GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
+		hasGUS = true; // FS
+		tprintf("SB_Init: Loading GUS patches.\n", 1); // FS
+		hgotoxy(17,9);
+		hprintf("Loading GUS patches.", 0x3f); // FS
+		dmxlump = W_GetNumForName("dmxgus");
+		GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
 	}
 
   }
@@ -333,6 +338,8 @@ void I_StartupSound (void)
 {
 	char tmp[80];
   int rc, i;
+
+  hasGUS = false; // FS: set to false before the check
 
   if (debugmode)
 	tprintf("I_StartupSound: Hope you hear a pop.\n",1);

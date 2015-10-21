@@ -58,6 +58,7 @@ static void CheatMassacreFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat); // FS: From Doom
+static void CheatHeadbobFunc(player_t *player, Cheat_t *cheat); // FS: headbob
 
 // Public Data
 
@@ -304,12 +305,25 @@ static byte CheatIDDQDSeq[] =
 // FS: From Doom
 static byte CheatIDMUSSeq[] =
 {
-        CHEAT_ENCRYPT('i'),
-        CHEAT_ENCRYPT('d'),
-        CHEAT_ENCRYPT('m'),
-        CHEAT_ENCRYPT('u'),
-        CHEAT_ENCRYPT('s'),
+	CHEAT_ENCRYPT('i'),
+	CHEAT_ENCRYPT('d'),
+	CHEAT_ENCRYPT('m'),
+	CHEAT_ENCRYPT('u'),
+	CHEAT_ENCRYPT('s'),
 	0, 0, 0xff, 0
+};
+
+// FS: Headbob toggle
+static byte CheatHeadbobSeq[] =
+{
+        CHEAT_ENCRYPT('h'),
+        CHEAT_ENCRYPT('e'),
+        CHEAT_ENCRYPT('a'),
+        CHEAT_ENCRYPT('d'),
+        CHEAT_ENCRYPT('b'),
+        CHEAT_ENCRYPT('o'),
+        CHEAT_ENCRYPT('b'),
+	0xff, 0
 };
 
 static Cheat_t Cheats[] =
@@ -330,7 +344,8 @@ static Cheat_t Cheats[] =
 	{ CheatMassacreFunc, CheatMassacreSeq, NULL, 0, 0, 0 },
 	{ CheatIDKFAFunc, CheatIDKFASeq, NULL, 0, 0, 0 },
 	{ CheatIDDQDFunc, CheatIDDQDSeq, NULL, 0, 0, 0 },
-        { CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
+	{ CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
+	{ CheatHeadbobFunc, CheatHeadbobSeq, NULL, 0, 0, 0 }, // FS: Headbob toggle
 	{ NULL, NULL, NULL, 0, 0, 0 } // Terminator
 };
 
@@ -1525,18 +1540,50 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 // FS: From Doom
 static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 {
-        int     episode, map;
+	int episode, map;
 
 	episode = cheat->args[0]-'0';
 	map = cheat->args[1]-'0';
 
-	if(M_ValidEpisodeMap(episode, map))
+        if ((episode == 9) && (map == 7)) // FS: Hacky sack to allow title music
 	{
-                P_SetMessage(player, "MUSIC CHANGE", true);
-                S_StartSong((episode-1)*9 + map-1, true);
-        }
-        else
-        {
-                P_SetMessage(player, "IMPOSSIBLE SELECTION", true);
-        }
+		P_SetMessage(player, "MUSIC CHANGE", true);
+		S_StartSong(mus_titl, true);
+	}        
+        else if ((episode == 9) && (map == 8)) // FS: Hacky sack to allow finale music
+	{
+		P_SetMessage(player, "MUSIC CHANGE", true);
+                S_StartSong(mus_intr, true);
+	}        
+	else if ((episode == 9) && (map == 9)) // FS: Hacky sack to allow finale music
+	{
+		P_SetMessage(player, "MUSIC CHANGE", true);
+		S_StartSong(mus_cptd, true);
+	}        
+	else if(M_ValidEpisodeMap(episode, map))
+	{
+		P_SetMessage(player, "MUSIC CHANGE", true);
+		S_StartSong((episode-1)*9 + map-1, true);
+	}
+	else
+	{
+		P_SetMessage(player, "IMPOSSIBLE SELECTION", true);
+	}
 }
+
+// FS: Headbob toggle
+static void CheatHeadbobFunc(player_t *player, Cheat_t *cheat)
+{
+        extern int headBob;
+
+        headBob = !headBob;
+        if(headBob)
+	{
+                P_SetMessage(player, "HEAD BOBBING ON", false);
+	}
+	else
+	{
+                P_SetMessage(player, "HEAD BOBBING OFF", false);
+	}
+}
+

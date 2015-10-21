@@ -1,4 +1,8 @@
-- Make "-oldrules" work with Coop stuff
-- 640x480 SVGA (and other VESA modes)
-- 22kHz SB16
-- Disney Sound source
+- 640x480 SVGA (and other VESA modes).
+- 22kHz SB16.
+- Disney Sound source.
+- FOV.
+- Fix cheating in coop.
+- Fix SETUP.EXE to keep new values.
+- Fix demo desync.
+

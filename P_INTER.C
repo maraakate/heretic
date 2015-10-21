@@ -319,7 +319,7 @@ void P_GiveKey(player_t *player, keytype_t key)
 	player->bonuscount = BONUSADD;
 	player->keys[key] = true;
 
-        if (netgame && !deathmatch) // FS: Give it to all in coop
+        if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Give it to all in coop
         {
                 for (i = 0; i < MAXPLAYERS; i++)
                 {
@@ -331,16 +331,18 @@ void P_GiveKey(player_t *player, keytype_t key)
                         player->bonuscount = BONUSADD;
                         player->keys[key] = true;
 
+                        S_StartSound(NULL, sfx_keyup); // FS: Broadcast to all
+
                         switch(key)
                         {
                                 case key_blue:
-                                        P_SetMessage(player, "EVERYONE HAS THE BLUE KEY!", false);
+                                        P_SetMessage(player, "EVERYONE HAS THE BLUE KEY!", true);
                                         break;
                                 case key_green:
-                                        P_SetMessage(player, "EVERYONE HAS THE GREEN KEY!", false);
+                                        P_SetMessage(player, "EVERYONE HAS THE GREEN KEY!", true);
                                         break;
                                 case key_yellow:
-                                        P_SetMessage(player, "EVERYONE HAS THE YELLOW KEY!", false);
+                                        P_SetMessage(player, "EVERYONE HAS THE YELLOW KEY!", true);
                                         break;
                                 default:
                                         break;
@@ -562,7 +564,7 @@ void A_RestoreSpecialThing2(mobj_t *thing)
 
 void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 {
-        int i;
+	int i;
 	player_t *player;
 	fixed_t delta;
 	int sound;
@@ -632,7 +634,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 		case SPR_BKYY: // Key_Blue
 			if(!player->keys[key_blue])
 			{
-                                P_SetMessage(player, TXT_GOTBLUEKEY, false);
+				P_SetMessage(player, TXT_GOTBLUEKEY, false);
 			}
 			P_GiveKey(player, key_blue);
 			sound = sfx_keyup;
@@ -644,9 +646,9 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 		case SPR_CKYY: // Key_Yellow
 			if(!player->keys[key_yellow])
 			{
-                        	P_SetMessage(player, TXT_GOTYELLOWKEY, false);
+				P_SetMessage(player, TXT_GOTYELLOWKEY, false);
 			}
-                        sound = sfx_keyup;
+			sound = sfx_keyup;
 			P_GiveKey(player, key_yellow);
 			if(!netgame)
 			{
@@ -904,7 +906,10 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 
 void P_KillMobj(mobj_t *source, mobj_t *target)
 {
-	target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY|MF_NOGRAVITY);
+        int i; // FS
+        player_t *player; // FS
+
+        target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY|MF_NOGRAVITY);
 	target->flags |= MF_CORPSE|MF_DROPOFF;
 	target->flags2 &= ~MF2_PASSMOBJ;
 	target->height >>= 2;
@@ -949,6 +954,16 @@ void P_KillMobj(mobj_t *source, mobj_t *target)
 		target->player->powers[pw_flight] = 0;
 		target->player->powers[pw_weaponlevel2] = 0;
 		target->player->playerstate = PST_DEAD;
+
+        if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Broadcast death in coop
+		{
+			for (i = 0; i < MAXPLAYERS; i++)
+            {
+				player = &players[i];
+				P_SetMessage(player, "PLAYER DIED!", true);
+			}
+		}
+
 		P_DropWeapon(target->player);
 		if(target->flags2&MF2_FIREDAMAGE)
 		{ // Player flame death
@@ -1264,7 +1279,14 @@ void P_DamageMobj
 	{
 		return;
 	}
-	if(target->flags&MF_SKULLFLY)
+
+        if((netgame && !deathmatch) && (!M_CheckParm("-oldrules") || !M_CheckParm("-friendlyfire")) && (target->player && source->player))
+        // FS: No friendly fire in Coop
+        {
+                return;
+        }
+
+        if(target->flags&MF_SKULLFLY)
 	{
 		if(target->type == MT_MINOTAUR)
 		{ // Minotaur is invulnerable during charge attack
@@ -1432,7 +1454,7 @@ void P_DamageMobj
 			damage -= saved;
 		}
 		if(damage >= player->health
-                        && ((gameskill == sk_baby) || netgame) // FS: Was Deathmatch
+			&& ((gameskill == sk_baby) || netgame) // FS: Was Deathmatch
 			&& !player->chickenTics)
 		{ // Try to use some inventory health
 			P_AutoUseHealth(player, damage-player->health+1);

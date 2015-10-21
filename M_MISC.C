@@ -491,7 +491,7 @@ default_t defaults[] =
 
 	{ "usegamma", &usegamma, 0 },
 	{ "usePalFlash", &usePalFlash, 1 }, // FS: Palette Flashing
-        { "headBob", &headBob, 1 }, // FS: Head bob
+	{ "headBob", &headBob, 1 }, // FS: Head bob
 
 	{ "chatmacro0", (int *) &chat_macros[0], (int) HUSTR_CHATMACRO0 },
 	{ "chatmacro1", (int *) &chat_macros[1], (int) HUSTR_CHATMACRO1 },

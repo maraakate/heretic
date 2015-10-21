@@ -978,7 +978,6 @@ void P_SpawnPlayer(mapthing_t *mthing)
 	p->fixedcolormap = 0;
 	p->viewheight = VIEWHEIGHT;
 	P_SetupPsprites(p); // setup gun psprite        
-
 	if(deathmatch)
 	{ // Give all keys in death match mode
 		for(i = 0; i < NUMKEYS; i++)
@@ -996,7 +995,6 @@ void P_SpawnPlayer(mapthing_t *mthing)
 		playerkeys = 0;
 		UpdateState |= I_STATBAR;
 	}               
-
 }
 
 //----------------------------------------------------------------------------

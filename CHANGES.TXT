@@ -1,3 +1,21 @@
+01-16-13
+ - No "friendly fire" in coop.
+
+01-15-13
+ - Fixed MAXAMMO (backpack) with coop respawn.
+
+01-14-13
+ - "-oldrules" parameter works with coop.
+ - "-gus" to silently load HT_GUS1M.WAD for GUS cards, if available.
+ - "-shareware" to force the game into shareware mode.
+
+01-13-13
+ - "Player died!" message in coop.
+ - Startup screen alerts you if it is loading GUS patches into RAM.
+ - Cheating in coop with -cheats, but game desyncs.  Needs to be rewritten.
+ - "-nopalflash" and "-noheadbob" parameter.  Useful to pass from SETUP.EXE
+   where it tends to delete these values.
+
 01-12-13
  - New game rules in coop:
    * Players start with crossbow and 15 arrows.
