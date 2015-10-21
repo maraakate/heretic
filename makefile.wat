@@ -23,8 +23,8 @@
 #
 # --------------------------------------------------------------------------
 
-CCOPTS = /d2 /omaxet /zp1 /4r /ei /j /zq /i=3rdparty\include
-
+CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=3rdparty\include
+#CCOPTS = /d2 /odam /zp1 /4s /ei /j /zq /i=3rdparty\include
 
 LOCOBJS = &
  i_cyber.obj &
@@ -94,6 +94,7 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
  copy tic.exe striptic.exe
  wstrip -n striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
+# sb /R /O heretic.exe #Uncomment this to use DOS32/a
 
 i_ibm.obj:
  wcc386 /zp1 /4r /zq /ei /i=3rdparty\include /j i_ibm.c
@@ -106,11 +107,13 @@ i_ibm.obj:
 
 clean : .SYMBOLIC
  del *.obj
- del *.map
+ del *.dsg
+ del *.cfg
+ del *.wad
+ del *.deh
+ del *.dsg
  del *.sym
- del tic.exe
- del striptic.exe
- del heretic.exe
+ del *.map
  del out.txt
 
 final : .SYMBOLIC
@@ -118,4 +121,4 @@ final : .SYMBOLIC
  copy tic.exe striptic.exe
  wstrip -n striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
-# sb /R /O heretic.exe
+# sb /R /O heretic.exe #Uncomment this to use DOS32/a
