@@ -1,12 +1,24 @@
+09-02-13
+ - "-noexit" to disable exits in netgames.  Useful for DM maps.  Only works
+   for valid netgames.  You can test it out with IPXSETUP.EXE -NODES 1
+   -NOEXIT.
+ - Had to shift the options menu up a bit since it was causing some glitches
+   with the status bar.
+
 09-01-13
  - Extended limits from wHeretic.  Should be able to play some larger maps
    from 1998-1999'ish.
    * MAXVISPLANES from 128 to 1024
    * MAXOPENINGS from SCREENWIDTH*64 to SCREENWIDTH*256
-   * MAXDRAWSEGS from 256 to 1280
+   * MAXDRAWSEGS from 256 to 1024
    * MAXVISSPRITES from 128 to 1024
    * Raised Save Game maximum file size from about ~196KB to ~1024KB(1MB)
    * Raised Save Game maximum string size from 24 to 256.
+   * MAX_AMBIENT_SFX from 8 to 32.  Meant for allowing PC_LS.WAD to play.
+     This could maybe cause issues on maps that are designed badly and have
+     too many all fighting for sound space.  If you start getting weirdness
+     with too many sounds and acting funky let me know and I will implement
+     an alternative way to deal with the issue.
 
 08-31-13
  - Added Headbob and Palette Flashing toggle to Options Menu.

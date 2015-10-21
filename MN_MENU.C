@@ -248,7 +248,7 @@ static MenuItem_t OptionsItems[] =
 
 static Menu_t OptionsMenu =
 {
-	88, 30,
+	88, 15,
 	DrawOptionsMenu,
 	7, OptionsItems, // FS: Was 5
 	0,
@@ -689,29 +689,29 @@ static void DrawOptionsMenu(void)
 
 	if(messageson)
 	{
-		MN_DrTextB("ON", 196, 50);
+		MN_DrTextB("ON", 196, 35);
 	}
 	else
 	{
-		MN_DrTextB("OFF", 196, 50);
+		MN_DrTextB("OFF", 196, 35);
 	}
 
 	if(usePalFlash) // FS: Draw Pal Flash
 	{
-		MN_DrTextB("ON", 240, 70);
+		MN_DrTextB("ON", 240, 55);
 	}
 	else
 	{
-		MN_DrTextB("OFF", 240, 70);
+		MN_DrTextB("OFF", 240, 55);
 	}
 
 	if(headBob) // FS: Headbob Toggle
 	{
-		MN_DrTextB("ON", 188, 90);
+		MN_DrTextB("ON", 188, 75);
 	}
 	else
 	{
-		MN_DrTextB("OFF", 188, 90);
+		MN_DrTextB("OFF", 188, 75);
 	}
 
         DrawSlider(&OptionsMenu, 5, 10, mouseSensitivity/5); // FS: We using 20 now and was 3,10, etc..

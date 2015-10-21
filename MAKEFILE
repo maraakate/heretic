@@ -32,7 +32,7 @@
 #  The EXTERNOPT macro should be set to /dNORANGECHECKING
 #
 
-CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=dmx
+CCOPTS = /d2 /omaxet /zp1 /4r /ei /j /zq /i=dmx
 
 
 LOCOBJS = &

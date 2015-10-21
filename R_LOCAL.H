@@ -165,7 +165,7 @@ typedef struct drawseg_s
 #define SIL_TOP		2
 #define	SIL_BOTH	3
 
-#define	MAXDRAWSEGS		1280 // FS: WAS 256
+#define MAXDRAWSEGS             1024 // FS: WAS 256
 
 // A vissprite_t is a thing that will be drawn during a refresh
 typedef struct vissprite_s

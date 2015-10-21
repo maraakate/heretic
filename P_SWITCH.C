@@ -257,6 +257,11 @@ boolean P_UseSpecialLine ( mobj_t *thing, line_t *line)
 				P_ChangeSwitchTexture(line,0);
 			break;
 		case 11:		// Exit level
+			if (netgame && M_CheckParm("-noexit")) // FS: No Exit!
+			{
+				P_SetMessage(&players[consoleplayer], "EXITS DISABLED!", true);
+				break;
+			}
 			G_ExitLevel ();
 			P_ChangeSwitchTexture(line,0);
 			break;
@@ -305,6 +310,11 @@ boolean P_UseSpecialLine ( mobj_t *thing, line_t *line)
 				P_ChangeSwitchTexture(line,0);
 			break;
 		case 51:		// Secret EXIT
+			if (netgame && M_CheckParm("-noexit")) // FS: No Exit!
+			{
+				P_SetMessage(&players[consoleplayer], "EXITS DISABLED!", true);
+				break;
+			}
 			G_SecretExitLevel ();
 			P_ChangeSwitchTexture(line,0);
 			break;

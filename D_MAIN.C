@@ -698,11 +698,6 @@ void tprintf(char *msg,int initflag)
 	int i;
 	#endif
 
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
-	{
-		printf(msg);
-		return;
-	}
 	#ifdef __WATCOMC__
 	if (initflag)
 		tmsg[0] = 0;

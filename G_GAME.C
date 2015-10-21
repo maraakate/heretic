@@ -1462,7 +1462,7 @@ void G_DoCompleted(void)
 	static int afterSecret[5] = { 7, 5, 5, 5, 4 };
 
 	gameaction = ga_nothing;
-	if(G_CheckDemoStatus())
+	if(G_CheckDemoStatus()) 
 	{
 		return;
 	}
