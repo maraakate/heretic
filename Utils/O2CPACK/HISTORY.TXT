@@ -1,0 +1,151 @@
+This file is part of the Object to Coff (O2C) package!
+------------------------------------------------------
+
+History
+=======
+
+Version 0.1 BETA
+----------------
+
+- All Turbo Assembler functions will be converted, except the 'group'
+  definitions. Do not use it!
+
+- Up to 8192 symbols/externals/publics etc.
+
+- Up to 4Mb segmentsizes
+
+- Option /? /h
+
+- Program is very big, due to pre-allocated data structures
+
+- All Turbo assembler files must be compiled with /Zi and /Ml
+   (Zi=debug info, Ml=case sensitive link)
+
+
+
+Version 0.2 BETA
+----------------
+
+- This version converts Object files without debug info now too
+  (no /Zi switch anymore)
+
+- The Model option FLAT,C works fine too, so you don't have to add the
+  underscores now
+
+
+
+Version 0.3 BETA
+----------------
+
+- Fixed relative pointer conversion (CALL label/JMP label)
+
+
+
+Version 0.4 BETA
+----------------
+
+- Smaller executable, due to use of linked-lists instead of predefined
+  arrays.
+
+- Unlimited symbols/externals/publics etc.
+
+
+
+Version 0.5 BETA
+----------------
+
+- Wildcard supporting, multiple filenames too
+
+- Library file (.LIB) conversion support
+
+- Binary file to raw data conversion support
+
+- Destination file option kicked (filename will now be the same as the
+  original assembler file)
+
+- Also removed the automatic .OBJ file extension because of different
+  legal extensions now
+
+- Uninitialized data segment (.bss segment) support
+
+- It seems to be a bit faster (a bonus in the shareware version -> shorter
+  delay, but irritating delays if you remove some .txt files from the
+  package!)
+
+- Better error handling
+
+- Fixed a few bugs
+
+
+
+Version 0.6 BETA
+----------------
+
+- Kicked a real nasty bug. I know it sounds strange, but i think the .coff
+  format has been changed a little since djgpp version 2. If your program
+  contains externals in the asm file it did not work correctly, now it does.
+
+- Also added the command line option -L, so you can also use case
+  insensitive symbols, that are not tasm'd case insensitive. (actually all
+  symbols will be forced to lower case!)
+
+- Added support for all compilers, such as Watcom/Borland C etc..
+
+- Added some other cool options that are probably needed to link Watcom C
+  librarys with your DJGPP program.
+
+- All conversions can be done to .A now. This is implemented to prevent a
+  lot of coff files when converting a .LIB file. A temporary directory is
+  created, wherein the coff file(s) are stored. After that the DJGPP utility
+  AR.EXE is used to make one big library file which you can link with your
+  own DJGPP program.
+
+- Changed the examples
+
+- O2C.EXE is a lot smaller than first because O2C is compiled in DJGPP
+  version 2.7.1. It is faster too...
+
+
+Version 1.0
+-----------
+
+- Changed version number from BETA to FINAL one
+
+- Changed o2c file to a none-executable, because heuristic virus-scanners
+  are reporting that o2c is infected by an unknown virus. This is really
+  NOT true. I wonder if there is a good solution too this, because all files
+  stubified with 'stubify' have the same effect. You are allowed to stubify
+  o2c yourself!
+
+
+REGISTERED version
+------------------
+
+- Free updates for version 0.x and 1.x
+
+- No annoying headers in YOUR executable
+
+- A small and fast 'Borland C 3.1' version
+
+- The ONLY way to make your 'object to coff converted' program commercial
+
+- Info about the way I convert the object files (technical specs and so on)
+
+- No annoying delay and 'press any key'
+
+
+
+Known bugs
+----------
+
+- None
+
+
+
+Things to do
+------------
+
+- Documentation
+
+- Debug info
+

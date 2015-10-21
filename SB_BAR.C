@@ -1706,5 +1706,28 @@ static void CheatFinishLevelFunc (player_t *player, Cheat_t *cheat)
 	}
 	
 	S_StartSound(NULL, sfx_dorcls);
-	G_ExitLevel ();
+	switch(gamemap)
+	{
+		case 3:
+			if(gameepisode == 5)
+				G_SecretExitLevel();
+			else
+				G_ExitLevel();
+			break;		
+		case 4:
+			if(gameepisode == 2 || gameepisode == 3 || gameepisode == 4)
+				G_SecretExitLevel();
+			else
+				G_ExitLevel();
+			break;
+		case 6:
+			if(gameepisode == 1)
+				G_SecretExitLevel();
+			else
+				G_ExitLevel();
+			break;
+		default:
+			G_ExitLevel ();
+			break;
+	}
 }

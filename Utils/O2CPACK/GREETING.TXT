@@ -1,0 +1,74 @@
+This file is part of the Object to Coff (O2C) package!
+------------------------------------------------------
+
+
+Greetings
+=========
+
+All demoscene groups/people like:
+
+- Radio 538
+- Abstract Concepts
+- ACE
+- Acme
+- Admire
+- BRC
+- Cascada
+- Complex
+- Dust
+- EMF
+- Future Crew, Not this time!
+- Gravis
+- Hypnosis
+- Iguana
+- Legend Design
+- Leopold Nagelkerke
+- Lizard King
+- Logic Design
+- Magic 12
+- MSX Users
+- Noice
+- Nostalgia
+- Prime
+- S!P
+- Spirit
+- Students of HSE
+- Success
+- Tran
+- Triton
+- Valhalla
+- Vla
+- Void
+
+
+Special SPiRiT Greetings go to SPiRiT members
+=============================================
+
+- Bloody        : Musixx
+- Cenotaph      : Coder
+- El Greco      : Coder (lots of math)
+- Frankied      : Coder
+- Magic Boy     : Coder
+- Mr. Belvedere : BBS
+- Rico          : Coder (Right, that's me)
+- SynthFreak    : Musixx
+- The Counsellor: Coder/Grafixx
+- Tokyo Joe     : Coder
+- Trax          : Coder
+- Zest          : Musixx/Grafixx
+
+
+And of course thanx and greetings to the huge amount of BETA testers
+====================================================================
+
+- Trax
+- El Greco
+- Viktor Belokour (thanx for the bug report!)
+- Scitech
+
+
+Contact me to the following e-mail address if you want into the
+greetings too. All bugfix reports and comments are welcome too.
+
+mb002@hi.ft.hse.nl
+

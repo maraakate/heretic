@@ -737,6 +737,19 @@ void tprintf(char *msg,int initflag)
 #endif
 }
 
+#ifdef __WATCOMC__
+void CleanExit(void)
+{
+	union REGS regs;
+
+	I_ShutdownKeyboard();
+	regs.x.eax = 0x3;
+	int386(0x10, &regs, &regs);
+	printf("Exited from HERETIC.\n");
+	exit(1);
+}
+#endif
+
 void CheckAbortStartup(void)
 {
 #ifdef __WATCOMC__
@@ -761,19 +774,6 @@ void InitThermo(int max)
 	thermMax = max;
 	thermCurrent = 0;
 }
-
-#ifdef __WATCOMC__
-void CleanExit(void)
-{
-	union REGS regs;
-
-	I_ShutdownKeyboard();
-	regs.x.eax = 0x3;
-	int386(0x10, &regs, &regs);
-	printf("Exited from HERETIC.\n");
-	exit(1);
-}
-#endif
 
 //---------------------------------------------------------------------------
 //

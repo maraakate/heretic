@@ -1,0 +1,41 @@
+
+To:  R. Spijkers
+     Peperstraat 20
+     5061 XC Oisterwijk
+     The Netherlands (Noord Brabant)
+     E-Mail: mb002@hi.ft.hse.nl
+
+Single user registration form for the Object to Coff (O2C) converter.
+(only valid for versions equal or less than 1.9)
+Please print this file and send it to the address above.
+
+Please write clear and legible!
+
+The price of the registered version of O2C is Fl15,- or $10.
+- Enclose cash money with this registration form.
+- Or Giro: 1238798 with comment: "OBJ2COFF registration"
+       (Alleen in Nederland)
+
+
+Your name:  ________________________________________
+
+Address:    ________________________________________
+
+            ________________________________________
+
+            ________________________________________
+
+Country:    ________________________________________
+
+Email address
+(optional): ________________________________________
+
+
+Send the registered version by Email: [  ] Yes   [  ] No
+
+
+
+
+
+Signature:  ________________________________________
+

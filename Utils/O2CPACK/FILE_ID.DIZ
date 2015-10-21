@@ -1,0 +1,15 @@
+    RiCO/SPiRiT proudly Presents:
+
+         version 1.0  of the
+
+  OBJ/LIB -> COFF/ARCH File Converter
+
+       - only Flat model conversion
+       - Tasm/Watcom/MC/BC support
+       - new bugfixes
+
+   It converts:
+       - .OBJ object files
+       - .LIB library files
+       - .??? binary files
+

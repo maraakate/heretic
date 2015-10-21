@@ -1,0 +1,41 @@
+This file is part of the Object to Coff (O2C) package!
+------------------------------------------------------
+
+
+Files
+=====
+
+This package contains the following files:
+
+- fileid.diz      File ID
+
+- o2c             DJGPP2 version of the Object to Coff Converter
+- o2c.bat         o2c starter, there must be a path to go32-v2.exe
+- o2cmake.bat     o2c executible maker, there must be a path to stubify.exe
+
+- example1.asm    \
+- example1.bat     A sample that converts an object file
+- example.c       /
+
+- example2.asm    \
+- example2.bat     The same example, now with a library file
+- example.c       /
+
+- example3.asm    \
+- exdata3.dat      The same example again, only now the
+- example3.bat     BINARY conversion will be tested
+- example.c       /
+
+- files.txt       You're reading it now
+- greetings.txt   Some greetings
+- history.txt     Pervious version-description in this file
+- legal.txt       The legal stuff
+- register.txt    Registration form
+
+
+Addition files needed:
+
+- cwsdpmi.exe     The dpmi driver (or an other one)
+- go32-v2.exe     Stubloader for o2c or
+- stubify.exe     Stubifier for o2c, all delivered with djgpp2
+

@@ -2,6 +2,7 @@
 // MN_menu.c
 
 #include <ctype.h>
+#include <io.h>
 #include "DoomDef.h"
 #include "P_local.h"
 #include "R_local.h"
@@ -77,8 +78,8 @@ static boolean SCScreenSize(int option);
 static boolean SCLoadGame(int option);
 static boolean SCSaveGame(int option);
 static boolean SCMessages(int option);
-static void SCPalFlashes(int option); // FS: Pal Flashes
-static void SCHeadBob(int option); // FS: Headbob Toggle
+static boolean SCPalFlashes(int option); // FS: Pal Flashes
+static boolean SCHeadBob(int option); // FS: Headbob Toggle
 static boolean SCEndGame(int option);
 static boolean SCInfo(int option);
 static void DrawMainMenu(void);
@@ -839,7 +840,7 @@ static boolean SCMessages(int option)
 	return true;
 }
 
-static void SCPalFlashes(int option) // FS: Palette Flashes Toggle
+static boolean SCPalFlashes(int option) // FS: Palette Flashes Toggle
 {
 	extern boolean usePalFlash;
 	usePalFlash ^= 1;
@@ -852,9 +853,10 @@ static void SCPalFlashes(int option) // FS: Palette Flashes Toggle
 		P_SetMessage(&players[consoleplayer], "PALETTE FLASHES OFF", true);
 	}
 	S_StartSound(NULL, sfx_chat);
+	return true;
 }
 
-static void SCHeadBob(int option) // FS: Headbob Toggle
+static boolean SCHeadBob(int option) // FS: Headbob Toggle
 {
 	extern int headBob;
 	headBob ^= 1;
@@ -867,6 +869,7 @@ static void SCHeadBob(int option) // FS: Headbob Toggle
 		P_SetMessage(&players[consoleplayer], "HEADBOBBING OFF", true);
 	}
 	S_StartSound(NULL, sfx_chat);
+	return true;
 }
 
 //---------------------------------------------------------------------------
@@ -891,6 +894,7 @@ static boolean SCLoadGame(int option)
 	{
 		sprintf(name, SAVEGAMENAME"%d.hsg", option);
 	}
+	SaveMenu.oldItPos = option; // FS: Keep it consistent
 	G_LoadGame(name);
 	MN_DeactivateMenu();
 	BorderNeedRefresh = true;
@@ -931,6 +935,7 @@ static boolean SCSaveGame(int option)
 	}
 	else
 	{
+		LoadMenu.oldItPos = option; // FS: Keep it consistent
 		G_SaveGame(option, SlotText[option]);
 		FileMenuKeySteal = false;
 		MN_DeactivateMenu();

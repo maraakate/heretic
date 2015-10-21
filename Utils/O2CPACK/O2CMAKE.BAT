@@ -1,0 +1,1 @@
+@stubify o2c

@@ -1906,7 +1906,7 @@ byte *I_ZoneBase (int *size)
 
 	do
 	{
-		heap -= 0x20000;                // FS: was 0x10000, now 128k Zone// leave 64k alone
+		heap -= 0x10000;		// leave 64k alone
 		if (heap > 0x800000)
 			heap = 0x800000;
 		ptr = malloc (heap);

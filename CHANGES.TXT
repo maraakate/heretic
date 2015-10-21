@@ -1,3 +1,6 @@
+10-16-13
+ - HHSCOTT cheat will now automatically skip to the secret levels.
+
 10-06-13
  - Delete save games from Load and Save Menu by pressing delete.
  - If you're in a fake netgame (i.e. ipxsetup -nodes 1) you can
