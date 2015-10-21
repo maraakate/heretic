@@ -688,7 +688,7 @@ static void DrawOptionsMenu(void)
 	{
 		MN_DrTextB("OFF", 196, 50);
 	}
-	DrawSlider(&OptionsMenu, 3, 10, mouseSensitivity/2); // FS: We using 20 now
+        DrawSlider(&OptionsMenu, 3, 10, mouseSensitivity/5); // FS: We using 20 now
 }
 
 //---------------------------------------------------------------------------
@@ -914,7 +914,7 @@ static boolean SCMouseSensi(int option)
 {
 	if(option == RIGHT_DIR)
 	{
-		if(mouseSensitivity < 20) // FS: Go up to 20
+                if(mouseSensitivity < 50) // FS: Go up to 50
 		{
 			mouseSensitivity++;
 		}
@@ -1026,6 +1026,7 @@ boolean MN_Responder(event_t *event)
 	MenuItem_t *item;
 	extern boolean automapactive;
 	static boolean shiftdown;
+	extern boolean usePalFlash; // FS: Use Palette Flashing
 	extern void D_StartTitle(void);
 	extern void G_CheckDemoStatus(void);
 	char *textBuffer;
@@ -1205,6 +1206,18 @@ boolean MN_Responder(event_t *event)
 				slottextloaded = false; //reload the slot text, when needed
 				return true;
 			case KEY_F5: // F5 isn't used in Heretic. (detail level)
+				if(usePalFlash == true)
+				{
+					P_SetMessage(&players[consoleplayer], "PALETTE FLASHES OFF", false);
+					usePalFlash = false;
+					SB_PaletteFlash();
+				}
+				else
+				{
+					P_SetMessage(&players[consoleplayer], "PALETTE FLASHES ON", false);
+					usePalFlash = true;
+					SB_PaletteFlash();
+				}
 				return true;
 			case KEY_F6: // quicksave
 				if(gamestate == GS_LEVEL && !demoplayback)
@@ -1291,6 +1304,26 @@ boolean MN_Responder(event_t *event)
 					usegamma = 0;
 				}
 				I_SetPalette((byte *)W_CacheLumpName("PLAYPAL", PU_CACHE));
+
+				switch(usegamma) // FS: Could be smart but it's 2AM.  I'm lazy, and you won't ever play this version.
+				{
+					case 0:
+						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION OFF", false);
+						break;
+					case 1:
+						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 1", false);
+						break;
+					case 2:
+						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 2", false);
+						break;
+					case 3:
+						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 3", false);
+						break;
+					case 4:
+						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 4", false);
+						break;
+				}
+
 				return true;
 #endif
 		}

@@ -16,6 +16,7 @@ void P_PlayerNextArtifact(player_t *player);
 boolean onground;
 int newtorch; // used in the torch flicker effect.
 int newtorchdelta;
+extern int headBob; // FS: Head bob toggle
 
 boolean WeaponInShareware[] =
 {
@@ -91,7 +92,7 @@ void P_CalcHeight (player_t *player)
 		player->bob = FRACUNIT/2;
 	}
 
-	if ((player->cheats & CF_NOMOMENTUM))
+        if ((player->cheats & CF_NOMOMENTUM))
 	{
 		player->viewz = player->mo->z + VIEWHEIGHT;
 		if (player->viewz > player->mo->ceilingz-4*FRACUNIT)
@@ -151,6 +152,9 @@ void P_CalcHeight (player_t *player)
 	{
 		player->viewz = player->mo->floorz+4*FRACUNIT;
 	}
+
+        if (headBob < 1)
+                bob = player->bob = 0; // FS: Hate bob
 }
 
 /*

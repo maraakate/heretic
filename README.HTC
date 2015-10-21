@@ -1,0 +1,104 @@
+Heretic v1.3a for DOS
+Coding by [HCI]Mara'akate
+
+Additional code from taniwha, Dosdoom project and more.
+---------------------------------------------------------
+
+Table of Contents
+
+1 - Introduction
+2 - What's New
+3 - Requirements
+4 - Installation
+5 - Known Bugs and Limitations
+6 - Final Thoughts
+
+
+1 - Introduction
+---------------------------------------------------------
+
+Why code for DOS in 2013 you ask?  Pretty much the same reason anybody
+   is coding Heretic ports these days... for fun and to learn some programming.
+   This is my third serious project as far as programming goes and I have
+   learned a lot.  As each day goes by, Heretic grows more and more in
+   it's complexity with new features and bug fixes.
+
+2 - What's New
+---------------------------------------------------------
+
+Heretic v1.3a has many features.
+   Here are some highlights:
+
+* Always run.
+* Raised mouse sensitivity cap.
+* Show Ammo, Keys, and Armor in full screen.
+* "Secrets Found: x/x" in Map mode.
+* "You found a secret area!" message with an audio hint.
+* F5 for toggling of palette flashing (i.e. screen reddens when hurt).
+   This can also be disabled via "-nopalflash".
+* No headbobing with "-noheadbob" or setting headBob = 0 in HERETIC.CFG.
+* Menu Options for Headbob and Palette Flashing.
+* Gamma Level notification text.
+* IDMUS cheat from Doom.
+   97 will play the title song, 98 will play the intermission song, and
+   99 will play the finale song.
+* Extremely enhanced coop
+   - Players keep all keys, ammo, artifacts, and weapons when they are
+     respawned.
+   - Keys are shared among all connected players with message
+     "EVERYONE HAS THE X KEY!"
+   - Players start with Crossbow and 15 arrows.
+   - Respawning items.
+   - "PLAYER DIED!" notification text.
+   - No "friendly fire".
+* "Loading GUS Patches." notification during initial startup if a GUS is
+    present.
+* "-gus" to silently load HT_GUS1M.WAD for GUS cards, if available.
+* New game rules:
+   - Torch lighting will last for the duration of the level.
+   - Multiple artifacts will carry to the next level.
+* "-oldrules" parameter to use older game rules.
+* HERESW.BAT to toggle between v1.3 (original) and v1.3a (this version)
+
+3 - Requirements
+---------------------------------------------------------
+
+The System Requirements should be the same, but a 14k modem with a
+custom sersetup replacement (like SERBNU) should be used to take advantage
+of faster modem speeds.  The respawning items and global broadcasting in
+the custom coop mode may be slow on 9600 baud.
+
+TCP/IP Play:
+ - ISA: NE2000 Clone
+ - PCI: LNE100TX v4
+ - PCMCIA WIFI(!): Avaya World Card Gold
+ Simply load up the packet driver for one of these cards and use KALI
+ for DOS.  You must update the KALI.CFG to point to the new tracker which
+ is located at 173.201.177.156:2213.  KALI for DOS can be downloaded at
+ http://dk.toastednet.org/kdos14a.exe (case sensitive).
+
+IPX:
+ Basically the same way... any NIC that has decent DOS drivers (like the ones
+ listed above) will have ODI drivers.
+
+4 - Installation
+---------------------------------------------------------
+
+1) Extract to your Heretic directory
+2) Load your drivers.
+3) Run HERETIC.EXE
+4) Frag on!
+
+5 - Known Bugs and Limitations
+---------------------------------------------------------
+
+* The desynced demos bug from original 1.3.  Haven't looked into it.
+
+6 - Final Thoughts
+---------------------------------------------------------
+
+Visit http://dk.toastednet.org/QDOS to download KALI for DOS!
+
+
+Questions?  Comments?  Contact Maraakate at telnet://marabbs.no-ip.org.
+

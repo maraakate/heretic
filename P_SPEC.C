@@ -863,8 +863,8 @@ void P_PlayerInSpecialSector(player_t *player)
 			break;
 		case 9: // SecretArea
 			player->secretcount++;
-			S_StartSound(NULL, sfx_chat); // FS: Play a sound
-			P_SetMessage(&players[consoleplayer], TXT_FOUNDSECRET, false); // FS: Alert me about a secret
+			S_StartSound(player->mo, sfx_chat); // FS: Play a sound
+			P_SetMessage(player, TXT_FOUNDSECRET, true); // FS: Alert me about a secret
 			sector->special = 0;
 			break;
 		case 11: // Exit_SuperDamage (DOOM E1M8 finale)

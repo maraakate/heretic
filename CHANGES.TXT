@@ -1,0 +1,27 @@
+10-01-12
+ - Mouse sensitivity raised from 20 to 50.  Great for trackballs!
+ - Mousey (fwd+bckwd) capped to 20.  Things get silly if it's higher.
+ - headBob in heretic.cfg.  Set to 0 to disable Head Bobbing.
+
+09-22-12
+ - Secret area text now "ultimate" message.
+ - Fixed spamming the secret area text to other players in coop.
+ - F5 for Palette Flashing toggle.
+ - Gamma level notification text.
+ - Palette Flashing toggle is saved to config.
+
+05-30-12
+ - Play a sound when you find a secret area.
+
+04-05-12
+ - Show ammo and armor in full screen.
+ - "You found a secret area!" message.
+ - "Secrets Found: x/x" in map mode.
+ - Version bump to "v1.3a".
+ - Mouse sensitivity raised from 10 to 20.
+ - Show keys in full screen.
+
+04-04-12
+ - First Compile.
+ - Walk speed == run speed.
+ - "Game restored" message.

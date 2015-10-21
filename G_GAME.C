@@ -658,7 +658,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 	{
 		cmd->angleturn -= mousex*0x8;
 	}
-	forward += mousey;
+        forward += mousey;
 	mousex = mousey = 0;
 
 	if (forward > MAXPLMOVE)
@@ -875,8 +875,16 @@ boolean G_Responder(event_t *ev)
 			mousebuttons[1] = ev->data1&2;
 			mousebuttons[2] = ev->data1&4;
 			mousex = ev->data2*(mouseSensitivity+5)/10;
-			mousey = ev->data3*(mouseSensitivity+5)/10;
-			return(true); // eat events
+
+                        if (mouseSensitivity < 20) // FS: Cap because it gets wonky
+                        {
+                                mousey = ev->data3*(mouseSensitivity+5)/10;
+                        }
+                        else
+                        {
+                                mousey = ev->data3*(25)/10;
+                        }
+                        return(true); // eat events
 
 		case ev_joystick:
 			joybuttons[0] = ev->data1&1;

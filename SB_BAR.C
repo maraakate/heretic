@@ -61,6 +61,7 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat);
 // Public Data
 
 boolean DebugSound; // debug flag for displaying sound info
+boolean usePalFlash; // FS: Palette Flashing
 
 boolean inventory;
 int curpos;
@@ -854,6 +855,10 @@ void SB_PaletteFlash(void)
 	{
 		palette = 0;
 	}
+
+	if (usePalFlash == false) // FS: Palette Flashing toggle
+		palette = 0;
+
 	if(palette != sb_palette)
 	{
 		sb_palette = palette;

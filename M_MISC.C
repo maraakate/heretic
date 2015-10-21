@@ -366,6 +366,7 @@ extern  int         joybspeed;
 extern  int     viewwidth, viewheight;
 
 int mouseSensitivity;
+int headBob; // FS: Head bob toggle
 
 extern  int screenblocks;
 
@@ -389,6 +390,8 @@ extern int snd_MusicDevice, // current music card # (index to dmxCodes)
 extern int     snd_SBport, snd_SBirq, snd_SBdma;       // sound blaster variables
 extern int     snd_Mport;                              // midi variables
 #endif
+
+extern boolean usePalFlash; // FS
 
 default_t defaults[] =
 {
@@ -487,6 +490,8 @@ default_t defaults[] =
 #endif
 
 	{ "usegamma", &usegamma, 0 },
+	{ "usePalFlash", &usePalFlash, 1 }, // FS: Palette Flashing
+        { "headBob", &headBob, 1 }, // FS: Head bob
 
 	{ "chatmacro0", (int *) &chat_macros[0], (int) HUSTR_CHATMACRO0 },
 	{ "chatmacro1", (int *) &chat_macros[1], (int) HUSTR_CHATMACRO1 },
