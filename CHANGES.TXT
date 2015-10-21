@@ -1,3 +1,6 @@
+09-08-13
+ - Added checks for statcopy to work for episode ends.
+
 09-05-13
  - Raised MAX_BOSS_SPOTS and MAX_MACE_SPOTS from 8 to 32.
 

@@ -1489,6 +1489,18 @@ void G_DoCompleted(void)
 	else if(gamemap == 8)
 	{
 		gameaction = ga_victory;
+
+		if(M_CheckParm("-statcopy")) // FS: Check for statcopy, and use it on episode end
+		{
+			IN_InitStats();
+
+			if(!netgame)
+				IN_PrintSingleStats();
+			else if(netgame && !deathmatch)
+				IN_PrintCoopStats();
+			else
+				IN_PrintDMStats();
+		}
 		return;
 	}
 	else
