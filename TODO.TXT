@@ -4,6 +4,5 @@
 - FOV.
 - Fix cheating in coop.
 - Make IDMUS and other harmless "cheats" work in netplay.
-- Fix friendly fire.
 - Fix demo desync.
 - Fix "skill 0" to be an invalid option.

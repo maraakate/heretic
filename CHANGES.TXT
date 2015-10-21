@@ -1,3 +1,7 @@
+09-23-13
+ - Weapon pick up text in Netgames.
+ - No friendly fire returns.  This time it works properly!
+
 09-21-13
  - Load a custom Gravis UltraSound INI file with -usegusini <filename.ini>.
    Error checks are in place to see if the file exists and if you passed
@@ -37,14 +41,14 @@
    will default if not specified, but if you get some weirdness not
    remembering parameters or desyncing games because of missing params it's
    likely my checks aren't as good as I thought.
-  - Fixed P_SetMessage "ultimate messages" value to be cleared on death
+ - Fixed P_SetMessage "ultimate messages" value to be cleared on death
    and finish levels.  If you died and immediately respawned in a netgame
    messages would be disabled unless you reset the value in the menu or
    another "ultimate message" appeared.  In my stats testing I also found
    that if you saved in front of an exit and "GAME RESTORED" was still on
    the screen, flick the switch, messages again would be disabled.
    If you find other weird situations where it happens let me know.
-  - New cheat "HHSCOTT" to immediately finish level.  Was originally for
+ - New cheat "HHSCOTT" to immediately finish level.  Was originally for
    testing the statcopy function, but figured I'd leave it in.
 
 09-03-13
@@ -87,10 +91,10 @@
  - Torch is removed when you die.
 
 07-12-13
- - Friendly Fire removed because it's causing problems. :(
+ - No friendly fire in coop removed because it's causing problems. :(
 
 01-16-13
- - No "friendly fire" in coop.
+ - No friendly fire in coop.
 
 01-15-13
  - Fixed MAXAMMO (backpack) with coop respawn.
@@ -111,7 +115,6 @@
    * Players keep weapons, inventory, etc. after respawn.
    * Keys are shared.
    * Items respawn, sharing deathmatch rules for respawning.
-
  - Holding run doesn't allow ultrafast movement.  Thanks to DOSDOOM
    for oneliner.
 

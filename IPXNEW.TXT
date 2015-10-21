@@ -1,0 +1,69 @@
+Updated IPXSETUP.EXE for Heretic, Doom 2, and Doom
+Allows custom exes by passing -exe <filename.exe> to IPXNEW!
+Increased argument string from 99 to 1024.  
+Make some wild response files!
+Allows setting of console player by using -player <node#>.
+Ideas from CTFDOOM's IPXSETUP.
+
+
+(Taken from CTFDOOM IPXSETUP README.TXT)
+
+****************
+** How to use **
+****************
+
+Allows players now to select which team they wish to play for.
+
+    Teams
+      1        Players 1(Green)  & 3(Brown)
+      2        Players 2(Indigo) & 4(Red)
+
+    This is extremely useful if you have a 4 player game setup with 2
+computers in each room. Usually IPXDOOM will decide players numbers by
+their network node address this parameter forces a player number into the
+game.
+
+NOTE : If "-player" is not used the original code is used.
+
+eg.
+   Lets assume we have a 4 player game set up without the "-player" parameter
+   with two machines in each room.
+
+   Room 1
+   Player 1  (IPXDOOM Chooses the Player Numbers)
+   Player 2
+
+   Room 2
+   Player 3
+   Player 4
+
+   Now seeing as the CTF implementation uses players 1 & 3 on one team and
+   2 & 4 on the other, this really is NOT an ideal setup!
+
+
+   To overcome this now is extremely easy :
+
+   Room 1
+   Player 1  IPXDOOM -player 1 -ctf -file <mapname.WAD> -nodes 4
+   Player 3  IPXDOOM -player 3 -ctf -file <mapname.WAD> -nodes 4
+
+   Room 2
+   Player 2  IPXDOOM -player 2 -ctf -file <mapname.WAD> -nodes 4
+   Player 4  IPXDOOM -player 4 -ctf -file <mapname.WAD> -nodes 4
+
+
+   Thats it!! Players are now set up the correct way!
+
+***Change Log***
+09-16-2013
+ - Updated to use my DOOMNEW.EXE port.
+
+09-05-2013
+ - Updated to use the newer IPXSETUP which used the LDOG "windows".  The net
+   code is fundamentally unchanged between the older text IPXSETUP and the 
+   new one.
+ - "-?" and "/?" were missing.  Readded, and updated to reflect new changes.
+ - Renamed to IPXNEW.EXE for those who still want to keep the original IPXSETUP.
+
+09-02-2013
+ - First Compile.

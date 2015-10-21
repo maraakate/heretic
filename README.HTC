@@ -49,7 +49,7 @@ Heretic v1.3a has many features.
      "EVERYONE HAS THE X KEY!"
    - Players start with Crossbow and 15 arrows.
    - Respawning items.
-   - "PLAYER DIED!" notification text.
+   - "PLAYER X DIED!" notification text.
    - No "friendly fire".
 * "Loading GUS Patches." notification during initial startup if a GUS is
     present.
@@ -59,6 +59,16 @@ Heretic v1.3a has many features.
    - Multiple artifacts will carry to the next level.
 * "-oldrules" parameter to use older game rules.
 * HERESW.BAT to toggle between v1.3 (original) and v1.3a (this version)
+* Extended limits from wHeretic.  Can now play a wide variety of large maps.
+  No zDoom/Boom support.
+* Updated SETUP.EXE to remember the new configuration parameters.
+  This new SETUP.EXE also correctly applies the default chat macros.
+* Updated IPXSETUP.EXE, now called IPXNEW.EXE. 
+   - Allows custom exes by passing -exe <filename.exe>
+   - Increased argument string from 99 to 1024, allowing
+     for rather large and complex response files.
+   - Allows setting of console player by using -node <#>.
+   - See IPXNEW.TXT for more details.
 
 3 - Requirements
 ---------------------------------------------------------
@@ -75,7 +85,7 @@ TCP/IP Play:
  Simply load up the packet driver for one of these cards and use KALI
  for DOS.  You must update the KALI.CFG to point to the new tracker which
  is located at 173.201.177.156:2213.  KALI for DOS can be downloaded at
- http://dk.toastednet.org/kdos14a.exe (case sensitive).
+ http://maraakate.org/Kali.
 
 IPX:
  Basically the same way... any NIC that has decent DOS drivers (like the ones
@@ -92,7 +102,8 @@ IPX:
 5 - Known Bugs and Limitations
 ---------------------------------------------------------
 
-* The desynced demos bug from original 1.3.  Haven't looked into it.
+* The desynced demos bug from original 1.3.
+* No check yet for "skill 0", which is NOT a skill number for easy!
 
 6 - Final Thoughts
 ---------------------------------------------------------

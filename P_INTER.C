@@ -218,6 +218,32 @@ boolean P_GiveWeapon(player_t *player, weapontype_t weapon)
 		P_GiveAmmo(player, wpnlev1info[weapon].ammo,
 			GetWeaponAmmo[weapon]);
 		player->pendingweapon = weapon;
+
+		if(!M_CheckParm("-oldrules")) // FS: Some hacky shit to show the pickup messages in netgames for always stay
+		{
+			switch (weapon)
+			{
+				case wp_crossbow:
+					P_SetMessage(player, TXT_WPNCROSSBOW, false);
+					break;
+				case wp_blaster:
+					P_SetMessage(player, TXT_WPNBLASTER, false);
+					break;
+				case wp_skullrod:
+					P_SetMessage(player, TXT_WPNSKULLROD, false);
+					break;
+				case wp_phoenixrod:
+					P_SetMessage(player, TXT_WPNPHOENIXROD, false);
+					break;
+				case wp_mace:
+					P_SetMessage(player, TXT_WPNMACE, false);
+					break;
+				case wp_gauntlets:
+					P_SetMessage(player, TXT_WPNGAUNTLETS, false);
+					break;
+			}
+		}
+
 		if(player == &players[consoleplayer])
 		{
 			S_StartSound(NULL, sfx_wpnup);
@@ -883,7 +909,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	{
 		player->itemcount++;
 	}
-        if((netgame && respawn && !(special->flags&MF_DROPPED) && !M_CheckParm("-oldrules")) || M_CheckParm("-respawnitems")) // FS: Respawning Items Was deathmatch
+	if((netgame && respawn && !(special->flags&MF_DROPPED) && !M_CheckParm("-oldrules")) || M_CheckParm("-respawnitems")) // FS: Respawning Items Was deathmatch
 	{
 		P_HideSpecialThing(special);
 	}
@@ -1448,18 +1474,15 @@ void P_DamageMobj
 	//
 	if(player)
 	{
-		// end of game hell hack
-		//if(target->subsector->sector->special == 11
-		//	&& damage >= target->health)
-		//{
-		//	damage = target->health - 1;
-		//}
-
-		if(damage < 1000 && ((player->cheats&CF_GODMODE)
-			|| player->powers[pw_invulnerability]))
+		if(damage < 1000 && ((player->cheats&CF_GODMODE) || player->powers[pw_invulnerability]))
 		{
 			return;
 		}
+		if(source->type == MT_PLAYER && source->player != player && (!M_CheckParm("-oldrules") && netgame && !deathmatch)) // FS: No friendly fire
+		{
+			return;
+		}
+
 		if(player->armortype)
 		{
 			if(player->armortype == 1)
