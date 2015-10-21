@@ -30,7 +30,7 @@ int maxammo[NUMAMMO] =
 	150		// mace
 };
 
-static int GetWeaponAmmo[NUMWEAPONS] =
+int GetWeaponAmmo[NUMWEAPONS] =
 {
 	0,		// staff
 	25,		// gold wand
@@ -52,51 +52,6 @@ static weapontype_t GetAmmoChange[] =
 	wp_phoenixrod,
 	wp_mace
 };
-
-/*
-static boolean GetAmmoChangePL1[NUMWEAPONS][NUMAMMO] =
-{
-	// staff
-	{wp_goldwand, wp_crossbow, wp_blaster, wp_skullrod, -1, wp_mace},
-	// gold wand
-	{-1, wp_crossbow, wp_blaster, wp_skullrod, -1, wp_mace},
-	// crossbow
-	{-1, -1, wp_blaster, wp_skullrod, -1, -1},
-	// blaster
-	{-1, -1, -1, -1, -1, -1},
-	// skull rod
-	{-1, -1, -1, -1, -1, -1},
-	// phoenix rod
-	{-1, -1, -1, -1, -1, -1},
-	// mace
-	{-1, wp_crossbow, wp_blaster, wp_skullrod, -1, -1},
-	// gauntlets
-	{-1, wp_crossbow, wp_blaster, wp_skullrod, -1, wp_mace}
-};
-*/
-
-/*
-static boolean GetAmmoChangePL2[NUMWEAPONS][NUMAMMO] =
-{
-	// staff
-	{wp_goldwand, wp_crossbow, wp_blaster, wp_skullrod, wp_phoenixrod,
-		wp_mace},
-	// gold wand
-	{-1, wp_crossbow, wp_blaster, wp_skullrod, wp_phoenixrod, wp_mace},
-	// crossbow
-	{-1, -1, wp_blaster, wp_skullrod, wp_phoenixrod, -1},
-	// blaster
-	{-1, -1, -1, wp_skullrod, wp_phoenixrod, -1},
-	// skull rod
-	{-1, -1, -1, -1, -1, -1},
-	// phoenix rod
-	{-1, -1, -1, -1, -1, -1},
-	// mace
-	{-1, wp_crossbow, wp_blaster, wp_skullrod, -1, -1},
-	// gauntlets
-	{-1, -1, -1, wp_skullrod, wp_phoenixrod, wp_mace}
-};
-*/
 
 //--------------------------------------------------------------------------
 //
@@ -174,23 +129,7 @@ boolean P_GiveAmmo(player_t *player, ammotype_t ammo, int count)
 			player->pendingweapon = GetAmmoChange[ammo];
 		}
 	}
-/*
-	if(player->powers[pw_weaponlevel2])
-	{
-		changeWeapon = GetAmmoChangePL2[player->readyweapon][ammo];
-	}
-	else
-	{
-		changeWeapon = GetAmmoChangePL1[player->readyweapon][ammo];
-	}
-	if(changeWeapon != -1)
-	{
-		if(player->weaponowned[changeWeapon])
-		{
-			player->pendingweapon = changeWeapon;
-		}
-	}
-*/
+
 	return(true);
 }
 
@@ -439,19 +378,7 @@ boolean P_GivePower(player_t *player, powertype_t power)
 		player->powers[power] = INFRATICS;
 		return(true);
 	}
-/*
-	if(power == pw_ironfeet)
-	{
-		player->powers[power] = IRONTICS;
-		return(true);
-	}
-	if(power == pw_strength)
-	{
-		P_GiveBody(player, 100);
-		player->powers[power] = 1;
-		return(true);
-	}
-*/
+
 	if(player->powers[power])
 	{
 		return(false); // already got it

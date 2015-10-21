@@ -60,8 +60,7 @@ const char *dnames[] = {"None",
 			};
 #endif
 
-const char snd_prefixen[] = { 'P', 'P', 'A', 'S', 'S', 'S', 'M',
-  'M', 'M', 'S' };
+const char snd_prefixen[] = { 'P', 'P', 'A', 'S', 'S', 'S', 'M', 'M', 'M', 'S' };
 
 int snd_Channels;
 int snd_DesiredMusicDevice, snd_DesiredSfxDevice;

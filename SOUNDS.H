@@ -88,6 +88,8 @@ typedef struct sfxinfo_s
 	int numchannels; // total number of channels a sound type may occupy
 } sfxinfo_t;
 
+extern sfxinfo_t        S_sfx[]; // FS: For HHE
+
 typedef struct
 {
 	mobj_t *mo;
@@ -111,7 +113,7 @@ typedef	struct
 	int channelCount;
 	int musicVolume;
 	int soundVolume;
-	ChanInfo_t chan[8];
+	ChanInfo_t chan[MAX_CHANNELS]; // FS: Was 8
 } SoundInfo_t;
 
 // Sound identifiers

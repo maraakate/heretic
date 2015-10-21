@@ -6,7 +6,7 @@
 #include "AM_map.h"
 #include "AM_data.h"
 #include <stdio.h>
-
+#include "deh_main.h" // FS: For HHE
 
 vertex_t KeyPoints[NUMKEYS];
 
@@ -1347,7 +1347,7 @@ void AM_Drawer(void)
 	}
 	if((gameepisode < (ExtendedWAD ? 6 : 4)) && gamemap < 10)
 	{
-		MN_DrTextA(LevelNames[(gameepisode-1)*9+gamemap-1], 20, 135);
+		MN_DrTextA(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1]), 20, 135);
 	}
 	sprintf(secrets, "SECRETS FOUND: %i/%i", players[consoleplayer].secretcount,totalsecret); // FS
 	MN_DrTextA(secrets, 20, 145); // FS

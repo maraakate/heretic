@@ -6,6 +6,7 @@
 #include "DoomDef.h"
 #include "P_local.h"
 #include "soundst.h"
+#include "deh_main.h"
 
 // Macros
 
@@ -131,6 +132,10 @@ int	wpn_dragon; // FS: Custom weapon keys
 int	wpn_hellstaff; // FS: Custom weapon keys
 int	wpn_phoenix; // FS: Custom weapon keys
 
+int use_artbinds; // FS: Custom artifact keys
+int art_torch; // FS: Custom artifact keys
+int art_flask; // FS: Custom artifact keys
+
 #define MAXPLMOVE       0x32
 
 fixed_t         forwardmove[2] = {0x19, 0x32};
@@ -166,23 +171,6 @@ extern externdata_t *i_ExternData;
 
 extern boolean ultimatemsg; // FS: Was goofing
 
-
-//=============================================================================
-// Not used - ripped out for Heretic
-/*
-int G_CmdChecksum(ticcmd_t *cmd)
-{
-	int     i;
-	int sum;
-
-	sum = 0;
-	for(i = 0; i < sizeof(*cmd)/4-1; i++)
-	{
-		sum += ((int *)cmd)[i];
-	}
-	return(sum);
-}
-*/
 
 /*
 ====================
@@ -579,6 +567,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 		cmd->arti = arti_tomeofpower;
 	}
 
+
 //
 // buttons
 //
@@ -615,6 +604,25 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 		{
 				cmd->buttons |= BT_CHANGE;
 				cmd->buttons |= 5<<BT_WEAPONSHIFT;
+		}
+	}
+
+	if(use_artbinds)
+	{
+		if(gamekeydown[art_torch])
+		{
+			gamekeydown[art_torch] = false;
+			if(players[consoleplayer].powers[pw_infrared])
+			{
+				players[consoleplayer].powers[pw_infrared] = 0;
+			}
+			else
+				P_GivePower(&players[consoleplayer],pw_infrared);
+		}
+		if(gamekeydown[art_flask])
+		{
+			gamekeydown[art_flask] = false;
+			cmd->arti = arti_health;
 		}
 	}
 
@@ -1169,11 +1177,6 @@ void G_PlayerFinishLevel(int player)
 
 	ultimatemsg = false; // FS: Clear it out
 
-/*      // BIG HACK
-	inv_ptr = 0;
-	curpos = 0;
-*/
-	// END HACK
 	p = &players[player];
 
         if(M_CheckParm("-oldrules")) // FS: Old Rules
@@ -1772,24 +1775,13 @@ void G_InitNew(skill_t skill, int episode, int map)
 	// Set the sky map
 	if(episode > 5)
 	{
-		skytexture = R_TextureNumForName("SKY1");
+		skytexture = R_TextureNumForName(DEH_String("SKY1"));
 	}
 	else
 	{
-		skytexture = R_TextureNumForName(skyLumpNames[episode-1]);
+		skytexture = R_TextureNumForName(DEH_String(skyLumpNames[episode-1]));
 	}
 
-//
-// give one null ticcmd_t
-//
-#if 0
-	gametic = 0;
-	maketic = 1;
-	for (i=0 ; i<MAXPLAYERS ; i++)
-		nettics[i] = 1;                 // one null event for this gametic
-	memset (localcmds,0,sizeof(localcmds));
-	memset (netcmds,0,sizeof(netcmds));
-#endif
 	G_DoLoadLevel();
 }
 

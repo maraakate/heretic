@@ -375,6 +375,10 @@ extern int	wpn_dragon; // FS: Custom weapon keys
 extern int	wpn_hellstaff; // FS: Custom weapon keys
 extern int	wpn_phoenix; // FS: Custom weapon keys
 
+extern int	use_artbinds; // FS: Custom artifact keys
+extern int	art_torch; // FS: Custom artifact keys
+extern int	art_flask; // FS: Custom artifact keys
+
 extern  int screenblocks;
 
 extern char *chat_macros[10];
@@ -506,6 +510,11 @@ default_t defaults[] =
 	{ "wpn_dragon", &wpn_dragon, 45, 1 }, // FS: X
 	{ "wpn_hellstaff", &wpn_hellstaff, 46, 1 }, // FS: C
 	{ "wpn_phoenix", &wpn_phoenix, 16, 1 }, // FS: Q
+	
+	// FS: Use custom artifact binds
+	{ "use_artbinds", &use_artbinds, 0},
+	{ "art_torch", &art_torch, 33, 1 }, // FS: F
+	{ "art_flask", &art_flask, 34, 1 }, // FS: G
 
 	{ "chatmacro0", (int *) &chat_macros[0], (int) HUSTR_CHATMACRO0 },
 	{ "chatmacro1", (int *) &chat_macros[1], (int) HUSTR_CHATMACRO1 },

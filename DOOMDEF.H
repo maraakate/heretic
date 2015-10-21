@@ -14,6 +14,8 @@
 #define VERSION 130
 #define VERSION_TEXT "v1.3a" // FS: Raised
 
+#define arrlen(array) (sizeof(array) / sizeof(*array)) // FS: For HHE
+
 // if rangecheck is undefined, most parameter validation debugging code
 // will not be compiled
 //#define RANGECHECK
@@ -660,6 +662,7 @@ extern	boolean		singletics;			// debug flag to cancel adaptiveness
 
 extern boolean DebugSound; // debug flag for displaying sound info
 
+extern	int			GetWeaponAmmo[NUMWEAPONS]; // FS: For HHE
 extern	int			maxammo[NUMAMMO];
 
 extern	boolean		demoplayback;

@@ -8,6 +8,7 @@
 
 #include "DoomDef.h"
 #include "soundst.h"
+#include "deh_main.h" // FS: For HHE
 
 typedef enum
 {
@@ -572,8 +573,8 @@ void IN_DrawOldLevel(void)
 	int i;
 	int x;
 
-	x = 160-MN_TextBWidth(LevelNames[(gameepisode-1)*9+prevmap-1]+7)/2;
-	IN_DrTextB(LevelNames[(gameepisode-1)*9+prevmap-1]+7, x, 3);
+	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
 	x = 160-MN_TextAWidth("FINISHED")/2;
 	MN_DrTextA("FINISHED", x, 25);
 
@@ -623,8 +624,8 @@ void IN_DrawYAH(void)
 
 	x = 160-MN_TextAWidth("NOW ENTERING:")/2;
 	MN_DrTextA("NOW ENTERING:", x, 10);
-	x = 160-MN_TextBWidth(LevelNames[(gameepisode-1)*9+gamemap-1]+7)/2;
-	IN_DrTextB(LevelNames[(gameepisode-1)*9+gamemap-1]+7, x, 20);
+	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7)/2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7, x, 20);
 
 	if(prevmap == 9)
 	{
@@ -664,8 +665,8 @@ void IN_DrawSingleStats(void)
 	IN_DrTextB("ITEMS", 50, 90);
 	IN_DrTextB("SECRETS", 50, 115);
 
-	x = 160-MN_TextBWidth(LevelNames[(gameepisode-1)*9+prevmap-1]+7)/2;
-	IN_DrTextB(LevelNames[(gameepisode-1)*9+prevmap-1]+7, x, 3);
+	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
 	x = 160-MN_TextAWidth("FINISHED")/2;
 	MN_DrTextA("FINISHED", x, 25);
 	
@@ -725,8 +726,8 @@ void IN_DrawSingleStats(void)
 	{
 		x = 160-MN_TextAWidth("NOW ENTERING:")/2;
 		MN_DrTextA("NOW ENTERING:", x, 160);
-		x = 160-MN_TextBWidth(LevelNames[(gameepisode-1)*9+gamemap-1]+7)/2;
-		IN_DrTextB(LevelNames[(gameepisode-1)*9+gamemap-1]+7, x, 170);
+		x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7)/2;
+		IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7, x, 170);
 		skipintermission = false;
 	}
 }
@@ -750,8 +751,8 @@ void IN_DrawCoopStats(void)
 	IN_DrTextB("KILLS", 95, 35);
 	IN_DrTextB("BONUS", 155, 35);
 	IN_DrTextB("SECRET", 232, 35);
-	x = 160-MN_TextBWidth(LevelNames[(gameepisode-1)*9+prevmap-1]+7)/2;
-	IN_DrTextB(LevelNames[(gameepisode-1)*9+prevmap-1]+7, x, 3);
+	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
 	x = 160-MN_TextAWidth("FINISHED")/2;
 	MN_DrTextA("FINISHED", x, 25);
 
@@ -1056,7 +1057,7 @@ void IN_PrintSingleStats(void)
 			I_Error("Unable to open stats file!");
 
 		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<SINGLE PLAYER>\n\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
-		gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7, gameskill+1, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
+		gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
 		fseek(f,0, SEEK_END);
 		fputs(buffer, f);
 		fflush(f);
@@ -1084,7 +1085,7 @@ void IN_PrintCoopStats(void)
 		if (!f)
 			I_Error("Unable to open stats file!");
 
-		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7, gameskill+1);
+		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1);
 		fputs(buffer, f);
 		fflush(f);
 
@@ -1125,7 +1126,7 @@ void IN_PrintDMStats(void)
 		if (!f)
 			I_Error("Unable to open stats file!");
 
-		sprintf(buffer,"MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, LevelNames[(gameepisode-1)*9+prevmap-1]+7);
+		sprintf(buffer,"MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7);
 		fputs(buffer, f);
 		fflush(f);
 

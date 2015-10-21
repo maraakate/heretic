@@ -5,4 +5,6 @@
 - Fix cheating in coop.
 - Make IDMUS and other harmless "cheats" work in netplay.
 - Fix demo desync.
-- Fix "skill 0" to be an invalid option.
+- HHE:
+  * Find a solution to the Text parsing issue.
+  * Cheat replacement.

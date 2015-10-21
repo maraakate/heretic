@@ -6,6 +6,7 @@
 #include "P_local.h"
 #include "R_local.h"
 #include "soundst.h"
+#include "deh_main.h"
 
 // Macros
 
@@ -517,7 +518,7 @@ void MN_Drawer(void)
 		{
 			if(item->type != ITT_EMPTY && item->text)
 			{
-				MN_DrTextB(item->text, x, y);
+				MN_DrTextB(DEH_String(item->text), x, y); // FS: For HHE
 			}
 			y += ITEM_HEIGHT;
 			item++;
@@ -810,7 +811,7 @@ static boolean SCMessages(int option)
 	messageson ^= 1;
 	if(messageson)
 	{
-		P_SetMessage(&players[consoleplayer], "MESSAGES ON", true);
+		P_SetMessage(&players[consoleplayer], DEH_String("MESSAGES ON"), true);
 	}
 	else
 	{

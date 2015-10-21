@@ -1,3 +1,18 @@
+09-28-13
+ - use_artbinds in HERETIC.CFG.  If set to 1, the following defaults are used:
+   * 'F' for Torch
+   * 'G' for Quartz Flask
+   These binds can be customized via the HERETIC.CFG.  However, you must know
+   the appropriate scancode.
+ - art_torch will toggle a torch.
+ - Fixed "-skill 0" to be an invalid option as well as any other invalid
+   number passed to "-skill".
+ - Specify the main game WAD with -mainwad.  Useful for DEUSF stuff and you
+   don't want to remember if you un-DEUSF'd something.
+
+09-25-13
+ - Preliminary HHE support.  No text parsing.  Need to find a solution.
+
 09-23-13
  - Weapon pick up text in Netgames.
  - No friendly fire returns.  This time it works properly!

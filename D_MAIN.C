@@ -14,6 +14,7 @@
 #include "DoomDef.h"
 #include "P_local.h"
 #include "soundst.h"
+#include "deh_main.h" // FS: For HHE
 
 boolean shareware = false;		// true if only episode 1 present
 boolean ExtendedWAD = false;	// true if episodes 4 and 5 present
@@ -799,12 +800,19 @@ void D_DoomMain(void)
 		savegamesize = 0x30000;
 	}
 
-        startskill = sk_medium;
+	startskill = sk_medium;
 	startepisode = 1;
 	startmap = 1;
 	autostart = false;
 
-	// wadfiles[0] is a char * to the main wad
+	// FS: Define a custom main WAD
+	p = M_CheckParm("-mainwad");
+	if(p)
+	{
+		wadfiles[0] = myargv[p+1];
+	}
+	
+	// wadfiles[0] is a char * to the main wad	
 	fp = fopen(wadfiles[0], "rb");
 	if(fp)
 	{
@@ -837,10 +845,10 @@ void D_DoomMain(void)
 		}
 	}
 
-        if (M_CheckParm("-gus")) // FS: GUS1M patches
-        {
-                D_AddFile("HT_GUS1M.WAD", 0);
-        }
+	if (M_CheckParm("-gus")) // FS: GUS1M patches
+	{
+			D_AddFile("HT_GUS1M.WAD", 0);
+	}
 
 	// -DEVMAP <episode> <map>
 	// Adds a map wad from the development directory to the wad list,
@@ -868,7 +876,7 @@ void D_DoomMain(void)
 	if (p && p < myargc-1)
 	{
 		sprintf(file, "%s.lmp", myargv[p+1]);
-                D_AddFile(file, 1);
+		D_AddFile(file, 1);
 		printf("Playing demo %s.lmp.\n", myargv[p+1]);
 	}
 
@@ -884,6 +892,8 @@ void D_DoomMain(void)
 	if(p && p < myargc-1)
 	{
 		startskill = myargv[p+1][0]-'1';
+		if(startskill < sk_baby || startskill > sk_nightmare) // FS: Make sure it's valid.  Was fucking up my Kali gamin'!
+			I_Error("Invalid Skill parameter! Valid options are 1 through 5.");
 		autostart = true;
 	}
 
@@ -950,8 +960,7 @@ void D_DoomMain(void)
 	if (autostart)
 	{
 		char temp[64];
-		sprintf(temp, "Warp to Episode %d, Map %d, Skill %d ",
-			startepisode, startmap, startskill+1);
+		sprintf(temp, "Warp to Episode %d, Map %d, Skill %d ", startepisode, startmap, startskill+1);
 		status(temp);
 	}
 	wadprintf(); // print the added wadfiles
@@ -1120,6 +1129,8 @@ void D_DoomMain(void)
         {
                 usePalFlash = 0;
         }
+
+	DEH_Init(); // FS: HHE Files
 
 #ifdef __WATCOMC__
 	_settextcursor(0x0607); // bring the cursor back

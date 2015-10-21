@@ -46,12 +46,25 @@ GLOBOBJS = &
  ct_chat.obj &
  d_main.obj &
  d_net.obj &
+ deh_ammo.obj		 &
+ deh_cht.obj		 &
+ deh_io.obj		 &
+ deh_frme.obj		 &
+ deh_map.obj		 &
+ deh_main.obj		 &
+ deh_misc.obj		 &
+ deh_ptr.obj		 &
+ deh_snd.obj		 &
+ deh_text.obj		 &
+ deh_thng.obj		 &
+ deh_wpn.obj		 &
  g_game.obj &
  f_finale.obj &
  info.obj &
  in_lude.obj &
  mn_menu.obj &
  m_misc.obj &
+ md5.obj &
  p_ceilng.obj &
  p_doors.obj &
  p_enemy.obj &
@@ -82,6 +95,7 @@ GLOBOBJS = &
  tables.obj &
  v_video.obj &
  w_wad.obj &
+ w_merge.obj &
  z_zone.obj
 
 tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
