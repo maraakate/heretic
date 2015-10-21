@@ -368,6 +368,7 @@ extern  int     viewwidth, viewheight;
 
 int mouseSensitivity;
 int headBob; // FS: Head bob toggle
+extern int	drawTime; // FS: Draw time clock
 
 extern int	use_wpnbinds; // FS: Custom weapon keys
 extern int	wpn_crossbow; // FS: Custom weapon keys
@@ -503,6 +504,7 @@ default_t defaults[] =
 	{ "usegamma", &usegamma, 0 },
 	{ "usePalFlash", &usePalFlash, 1 }, // FS: Palette Flashing
 	{ "headBob", &headBob, 1 }, // FS: Head bob
+	{ "drawTime", &drawTime, 0}, // FS: Draw time clock
 
 	// FS: Use custom weapon binds
 	{ "use_wpnbinds", &use_wpnbinds, 0},

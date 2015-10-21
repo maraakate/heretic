@@ -7,6 +7,7 @@
 #include "AM_data.h"
 #include <stdio.h>
 #include "deh_main.h" // FS: For HHE
+#include <time.h> // FS: For Time Clock
 
 vertex_t KeyPoints[NUMKEYS];
 
@@ -121,7 +122,8 @@ static char cheat_amap[] = { 'r','a','v','m','a','p' };
 
 static byte cheatcount=0;
 
-extern boolean viewactive;
+extern boolean	viewactive;
+int				drawTime; // FS: Draw time clock
 
 static byte antialias[NUMALIAS][8]=
 {
@@ -1325,6 +1327,24 @@ void AM_drawCrosshair(int color)
   fb[(f_w*(f_h+1))/2] = color; // single point for now
 }
 
+void AM_DrawTime(void)
+{
+	struct tm	*local = NULL;
+	time_t		utc = 0;
+	const char *timefmt = NULL;
+	char		st[80];
+
+	utc = time (NULL);
+	local = localtime (&utc);
+
+	if (drawTime == 1)
+		timefmt = "%H:%M:%S %p"; // FS: Military
+	else if (drawTime > 1)
+		timefmt = "%I:%M:%S %p"; // FS: Regular
+	strftime (st, sizeof (st), timefmt, local);
+	MN_DrTextA(st, 20, 20);
+}
+
 void AM_Drawer(void)
 {
 	int highestEpisode;
@@ -1337,10 +1357,9 @@ void AM_Drawer(void)
   if (grid) AM_drawGrid(GRIDCOLORS);
   AM_drawWalls();
   AM_drawPlayers();
-  if (cheating==2) AM_drawThings(THINGCOLORS, THINGRANGE);
-//  AM_drawCrosshair(XHAIRCOLORS);
+  if (cheating==2)
+  	AM_drawThings(THINGCOLORS, THINGRANGE);
 
-//  AM_drawMarks();
 	if(gameskill == sk_baby)
 	{
 		AM_drawkeys();
@@ -1352,6 +1371,6 @@ void AM_Drawer(void)
 	sprintf(secrets, "SECRETS FOUND: %i/%i", players[consoleplayer].secretcount,totalsecret); // FS
 	MN_DrTextA(secrets, 20, 145); // FS
 
-//  I_Update();
-//  V_MarkRect(f_x, f_y, f_w, f_h);
+	if (drawTime)
+		AM_DrawTime(); // FS: Draw time clock
 }
