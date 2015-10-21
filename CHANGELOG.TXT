@@ -1,3 +1,6 @@
+05-30-12
+ - Plays a sound when you find a secret area.
+
 04-05-12
  - Show ammo and armor in full screen.
  - "You found a secret area!" message.
@@ -10,4 +13,3 @@
  - First Compile.
  - Walk speed == run speed.
  - "Game restored" message.
- 

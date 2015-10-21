@@ -965,6 +965,7 @@ void D_DoomMain(void)
 #endif
 
 	tprintf("SB_Init: Loading patches.\n",1);
+	hprintf ("Loading MIDI patches.\n", 0x3f); // FS
 	SB_Init();
 	IncThermo();
 

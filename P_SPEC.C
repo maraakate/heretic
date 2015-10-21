@@ -863,6 +863,7 @@ void P_PlayerInSpecialSector(player_t *player)
 			break;
 		case 9: // SecretArea
 			player->secretcount++;
+			S_StartSound(NULL, sfx_chat); // FS: Play a sound
 			P_SetMessage(&players[consoleplayer], TXT_FOUNDSECRET, false); // FS: Alert me about a secret
 			sector->special = 0;
 			break;
