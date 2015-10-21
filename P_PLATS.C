@@ -217,11 +217,13 @@ void P_AddActivePlat(plat_t *plat)
 {
 	int		i;
 	for (i = 0;i < MAXPLATS;i++)
+	{
 		if (activeplats[i] == NULL)
 		{
 			activeplats[i] = plat;
 			return;
 		}
+	}
 	I_Error ("P_AddActivePlat: no more plats!");
 }
 

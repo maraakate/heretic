@@ -1857,6 +1857,7 @@ void I_Quit(void)
 
 	D_QuitNetGame();
 	M_SaveDefaults();
+	M_SaveExtendedDefaults(); // FS: For EXTEND.CFG
 	scr = (byte *)W_CacheLumpName("ENDTEXT", PU_CACHE);
 	I_Shutdown();
 	memcpy((void *)0xb8000, scr, 80*25*2);

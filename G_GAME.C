@@ -806,7 +806,8 @@ boolean G_Responder(event_t *ev)
 {
 	player_t *plr;
 	extern boolean MenuActive;
-
+	extern int	novert; // FS
+	
 	plr = &players[consoleplayer];
 	if(ev->type == ev_keyup && ev->data1 == key_useartifact)
 	{ // flag to denote that it's okay to use an artifact
@@ -924,7 +925,7 @@ boolean G_Responder(event_t *ev)
 			mousebuttons[2] = ev->data1&4;
 			mousex = ev->data2*(mouseSensitivity+5)/10;
 
-			if (!M_CheckParm("-novert")) // FS: Disable vertical movement
+			if (!novert) // FS: Disable vertical movement
 			{
                         if (mouseSensitivity < 20) // FS: Cap because it gets wonky
                         {

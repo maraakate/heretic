@@ -34,6 +34,8 @@ boolean autostart;
 extern boolean automapactive;
 extern int headBob; // FS: Head bob toggle
 extern boolean usePalFlash; // FS
+extern int faststart; // FS: Always faststart if you want
+extern int novert; // FS: No vertical mouse movement
 
 boolean advancedemo;
 
@@ -483,7 +485,7 @@ char exrnwads2[80];
 
 void wadprintf(void)
 {
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
 	{
 		return;
 	}
@@ -573,7 +575,7 @@ void hprintf(char *string, unsigned char a)
 #ifdef __WATCOMC__
 	int i;
 
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
 	{
 		puts(string);
 		return;
@@ -587,7 +589,7 @@ void hprintf(char *string, unsigned char a)
 
 void drawstatus(void)
 {
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm ("-faststart") || faststart ) // FS: Fast Start
 	{
 		return;
 	}
@@ -613,7 +615,7 @@ void DrawThermo(void)
 	int     progress;
 	int     i;
 
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
 	{
 		return;
 	}
@@ -669,7 +671,7 @@ void blitStartup(void)
 {
 	byte *textScreen;
 
-	if(debugmode || M_CheckParm("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm("-faststart") || faststart) // FS: Fast Start
 	{
 		return;
 	}
@@ -692,7 +694,7 @@ void blitStartup(void)
 char tmsg[300];
 void tprintf(char *msg,int initflag)
 {
-	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
 	{
 		printf(msg);
 		return;
@@ -845,10 +847,10 @@ void D_DoomMain(void)
 		}
 	}
 
-	if (M_CheckParm("-gus")) // FS: GUS1M patches
-	{
-			D_AddFile("HT_GUS1M.WAD", 0);
-	}
+//	if (M_CheckParm("-gus")) // FS: GUS1M patches
+//	{
+//			D_AddFile("HT_GUS1M.WAD", 0);
+//	}
 
 	// -DEVMAP <episode> <map>
 	// Adds a map wad from the development directory to the wad list,
@@ -922,7 +924,8 @@ void D_DoomMain(void)
 	// Load defaults before initing other systems
 	printf("M_LoadDefaults: Load system defaults.\n");
 	M_LoadDefaults();
-
+	M_LoadExtendedDefaults(); // FS: For EXTEND.CFG
+	
 	printf("Z_Init: Init zone memory allocation daemon.\n");
 	Z_Init();
 
@@ -1120,16 +1123,21 @@ void D_DoomMain(void)
 		}
 	}
 
-        if (M_CheckParm("-noheadbob")) // FS
-        {
-                headBob = 0;
-        }
+	if (M_CheckParm("-noheadbob")) // FS
+	{
+		headBob = 0;
+	}
 
-        if (M_CheckParm("-nopalflash")) // FS
-        {
-                usePalFlash = 0;
-        }
+	if (M_CheckParm("-nopalflash")) // FS
+	{
+		usePalFlash = 0;
+	}
 
+	if (M_CheckParm("-novert")) // FS
+	{
+		novert = 1;
+	}
+		
 	DEH_Init(); // FS: HHE Files
 
 #ifdef __WATCOMC__

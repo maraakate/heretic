@@ -6,6 +6,7 @@
 #include "dmx.h"
 #include "sounds.h"
 #include "i_sound.h"
+#include "GUS.H" // FS: For internal HT_GUS1M.WAD
 
 /*
 ===============
@@ -178,37 +179,21 @@ int I_GetSfxLumpNum(sfxinfo_t *sound)
 
   if(sound->name == 0)
 		return 0;
-  if (sound->link) sound = sound->link;
-//  sprintf(namebuf, "d%c%s", snd_prefixen[snd_SfxDevice], sound->name);
+  if (sound->link)
+	sound = sound->link;
   return W_GetNumForName(sound->name);
 
 }
 
 int I_StartSound (int id, void *data, int vol, int sep, int pitch, int priority)
 {
-/*
-  // hacks out certain PC sounds
-  if (snd_SfxDevice == PC
-	&& (data == S_sfx[sfx_posact].data
-	||  data == S_sfx[sfx_bgact].data
-	||  data == S_sfx[sfx_dmact].data
-	||  data == S_sfx[sfx_dmpain].data
-	||  data == S_sfx[sfx_popain].data
-	||  data == S_sfx[sfx_sawidl].data)) return -1;
-
-  else
-		*/
 	return SFX_PlayPatch(data, pitch, sep, vol, 0, 0);
 
 }
 
 void I_StopSound(int handle)
 {
-//  extern volatile long gDmaCount;
-//  long waittocount;
   SFX_StopPatch(handle);
-//  waittocount = gDmaCount + 2;
-//  while (gDmaCount < waittocount) ;
 }
 
 int I_SoundIsPlaying(int handle)
@@ -272,6 +257,7 @@ void I_sndArbitrateCards(void)
 	byte *gusbuffer; // FS: Allow an external GUS ini file
 	int	gusfilelength; // FS: Allow an external GUS ini file
 	int	p; // FS: Allow an external GUS ini file
+	extern int useIntGus; // FS: Use internal GUS1M WADs
 
 	if (GF1_Detect()) tprintf("Dude.  The GUS ain't responding.\n",1);
 	else
@@ -300,8 +286,18 @@ void I_sndArbitrateCards(void)
 		}
 		else
 		{
-			dmxlump = W_GetNumForName("dmxgus");
-			GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
+			if (M_CheckParm("-gus") || useIntGus)
+			{
+				extern char *htgus;
+				int length = strlen(htgus);				
+				tprintf("  using internal HT_GUS1M.WAD\n", 1);
+				GF1_SetMap(htgus, length); // FS: Internal GUS				
+			}
+			else
+			{
+				dmxlump = W_GetNumForName("dmxgus");
+				GF1_SetMap(W_CacheLumpNum(dmxlump, PU_CACHE), lumpinfo[dmxlump].size);
+			}
 		}
 	}
 
