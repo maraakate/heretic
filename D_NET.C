@@ -782,3 +782,20 @@ if (debugfile)
 		NetUpdate ();                                   // check for new console commands
 	}
 }
+
+// FS: Get how many players are actually in the game
+int NetGetPlayerCount(void)
+{
+	int i;
+	int saveplayers;
+
+	saveplayers = 0;
+	for(i = 0; i < MAXPLAYERS; i++)
+	{
+		if(playeringame[i])
+		{
+			saveplayers++;
+		}
+	}
+	return saveplayers;
+}

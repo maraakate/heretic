@@ -856,6 +856,7 @@ void D_QuitNetGame (void);
 // broadcasts special packets to other players to notify of game exit
 
 void TryRunTics (void);
+int NetGetPlayerCount(void); // FS
 
 //---------
 //SYSTEM IO

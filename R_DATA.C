@@ -4,6 +4,7 @@
 #include "DoomDef.h"
 #include "R_local.h"
 #include "P_local.h"
+#include "deh_main.h" // FS
 
 extern void CheckAbortStartup(void);
 
@@ -49,6 +50,7 @@ fixed_t		*spriteoffset;
 fixed_t		*spritetopoffset;
 
 lighttable_t	*colormaps;
+extern int		faststart; // FS
 
 
 /*
@@ -285,6 +287,7 @@ void R_InitTextures (void)
 	int			offset, maxoff, maxoff2;
 	int			numtextures1, numtextures2;
 	int			*directory;
+	int			temp1,temp2,temp3; // FS: Doom shit
 
 //
 // load the patch names from pnames.lmp
@@ -341,15 +344,29 @@ void R_InitTextures (void)
 	textureheight = Z_Malloc (numtextures*4, PU_STATIC, 0);
 
 	totalwidth = 0;
-
+	
+    // FS: Really complex printing shit...
+	temp1 = W_GetNumForName (DEH_String("S_START"));  // P_???????
+	temp2 = W_GetNumForName (DEH_String("S_END")) - 1;
+	temp3 = ((temp2-temp1+63)/64) + ((numtextures+63)/64);
+	tprintf("[", 1);
+	for (i = 0; i < temp3; i++)
+		tprintf(" ", 1);
+	tprintf("         ]", 1);
+	for (i = 0; i < temp3; i++)
+		tprintf("\x8", 1);
+    tprintf("\x8\x8\x8\x8\x8\x8\x8\x8\x8\x8", 1);	
+    
 	for (i=0 ; i<numtextures ; i++, directory++)
 	{
-		#ifdef __NEXT__
-		if(!(i&63))
-			printf (".");
-		#else
-		IncThermo();
-		#endif
+		if(faststart)
+		{
+			if(!(i&63))
+				tprintf (".", 1);
+		}
+		else
+			IncThermo();
+
 		if (i == numtextures1)
 		{	// start looking in second texture file
 			maptex = maptex2;
@@ -458,12 +475,14 @@ void R_InitSpriteLumps (void)
 
 	for (i=0 ; i< numspritelumps ; i++)
 	{
-		#ifdef __NEXT__
-		if (!(i&63))
-			printf (".");
-		#else
-		IncThermo();
-		#endif
+		if(faststart)
+		{
+			if (!(i&63))
+				tprintf (".", 1);
+		}
+		else
+			IncThermo();
+
 		patch = W_CacheLumpNum (firstspritelump+i, PU_CACHE);
 		spritewidth[i] = SHORT(patch->width)<<FRACBITS;
 		spriteoffset[i] = SHORT(patch->leftoffset)<<FRACBITS;
@@ -507,17 +526,16 @@ void R_InitColormaps (void)
 
 void R_InitData (void)
 {
-	tprintf("\nR_InitTextures\n",0);
 	R_InitTextures ();
-//printf (".");
-	tprintf("R_InitFlats\n",0);
+	tprintf (".", 1);
+
 	R_InitFlats ();
 	IncThermo();
-//printf (".");
-	tprintf("R_InitSpriteLumps\n",0);
+	tprintf (".", 1);
+
 	R_InitSpriteLumps ();
 	IncThermo();
-//printf (".");
+	tprintf (".", 1);
 	R_InitColormaps ();
 }
 

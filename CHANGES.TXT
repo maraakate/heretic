@@ -1,6 +1,12 @@
+10-06-13
+ - Delete save games from Load and Save Menu by pressing delete.
+ - If you're in a fake netgame (i.e. ipxsetup -nodes 1) you can
+   now load a game or start a new one.
+
 10-05-13
  - IDMUS cheat now works in netgames.
  - noprecache and faststart are now in EXTEND.CFG.
+ - faststart screen is more like Dooms.
 
 10-04-13
  - "-gus" paramater now loads the HT_GUS1M.WAD internally from the EXE.

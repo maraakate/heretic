@@ -1407,7 +1407,8 @@ void P_DamageMobj
 		}
 		if(source->type == MT_PLAYER && source->player != player && (!M_CheckParm("-oldrules") && netgame && !deathmatch)) // FS: No friendly fire
 		{
-			return;
+			if(P_GetPlayerNum(source->player) != P_GetPlayerNum(target->player)) // FS: Make sure we still get self-damage
+				return;
 		}
 
 		if(player->armortype)

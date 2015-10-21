@@ -575,7 +575,10 @@ void hprintf(char *string, unsigned char a)
 #ifdef __WATCOMC__
 	int i;
 
-	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
+	if(M_CheckParm ("-faststart") || faststart) // FS: Fast Start
+		return;
+
+	if(debugmode)
 	{
 		puts(string);
 		return;
@@ -847,11 +850,6 @@ void D_DoomMain(void)
 		}
 	}
 
-//	if (M_CheckParm("-gus")) // FS: GUS1M patches
-//	{
-//			D_AddFile("HT_GUS1M.WAD", 0);
-//	}
-
 	// -DEVMAP <episode> <map>
 	// Adds a map wad from the development directory to the wad list,
 	// and sets the start episode and the start map.
@@ -973,12 +971,12 @@ void D_DoomMain(void)
 
 	CT_Init();
 
-	tprintf("R_Init: Init Heretic refresh daemon.\n",1);
+	tprintf("R_Init: Init Heretic refresh daemon - ",1);
 	hgotoxy(17,7);
 	hprintf("Loading graphics",0x3f);
 	R_Init();
 
-	tprintf("P_Init: Init Playloop state.\n",1);
+	tprintf("\nP_Init: Init Playloop state.\n",1);
 	hgotoxy(17,8);
 	hprintf("Init game engine.",0x3f);
 	P_Init();
@@ -999,11 +997,7 @@ void D_DoomMain(void)
 	}
 	hprintf("Checking network game status.", 0x3f);
 	D_CheckNetGame();
-        if(M_CheckParm("-fakenet")) // FS
-        {
-                netgame = true;
-        }
-        IncThermo();
+	IncThermo();
 
 #ifdef __WATCOMC__
 	I_CheckExternDriver(); // Check for an external device driver

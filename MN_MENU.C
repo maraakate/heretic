@@ -127,6 +127,7 @@ static int slotptr;
 static int currentSlot;
 static int quicksave;
 static int quickload;
+int			saveOn; //FS
 
 static MenuItem_t MainItems[] =
 {
@@ -460,7 +461,8 @@ char *QuitEndMsg[] =
 	"ARE YOU SURE YOU WANT TO QUIT?",
 	"ARE YOU SURE YOU WANT TO END THE GAME?",
 	"DO YOU WANT TO QUICKSAVE THE GAME NAMED",
-	"DO YOU WANT TO QUICKLOAD THE GAME NAMED"
+	"DO YOU WANT TO QUICKLOAD THE GAME NAMED",
+	"ARE YOU SURE YOU WANT TO DELETE THIS SAVE?" // FS
 };
 
 void MN_Drawer(void)
@@ -739,10 +741,16 @@ static void DrawOptions2Menu(void)
 
 static boolean SCNetCheck(int option)
 {
+	
 	if(!netgame)
 	{ // okay to go into the menu
 		return true;
 	}
+	
+	
+	if(NetGetPlayerCount() == 1)
+		return true;
+		
 	switch(option)
 	{
 		case 1:
@@ -775,6 +783,16 @@ static boolean SCQuitGame(int option)
 	{
 		paused = true;
 	}
+	return true;
+}
+
+static boolean M_DeleteSaveResponse(int ch) // FS: Ask if we want to delete the save game
+{
+	char savename[20];
+
+	MenuActive = false;
+	askforquit = true;
+	typeofask = 5;
 	return true;
 }
 
@@ -1079,7 +1097,7 @@ static boolean SCInfo(int option)
 boolean MN_Responder(event_t *event)
 {
 	int key;
-	int i;
+	int i, z; // FS
 	MenuItem_t *item;
 	extern boolean automapactive;
 	static boolean shiftdown;
@@ -1087,6 +1105,7 @@ boolean MN_Responder(event_t *event)
 	extern void D_StartTitle(void);
 	extern void G_CheckDemoStatus(void);
 	char *textBuffer;
+	char		savename[32]; // FS
 
 	if(event->data1 == KEY_RSHIFT)
 	{
@@ -1166,6 +1185,23 @@ boolean MN_Responder(event_t *event)
 							askforquit = false;
 							typeofask = 0;
 							BorderNeedRefresh = true;
+							return true;
+						case 5: // FS: Delete saves
+							sprintf(savename,SAVEGAMENAME"%d.hsg",saveOn);
+							remove(savename);
+							S_StartSound(NULL,sfx_dorcls);
+							for (z = 0; z < SLOTTEXTLEN+2; z++)
+							{
+								SlotText[saveOn][z] = 0; // empty the string
+								oldSlotText[z] = 0;
+							}
+							SlotStatus[saveOn] = 0;
+							askforquit = false;
+							paused = false;
+							typeofask = 0;
+							BorderNeedRefresh = true;
+							slottextloaded = false;
+							MenuActive = true;
 							return true;
 						default:
 							return true; // eat the 'y' keypress
@@ -1401,6 +1437,19 @@ boolean MN_Responder(event_t *event)
 		item = &CurrentMenu->items[CurrentItPos];
 		switch(key)
 		{
+			case (0x80+0x53): // FS: KEY_DEL
+				// FS: Ask us if we want to delete the current save
+				if(CurrentMenu == &LoadMenu || CurrentMenu == &SaveMenu)
+				{
+					sprintf(savename,SAVEGAMENAME"%d.hsg",item->option);
+					saveOn = item->option;
+					if(!access(savename,0))
+					{
+						M_DeleteSaveResponse(0);
+					}
+				}
+				return true;		
+				break;
 			case KEY_DOWNARROW:
 				do
 				{

@@ -188,10 +188,20 @@ void P_MovePlayer(player_t *player)
 	}
 	else
 	{ // Normal speed
-		if(cmd->forwardmove && (onground||player->mo->flags2&MF2_FLY))
-			P_Thrust(player, player->mo->angle, cmd->forwardmove*(2048*2)); // FS: Was 2048
-		if(cmd->sidemove && (onground||player->mo->flags2&MF2_FLY))
-			P_Thrust(player, player->mo->angle-ANG90, cmd->sidemove*(2048*2)); // FS: Was 2048
+		if(demoplayback) // FS: Was desyncing demos
+		{
+			if(cmd->forwardmove && (onground||player->mo->flags2&MF2_FLY))
+				P_Thrust(player, player->mo->angle, cmd->forwardmove*(2048));
+			if(cmd->sidemove && (onground||player->mo->flags2&MF2_FLY))
+				P_Thrust(player, player->mo->angle-ANG90, cmd->sidemove*(2048));
+		}
+		else
+		{
+			if(cmd->forwardmove && (onground||player->mo->flags2&MF2_FLY))
+				P_Thrust(player, player->mo->angle, cmd->forwardmove*(2048*2)); // FS: Was 2048
+			if(cmd->sidemove && (onground||player->mo->flags2&MF2_FLY))
+				P_Thrust(player, player->mo->angle-ANG90, cmd->sidemove*(2048*2)); // FS: Was 2048
+		}
 	}
 
 	if(cmd->forwardmove || cmd->sidemove)
