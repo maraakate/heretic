@@ -376,8 +376,7 @@ void R_InitTextures (void)
 			patch->originy = SHORT(mpatch->originy);
 			patch->patch = patchlookup[SHORT(mpatch->patch)];
 			if (patch->patch == -1)
-				I_Error (
-				"R_InitTextures: Missing patch in texture %s",texture->name);
+				I_Error ("R_InitTextures: Missing patch in texture %s",texture->name);
 		}		
 		texturecolumnlump[i] = Z_Malloc (texture->width*2, PU_STATIC,0);
 		texturecolumnofs[i] = Z_Malloc (texture->width*2, PU_STATIC,0);
@@ -508,14 +507,14 @@ void R_InitColormaps (void)
 
 void R_InitData (void)
 {
-	tprintf("\nR_InitTextures ",0);
+	tprintf("\nR_InitTextures\n",0);
 	R_InitTextures ();
 //printf (".");
 	tprintf("R_InitFlats\n",0);
 	R_InitFlats ();
 	IncThermo();
 //printf (".");
-	tprintf("R_InitSpriteLumps ",0);
+	tprintf("R_InitSpriteLumps\n",0);
 	R_InitSpriteLumps ();
 	IncThermo();
 //printf (".");

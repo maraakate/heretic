@@ -1,3 +1,29 @@
+09-01-13
+ - Extended limits from wHeretic.  Should be able to play some larger maps
+   from 1998-1999'ish.
+   * MAXVISPLANES from 128 to 1024
+   * MAXOPENINGS from SCREENWIDTH*64 to SCREENWIDTH*256
+   * MAXDRAWSEGS from 256 to 1280
+   * MAXVISSPRITES from 128 to 1024
+   * Raised Save Game maximum file size from about ~196KB to ~1024KB(1MB)
+   * Raised Save Game maximum string size from 24 to 256.
+
+08-31-13
+ - Added Headbob and Palette Flashing toggle to Options Menu.
+ - "-cheats" parameter for coop cheating.  This CAN desync the game!
+   Mainly useful for IDMUS changing.  But, try it out if you want.
+ - "-noprecache" to skip precaching.
+ - "-faststart" to disable the startup screen.  Also displays the older
+   doom-style text output at startup.
+ - "-novert" to disable mouse vertical movement.
+ - HERESW.BAT to toggle between old and updated Heretic.
+
+08-22-13
+ - Torch is removed when you die.
+
+07-12-13
+ - Friendly Fire removed because it's causing problems. :(
+
 01-16-13
  - No "friendly fire" in coop.
 
@@ -7,12 +33,10 @@
 01-14-13
  - "-oldrules" parameter works with coop.
  - "-gus" to silently load HT_GUS1M.WAD for GUS cards, if available.
- - "-shareware" to force the game into shareware mode.
 
 01-13-13
  - "Player died!" message in coop.
  - Startup screen alerts you if it is loading GUS patches into RAM.
- - Cheating in coop with -cheats, but game desyncs.  Needs to be rewritten.
  - "-nopalflash" and "-noheadbob" parameter.  Useful to pass from SETUP.EXE
    where it tends to delete these values.
 
@@ -23,7 +47,6 @@
    * Keys are shared.
    * Items respawn, sharing deathmatch rules for respawning.
 
-   "-oldrules" does not revert to old style coop, yet.
  - Holding run doesn't allow ultrafast movement.  Thanks to DOSDOOM
    for oneliner.
 
@@ -37,6 +60,7 @@
  - Added IDMUS cheat from Doom.  Changes music with IDMUSXY
    X being Episode, Y being Map.  i.e. IDMUS17 to play music from
    Episode 1, Map 7.
+   Use 97, 98, and 99 to play the Intro, Intermission and Finale Songs.
 
 10-01-12
  - Mouse sensitivity raised from 20 to 50.  Great for trackballs!

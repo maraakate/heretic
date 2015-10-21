@@ -475,7 +475,7 @@ char exrnwads2[80];
 
 void wadprintf(void)
 {
-	if(debugmode)
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
 	{
 		return;
 	}
@@ -565,7 +565,7 @@ void hprintf(char *string, unsigned char a)
 #ifdef __WATCOMC__
 	int i;
 
-	if(debugmode)
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
 	{
 		puts(string);
 		return;
@@ -579,7 +579,7 @@ void hprintf(char *string, unsigned char a)
 
 void drawstatus(void)
 {
-	if(debugmode)
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
 	{
 		return;
 	}
@@ -605,7 +605,7 @@ void DrawThermo(void)
 	int     progress;
 	int     i;
 
-	if(debugmode)
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
 	{
 		return;
 	}
@@ -661,7 +661,7 @@ void blitStartup(void)
 {
 	byte *textScreen;
 
-	if(debugmode)
+	if(debugmode || M_CheckParm("-faststart") ) // FS: Fast Start
 	{
 		return;
 	}
@@ -684,6 +684,12 @@ void blitStartup(void)
 char tmsg[300];
 void tprintf(char *msg,int initflag)
 {
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
+	{
+		printf(msg);
+		return;
+	}
+
 #if 0
 	#ifdef __WATCOMC__
 	char    temp[80];
@@ -692,7 +698,7 @@ void tprintf(char *msg,int initflag)
 	int i;
 	#endif
 
-	if(debugmode)
+	if(debugmode || M_CheckParm ("-faststart") ) // FS: Fast Start
 	{
 		printf(msg);
 		return;
@@ -947,12 +953,12 @@ void D_DoomMain(void)
 
 	CT_Init();
 
-	tprintf("R_Init: Init Heretic refresh daemon.",1);
+	tprintf("R_Init: Init Heretic refresh daemon.\n",1);
 	hgotoxy(17,7);
 	hprintf("Loading graphics",0x3f);
 	R_Init();
 
-	tprintf("P_Init: Init Playloop state.",1);
+	tprintf("P_Init: Init Playloop state.\n",1);
 	hgotoxy(17,8);
 	hprintf("Init game engine.",0x3f);
 	P_Init();
@@ -990,6 +996,17 @@ void D_DoomMain(void)
 //
 // start the apropriate game based on parms
 //
+
+	// FS: FROM DOOM check for a driver that wants intermission stats 
+	p = M_CheckParm ("-statcopy");
+	if (p && p<myargc-1)
+	{
+		// for statistics driver
+		extern  void*	statcopy;                            
+
+		statcopy = (void*)atoi(myargv[p+1]);
+		printf ("External statistics registered.\n");
+	}
 
 	D_CheckRecordFrom();
 

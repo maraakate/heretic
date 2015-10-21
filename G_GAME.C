@@ -158,6 +158,8 @@ int inventoryTics;
 extern externdata_t *i_ExternData;
 #endif
 
+void*	statcopy; // FS: for statistics driver
+
 //=============================================================================
 // Not used - ripped out for Heretic
 /*
@@ -883,6 +885,8 @@ boolean G_Responder(event_t *ev)
 			mousebuttons[2] = ev->data1&4;
 			mousex = ev->data2*(mouseSensitivity+5)/10;
 
+			if (!M_CheckParm("-novert")) // FS: Disable vertical movement
+			{
                         if (mouseSensitivity < 20) // FS: Cap because it gets wonky
                         {
                                 mousey = ev->data3*(mouseSensitivity+5)/10;
@@ -892,6 +896,12 @@ boolean G_Responder(event_t *ev)
                                 mousey = ev->data3*(25)/10;
                         }
                         return(true); // eat events
+			}
+			else
+			{
+				mousey = 0;
+				return(true);
+			}
 
 		case ev_joystick:
 			joybuttons[0] = ev->data1&1;
@@ -1140,15 +1150,15 @@ void G_PlayerFinishLevel(int player)
                         p->inventory[i].count = 1;
                 }
 
-	p->artifactCount = p->inventorySlotNum;
+		p->artifactCount = p->inventorySlotNum;
 
-	if(!deathmatch)
-	{
-		for(i = 0; i < 16; i++)
+		if(!deathmatch)
 		{
-			P_PlayerUseArtifact(p, arti_fly);
+			for(i = 0; i < 16; i++)
+			{
+				P_PlayerUseArtifact(p, arti_fly);
+			}
 		}
-	}
         }
 
         memset(p->powers, 0, sizeof(p->powers));
@@ -1288,6 +1298,7 @@ void G_PlayerReborn(int player)
 	{
 		SB_state = -1; // refresh the status bar
 		inv_ptr = 0; // reset the inventory pointer
+
 		curpos = 0;
 	}
 }

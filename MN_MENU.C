@@ -76,6 +76,8 @@ static boolean SCScreenSize(int option);
 static boolean SCLoadGame(int option);
 static boolean SCSaveGame(int option);
 static boolean SCMessages(int option);
+static void SCPalFlashes(int option); // FS: Pal Flashes
+static void SCHeadBob(int option); // FS: Headbob Toggle
 static boolean SCEndGame(int option);
 static boolean SCInfo(int option);
 static void DrawMainMenu(void);
@@ -237,6 +239,8 @@ static MenuItem_t OptionsItems[] =
 {
 	{ ITT_EFUNC, "END GAME", SCEndGame, 0, MENU_NONE },
 	{ ITT_EFUNC, "MESSAGES : ", SCMessages, 0, MENU_NONE },
+	{ ITT_EFUNC, "PALLETE FLASHES : ", SCPalFlashes, 0, MENU_NONE }, // FS: Pal Flashes
+	{ ITT_EFUNC, "HEADBOB : ", SCHeadBob, 0, MENU_NONE }, // FS: Headbob Toggle
 	{ ITT_LRFUNC, "MOUSE SENSITIVITY", SCMouseSensi, 0, MENU_NONE },
 	{ ITT_EMPTY, NULL, NULL, 0, MENU_NONE },
 	{ ITT_SETMENU, "MORE...", NULL, 0, MENU_OPTIONS2 }
@@ -246,7 +250,7 @@ static Menu_t OptionsMenu =
 {
 	88, 30,
 	DrawOptionsMenu,
-	5, OptionsItems,
+	7, OptionsItems, // FS: Was 5
 	0,
 	MENU_MAIN
 };
@@ -680,6 +684,9 @@ static void DrawFileSlots(Menu_t *menu)
 
 static void DrawOptionsMenu(void)
 {
+	extern boolean usePalFlash;
+	extern int headBob;
+
 	if(messageson)
 	{
 		MN_DrTextB("ON", 196, 50);
@@ -688,7 +695,26 @@ static void DrawOptionsMenu(void)
 	{
 		MN_DrTextB("OFF", 196, 50);
 	}
-        DrawSlider(&OptionsMenu, 3, 10, mouseSensitivity/5); // FS: We using 20 now
+
+	if(usePalFlash) // FS: Draw Pal Flash
+	{
+		MN_DrTextB("ON", 240, 70);
+	}
+	else
+	{
+		MN_DrTextB("OFF", 240, 70);
+	}
+
+	if(headBob) // FS: Headbob Toggle
+	{
+		MN_DrTextB("ON", 188, 90);
+	}
+	else
+	{
+		MN_DrTextB("OFF", 188, 90);
+	}
+
+        DrawSlider(&OptionsMenu, 5, 10, mouseSensitivity/5); // FS: We using 20 now and was 3,10, etc..
 }
 
 //---------------------------------------------------------------------------
@@ -792,6 +818,36 @@ static boolean SCMessages(int option)
 	}
 	S_StartSound(NULL, sfx_chat);
 	return true;
+}
+
+static void SCPalFlashes(int option) // FS: Palette Flashes Toggle
+{
+	extern boolean usePalFlash;
+	usePalFlash ^= 1;
+	if(usePalFlash)
+	{
+		P_SetMessage(&players[consoleplayer], "PALETTE FLASHES ON", true);
+	}
+	else
+	{
+		P_SetMessage(&players[consoleplayer], "PALETTE FLASHES OFF", true);
+	}
+	S_StartSound(NULL, sfx_chat);
+}
+
+static void SCHeadBob(int option) // FS: Headbob Toggle
+{
+	extern int headBob;
+	headBob ^= 1;
+	if(headBob)
+	{
+		P_SetMessage(&players[consoleplayer], "HEADBOBBING ON", true);
+	}
+	else
+	{
+		P_SetMessage(&players[consoleplayer], "HEADBOBBING OFF", true);
+	}
+	S_StartSound(NULL, sfx_chat);
 }
 
 //---------------------------------------------------------------------------

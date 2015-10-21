@@ -684,8 +684,8 @@ extern int rndindex;
 extern int gametic, maketic;
 extern	int        	nettics[MAXNETNODES];
 
-#define SAVEGAMESIZE 0x30000
-#define SAVESTRINGSIZE 24
+#define SAVEGAMESIZE 0x100000 // FS: Was 0x30000
+#define SAVESTRINGSIZE 256 // FS: Was 24
 extern byte *savebuffer;
 extern byte *save_p;
 
@@ -858,8 +858,8 @@ void TryRunTics (void);
 //SYSTEM IO
 //---------
 #if 1
-#define	SCREENWIDTH		320
-#define	SCREENHEIGHT	200
+#define SCREENWIDTH             320
+#define SCREENHEIGHT    200
 #else
 #define	SCREENWIDTH		560
 #define	SCREENHEIGHT	375

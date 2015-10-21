@@ -598,8 +598,14 @@ void P_SetupLevel (int episode, int map, int playermask, skill_t skill)
 //	P_ConnectSubsectors ();
 
 // preload graphics
-	if (precache)
-		R_PrecacheLevel ();
+
+// preload graphics
+	if (!M_CheckParm("-noprecache")) // FS: No precache
+	{
+		if (precache)
+			R_PrecacheLevel ();
+	}
+
 
 //printf ("free memory: 0x%x\n", Z_FreeMemory());
 

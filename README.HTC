@@ -37,6 +37,7 @@ Heretic v1.3a has many features.
 * F5 for toggling of palette flashing (i.e. screen reddens when hurt).
    This can also be disabled via "-nopalflash".
 * No headbobing with "-noheadbob" or setting headBob = 0 in HERETIC.CFG.
+* Menu Options for Headbob and Palette Flashing.
 * Gamma Level notification text.
 * IDMUS cheat from Doom.
    97 will play the title song, 98 will play the intermission song, and
@@ -57,6 +58,7 @@ Heretic v1.3a has many features.
    - Torch lighting will last for the duration of the level.
    - Multiple artifacts will carry to the next level.
 * "-oldrules" parameter to use older game rules.
+* HERESW.BAT to toggle between v1.3 (original) and v1.3a (this version)
 
 3 - Requirements
 ---------------------------------------------------------

@@ -22,8 +22,17 @@
 #  /i=dir  add include directories
 #
 # --------------------------------------------------------------------------
+#
+# DEBUG Build:
+#
+#  The EXTERNOPT macro should be set to /d2
+#
+# FINAL Build:
+#
+#  The EXTERNOPT macro should be set to /dNORANGECHECKING
+#
 
-CCOPTS = /d2 /omaxet /zp1 /4r /ei /j /zq /i=dmx
+CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=dmx
 
 
 LOCOBJS = &
@@ -79,9 +88,22 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
  wlink @tic.lnk
  copy tic.exe striptic.exe
  wstrip striptic.exe
- 4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
- sb /R /O heretic.exe
- upx -9 heretic.exe
+ 4gwbind 4gwpro.exe striptic.exe HERETIC.EXE -V 
+ copy HERETIC.EXE HERETIC.UPD
+ copy /Y HERETIC.EXE D:\GAMES\HERETIC
+ copy /Y HERETIC.EXE D:\GAMES\HERETI~1
+ copy /Y HERETIC.UPD D:\GAMES\HERETIC
+ copy /Y HERETIC.UPD D:\GAMES\HERETI~1
+ copy /Y HERETIC.ORG D:\GAMES\HERETIC
+ copy /Y HERETIC.ORG D:\GAMES\HERETI~1
+ copy /Y README.HTC D:\GAMES\HERETIC
+ copy /Y README.HTC D:\GAMES\HERETI~1
+ copy /Y CHANGES.TXT D:\GAMES\HERETIC
+ copy /Y CHANGES.TXT D:\GAMES\HERETI~1
+ copy /Y TODO.TXT D:\GAMES\HERETIC
+ copy /Y TODO.TXT D:\GAMES\HERETI~1
+ copy /Y HERESW.BAT D:\GAMES\HERETIC
+ copy /Y HERESW.BAT D:\GAMES\HERETI~1
 
 i_ibm.obj:
  wcc386 /zp1 /4r /zq /ei /j i_ibm.c
@@ -100,6 +122,7 @@ clean : .SYMBOLIC
  del tic.map
  del out.txt
  del heretic.cfg
+ del heretic.upd
  del heretic.wad
 
 final : .SYMBOLIC
@@ -107,6 +130,4 @@ final : .SYMBOLIC
  copy tic.exe striptic.exe
  wstrip striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
- sb /R /O heretic.exe
- upx -9 heretic.exe
 

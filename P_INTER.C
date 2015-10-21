@@ -319,36 +319,37 @@ void P_GiveKey(player_t *player, keytype_t key)
 	player->bonuscount = BONUSADD;
 	player->keys[key] = true;
 
-        if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Give it to all in coop
-        {
-                for (i = 0; i < MAXPLAYERS; i++)
-                {
-                        player = &players[i];
-                        playerkeys |= 1<<key;
-                        KeyPoints[key].x = 0;
-                        KeyPoints[key].y = 0;
+	if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Give it to all in coop
+	{
+		for (i = 0; i < MAXPLAYERS; i++)
+		{
+			player = &players[i];
+			playerkeys |= 1<<key;
+			KeyPoints[key].x = 0;
+			KeyPoints[key].y = 0;
 
-                        player->bonuscount = BONUSADD;
-                        player->keys[key] = true;
+			player->bonuscount = BONUSADD;
+			player->keys[key] = true;
 
-                        S_StartSound(NULL, sfx_keyup); // FS: Broadcast to all
+			S_StartSound(NULL, sfx_keyup); // FS: Broadcast to all
 
-                        switch(key)
-                        {
-                                case key_blue:
-                                        P_SetMessage(player, "EVERYONE HAS THE BLUE KEY!", true);
-                                        break;
-                                case key_green:
-                                        P_SetMessage(player, "EVERYONE HAS THE GREEN KEY!", true);
-                                        break;
-                                case key_yellow:
-                                        P_SetMessage(player, "EVERYONE HAS THE YELLOW KEY!", true);
-                                        break;
-                                default:
-                                        break;
-                        }
-                }
-}       }
+			switch(key)
+			{
+				case key_blue:
+					P_SetMessage(player, "EVERYONE HAS THE BLUE KEY!", true);
+					break;
+				case key_green:
+					P_SetMessage(player, "EVERYONE HAS THE GREEN KEY!", true);
+					break;
+				case key_yellow:
+					P_SetMessage(player, "EVERYONE HAS THE YELLOW KEY!", true);
+					break;
+				default:
+					break;
+			}
+		}
+	}       
+}
 
 //---------------------------------------------------------------------------
 //
@@ -488,8 +489,8 @@ boolean P_GiveArtifact(player_t *player, artitype_t arti, mobj_t *mo)
 void P_SetDormantArtifact(mobj_t *arti)
 {
 	arti->flags &= ~MF_SPECIAL;
-        if(netgame && (arti->type != MT_ARTIINVULNERABILITY) // FS: Was deathmatch
-		&& (arti->type != MT_ARTIINVISIBILITY))
+        if(netgame && (arti->type != MT_ARTIINVULNERABILITY) // FS: Respawn items Was deathmatch
+		&& (arti->type != MT_ARTIINVISIBILITY) && !M_CheckParm("-oldrules"))
 	{
 		P_SetMobjState(arti, S_DORMANTARTI1);
 	}
@@ -882,7 +883,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	{
 		player->itemcount++;
 	}
-        if(netgame && respawn && !(special->flags&MF_DROPPED)) // FS: Was deathmatch
+        if(netgame && respawn && !(special->flags&MF_DROPPED) && !M_CheckParm("-oldrules")) // FS: Respawning Items Was deathmatch
 	{
 		P_HideSpecialThing(special);
 	}
@@ -953,12 +954,14 @@ void P_KillMobj(mobj_t *source, mobj_t *target)
 		target->flags2 &= ~MF2_FLY;
 		target->player->powers[pw_flight] = 0;
 		target->player->powers[pw_weaponlevel2] = 0;
+		target->player->powers[pw_infrared] = 0; // FS: Remove Torch
+		target->player->fixedcolormap = 0; // FS: Remove Torch
 		target->player->playerstate = PST_DEAD;
 
-        if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Broadcast death in coop
+		if (netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Broadcast death in coop
 		{
 			for (i = 0; i < MAXPLAYERS; i++)
-            {
+			{
 				player = &players[i];
 				P_SetMessage(player, "PLAYER DIED!", true);
 			}
@@ -1280,13 +1283,7 @@ void P_DamageMobj
 		return;
 	}
 
-        if((netgame && !deathmatch) && (!M_CheckParm("-oldrules") || !M_CheckParm("-friendlyfire")) && (target->player && source->player))
-        // FS: No friendly fire in Coop
-        {
-                return;
-        }
-
-        if(target->flags&MF_SKULLFLY)
+	if(target->flags&MF_SKULLFLY)
 	{
 		if(target->type == MT_MINOTAUR)
 		{ // Minotaur is invulnerable during charge attack
@@ -1454,7 +1451,7 @@ void P_DamageMobj
 			damage -= saved;
 		}
 		if(damage >= player->health
-			&& ((gameskill == sk_baby) || netgame) // FS: Was Deathmatch
+			&& ((gameskill == sk_baby) || netgame) // FS: Was Deathmatch MAKE OLDRULES
 			&& !player->chickenTics)
 		{ // Try to use some inventory health
 			P_AutoUseHealth(player, damage-player->health+1);

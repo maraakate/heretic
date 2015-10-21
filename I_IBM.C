@@ -1374,10 +1374,10 @@ void I_StartupMouse (void)
 
 	if (I_ResetMouse () != 0xffff)
 	{
-		tprintf ("Mouse: not present ",0);
+		tprintf ("Mouse: not present\n",0);
 		return;
 	}
-	tprintf ("Mouse: detected ",0);
+	tprintf ("Mouse: detected\n",0);
 
 	mousepresent = 1;
 
@@ -1512,7 +1512,7 @@ void I_StartupJoystick (void)
 	if (!I_ReadJoystick ())
 	{
 		joystickpresent = false;
-		tprintf ("joystick not found ",0);
+		tprintf ("joystick not found\n",0);
 		return;
 	}
 	printf("joystick found\n");
@@ -1778,15 +1778,15 @@ void I_Init (void)
 	extern void I_StartupTimer(void);
 
 	novideo = M_CheckParm("novideo");
-	tprintf("I_StartupDPMI",1);
+	tprintf("I_StartupDPMI\n",1);
 	I_StartupDPMI();
-	tprintf("I_StartupMouse ",1);
+	tprintf("I_StartupMouse\n",1);
 	I_StartupMouse();
-//	tprintf("I_StartupJoystick ",1);
+//	tprintf("I_StartupJoystick\n",1);
 //	I_StartupJoystick();
-//	tprintf("I_StartupKeyboard ",1);
+//	tprintf("I_StartupKeyboard\n",1);
 //	I_StartupKeyboard();
-	tprintf("S_Init... ",1);
+	tprintf("S_Init...\n",1);
 	S_Init();
 	//IO_StartupTimer();
 	S_Start();
@@ -1881,9 +1881,11 @@ byte *I_ZoneBase (int *size)
 {
 	int             meminfo[32];
 	int             heap;
-	int             i;
+	int             i, z; // FS: Testing Heapsize set
 	int                             block;
 	byte                    *ptr;
+
+
 
 	memset (meminfo,0,sizeof(meminfo));
 	segread(&segregs);
@@ -1893,6 +1895,12 @@ byte *I_ZoneBase (int *size)
 	int386x( 0x31, &regs, &regs, &segregs );
 
 	heap = meminfo[0];
+	// FS: Testing manually setting heapsize
+	z = M_CheckParm("-mem");
+	if (z && z<myargc-1)
+	{
+		heap = (int) (atof(myargv[z+1]) * 1024 * 1024);
+	}
 	printf ("DPMI memory: 0x%x, ",heap);
 
 	do

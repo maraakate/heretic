@@ -363,7 +363,7 @@ void I_StartupSound (void)
 
   if (debugmode)
   {
-	sprintf(tmp,"  Music device #%d & dmxCode=%d", snd_MusicDevice,
+	sprintf(tmp,"  Music device #%d & dmxCode=%d\n", snd_MusicDevice,
 	  dmxCodes[snd_MusicDevice]);
 	tprintf(tmp,0);
 	sprintf(tmp,"  Sfx device #%d & dmxCode=%d\n", snd_SfxDevice,
@@ -372,13 +372,13 @@ void I_StartupSound (void)
   }
 
   // inits DMX sound library
-  tprintf("  calling DMX_Init",0);
+  tprintf("  calling DMX_Init\n",0);
   rc = DMX_Init(SND_TICRATE, SND_MAXSONGS, dmxCodes[snd_MusicDevice],
 	dmxCodes[snd_SfxDevice]);
 
   if (debugmode)
   {
-	sprintf(tmp,"  DMX_Init() returned %d", rc);
+	sprintf(tmp,"  DMX_Init() returned %d\n", rc);
 	tprintf(tmp,0);
   }
 
