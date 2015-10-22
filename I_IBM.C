@@ -7,6 +7,7 @@
 #include <stdarg.h>
 #include <graph.h>
 #include "DoomDef.h"
+#include "i_system.h"
 #include "R_local.h"
 #include "s_sound.h"
 
@@ -41,8 +42,11 @@ typedef struct
 
 extern  dpmiregs_t      dpmiregs;
 
+/* Prototypes */
 void I_ReadMouse (void);
 void I_InitDiskFlash (void);
+void I_JoystickEvents (void);
+void DPMIInt (int i);
 
 extern  int     usemouse, usejoystick;
 

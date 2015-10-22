@@ -1,9 +1,11 @@
-
 // I_SOUND.C
 
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "doomdef.h"
 #include "dmx.h"
+#include "i_system.h"
 #include "sounds.h"
 #include "snd_dmx.h"
 #include "GUS.H" // FS: For internal HT_GUS1M.WAD
