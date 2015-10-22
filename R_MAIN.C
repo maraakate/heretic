@@ -1,6 +1,8 @@
 // R_main.c
 
 #include <math.h>
+#include <stdlib.h>
+
 #include "DoomDef.h"
 #include "R_local.h"
 /*
