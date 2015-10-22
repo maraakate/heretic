@@ -81,7 +81,7 @@ GLOBOBJS = &
  r_plane.obj &
  r_segs.obj &
  r_things.obj &
- s_sounds.obj &
+ s_sound.obj &
  sb_bar.obj &
  sounds.obj &
  tables.obj &

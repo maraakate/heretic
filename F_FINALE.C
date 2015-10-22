@@ -70,7 +70,6 @@ void F_StartFinale (void)
 	finalecount = 0;
 	FontABaseLump = W_GetNumForName("FONTA_S")+1;
 
-//      S_ChangeMusic(mus_victor, true);
 	S_StartSong(mus_cptd, true);
 }
 

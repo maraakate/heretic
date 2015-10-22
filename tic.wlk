@@ -67,7 +67,7 @@ file r_main.obj
 file r_plane.obj
 file r_segs.obj
 file r_things.obj
-file s_sounds.obj
+file s_sound.obj
 file sb_bar.obj
 file sounds.obj
 file tables.obj
