@@ -4,15 +4,15 @@
 
 #include "DoomDef.h"
 
-#define NCMD_EXIT               0x80000000
-#define NCMD_RETRANSMIT 0x40000000
-#define NCMD_SETUP              0x20000000
-#define NCMD_KILL               0x10000000              // kill game
-#define NCMD_CHECKSUM   0x0fffffff
+#define NCMD_EXIT				0x80000000
+#define NCMD_RETRANSMIT			0x40000000
+#define NCMD_SETUP				0x20000000
+#define NCMD_KILL				0x10000000              // kill game
+#define NCMD_CHECKSUM			0x0fffffff
 
 
-doomcom_t               *doomcom;
-doomdata_t              *netbuffer;             // points inside doomcom
+doomcom_t	*doomcom;
+doomdata_t	*netbuffer;             // points inside doomcom
 
 
 /*
@@ -520,7 +520,11 @@ void D_ArbitrateNetStart (void)
 				//netbuffer->starttic = startepisode * 64 + startmap;
 				netbuffer->starttic = (startepisode<<4)+startmap;
 				netbuffer->player = VERSION;
-				netbuffer->numtics = 0;
+				//netbuffer->numtics = 0; // original code
+				/* SG 4/14/98 quick hack - we fill up about 2 tic buffers
+				 * should calculate our size/sizeof(ticcmd_t)
+				 */
+				 netbuffer->numtics = 2;
 				HSendPacket (i, NCMD_SETUP);
 			}
 

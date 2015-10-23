@@ -1,0 +1,10 @@
+Updated IPXSETUP.EXE for Heretic, Doom 2, and Doom
+Allows custom exes by passing -exe <filename.exe> to IPXNEW!
+Increased argument string from 99 to 1024.  
+Make some wild response files!
+Allows setting of console player by using -player <node#>.
+Ideas from CTFDOOM's IPXSETUP.
+
+By [HCI]Mara'akate
+telnet://marabbs.no-ip.org
+http://maraakate.org/Kali

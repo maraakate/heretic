@@ -229,7 +229,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 
 	if (!M_CheckParm("-debug"))
 	{
-                if (gamekeydown[key_speed] || joybuttons[joybspeed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
+		if (gamekeydown[key_speed] || joybuttons[joybspeed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
 			speed = !speed;
 	}
 
@@ -927,15 +927,15 @@ boolean G_Responder(event_t *ev)
 
 			if (!novert) // FS: Disable vertical movement
 			{
-                        if (mouseSensitivity < 20) // FS: Cap because it gets wonky
-                        {
-                                mousey = ev->data3*(mouseSensitivity+5)/10;
-                        }
-                        else
-                        {
-                                mousey = ev->data3*(25)/10;
-                        }
-                        return(true); // eat events
+				if (mouseSensitivity < 20) // FS: Cap because it gets wonky
+				{
+					mousey = ev->data3*(mouseSensitivity+5)/10;
+				}
+				else
+				{
+					mousey = ev->data3*(25)/10;
+				}
+				return(true); // eat events
 			}
 			else
 			{
@@ -1026,6 +1026,7 @@ void G_Ticker (void)
 	buf = (gametic/ticdup)%BACKUPTICS;
 
 	for (i=0 ; i<MAXPLAYERS ; i++)
+	{
 		if (playeringame[i])
 		{
 			cmd = &players[i].cmd;
@@ -1040,17 +1041,18 @@ void G_Ticker (void)
 			if (netgame && !(gametic%ticdup) )
 			{
 				if (gametic > BACKUPTICS
-				&& consistancy[i][buf] != cmd->consistancy)
+					&& consistancy[i][buf] != cmd->consistancy)
 				{
-					I_Error ("consistency failure (%i should be %i)",cmd->consistancy, consistancy[i][buf]);
+					I_Error ("consistency failure (%i should be %i)",
+							cmd->consistancy, consistancy[i][buf]);
 				}
 				if (players[i].mo)
 					consistancy[i][buf] = players[i].mo->x;
 				else
-					consistancy[i][buf] = rndindex;
+					consistancy[i][buf] = 0; /* killough 2/14/98 -- was rndindex */
 			}
 		}
-
+	}
 //
 // check for special buttons
 //
@@ -1180,12 +1182,12 @@ void G_PlayerFinishLevel(int player)
 
 	p = &players[player];
 
-        if(M_CheckParm("-oldrules")) // FS: Old Rules
-        {
-                for(i=0; i<p->inventorySlotNum; i++)
-                {
-                        p->inventory[i].count = 1;
-                }
+	if(M_CheckParm("-oldrules")) // FS: Old Rules
+	{
+		for(i=0; i<p->inventorySlotNum; i++)
+		{
+			p->inventory[i].count = 1;
+		}
 
 		p->artifactCount = p->inventorySlotNum;
 
@@ -1196,7 +1198,7 @@ void G_PlayerFinishLevel(int player)
 				P_PlayerUseArtifact(p, arti_fly);
 			}
 		}
-        }
+	}
 
 	memset(p->powers, 0, sizeof(p->powers));
 	memset(p->keys, 0, sizeof(p->keys));
