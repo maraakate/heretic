@@ -68,9 +68,6 @@ unsigned NetbufferChecksum (void)
 
 	c = 0x1234567;
 
-#if defined(NeXT) || defined(NORMALUNIX)
-	return 0;                       // byte order problems
-#endif
 
 	l = (NetbufferSize () - (int)&(((doomdata_t *)0)->retransmitfrom))/4;
 	for (i=0 ; i<l ; i++)
@@ -669,12 +666,14 @@ void TryRunTics (void)
 	lowtic = MAXINT;
 	numplaying = 0;
 	for (i=0 ; i<doomcom->numnodes ; i++)
+	{
 		if (nodeingame[i])
 		{
 			numplaying++;
 			if (nettics[i] < lowtic)
 				lowtic = nettics[i];
 		}
+	}
 	availabletics = lowtic - gametic/ticdup;
 
 

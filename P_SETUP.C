@@ -592,16 +592,14 @@ void P_SetupLevel (int episode, int map, int playermask, skill_t skill)
 		}
 	}
 
-// set up world state
+	// set up world state
 	P_SpawnSpecials ();
 	
 // build subsector connect matrix
 //	P_ConnectSubsectors ();
 
-// preload graphics
-
-// preload graphics
-	if (!noprecache) // FS: No precache
+	// preload graphics
+    if( (!noprecache) || (noprecache && netgame)) /* FS: Skip precaching, except in netgames */
 	{
 		if (precache)
 			R_PrecacheLevel ();

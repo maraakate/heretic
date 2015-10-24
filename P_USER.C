@@ -76,23 +76,28 @@ void P_Thrust(player_t *player, angle_t angle, fixed_t move)
 void P_CalcHeight (player_t *player)
 {
 	int             angle;
-	int	maxbob; // FS
 	fixed_t bob;
 
-	if (headBob < 1)
-		maxbob = 0; // FS: Hate bob
-	else
-		maxbob = 0x100000;
-//
-// regular movement bobbing (needs to be calculated for gun swing even
-// if not on ground)
-// OPTIMIZE: tablify angle
+	// Regular movement bobbing
+	// (needs to be calculated for gun swing
+	// even if not on ground)
+	// OPTIMIZE: tablify angle
+	// Note: a LUT allows for effects
+	//  like a ramp with low health.
 
-	player->bob = FixedMul (player->mo->momx, player->mo->momx)+
-	FixedMul (player->mo->momy,player->mo->momy);
-	player->bob >>= 2;
-	if (player->bob>maxbob)
-		player->bob = maxbob;
+	if (!headBob && !netgame) /* FS: FIXME: Apparently desyncs netgames */
+	{
+		player->bob = 0;
+	}
+	else
+	{
+		player->bob = FixedMul (player->mo->momx, player->mo->momx) + FixedMul (player->mo->momy,player->mo->momy);
+		player->bob >>= 2;
+
+		if (player->bob > MAXBOB)
+			player->bob = MAXBOB;
+	}
+	
 	if(player->mo->flags2&MF2_FLY && !onground)
 	{
 		player->bob = FRACUNIT/2;
@@ -101,9 +106,15 @@ void P_CalcHeight (player_t *player)
 	if ((player->cheats & CF_NOMOMENTUM))
 	{
 		player->viewz = player->mo->z + VIEWHEIGHT;
+
 		if (player->viewz > player->mo->ceilingz-4*FRACUNIT)
 			player->viewz = player->mo->ceilingz-4*FRACUNIT;
-		player->viewz = player->mo->z + player->viewheight;
+
+		// The following line was in the Id source and appears      // phares 2/25/98
+		// to be a bug. player->viewz is checked in a similar
+		// manner at a different exit below.
+
+		// player->viewz = player->mo->z + player->viewheight;
 		return;
 	}
 
