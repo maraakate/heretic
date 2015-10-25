@@ -8,7 +8,8 @@
 #include <graph.h>
 #include "DoomDef.h"
 #include "R_local.h"
-#include "s_sound.h"
+#include "sounds.h"
+#include "dmx.h"
 
 // Macros
 

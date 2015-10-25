@@ -1,11 +1,8 @@
 #include <stdlib.h>
-#include <dpmiapi.h>
 
 #include "doomdata.h"
 #include "doomdef.h"
-#include "p_local.h"
 #include "r_local.h"
-#include "s_sound.h"
 #include "snd_dmx.h"
 
 /*
