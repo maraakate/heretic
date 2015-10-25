@@ -834,10 +834,6 @@ void D_DoomMain (void);
 void IncThermo(void);
 void InitThermo(int max);
 void tprintf(char *string, int initflag);
-void hgotoxy(int x,int y);
-void hput(unsigned char c, unsigned char a);
-void hprintf(char *string, unsigned char a);
-
 // not a globally visible function, just included for source reference
 // calls all startup code
 // parses command line options
@@ -1127,14 +1123,7 @@ extern boolean intermission;
 void IN_Start(void);
 void IN_Ticker(void);
 void IN_Drawer(void);
-
-/* FS: Statcopy stuff */
-void IN_InitStats(void);
-char *IN_CheckStatArgv(void);
-void IN_PrintCoopStats(void);
-void IN_PrintSingleStats(void);
-void IN_PrintDMStats(void);
-
+char *IN_CheckStatArgv(void); // FS: For statcopy 
 //----------------------
 // Chat mode (CT_chat.c)
 //----------------------

@@ -11,9 +11,7 @@
 #include <stdlib.h>
 #endif
 
-#include <conio.h>
 #include <ctype.h>
-#include <io.h>
 
 #include "DoomDef.h"
 #include "soundst.h"

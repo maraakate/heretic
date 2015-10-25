@@ -12,7 +12,6 @@
 #include <time.h> // FS: For Stat Copy
 
 #include "DoomDef.h"
-#include "i_system.h"
 #include "P_local.h"
 #include "soundst.h"
 #include "deh_main.h" // FS: For HHE

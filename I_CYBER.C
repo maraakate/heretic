@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "doomdef.h"
-
 /*
 ====================================================
 
@@ -28,6 +26,16 @@ normal speed to help aiming.
 
 ====================================================
 */
+
+typedef struct
+{
+	char            forwardmove;            // *2048 for move
+	char            sidemove;                       // *2048 for move
+	short           angleturn;                      // <<16 for angle delta
+	short           consistancy;            // checks for net game
+	unsigned char            chatchar;
+	unsigned char           buttons;
+} ticcmd_t;
 
 #define BT_ATTACK               1
 #define BT_USE                  2
@@ -103,8 +111,6 @@ extern  int mousepresent;
 //===========================================================
 void I_StartupCyberMan(void)
 {
-	char cyberMsg[2048];
-
    StaticDeviceData *pbuf;
    int success = 0;
 
@@ -132,26 +138,27 @@ void I_StartupCyberMan(void)
    if ((short)RMI.EAX != 1)
    {
 	  // SWIFT functions not present
-	  sprintf(cyberMsg, "CyberMan: Wrong mouse driver - no SWIFT support (AX=%04x).\n", (unsigned)(short)RMI.EAX);
-	  tprintf(cyberMsg, 1);
+	  tprintf("CyberMan: Wrong mouse driver - no SWIFT support (AX=%04x).\n",
+			 (unsigned)(short)RMI.EAX);
    }
-   else if (pbuf->deviceType != DEVTYPE_CYBERMAN)
+   else
+   if (pbuf->deviceType != DEVTYPE_CYBERMAN)
    {
 	  // no SWIFT device, or not CyberMan
 	  if (pbuf->deviceType == 0)
 	  {
-		 tprintf("CyberMan: no SWIFT device connected.\n", 1);
+		 tprintf("CyberMan: no SWIFT device connected.\n");
 	  }
 	  else
 	  {
-		 sprintf(cyberMsg, "CyberMan: SWIFT device is not a CyberMan! (type=%d)\n",	pbuf->deviceType);
-		 tprintf(cyberMsg, 1);
+		 tprintf("CyberMan: SWIFT device is not a CyberMan! (type=%d)\n",
+				pbuf->deviceType);
 	  }
    }
    else
    {
-	  sprintf(cyberMsg, "CyberMan: CyberMan %d.%02d connected.\n", pbuf->majorVersion, pbuf->minorVersion);
-	  tprintf(cyberMsg, 1);
+	  tprintf("CyberMan: CyberMan %d.%02d connected.\n",
+			 pbuf->majorVersion, pbuf->minorVersion);
 	  isCyberPresent = 1;
 	  mousepresent = 0;
    }
