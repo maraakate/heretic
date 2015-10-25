@@ -29,7 +29,7 @@ CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=3rdparty\include
 LOCOBJS = &
  i_cyber.obj &
  i_ibm_a.obj &
- snd_dmx.obj &
+ i_sound.obj &
  linear.obj
 
 GLOBOBJS = &
@@ -81,7 +81,6 @@ GLOBOBJS = &
  r_plane.obj &
  r_segs.obj &
  r_things.obj &
- s_sounds.obj &
  sb_bar.obj &
  sounds.obj &
  tables.obj &
@@ -115,7 +114,6 @@ clean : .SYMBOLIC
  del *.dsg
  del *.sym
  del *.map
- del *.err
  del out.txt
 
 final : .SYMBOLIC

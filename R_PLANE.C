@@ -1,5 +1,4 @@
 // R_planes.c
-#include <stdlib.h>
 
 #include "DoomDef.h"
 #include "R_local.h"

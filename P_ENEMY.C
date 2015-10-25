@@ -1,6 +1,5 @@
-// P_enemy.c
 
-#include <stdlib.h>
+// P_enemy.c
 
 #include "DoomDef.h"
 #include "P_local.h"

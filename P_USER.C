@@ -1,6 +1,5 @@
-// P_user.c
 
-#include <stdlib.h>
+// P_user.c
 
 #include "DoomDef.h"
 #include "P_local.h"

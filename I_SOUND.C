@@ -5,7 +5,7 @@
 #include "doomdef.h"
 #include "dmx.h"
 #include "sounds.h"
-#include "snd_dmx.h"
+#include "i_sound.h"
 #include "GUS.H" // FS: For internal HT_GUS1M.WAD
 
 /*

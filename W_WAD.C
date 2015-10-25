@@ -9,12 +9,11 @@
 
 #else
 
-#include <ctype.h>
-#include <fcntl.h>
-#include <io.h>
 #include <malloc.h>
+#include <io.h>
+#include <fcntl.h>
 #include <sys/stat.h>
-#endif // NeXT
+#endif
 
 #include "DoomDef.h"
 
