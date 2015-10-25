@@ -25,6 +25,7 @@
 //-----------------------------------------------------------------------------
 
 #include <ctype.h>
+#include <stdlib.h>
 
 #include "doomdef.h"
 #include "doomdata.h"

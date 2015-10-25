@@ -1,8 +1,9 @@
-
 // G_game.c
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
 #include "DoomDef.h"
 #include "P_local.h"
 #include "soundst.h"

@@ -1,11 +1,10 @@
 // R_main.c
 
+#include <stdlib.h>
 #include <math.h>
+
 #include "DoomDef.h"
 #include "R_local.h"
-/*
-
-*/
 
 int			viewangleoffset;
 

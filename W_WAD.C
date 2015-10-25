@@ -9,6 +9,7 @@
 
 #else
 
+#include <ctype.h>
 #include <malloc.h>
 #include <io.h>
 #include <fcntl.h>

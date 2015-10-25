@@ -1,5 +1,6 @@
-
 // P_maputl.c
+
+#include <stdlib.h>
 
 #include "DoomDef.h"
 #include "P_local.h"

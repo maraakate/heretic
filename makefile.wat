@@ -24,7 +24,7 @@
 # --------------------------------------------------------------------------
 
 CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=3rdparty\include
-#CCOPTS = /d2 /odam /zp1 /4s /ei /j /zq /i=3rdparty\include
+#CCOPTS = /d2 /odam /zp1 /4r /ei /j /zq /i=3rdparty\include
 
 LOCOBJS = &
  i_cyber.obj &

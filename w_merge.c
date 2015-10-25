@@ -691,5 +691,4 @@ void W_NWTDashMerge(char *filename)
 
     W_CloseFile(wad_file);
 }
-
 #endif
