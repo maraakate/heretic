@@ -1107,6 +1107,7 @@ boolean MN_Responder(event_t *event)
 	extern boolean automapactive;
 	static boolean shiftdown;
 	extern boolean usePalFlash; // FS: Use Palette Flashing
+	extern int alwaysrun;
 	extern void D_StartTitle(void);
 	extern void G_CheckDemoStatus(void);
 	char *textBuffer;
@@ -1397,7 +1398,7 @@ boolean MN_Responder(event_t *event)
 				return true;
 			case KEY_F11: // F11 - gamma mode correction
 				usegamma++;
-				if(usegamma > 4)
+				if((usegamma > 4) || (usegamma < 0))
 				{
 					usegamma = 0;
 				}
@@ -1421,7 +1422,18 @@ boolean MN_Responder(event_t *event)
 						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 4", false);
 						break;
 				}
-
+				return true;
+			case KEY_F12: /* FS: Always run toggle */
+				if(alwaysrun)
+				{
+					P_SetMessage(&players[consoleplayer], "ALWAYS RUN OFF", false);
+					alwaysrun = 0;
+				}
+				else
+				{
+					P_SetMessage(&players[consoleplayer], "ALWAYS RUN ON", false);
+					alwaysrun = 1;
+				}
 				return true;
 #endif
 		}

@@ -2,7 +2,9 @@
 
 #include <dos.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "doomdef.h"
 
 /*
 ====================================================
@@ -26,16 +28,6 @@ normal speed to help aiming.
 
 ====================================================
 */
-
-typedef struct
-{
-	char            forwardmove;            // *2048 for move
-	char            sidemove;                       // *2048 for move
-	short           angleturn;                      // <<16 for angle delta
-	short           consistancy;            // checks for net game
-	unsigned char            chatchar;
-	unsigned char           buttons;
-} ticcmd_t;
 
 #define BT_ATTACK               1
 #define BT_USE                  2
@@ -111,57 +103,58 @@ extern  int mousepresent;
 //===========================================================
 void I_StartupCyberMan(void)
 {
-   StaticDeviceData *pbuf;
-   int success = 0;
+	StaticDeviceData *pbuf;
+	int success = 0;
+	char cyberMsg[256];
 
-   isCyberPresent = 0;
+	isCyberPresent = 0;
 
-   cyberstat = (SWIFT_3DStatus *)I_AllocLow (DOSMEMSIZE);
-   segment = (int)cyberstat>>4;
+	cyberstat = (SWIFT_3DStatus *)I_AllocLow (DOSMEMSIZE);
+	segment = (int)cyberstat>>4;
 
-   pbuf = (StaticDeviceData *)cyberstat;
-   memset(pbuf, 0, sizeof (StaticDeviceData));
+	pbuf = (StaticDeviceData *)cyberstat;
+	memset(pbuf, 0, sizeof (StaticDeviceData));
 
-   // Use DPMI call 300h to issue mouse interrupt
-   memset(&RMI, 0, sizeof(RMI));
-   RMI.EAX = 0x53C1;            // SWIFT: Get Static Device Data
-   RMI.ES = segment;
-   RMI.EDX = 0;
-   memset(&sregs, 0, sizeof (sregs));
-   regs.w.ax = 0x0300;          // DPMI: simulate interrupt
-   regs.w.bx = MOUSE_INT;
-   regs.w.cx = 0;
-   regs.x.edi = FP_OFF(&RMI);
-   sregs.es = FP_SEG(&RMI);
-   int386x( DPMI_INT, &regs, &regs, &sregs );
+	// Use DPMI call 300h to issue mouse interrupt
+	memset(&RMI, 0, sizeof(RMI));
+	RMI.EAX = 0x53C1;            // SWIFT: Get Static Device Data
+	RMI.ES = segment;
+	RMI.EDX = 0;
+	memset(&sregs, 0, sizeof (sregs));
+	regs.w.ax = 0x0300;          // DPMI: simulate interrupt
+	regs.w.bx = MOUSE_INT;
+	regs.w.cx = 0;
+	regs.x.edi = FP_OFF(&RMI);
+	sregs.es = FP_SEG(&RMI);
+	int386x( DPMI_INT, &regs, &regs, &sregs );
 
-   if ((short)RMI.EAX != 1)
-   {
-	  // SWIFT functions not present
-	  tprintf("CyberMan: Wrong mouse driver - no SWIFT support (AX=%04x).\n",
-			 (unsigned)(short)RMI.EAX);
-   }
-   else
-   if (pbuf->deviceType != DEVTYPE_CYBERMAN)
-   {
-	  // no SWIFT device, or not CyberMan
-	  if (pbuf->deviceType == 0)
-	  {
-		 tprintf("CyberMan: no SWIFT device connected.\n");
-	  }
-	  else
-	  {
-		 tprintf("CyberMan: SWIFT device is not a CyberMan! (type=%d)\n",
-				pbuf->deviceType);
-	  }
-   }
-   else
-   {
-	  tprintf("CyberMan: CyberMan %d.%02d connected.\n",
-			 pbuf->majorVersion, pbuf->minorVersion);
-	  isCyberPresent = 1;
-	  mousepresent = 0;
-   }
+	if ((short)RMI.EAX != 1)
+	{
+		// SWIFT functions not present
+		sprintf(cyberMsg, "CyberMan: Wrong mouse driver - no SWIFT support (AX=%04x).\n", (unsigned)(short)RMI.EAX);
+		tprintf(cyberMsg, 1);
+	}
+	else if (pbuf->deviceType != DEVTYPE_CYBERMAN)
+	{
+		// no SWIFT device, or not CyberMan
+		if (pbuf->deviceType == 0)
+		{
+			sprintf(cyberMsg, "CyberMan: no SWIFT device connected.\n");
+			tprintf(cyberMsg, 1);
+		}
+		else
+		{
+			sprintf(cyberMsg, "CyberMan: SWIFT device is not a CyberMan! (type=%d)\n", pbuf->deviceType);
+			tprintf(cyberMsg,1 );
+		}
+	}
+	else
+	{
+		sprintf(cyberMsg, "CyberMan: CyberMan %d.%02d connected.\n", pbuf->majorVersion, pbuf->minorVersion);
+		tprintf(cyberMsg, 1);
+		isCyberPresent = 1;
+		mousepresent = 0;
+	}
 }
 
 

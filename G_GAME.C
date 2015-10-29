@@ -171,7 +171,7 @@ extern externdata_t *i_ExternData;
 #endif
 
 extern boolean ultimatemsg; // FS: Was goofing
-
+extern int alwaysrun;
 
 /*
 ====================
@@ -223,16 +223,8 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 
 //printf ("cons: %i\n",cmd->consistancy);
 
-	strafe = gamekeydown[key_strafe] || mousebuttons[mousebstrafe]
-		|| joybuttons[joybstrafe];
-        speed = gamekeydown[key_speed] || joybuttons[joybspeed]
-                || joybuttons[joybspeed];
-
-	if (!M_CheckParm("-debug"))
-	{
-		if (gamekeydown[key_speed] || joybuttons[joybspeed]) // FS: could cheat with ultrafast movement, from DOSDOOM.
-			speed = !speed;
-	}
+	strafe = gamekeydown[key_strafe] || mousebuttons[mousebstrafe] || joybuttons[joybstrafe];
+	speed = alwaysrun || gamekeydown[key_speed] || joybuttons[joybspeed] || joybuttons[joybspeed];
 
 #ifdef __WATCOMC__
 	if(useexterndriver)
@@ -584,31 +576,31 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 		dclicks = 0;                    // clear double clicks if hit use button
 	}
 
-	if(use_wpnbinds) // FS: Custom weapon keys
+	if(use_wpnbinds) /* FS: Custom weapon keys */
 	{
 		if(gamekeydown[wpn_crossbow])
 		{
-				cmd->buttons |= BT_CHANGE;
-				cmd->buttons |= 2<<BT_WEAPONSHIFT;
+			cmd->buttons |= BT_CHANGE;
+			cmd->buttons |= 2<<BT_WEAPONSHIFT;
 		}
 		if(gamekeydown[wpn_dragon])
 		{
-				cmd->buttons |= BT_CHANGE;
-				cmd->buttons |= 3<<BT_WEAPONSHIFT;
+			cmd->buttons |= BT_CHANGE;
+			cmd->buttons |= 3<<BT_WEAPONSHIFT;
 		}
 		if(gamekeydown[wpn_hellstaff])
 		{
-				cmd->buttons |= BT_CHANGE;
-				cmd->buttons |= 4<<BT_WEAPONSHIFT;
+			cmd->buttons |= BT_CHANGE;
+			cmd->buttons |= 4<<BT_WEAPONSHIFT;
 		}
 		if(gamekeydown[wpn_phoenix])
 		{
-				cmd->buttons |= BT_CHANGE;
-				cmd->buttons |= 5<<BT_WEAPONSHIFT;
+			cmd->buttons |= BT_CHANGE;
+			cmd->buttons |= 5<<BT_WEAPONSHIFT;
 		}
 	}
 
-	if(use_artbinds)
+	if(use_artbinds) /* FS: Custom artifact keys */
 	{
 		if(gamekeydown[art_torch])
 		{

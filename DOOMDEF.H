@@ -1184,6 +1184,10 @@ void V_DrawFuzzPatch(int x, int y, patch_t *patch);
 void V_DrawShadowedPatch(int x, int y, patch_t *patch);
 void V_DrawRawScreen(byte *raw);
 
+/* D_Main.c stuff */
+void hgotoxy(int x,int y);
+void hprintf(char *string, unsigned char a);
+
 #include "sounds.h"
 
 #endif // __DOOMDEF__

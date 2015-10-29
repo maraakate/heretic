@@ -1145,7 +1145,6 @@ void   I_StartTic (void)
 	int             k;
 	event_t ev;
 
-
 	I_ReadMouse ();
 
 //

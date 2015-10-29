@@ -373,6 +373,7 @@ int	useIntGus; // FS: Internal HT_GUS1M.WAD
 int faststart; // FS: Always faststart if you want
 int novert; // FS: No vertical mouse movement
 int noprecache; // FS: No graphics precaching
+int alwaysrun; /* FS: Always run */
 extern int	drawTime; // FS: Draw time clock
 
 extern int	use_wpnbinds; // FS: Custom weapon keys
@@ -538,9 +539,11 @@ default_t extendeddefaults[] =
 	{ "wpn_phoenix", &wpn_phoenix, 16, 1 }, // FS: Q
 	
 	// FS: Use custom artifact binds
-	{ "use_artbinds", &use_artbinds, 0},
+	{ "use_artbinds", &use_artbinds, 0 },
 	{ "art_torch", &art_torch, 33, 1 }, // FS: F
-	{ "art_flask", &art_flask, 34, 1 } // FS: G
+	{ "art_flask", &art_flask, 34, 1 }, // FS: G
+	
+	{ "alwaysrun", &alwaysrun, 1 }
 };	
 
 int numdefaults;

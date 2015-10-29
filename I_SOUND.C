@@ -1,7 +1,8 @@
-
 // I_SOUND.C
 
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "doomdef.h"
 #include "dmx.h"
 #include "sounds.h"

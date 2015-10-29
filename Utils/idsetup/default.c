@@ -27,24 +27,6 @@ int	detailLevel       = 1;
 int	screenblocks      = 10;
 int   usegamma          = 0;
 
-#if 0
-	int	usePalFlash		= 1; // FS
-	int	headBob		= 1; // FS
-	int drawTime	= 0; // FS
-	int	grmode		= 1; // FS
-
-	// FS: Custom weapon keys
-	int	use_wpnbinds = 0;
-	int	wpn_shotgun;
-	int	wpn_crossbow; 
-	int	wpn_chaingun;
-	int	wpn_dragon;
-	int	wpn_rocket;
-	int	wpn_phoenix;
-	int	wpn_plasma;
-	int	wpn_hellstaff;
-#endif
-
 int	comport		= 1;
 
 char  chatmacros[10][40];
@@ -79,29 +61,6 @@ default_t	defaults[] =
 #ifdef HEXEN
 	{"key_jump", &curk.jump, SC_SPACE }, // FS: 0x35
 #endif
-
-#if 0
-	{"usePalFlash",&usePalFlash, 1}, // FS
-	{"headBob",&headBob, 1}, // FS
-	{"drawTime",&drawTime, 0}, // FS
-
-	// FS: Use custom weapon binds
-	{ "use_wpnbinds", &use_wpnbinds, 0},
-#if defined(DOOM) || defined(DOOM2)
-	{ "wpn_shotgun", &wpn_shotgun, 44 }, // FS: Z
-	{ "wpn_chaingun", &wpn_chaingun, 45 }, // FS: X
-	{ "wpn_rocket", &wpn_rocket, 16 }, // FS: Q
-	{ "wpn_plasma", &wpn_plasma, 46 }, // FS: C
-	{ "disk_flash_icon", &grmode, 1 }, // FS: Disk Flashing Icon
-#endif // DOOM || DOOM2
-
-#ifdef HERETIC
-	{ "wpn_crossbow", &wpn_crossbow, 44 }, // FS: Z
-	{ "wpn_dragon", &wpn_dragon, 45 }, // FS: X
-	{ "wpn_phoenix", &wpn_phoenix, 16 }, // FS: Q
-	{ "wpn_hellstaff", &wpn_hellstaff, 46 }, // FS: C
-#endif // HERETIC
-#endif // 0
 
 	{"use_mouse",&usemouse, 1 },
 	{"mouseb_fire",&curk.mouse[ID_FIRE],ID_FIRE },
@@ -248,6 +207,7 @@ int M_LoadDefaults (void)
 		if ( !strncmp(defaults[i].name,"chatmacro",9) )
 		{
 			char *chatnum = strchr(defaults[i].name, 'o');
+			/* FS: FIXME: What the fuck was this? :( */
 			int z = chatnum[1]-48; // FS: Because I don't know how to atoi this properly.
 
 			strcpy((char *)defaults[i].location,defaultchatmacro[z]);
