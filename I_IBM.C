@@ -1,5 +1,4 @@
-
-// I_IBM.C
+/* I_IBM.C -- MS-DOS Sub-system for WATCOM */
 
 #include <dos.h>
 #include <conio.h>
@@ -12,18 +11,21 @@
 #include "i_sound.h"
 #include "dmx.h"
 
-// Macros
+#ifdef USE_VRGOGGLES
+#include "svrdos4g.h"
 
+SVRDosOption_t svr_options;
+#endif
+
+/* Macros */
 #define DPMI_INT 0x31
 //#define NOKBD
 //#define NOTIMER
 
-// Public Data
-
+/* Public Data */
 int DisplayTicker = 0;
 
-// Code
-
+/* Code */
 void main(int argc, char **argv)
 {
 	myargc = argc;
@@ -915,7 +917,31 @@ void I_SetPalette(byte *palette)
 */
 
 byte *pcscreen, *destscreen, *destview;
+boolean usevrgoggles = false;
+int vrdist = 157286;
+int vrangle = 4;
 
+
+void I_InitVRGoggles (void)
+{
+	if (!M_CheckParm("-simuleyes"))
+	{
+		usevrgoggles = false;
+		return;
+	}
+
+#ifdef USE_VRGOGGLES
+	usevrgoggles = true;
+	pcscreen = destscreen = (byte *)malloc(SCREENHEIGHT*SCREENWIDTH);
+	SVRDosInit();
+	SVRDosSetMode(SVR_320_200_X);
+	SVRDosSetBlackCode(0);
+	SVRDosSetWhiteCode(255);
+	SVRDosSetRegistration(TRUE);
+	SVRDosSetImage(LEFT,0,0,320,200,pcscreen);
+	SVRDosSetImage(RIGHT,0,0,320,200,pcscreen);
+#endif
+}
 
 /*
 ==============
@@ -1025,10 +1051,12 @@ void I_InitGraphics(void)
 	}
 	grmode = true;
 	regs.w.ax = 0x13;
-	int386(0x10, &regs, &regs);//(const union REGS *)&regs, &regs); // FS: Compiler Warning?
+	int386(0x10, &regs, &regs); /* FS: Compiler warning */
 	pcscreen = destscreen = (byte *)0xa0000;
 	I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
 	I_InitDiskFlash();
+
+	I_InitVRGoggles();
 }
 
 //--------------------------------------------------------------------------
@@ -1039,6 +1067,17 @@ void I_InitGraphics(void)
 
 void I_ShutdownGraphics(void)
 {
+#ifdef USE_VRGOGGLES
+	if(usevrgoggles)
+	{
+		SVRDosSetMode(SVR_320_200);
+		SVRDosSetRegistration(FALSE);
+		SVRDosExit();
+		pcscreen = destscreen = (byte *)0xa0000;
+		regs.w.ax = 0x13;
+		int386(0x10, &regs, &regs); /* FS: Compiler Warning */
+	}
+#endif
 
 	if(*(byte *)0x449 == 0x13) // don't reset mode if it didn't get set
 	{

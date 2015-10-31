@@ -19,8 +19,8 @@ ENDIF
 ;
 ;================
 
-I_DivException_ PROC
-PUBLIC	I_DivException_
+I_DivException PROC
+PUBLIC	I_DivException
 	mov	edx,03c9h
 	mov	al,63
 	out	dx,al
@@ -36,14 +36,14 @@ ENDP
 ;
 ;================
 
-I_SetDivException_ PROC
-PUBLIC 	I_SetDivException_
+I_SetDivException PROC
+PUBLIC 	I_SetDivException
 	pusha
 
 	mov	eax,0212h
 	mov	ebx,0
 	mov	ecx,cs
-	mov	edx,OFFSET I_DivException_
+	mov	edx,OFFSET I_DivException
 	int 31h
 	jnc	good
 
@@ -69,14 +69,14 @@ ENDP
 
 .data
 
-_joystickx	dd	0
-_joysticky	dd	0
-PUBLIC	_joystickx, _joysticky
+joystickx	dd	0
+joysticky	dd	0
+PUBLIC	joystickx, joysticky
 
 .code
 
-I_ReadJoystick_ PROC
-PUBLIC 	I_ReadJoystick_
+I_ReadJoystick PROC
+PUBLIC 	I_ReadJoystick
 	pusha
 	pushf					; state of interrupt flag
 	cli
@@ -113,9 +113,9 @@ jloop:
 	jnz		jloop 		; If both bits were 0, drop out
 
 done:
-	mov		[_joystickx],esi
+	mov		[joystickx],esi
 	shr		edi,1		; because 2s were added
-	mov		[_joysticky],edi
+	mov		[joysticky],edi
 
 	popf			; restore interrupt flag
 	popa

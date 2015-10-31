@@ -161,6 +161,7 @@ void D_Display(void)
 {
 	extern boolean MenuActive;
 	extern boolean askforquit;
+	extern boolean usevrgoggles;
 
 	// Change the view size if needed
 	if(setsizeneeded)
@@ -218,7 +219,8 @@ void D_Display(void)
 	NetUpdate();
 
 	// Flush buffered stuff to screen
-	I_Update();
+	if(!usevrgoggles)
+		I_Update();
 }
 
 //---------------------------------------------------------------------------

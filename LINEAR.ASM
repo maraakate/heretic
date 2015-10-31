@@ -21,7 +21,7 @@
 
 .DATA
 
-EXTRN	_centery:DWORD
+EXTRN	centery:DWORD
 
 SCALEDEFINE     MACRO   number
 	dd      vscale&number
@@ -47,33 +47,33 @@ ENDM
 ;
 ;================
 
-R_DrawColumn_ PROC
-PUBLIC   R_DrawColumn_
+R_DrawColumn PROC
+PUBLIC   R_DrawColumn
 	PUSHR
 
-	mov		ebp,[_dc_yh]
+	mov		ebp,[dc_yh]
 	mov		ebx,ebp
-	mov     edi,[_ylookup+ebx*4]
-	mov		ebx,[_dc_x]
-	add     edi,[_columnofs + ebx*4]
+	mov     edi,[ylookup+ebx*4]
+	mov		ebx,[dc_x]
+	add     edi,[columnofs + ebx*4]
 
-	mov		eax,[_dc_yl]
+	mov		eax,[dc_yl]
 	sub     ebp,eax                    ; ebp = pixel count
 	or		ebp,ebp
 	js		done
 
-	mov     ecx,[_dc_iscale]
+	mov     ecx,[dc_iscale]
 
-	sub		eax,[_centery]
+	sub		eax,[centery]
 	imul	ecx
-	mov		edx,[_dc_texturemid]
+	mov		edx,[dc_texturemid]
 	add		edx,eax
 	shl		edx,9							; 7 significant bits, 25 frac
 
 	shl		ecx,9							; 7 significant bits, 25 frac
-	mov     esi,[_dc_source]
+	mov     esi,[dc_source]
 
-	mov     eax,[_dc_colormap]
+	mov     eax,[dc_colormap]
 
 	xor     ebx,ebx
 	shld    ebx,edx,7						; get address of first location
@@ -162,14 +162,14 @@ returnpoint	dd	0
 ;================
 
 
-R_DrawSpan_ PROC
-PUBLIC	R_DrawSpan_
+R_DrawSpan PROC
+PUBLIC	R_DrawSpan
 	PUSHR
 
 IFE SKIPPRIMITIVES
 
-	mov	eax,[_ds_x1]
-	mov	ebx,[_ds_x2]
+	mov	eax,[ds_x1]
+	mov	ebx,[ds_x2]
 	mov	eax,[mapcalls+eax*4]
 	mov	[callpoint],eax       ; spot to jump into unwound
 	mov	eax,[mapcalls+4+ebx*4]
@@ -179,10 +179,10 @@ IFE SKIPPRIMITIVES
 ;
 ; build composite position
 ;
-	mov	ecx,[_ds_xfrac]
+	mov	ecx,[ds_xfrac]
 	shl	ecx,10
 	and	ecx,0ffff0000h
-	mov	eax,[_ds_yfrac]
+	mov	eax,[ds_yfrac]
 	shr	eax,6
 	and	eax,0ffffh
 	or	ecx,eax
@@ -190,21 +190,21 @@ IFE SKIPPRIMITIVES
 ;
 ; build composite step
 ;
-	mov	edx,[_ds_xstep]
+	mov	edx,[ds_xstep]
 	shl	edx,10
 	and	edx,0ffff0000h
-	mov	eax,[_ds_ystep]
+	mov	eax,[ds_ystep]
 	shr	eax,6
 	and	eax,0ffffh
 	or	edx,eax
 
-	mov	esi,[_ds_source]
+	mov	esi,[ds_source]
 
-	mov	edi,[_ds_y]
-	mov	edi,[_ylookup+edi*4]
-	add edi,[_columnofs]
+	mov	edi,[ds_y]
+	mov	edi,[ylookup+edi*4]
+	add edi,[columnofs]
 
-	mov	eax,[_ds_colormap]
+	mov	eax,[ds_colormap]
 
 ;
 ; feed the pipeline and jump in

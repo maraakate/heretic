@@ -1098,6 +1098,15 @@ static boolean SCInfo(int option)
 // FUNC MN_Responder
 //
 //---------------------------------------------------------------------------
+#define KEY_INS         (0x80+0x52)
+#define KEY_DEL         (0x80+0x53)
+#define KEY_PGUP        (0x80+0x49)
+#define KEY_PGDN        (0x80+0x51)
+#define KEY_HOME        (0x80+0x47)
+#define KEY_END         (0x80+0x4f)
+
+extern int vrdist, vrangle;
+extern boolean usevrgoggles;
 
 boolean MN_Responder(event_t *event)
 {
@@ -1112,6 +1121,7 @@ boolean MN_Responder(event_t *event)
 	extern void G_CheckDemoStatus(void);
 	char *textBuffer;
 	char		savename[32]; // FS
+	char    tempstring[80];
 
 	if(event->data1 == KEY_RSHIFT)
 	{
@@ -1234,6 +1244,44 @@ boolean MN_Responder(event_t *event)
 	{
 		switch(key)
 		{
+#ifdef USE_VRGOGGLES
+			case KEY_INS:
+				if(usevrgoggles)
+				{
+					vrdist = FixedMul(vrdist, 72090);//vrdist + 72090;
+					if(vrdist >295000)
+						vrdist = 29500;
+					sprintf(tempstring,"VR DIST INCR %1.1f", ((float)vrdist/(float)65536));
+					P_SetMessage(&players[consoleplayer], tempstring, false);
+				}
+				break;
+			case KEY_DEL:
+				if(usevrgoggles)
+				{
+					vrdist = FixedMul(vrdist, 59758);//vrdist - 59578;
+					if (vrdist<20000)
+						vrdist=20000;
+					sprintf(tempstring,"VR DIST DECR %1.1f", ((float)vrdist/(float)65536));
+					P_SetMessage(&players[consoleplayer], tempstring, false);
+				}
+				break;
+			case KEY_PGUP:
+				if(usevrgoggles)
+				{
+					vrangle = vrangle + 1;
+					sprintf(tempstring,"VR ANG INCR %d", vrangle);
+					P_SetMessage(&players[consoleplayer], tempstring, false);
+				}
+				break;
+			case KEY_PGDN:
+				if(usevrgoggles)
+				{
+					vrangle = vrangle - 1;
+					sprintf(tempstring,"VR ANG DECR %d", vrangle);
+					P_SetMessage(&players[consoleplayer], tempstring, false);
+				}
+				break;
+#endif
 			case KEY_MINUS:
 				if(automapactive)
 				{ // Don't screen size in automap

@@ -6,6 +6,16 @@
 #include "DoomDef.h"
 #include "R_local.h"
 
+#ifdef USE_VRGOGGLES
+#include "svrdos4g.h"
+
+#define DEFAULTVRDIST  157286
+#define DEFAULTVRANGLE 4
+
+extern int vrangle, vrdist;
+#endif // USE_VRGOGGLES
+extern boolean usevrgoggles;
+
 int			viewangleoffset;
 
 #ifdef __WATCOMC__
@@ -811,15 +821,145 @@ void R_SetupFrame(player_t *player)
 #ifdef __WATCOMC__
 	destview = destscreen+(viewwindowx>>2)+viewwindowy*80;
 #endif
+}
 
-#if 0
-{
-static int frame;
-memset (screen, frame, SCREENWIDTH*SCREENHEIGHT);
-frame++;
-}
+#ifdef USE_VRGOGGLES
+void R_SetupFrame_VRLeft (player_t* player)
+{		
+    int		i;
+    int		calcangle;
+	int tableAngle;
+	int tempCentery;
+
+	calcangle = (vrangle*vrdist);
+
+	//drawbsp = 1;
+	viewplayer = player;
+#ifdef __WATCOMC__
+	viewangleoffset = newViewAngleOff<<ANGLETOFINESHIFT;
 #endif
+	viewangle = player->mo->angle+viewangleoffset-calcangle;
+	tableAngle = viewangle>>ANGLETOFINESHIFT;
+	if(player->chickenTics && player->chickenPeck)
+	{ // Set chicken attack view position
+		viewx = player->mo->x+player->chickenPeck*finecosine[tableAngle];
+		viewy = player->mo->y+player->chickenPeck*finesine[tableAngle];
+	}
+	else
+	{ // Normal view position
+		viewx = player->mo->x;
+		viewy = player->mo->y;
+	}
+	extralight = player->extralight;
+	viewz = player->viewz;
+	
+	tempCentery = viewheight/2+(player->lookdir)*screenblocks/10;
+	if(centery != tempCentery)
+	{
+		centery = tempCentery;
+		centeryfrac = centery<<FRACBITS;
+		for(i = 0; i < viewheight; i++)
+		{
+			yslope[i] = FixedDiv ((viewwidth<<detailshift)/2*FRACUNIT,
+				abs(((i-centery)<<FRACBITS)+FRACUNIT/2));
+		}
+	}
+	viewsin = finesine[tableAngle];
+	viewcos = finecosine[tableAngle];
+	sscount = 0;
+	if(player->fixedcolormap)
+	{
+		fixedcolormap = colormaps+player->fixedcolormap
+			*256*sizeof(lighttable_t);
+		walllights = scalelightfixed;
+		for(i = 0; i < MAXLIGHTSCALE; i++)
+		{
+			scalelightfixed[i] = fixedcolormap;
+		}
+	}
+	else
+	{
+		fixedcolormap = 0;
+	}
+	framecount++;
+	validcount++;
+
+	SVRDosSetImage(LEFT,0,0,320,200,screen);
 }
+
+void R_SetupFrame_VRRight (player_t* player)
+{		
+    int		i;
+    int		calcangle;
+	int tableAngle;
+	int tempCentery;
+
+	calcangle = (vrangle*vrdist);
+
+	//drawbsp = 1;
+	viewplayer = player;
+#ifdef __WATCOMC__
+	viewangleoffset = newViewAngleOff<<ANGLETOFINESHIFT;
+#endif
+	viewangle = player->mo->angle+viewangleoffset+calcangle;
+	tableAngle = viewangle>>ANGLETOFINESHIFT;
+	if(player->chickenTics && player->chickenPeck)
+	{ // Set chicken attack view position
+		viewx = player->mo->x+player->chickenPeck*finecosine[tableAngle];
+		viewy = player->mo->y+player->chickenPeck*finesine[tableAngle];
+	}
+	else
+	{ // Normal view position
+		viewx = player->mo->x;
+		viewy = player->mo->y;
+	}
+	extralight = player->extralight;
+	viewz = player->viewz;
+	
+	tempCentery = viewheight/2+(player->lookdir)*screenblocks/10;
+	if(centery != tempCentery)
+	{
+		centery = tempCentery;
+		centeryfrac = centery<<FRACBITS;
+		for(i = 0; i < viewheight; i++)
+		{
+			yslope[i] = FixedDiv ((viewwidth<<detailshift)/2*FRACUNIT,
+				abs(((i-centery)<<FRACBITS)+FRACUNIT/2));
+		}
+	}
+	viewsin = finesine[tableAngle];
+	viewcos = finecosine[tableAngle];
+	sscount = 0;
+	if(player->fixedcolormap)
+	{
+		fixedcolormap = colormaps+player->fixedcolormap
+			*256*sizeof(lighttable_t);
+		walllights = scalelightfixed;
+		for(i = 0; i < MAXLIGHTSCALE; i++)
+		{
+			scalelightfixed[i] = fixedcolormap;
+		}
+	}
+	else
+	{
+		fixedcolormap = 0;
+	}
+	framecount++;
+	validcount++;
+
+	SVRDosSetImage(RIGHT,0,0,320,200,screen);
+}
+#else
+void R_SetupFrame_VRLeft (player_t* player)
+{
+	I_Error("VR Goggles rendering without compiled VR support!");
+}
+
+void R_SetupFrame_VRRight (player_t* player)
+{
+	I_Error("VR Goggles rendering without compiled VR support!");
+}
+#endif // USE_VRGOGGLES
 
 /*
 ==============
@@ -831,16 +971,63 @@ frame++;
 
 void R_RenderPlayerView (player_t *player)
 {
-	R_SetupFrame (player);
+	if(usevrgoggles)
+		R_SetupFrame_VRLeft(player);
+	else
+		R_SetupFrame (player);
+
+	// Clear buffers
 	R_ClearClipSegs ();
 	R_ClearDrawSegs ();
 	R_ClearPlanes ();
 	R_ClearSprites ();
-	NetUpdate ();					// check for new console commands
-	R_RenderBSPNode (numnodes-1);	// the head node is the last node output
-	NetUpdate ();					// check for new console commands
+
+	// check for new console commands
+	NetUpdate ();
+
+	// the head node is the last node output
+	R_RenderBSPNode (numnodes-1);
+
+	// check for new console commands
+	NetUpdate ();
+
 	R_DrawPlanes ();
-	NetUpdate ();					// check for new console commands
+
+	// check for new console commands
+	NetUpdate ();
+
 	R_DrawMasked ();
-	NetUpdate ();					// check for new console commands
+
+	// check for new console commands
+	NetUpdate ();
+	
+	if(usevrgoggles)
+	{
+		R_SetupFrame_VRRight(player);
+
+		// Clear buffers
+		R_ClearClipSegs ();
+		R_ClearDrawSegs ();
+		R_ClearPlanes ();
+		R_ClearSprites ();
+
+		// check for new console commands
+		NetUpdate ();
+
+		// the head node is the last node output
+		R_RenderBSPNode (numnodes-1);
+
+		// check for new console commands
+		NetUpdate ();
+
+		R_DrawPlanes ();
+
+		// check for new console commands
+		NetUpdate ();
+
+		R_DrawMasked ();
+
+		// check for new console commands
+		NetUpdate ();
+	}
 }
