@@ -927,6 +927,11 @@ void I_InitVRGoggles (void)
 		return;
 	}
 
+	if(netgame)
+	{
+		I_Error("Can't use VR Goggles in a netgame!\n");
+	}
+
 	if(usevrgoggles) /* FS: Already in this mode, don't fool with it */
 		return;
 
@@ -1038,10 +1043,6 @@ void I_Update (void)
 		memcpy(pcscreen, screen, SCREENWIDTH*28);
 		UpdateState &= ~I_MESSAGES;
 	}
-
-//	SVRDosSetImage(LEFT,0,0,320,200,pcscreen);
-//	SVRDosSetImage(RIGHT,0,0,320,200,pcscreen);
-//  memcpy(pcscreen, screen, SCREENHEIGHT*SCREENWIDTH);
 }
 
 //--------------------------------------------------------------------------

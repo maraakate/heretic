@@ -1001,8 +1001,15 @@ void R_RenderPlayerView (player_t *player)
 	// check for new console commands
 	NetUpdate ();
 	
-	if(usevrgoggles)
+	if(usevrgoggles) /* FS: Now draw the Right Eye, but this time don't poll the NetUpdate as it's unnecessary to do it so many times and this happens so quickly */
 	{
+		/* FS: Gotta draw all the HUD/Messages stuff twice or it's only going to come out of one eye. */
+		CT_Drawer();
+		UpdateState |= I_FULLVIEW;
+		SB_Drawer();
+		DrawMessage();
+		MN_Drawer();
+
 		R_SetupFrame_VRRight(player);
 
 		// Clear buffers
@@ -1011,23 +1018,9 @@ void R_RenderPlayerView (player_t *player)
 		R_ClearPlanes ();
 		R_ClearSprites ();
 
-		// check for new console commands
-		NetUpdate ();
-
 		// the head node is the last node output
 		R_RenderBSPNode (numnodes-1);
-
-		// check for new console commands
-		NetUpdate ();
-
 		R_DrawPlanes ();
-
-		// check for new console commands
-		NetUpdate ();
-
 		R_DrawMasked ();
-
-		// check for new console commands
-		NetUpdate ();
 	}
 }
