@@ -9,9 +9,6 @@
 #ifdef USE_VRGOGGLES
 #include "svrdos4g.h"
 
-#define DEFAULTVRDIST  157286
-#define DEFAULTVRANGLE 4
-
 extern int vrangle, vrdist;
 #endif // USE_VRGOGGLES
 extern boolean usevrgoggles;

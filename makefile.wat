@@ -23,8 +23,8 @@
 #
 # --------------------------------------------------------------------------
 
-CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4r /ei /j /zq /i=3rdparty\include
-#CCOPTS = /d2 /odam /zp1 /4r /ei /j /zq /i=3rdparty\include
+CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4s /ei /j /zq /i=3rdparty\include
+#CCOPTS = /d2 /odam /zp1 /4s /ei /j /zq /i=3rdparty\include
 
 LOCOBJS = &
  i_cyber.obj &
@@ -97,7 +97,7 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
 # sb /R /O heretic.exe #Uncomment this to use DOS32/a
 
 i_ibm.obj:
- wcc386 /zp1 /4r /zq /ei /i=3rdparty\include /j i_ibm.c
+ wcc386 /zp1 /4s /zq /ei /i=3rdparty\include /j i_ibm.c
 
 .c.obj :
  wcc386 $(CCOPTS) $[*

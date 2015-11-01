@@ -1,0 +1,12 @@
+Heretic now supports 3D Shutter Glasses with the SimulEyes VR glasses.
+
+To use them, run stereo.bat.  3D Glasses are not supported over netgames; but
+you could try to remove the check and see if it will work with no desync
+issues.
+
+The eyes get swapped occasionally for a brief frame; this is typical with the
+SimulEyes VR glasses in every supported game I've tried them on.  It happens
+more often when the mouse is used.  Because the glasses are polling
+interrupts frequently there is no good solution to this that I'm aware of
+(and apparently the games designed to use them couldn't find a good solution
+either).

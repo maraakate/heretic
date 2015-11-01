@@ -17,7 +17,7 @@ Table of Contents
 1 - Introduction
 ---------------------------------------------------------
 
-Why code for DOS in 2013 you ask?  Pretty much the same reason anybody
+Why code for DOS in 2015 you ask?  Pretty much the same reason anybody
    is coding Heretic ports these days... for fun and to learn some programming.
    This is my third serious project as far as programming goes and I have
    learned a lot.  As each day goes by, Heretic grows more and more in
@@ -36,7 +36,7 @@ Heretic v1.3a has many features.
 * "You found a secret area!" message with an audio hint.
 * F5 for toggling of palette flashing (i.e. screen reddens when hurt).
    This can also be disabled via "-nopalflash".
-* No headbobing with "-noheadbob" or setting headBob = 0 in HERETIC.CFG.
+* No headbobing with "-noheadbob" or setting headBob = 0 in EXTEND.CFG.
 * Menu Options for Headbob and Palette Flashing.
 * Gamma Level notification text.
 * IDMUS cheat from Doom.

@@ -9,7 +9,7 @@ libpath %WATCOM%\lib386
 libpath %WATCOM%\lib386\dos
 libpath 3rdparty\libs
 lib noemu387.lib
-lib dmx
+lib dmx_s
 format os2 le
 name tic
 
