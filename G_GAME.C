@@ -782,6 +782,7 @@ void G_DoLoadLevel (void)
 	sendpause = sendsave = paused = false;
 	memset (mousebuttons, 0, sizeof(mousebuttons));
 	memset (joybuttons, 0, sizeof(joybuttons));
+	I_InitVRGoggles();
 }
 
 

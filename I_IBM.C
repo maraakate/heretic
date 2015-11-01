@@ -918,9 +918,6 @@ void I_SetPalette(byte *palette)
 
 byte *pcscreen, *destscreen, *destview;
 boolean usevrgoggles = false;
-int vrdist = 157286;
-int vrangle = 4;
-
 
 void I_InitVRGoggles (void)
 {
@@ -929,6 +926,9 @@ void I_InitVRGoggles (void)
 		usevrgoggles = false;
 		return;
 	}
+
+	if(usevrgoggles) /* FS: Already in this mode, don't fool with it */
+		return;
 
 #ifdef USE_VRGOGGLES
 	usevrgoggles = true;
@@ -940,6 +940,7 @@ void I_InitVRGoggles (void)
 	SVRDosSetRegistration(TRUE);
 	SVRDosSetImage(LEFT,0,0,320,200,pcscreen);
 	SVRDosSetImage(RIGHT,0,0,320,200,pcscreen);
+	I_SetPalette((byte *)W_CacheLumpName("PLAYPAL", PU_CACHE));
 #endif
 }
 
@@ -960,6 +961,9 @@ void I_Update (void)
 	byte *dest;
 	int tics;
 	static int lasttic;
+
+	if(usevrgoggles)
+		return;
 
 //
 // blit screen to video
@@ -995,6 +999,7 @@ void I_Update (void)
 	{
 		return;
 	}
+
 	if(UpdateState&I_FULLSCRN)
 	{
 		memcpy(pcscreen, screen, SCREENWIDTH*SCREENHEIGHT);
@@ -1034,6 +1039,8 @@ void I_Update (void)
 		UpdateState &= ~I_MESSAGES;
 	}
 
+//	SVRDosSetImage(LEFT,0,0,320,200,pcscreen);
+//	SVRDosSetImage(RIGHT,0,0,320,200,pcscreen);
 //  memcpy(pcscreen, screen, SCREENHEIGHT*SCREENWIDTH);
 }
 
@@ -1050,9 +1057,9 @@ void I_InitGraphics(void)
 		return;
 	}
 	grmode = true;
+	pcscreen = destscreen = (byte *)0xa0000;
 	regs.w.ax = 0x13;
 	int386(0x10, &regs, &regs); /* FS: Compiler warning */
-	pcscreen = destscreen = (byte *)0xa0000;
 	I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
 	I_InitDiskFlash();
 
@@ -1065,19 +1072,27 @@ void I_InitGraphics(void)
 //
 //--------------------------------------------------------------------------
 
-void I_ShutdownGraphics(void)
+void I_ShutdownVRGoggles (boolean exit)
 {
 #ifdef USE_VRGOGGLES
 	if(usevrgoggles)
 	{
 		SVRDosSetMode(SVR_320_200);
 		SVRDosSetRegistration(FALSE);
-		SVRDosExit();
+		if (exit)
+			SVRDosExit();
+		usevrgoggles = false;
 		pcscreen = destscreen = (byte *)0xa0000;
 		regs.w.ax = 0x13;
 		int386(0x10, &regs, &regs); /* FS: Compiler Warning */
+		I_SetPalette((byte *)W_CacheLumpName("PLAYPAL", PU_CACHE));
 	}
 #endif
+}
+
+void I_ShutdownGraphics(void)
+{
+	I_ShutdownVRGoggles(true);
 
 	if(*(byte *)0x449 == 0x13) // don't reset mode if it didn't get set
 	{

@@ -219,8 +219,7 @@ void D_Display(void)
 	NetUpdate();
 
 	// Flush buffered stuff to screen
-	if(!usevrgoggles)
-		I_Update();
+	I_Update();
 }
 
 //---------------------------------------------------------------------------
@@ -345,12 +344,14 @@ void D_DoAdvanceDemo (void)
 			pagetic = 210;
 			gamestate = GS_DEMOSCREEN;
 			pagename = "TITLE";
+			I_ShutdownVRGoggles(false);
 			S_StartSong(mus_titl, false);
 			break;
 		case 1:
 			pagetic = 140;
 			gamestate = GS_DEMOSCREEN;
 			pagename = "TITLE";
+			I_ShutdownVRGoggles(false);
 			break;
 		case 2:
 			BorderNeedRefresh = true;
@@ -361,6 +362,7 @@ void D_DoAdvanceDemo (void)
 			pagetic = 200;
 			gamestate = GS_DEMOSCREEN;
 			pagename = "CREDIT";
+			I_ShutdownVRGoggles(false);
 			break;
 		case 4:
 			BorderNeedRefresh = true;
@@ -378,6 +380,7 @@ void D_DoAdvanceDemo (void)
 			{
 				pagename = "CREDIT";
 			}
+			I_ShutdownVRGoggles(false);
 			break;
 		case 6:
 			BorderNeedRefresh = true;

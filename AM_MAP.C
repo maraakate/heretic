@@ -299,7 +299,9 @@ void AM_initVariables(void)
 	thinker_t *think;
 	mobj_t *mo;
 
-  //static event_t st_notify = { ev_keyup, AM_MSGENTERED };
+	I_ShutdownVRGoggles(false);
+
+	//static event_t st_notify = { ev_keyup, AM_MSGENTERED };
 
   automapactive = true;
   fb = screen;
@@ -418,12 +420,10 @@ static boolean stopped = true;
 
 void AM_Stop (void)
 {
-  //static event_t st_notify = { 0, ev_keyup, AM_MSGEXITED };
+	I_InitVRGoggles();
 
-//  AM_unloadPics();
-  automapactive = false;
-//  ST_Responder(&st_notify);
-  stopped = true;
+	automapactive = false;
+	stopped = true;
 	BorderNeedRefresh = true;
 }
 

@@ -374,6 +374,11 @@ int faststart; // FS: Always faststart if you want
 int novert; // FS: No vertical mouse movement
 int noprecache; // FS: No graphics precaching
 int alwaysrun; /* FS: Always run */
+
+/* FS: SimulEyes VR Goggles stuff */
+int vrdist;
+int vrangle;
+
 extern int	drawTime; // FS: Draw time clock
 
 extern int	use_wpnbinds; // FS: Custom weapon keys
@@ -543,8 +548,12 @@ default_t extendeddefaults[] =
 	{ "art_torch", &art_torch, 33, 1 }, // FS: F
 	{ "art_flask", &art_flask, 34, 1 }, // FS: G
 	
-	{ "alwaysrun", &alwaysrun, 1 }
-};	
+	{ "alwaysrun", &alwaysrun, 1 },
+
+	/* FS: SimulEyes VR Goggles stuff */
+	{ "vrdist", &vrdist, 157286 },
+	{ "vrangle", &vrangle, 4 }
+};
 
 int numdefaults;
 int numextendeddefaults; // FS: Use EXTEND.CFG
@@ -602,8 +611,7 @@ void M_SaveExtendedDefaults (void)
 		if (extendeddefaults[i].scantranslate)
 			extendeddefaults[i].location = &extendeddefaults[i].untranslated;
 #endif
-		if (extendeddefaults[i].defaultvalue > -0xfff
-		  && extendeddefaults[i].defaultvalue < 0xfff)
+		if ((extendeddefaults[i].defaultvalue > -0xfff && extendeddefaults[i].defaultvalue < 0xfff) || !strcmp(extendeddefaults[i].name, "vrdist")) /* FS: FIXME HACK: Hack it up, johnny. */
 		{
 			v = *extendeddefaults[i].location;
 			fprintf (f,"%s\t\t%i\n",extendeddefaults[i].name,v);

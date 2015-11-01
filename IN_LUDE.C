@@ -155,6 +155,7 @@ void IN_Start(void)
 	oldintertime = 0;
 	AM_Stop();
 	S_StartSong(mus_intr, true);
+	I_ShutdownVRGoggles(false);
 }
 
 //========================================================================

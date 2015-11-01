@@ -93,8 +93,8 @@ ticvr.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
  wlink @tic.vlk
  copy ticvr.exe striptic.exe
  wstrip -n striptic.exe
- 4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
-# sb /R /O heretic.exe #Uncomment this to use DOS32/a
+ 4gwbind 4gwpro.exe striptic.exe herevr.exe -V 
+# sb /R /O herevr.exe #Uncomment this to use DOS32/a
 
 i_ibm.obj:
  wcc386  /dUSE_VRGOGGLES /zp1 /4s /zq /ei /i=3rdparty\include /j i_ibm.c
@@ -120,5 +120,5 @@ final : .SYMBOLIC
  wlink @tic.vlk
  copy ticvr.exe striptic.exe
  wstrip -n striptic.exe
- 4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
-# sb /R /O heretic.exe #Uncomment this to use DOS32/a
+ 4gwbind 4gwpro.exe striptic.exe herevr.exe -V 
+# sb /R /O herevr.exe #Uncomment this to use DOS32/a

@@ -1,6 +1,8 @@
 
 // MN_menu.c
 
+#include <stdarg.h>
+#include <stdio.h>
 #include <ctype.h>
 #include <io.h>
 #include "DoomDef.h"
@@ -1251,8 +1253,8 @@ boolean MN_Responder(event_t *event)
 					vrdist = FixedMul(vrdist, 72090);//vrdist + 72090;
 					if(vrdist >295000)
 						vrdist = 29500;
-					sprintf(tempstring,"VR DIST INCR %1.1f", ((float)vrdist/(float)65536));
-					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring,"VR DIST INCR %1.1f\n", ((float)vrdist/(float)65536));
+//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_DEL:
@@ -1261,24 +1263,24 @@ boolean MN_Responder(event_t *event)
 					vrdist = FixedMul(vrdist, 59758);//vrdist - 59578;
 					if (vrdist<20000)
 						vrdist=20000;
-					sprintf(tempstring,"VR DIST DECR %1.1f", ((float)vrdist/(float)65536));
-					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring,"VR DIST DECR %1.1f\n", ((float)vrdist/(float)65536));
+//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_PGUP:
 				if(usevrgoggles)
 				{
 					vrangle = vrangle + 1;
-					sprintf(tempstring,"VR ANG INCR %d", vrangle);
-					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring,"VR ANG INCR %d\n", vrangle);
+//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_PGDN:
 				if(usevrgoggles)
 				{
 					vrangle = vrangle - 1;
-					sprintf(tempstring,"VR ANG DECR %d", vrangle);
-					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring,"VR ANG DECR %d\n", vrangle);
+//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 #endif

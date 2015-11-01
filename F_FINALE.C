@@ -70,7 +70,8 @@ void F_StartFinale (void)
 	finalecount = 0;
 	FontABaseLump = W_GetNumForName("FONTA_S")+1;
 
-//      S_ChangeMusic(mus_victor, true);
+	I_ShutdownVRGoggles(false);
+
 	S_StartSong(mus_cptd, true);
 }
 
