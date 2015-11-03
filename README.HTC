@@ -26,9 +26,6 @@ Why code for DOS in 2015 you ask?  Pretty much the same reason anybody
 2 - What's New
 ---------------------------------------------------------
 
-Heretic v1.3a has many features.
-   Here are some highlights:
-
 * Always run.
 * Raised mouse sensitivity cap.
 * Show Ammo, Keys, and Armor in full screen.
@@ -36,7 +33,7 @@ Heretic v1.3a has many features.
 * "You found a secret area!" message with an audio hint.
 * F5 for toggling of palette flashing (i.e. screen reddens when hurt).
    This can also be disabled via "-nopalflash".
-* No headbobing with "-noheadbob" or setting headBob = 0 in EXTEND.CFG.
+* No headbobing with "-noheadbob" or setting headBob 0 in EXTEND.CFG.
 * Menu Options for Headbob and Palette Flashing.
 * Gamma Level notification text.
 * IDMUS cheat from Doom.
@@ -69,6 +66,7 @@ Heretic v1.3a has many features.
      for rather large and complex response files.
    - Allows setting of console player by using -node <#>.
    - See IPXNEW.TXT for more details.
+* SimulEyes VR 3D Glasses support.  See readme.vr for more information.
 
 3 - Requirements
 ---------------------------------------------------------
@@ -102,8 +100,7 @@ IPX:
 5 - Known Bugs and Limitations
 ---------------------------------------------------------
 
-* The desynced demos bug from original 1.3.
-* No check yet for "skill 0", which is NOT a skill number for easy!
+* See TODO.txt.
 
 6 - Final Thoughts
 ---------------------------------------------------------

@@ -3,7 +3,7 @@
 
 # --------------------------------------------------------------------------
 #
-#      4r  use 80486 timings and register argument passing
+#      4s  use 80486 timings and stack argument passing
 #       c  compile only
 #      d1  include line number debugging information
 #      d2  include full sybolic debugging information
@@ -23,7 +23,7 @@
 #
 # --------------------------------------------------------------------------
 
-CCOPTS = $(EXTERNOPT) /omaxet /zp1 /4s /ei /j /zq /i=3rdparty\include
+CCOPTS = $(EXTERNOPT) /dUSE_VRGOGGLES /omaxet /zp1 /4s /ei /j /zq /i=3rdparty\include
 #CCOPTS = /d2 /odam /zp1 /4s /ei /j /zq /i=3rdparty\include
 
 LOCOBJS = &
@@ -97,7 +97,7 @@ tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
 # sb /R /O heretic.exe #Uncomment this to use DOS32/a
 
 i_ibm.obj:
- wcc386 /zp1 /4s /zq /ei /i=3rdparty\include /j i_ibm.c
+ wcc386  /dUSE_VRGOGGLES /zp1 /4s /zq /ei /i=3rdparty\include /j i_ibm.c
 
 .c.obj :
  wcc386 $(CCOPTS) $[*

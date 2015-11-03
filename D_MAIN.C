@@ -161,7 +161,6 @@ void D_Display(void)
 {
 	extern boolean MenuActive;
 	extern boolean askforquit;
-	extern boolean usevrgoggles;
 
 	// Change the view size if needed
 	if(setsizeneeded)

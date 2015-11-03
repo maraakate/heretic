@@ -615,9 +615,10 @@ void M_SaveExtendedDefaults (void)
 		{
 			v = *extendeddefaults[i].location;
 			fprintf (f,"%s\t\t%i\n",extendeddefaults[i].name,v);
-		} else {
-			fprintf (f,"%s\t\t\"%s\"\n",extendeddefaults[i].name,
-			  * (char **) (extendeddefaults[i].location));
+		}
+		else
+		{
+			fprintf (f,"%s\t\t\"%s\"\n",extendeddefaults[i].name, * (char **) (extendeddefaults[i].location));
 		}
 	}
 

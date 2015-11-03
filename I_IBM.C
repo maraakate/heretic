@@ -855,8 +855,6 @@ void I_UnColorBorder(void)
 
 void I_WaitVBL(int vbls)
 {
-	int i;
-	int old;
 	int stat;
 
 	if(novideo)

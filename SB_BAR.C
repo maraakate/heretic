@@ -4,6 +4,7 @@
 #include "DoomDef.h"
 #include "P_local.h"
 #include "soundst.h"
+#include "SVRDOS4G.H"
 
 // Macros
 
@@ -57,13 +58,13 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat);
 static void CheatMassacreFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat);
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat);
-static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat); // FS: From Doom
-static void CheatFinishLevelFunc(player_t *player, Cheat_t *cheat); // FS
+static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat); /* FS: From Doom */
+static void CheatFinishLevelFunc(player_t *player, Cheat_t *cheat); /* FS */
 
 // Public Data
 
 boolean DebugSound; // debug flag for displaying sound info
-boolean usePalFlash; // FS: Palette Flashing
+boolean usePalFlash; /*: Palette Flashing toggle */
 
 boolean inventory;
 int curpos;
@@ -302,7 +303,7 @@ static byte CheatIDDQDSeq[] =
 	0xff, 0
 };
 
-// FS: From Doom
+/* FS: From Doom */
 static byte CheatIDMUSSeq[] =
 {
         CHEAT_ENCRYPT('i'),
@@ -313,7 +314,7 @@ static byte CheatIDMUSSeq[] =
 	0, 0, 0xff, 0
 };
 
-// FS
+/* FS: HHSCOTT finish level immediately cheat */
 static byte CheatFinishLevelSeq[] =
 {
 	CHEAT_ENCRYPT('h'),
@@ -344,8 +345,8 @@ static Cheat_t Cheats[] =
 	{ CheatMassacreFunc, CheatMassacreSeq, NULL, 0, 0, 0 },
 	{ CheatIDKFAFunc, CheatIDKFASeq, NULL, 0, 0, 0 },
 	{ CheatIDDQDFunc, CheatIDDQDSeq, NULL, 0, 0, 0 },
-	{ CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, // FS: From Doom
-	{ CheatFinishLevelFunc, CheatFinishLevelSeq, NULL, 0, 0, 0 }, // FS
+	{ CheatIDMUSFunc, CheatIDMUSSeq, NULL, 0, 0, 0 }, /* FS: From Doom */
+	{ CheatFinishLevelFunc, CheatFinishLevelSeq, NULL, 0, 0, 0 }, /* FS */
 	{ NULL, NULL, NULL, 0, 0, 0 } // Terminator
 };
 
@@ -837,18 +838,6 @@ void SB_Drawer(void)
 			UpdateState |= I_MESSAGES;
 		}
 	}
-/*
-		if(CPlayer->powers[pw_weaponlevel2] > BLINKTHRESHOLD
-			|| (CPlayer->powers[pw_weaponlevel2]&8))
-		{
-			V_DrawPatch(291, 0, W_CacheLumpName("ARTIPWBK", PU_CACHE));
-		}
-		else
-		{
-			BorderTopRefresh = true;
-		}
-	}
-*/
 }
 
 // sets the new palette based upon current values of player->damagecount
@@ -858,6 +847,7 @@ void SB_PaletteFlash(void)
 	static int sb_palette = 0;
 	int palette;
 	byte *pal;
+	extern boolean usevrgoggles;
 
 	CPlayer = &players[consoleplayer];
 
@@ -884,7 +874,7 @@ void SB_PaletteFlash(void)
 		palette = 0;
 	}
 
-	if (usePalFlash == false) // FS: Palette Flashing toggle
+	if (usePalFlash == false || usevrgoggles) /* FS: Palette flashing toggle or FIXME: No palette flashing with SimulEyes as it fucks up the shutters */
 		palette = 0;
 
 	if(palette != sb_palette)
@@ -1065,7 +1055,6 @@ void DrawInventoryBar(void)
 	V_DrawPatch(34, 160, PatchINVBAR);
 	for(i = 0; i < 7; i++)
 	{
-		//V_DrawPatch(50+i*31, 160, W_CacheLumpName("ARTIBOX", PU_CACHE));
 		if(CPlayer->inventorySlotNum > x+i
 			&& CPlayer->inventory[x+i].type != arti_none)
 		{
@@ -1103,11 +1092,11 @@ void DrawFullScreenStuff(void)
 		DrBNumber(0, 5, 180);
 	}
 
-	// FS: For Armor
+	/* FS: For Armor */
 	if (!inventory)
 		DrBNumber(CPlayer->armorpoints, 240, 180);
 	
-	// FS: For Ammo
+	/* FS: For Ammo */
 	if (!inventory)
 	{	
 		temp = CPlayer->ammo[wpnlev1info[CPlayer->readyweapon].ammo];
@@ -1137,7 +1126,7 @@ void DrawFullScreenStuff(void)
 		}
 	}
 
-	// FS: Draw keys
+	/* FS: Draw keys */
 	if(CPlayer->keys[key_yellow])
 	{
 		V_DrawPatch(286, 162, W_CacheLumpName("ykeyicon", PU_CACHE));
@@ -1234,15 +1223,16 @@ static boolean HandleCheats(byte key)
 	int i;
 	boolean eat;
 
-/*	
-	if (!M_CheckParm("-cheats")) // FS: Cheating in multiplayer
+#if 0
+	if (!M_CheckParm("-cheats")) /* FS: Cheating in multiplayer */
 	{
 		if(netgame || gameskill == sk_nightmare)
 		{ // Can't cheat in a net-game, or in nightmare mode
 			return(false);
 		}
 	}
-*/
+#endif
+
 	if(players[consoleplayer].health <= 0)
 	{ // Dead players can't cheat
 		return(false);
@@ -1253,7 +1243,6 @@ static boolean HandleCheats(byte key)
 		if(CheatAddKey(&Cheats[i], key, &eat))
 		{
 			Cheats[i].func(&players[consoleplayer], &Cheats[i]);
-//			S_StartSound(NULL, sfx_dorcls);
 		}
 	}
 	return(eat);
@@ -1306,7 +1295,7 @@ static boolean CheatAddKey(Cheat_t *cheat, byte key, boolean *eat)
 
 static void CheatGodFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1327,7 +1316,7 @@ static void CheatGodFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatNoClipFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1350,7 +1339,7 @@ static void CheatWeaponsFunc(player_t *player, Cheat_t *cheat)
 	int i;
 	//extern boolean *WeaponInShareware;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1386,7 +1375,7 @@ static void CheatWeaponsFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatPowerFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1407,7 +1396,7 @@ static void CheatPowerFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatHealthFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1429,7 +1418,7 @@ static void CheatKeysFunc(player_t *player, Cheat_t *cheat)
 {
 	extern int playerkeys;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1445,7 +1434,7 @@ static void CheatKeysFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatSoundFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1467,7 +1456,7 @@ static void CheatTickerFunc(player_t *player, Cheat_t *cheat)
 {
 	extern int DisplayTicker;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1487,7 +1476,7 @@ static void CheatTickerFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatArtifact1Func(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1499,7 +1488,7 @@ static void CheatArtifact1Func(player_t *player, Cheat_t *cheat)
 
 static void CheatArtifact2Func(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1516,7 +1505,7 @@ static void CheatArtifact3Func(player_t *player, Cheat_t *cheat)
 	artitype_t type;
 	int count;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1566,7 +1555,7 @@ static void CheatWarpFunc(player_t *player, Cheat_t *cheat)
 	int episode;
 	int map;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1586,7 +1575,7 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat)
 {
 	extern boolean P_UndoPlayerChicken(player_t *player);
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1608,7 +1597,7 @@ static void CheatChickenFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatMassacreFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1623,7 +1612,7 @@ static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat)
 {
 	int i;
 
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1644,7 +1633,7 @@ static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;
@@ -1655,7 +1644,7 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 	P_SetMessage(player, TXT_CHEATIDDQD, true);
 }
 
-// FS: From Doom
+/* FS: From Doom */
 static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 {
 	int	episode, map;
@@ -1699,7 +1688,7 @@ static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatFinishLevelFunc (player_t *player, Cheat_t *cheat)
 {
-	if (!M_CheckParm("-cheats")) // FS
+	if (!M_CheckParm("-cheats")) /* FS */
 	{
 		if(netgame || gameskill == sk_nightmare)
 			return;

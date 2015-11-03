@@ -10,3 +10,89 @@ more often when the mouse is used.  Because the glasses are polling
 interrupts frequently there is no good solution to this that I'm aware of
 (and apparently the games designed to use them couldn't find a good solution
 either).
+
+Palette flashes (i.e. screen redenning from pain) do not work properly with
+SimulEyes.  It's currently disabled.
+
+
+*******************************************************************************
+Below is an old usenet post regarding the swapped eyes issue
+(found at http://www.stereo3d.com/pfslipup.txt):
+
+From: Donald Sawdai <dsawdai@engin.umich.edu>
+
+> CHRISTOPH:
+>
+> I did a bit of testing with LCD-BIOS and shutterglasses controllers which
+> connect to the VGA-port and intercept the V-sync signal.
+> 
+> In some (most?) programs there are slip-up's in the page-flipping which
+> cause a stereo reverse (50 percent chance). The "jump" or "jerk" is
+> vissible even with bare eyes. It happens about every 1 to 5 seconds. I know
+> those are interrupt/timing problems. Sometimes it helps to turn off midi
+> music or sound. Mouse interrupt etc. plays a role here too. Some programs
+> seem to be unaffected, others can be fixed and some programs are unusable.
+> 
+> I read the LCD-BIOS documentation again. I guess the RTC IRQ is one of the
+> problems.
+
+ DON:
+
+Interesting.  I had tried to address this problem originally (even with
+glasses that sync properly, this is unacceptable, since the screen will
+appear to "stutter").  For all appearances, I had solved this problem
+at the time.  Of course, every new BIOS, CD-ROM drivers, sound code,
+joystick code, and mouse code can potentially screw this up.  I found
+a big problem with some VESA BIOS drivers (SciTech's drivers sometimes
+made this worse).
+
+Note that this probably will happen whenever there is heavy disk access...
+
+Yes, the problem is that other devices are grabbing control of the CPU
+for too long via IRQs  -- long enough that LCDBios misses a refresh.
+
+Try a few different LCDBios switches.  Try with and without /LockFlip.
+Try /FastInt:-1 or /FastInt:-2.  Also try the /VBE2 switch.
+
+Most important, try different drivers for VESA, hard drive, CD-ROM,
+whatever!
+
+BTW, this is not a real issue in Windows.  Under DOS, hardware support
+is minimal, so the application must support many types of HW without
+conflicts.  There is better support for co-operation between drivers
+under Windows (plus many standard drivers -- CD, disk, joystick -- are
+high quality drivers supplied by MS).  My Windows driver is rock
+solid!
+
+> I thought LCD-BIOS uses hardware page-flipping whenever possible. Couldn't
+> the VGA-card do the page-flipping unaffected by timings in the rest of the
+> system?
+
+LCDBios always uses SW page flipping.  When LCDBios was written, the
+only HW page flipping available was interlaced screen modes.  But
+regular VGA cards could not do interlaced, and the VESA 2.0 standard
+did not support interlaced screen modes either.
+
+> H3D uses hardware page-flipping (?) and a VGA-PT controller on Voodoo Rush and
+> Rendition cards too. They seem to have found a way to avoid slip-up's or
+> they wouldn't use this.
+
+Hardware page flipping (if available due to the VESA 3.0 spec) never
+slips up, since it needs no CPU time.
+
+> How do native SimulEyes titles work? AFAIK they use LCD-BIOS somehow, but
+> LCD-BIOS must not be present as a seperate executable (?). Is it somehow
+> integrated into the game? 
+
+It depends.  StereoGraphics developed 2 SDKs for driving the SimulEyes.
+Both have code that is linked directly into the game when it is
+compiled.  One SDK uses LCDBios technology (they bought the source
+code from me for this purpose under a special arrangement).  The other
+SDK uses interlaced screen modes.  You can download the developer kits
+from their web site and take a look if you wish.
+
+-Don
+
+-> Name   : Donald Sawdai                                                <-
+-> Address: dsawdai@engin.umich.edu                                      <-
+-> Quote of the Day: "All work and no pay makes Jack a grad student."    <-

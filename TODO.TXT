@@ -1,11 +1,16 @@
-- Fix cheating in coop.
-- Fix demo desync.
 - HHE:
   * Find a solution to the Text parsing issue.
   * Cheat replacement.
-
-Out of my league:
-- 640x480 SVGA (and other VESA modes).
+- SVGA LFB modes.
 - 22kHz SB16.
+- Quake-style console and cmd buffer stuff.
+- sprintf with P_SetMessage.
+- DJGPP port.
+- Watcom warnings.
+
+Currently out of my league:
 - Disney Sound source.
-- FOV.
+- FOV adjustment.
+- Convert netstack to Quake 2.
+  * Includes fixing the head-bobbing desync issue.
+- Retail v1.3 demo desyncs.
