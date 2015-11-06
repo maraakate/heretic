@@ -9,6 +9,7 @@
 #include "DoomDef.h"
 #include "soundst.h"
 #include "deh_main.h" // FS: For HHE
+#include "i_system.h"
 
 typedef enum
 {
@@ -22,6 +23,10 @@ typedef enum
 void IN_Start(void);
 void IN_Ticker(void);
 void IN_Drawer(void);
+void IN_InitStats(void);
+void IN_PrintCoopStats(void);
+void IN_PrintSingleStats(void);
+void IN_PrintDMStats(void);
 
 boolean intermission;
 
@@ -32,7 +37,6 @@ void IN_Stop(void);
 void IN_LoadPics(void);
 void IN_UnloadPics(void);
 void IN_CheckForSkip(void);
-void IN_InitStats(void);
 void IN_InitDeathmatchStats(void);
 void IN_InitNetgameStats(void);
 void IN_DrawOldLevel(void);
@@ -46,9 +50,6 @@ void IN_DrawTime(int x, int y, int h, int m, int s);
 void IN_DrTextB(char *text, int x, int y);
 
 char *IN_CheckStatArgv(void); // FS: For statcopy
-void IN_PrintCoopStats(void);
-void IN_PrintSingleStats(void);
-void IN_PrintDMStats(void);
 
 static boolean skipintermission;
 static int interstate = 0;

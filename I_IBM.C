@@ -5,11 +5,16 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <graph.h>
+
 #include "DoomDef.h"
+#include "dpmiapi.h"
+#include "dmx.h"
+#include "i_sound.h"
+#include "i_system.h"
+#include "p_local.h"
 #include "R_local.h"
 #include "sounds.h"
-#include "i_sound.h"
-#include "dmx.h"
+#include "soundst.h"
 
 #ifdef USE_VRGOGGLES
 #include "svrdos4g.h"

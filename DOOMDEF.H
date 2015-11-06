@@ -857,6 +857,7 @@ void D_QuitNetGame (void);
 
 void TryRunTics (void);
 int NetGetPlayerCount(void); // FS
+void DrawMessage(void);
 
 //---------
 //SYSTEM IO
@@ -1124,6 +1125,11 @@ void IN_Start(void);
 void IN_Ticker(void);
 void IN_Drawer(void);
 char *IN_CheckStatArgv(void); // FS: For statcopy 
+void IN_InitStats(void);
+void IN_PrintCoopStats(void);
+void IN_PrintSingleStats(void);
+void IN_PrintDMStats(void);
+
 //----------------------
 // Chat mode (CT_chat.c)
 //----------------------

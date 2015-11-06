@@ -15,6 +15,7 @@
 #include "P_local.h"
 #include "soundst.h"
 #include "deh_main.h" // FS: For HHE
+#include "i_system.h"
 
 boolean shareware = false;		// true if only episode 1 present
 boolean ExtendedWAD = false;	// true if episodes 4 and 5 present

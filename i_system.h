@@ -1,7 +1,18 @@
-#ifndef __I_HEADER_H__
-#define __I_HEADER_H__
+#ifndef __I_SYSTEM_H
+#define __I_SYSTEM_H
 
-#include "DoomDef.h"
+#include "doomdef.h"
+
+void DPMIInt (int i);
+
+void I_InitVRGoggles (void);
+void I_ShutdownVRGoggles (boolean exit);
+
+void I_StartupKeyboard (void);
+void I_ShutdownKeyboard (void);
+void I_StartupJoystick (void);
+void I_CheckExternDriver(void);
+void I_JoystickEvents (void);
 
 //--------
 //SOUND IO
@@ -61,17 +72,28 @@ void I_UngetSoundEffect (void *soundset);
 // frees up the associated structure.  It stops any currently playing
 // sound effects.
 
-void I_StartSound (channel_t *c, int vol, int sep, int pitch, int priority);
+int I_StartSound (int id, void *data, int vol, int sep, int pitch, int priority);
 // Starts a sound in a particular sound channel
 
-void I_UpdateSoundParams(channel_t *c, int vol, int sep, int pitch);
+void I_UpdateSoundParams(int handle, int vol, int sep, int pitch);
 // Updates the volume, separation, and pitch of a sound channel
 
-void I_StopSound(channel_t *c);
+void I_StopSound(int handle);
 // Stops a sound channel
 
-int I_SoundIsPlaying(channel_t *c);
+int I_SoundIsPlaying(int handle);
 // called by S_*()'s to see if a channel is still playing.  Returns 0
 // if no longer playing, 1 if playing.
 
-#endif
+/* FS: Missing prototypes */
+void I_PlaySong(int handle, boolean looping);
+int I_GetSfxLumpNum(sfxinfo_t *sound);
+void I_PauseSong(int handle);
+void I_ResumeSong(int handle);
+void I_StartupSound (void);
+void I_SetChannels(int channels);
+void I_SetMusicVolume(int volume);
+void I_ShutdownSound (void);
+void I_UnRegisterSong(int handle);
+
+#endif // __I_SYSTEM_H

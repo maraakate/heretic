@@ -1,8 +1,9 @@
 // F_finale.c
+#include <ctype.h>
 
 #include "DoomDef.h"
 #include "soundst.h"
-#include <ctype.h>
+#include "i_system.h"
 
 int             finalestage;            // 0 = text, 1 = art screen
 int             finalecount;

@@ -1,13 +1,13 @@
-
 // AM_map.c
+#include <stdio.h>
+#include <time.h> // FS: For Time Clock
 
 #include "DoomDef.h"
 #include "P_local.h"
 #include "AM_map.h"
 #include "AM_data.h"
-#include <stdio.h>
 #include "deh_main.h" // FS: For HHE
-#include <time.h> // FS: For Time Clock
+#include "i_system.h"
 
 vertex_t KeyPoints[NUMKEYS];
 

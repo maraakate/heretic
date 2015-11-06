@@ -20,5 +20,6 @@ void S_Init(void);
 void S_GetChannelInfo(SoundInfo_t *s);
 void S_SetMaxVolume(boolean fullprocess);
 void S_SetMusicVolume(void);
+boolean S_StopSoundID(int sound_id, int priority);
 
 #endif
