@@ -81,6 +81,7 @@ GLOBOBJS = &
  r_plane.obj &
  r_segs.obj &
  r_things.obj &
+ s_sound.obj &
  sb_bar.obj &
  sounds.obj &
  tables.obj &
@@ -89,15 +90,15 @@ GLOBOBJS = &
  w_merge.obj &
  z_zone.obj
 
-tic.exe : $(LOCOBJS) $(GLOBOBJS) i_ibm.obj
+tic.exe : $(LOCOBJS) $(GLOBOBJS) sys_dosw.obj
  wlink @tic.wlk
  copy tic.exe striptic.exe
  wstrip -n striptic.exe
  4gwbind 4gwpro.exe striptic.exe heretic.exe -V 
 # sb /R /O heretic.exe #Uncomment this to use DOS32/a
 
-i_ibm.obj:
- wcc386  /dUSE_VRGOGGLES /zp1 /4s /zq /ei /i=3rdparty\include /j i_ibm.c
+sys_dosw.obj:
+ wcc386  /dUSE_VRGOGGLES /zp1 /4s /zq /ei /i=3rdparty\include /j sys_dosw.c
 
 .c.obj :
  wcc386 $(CCOPTS) $[*

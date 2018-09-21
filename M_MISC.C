@@ -9,6 +9,8 @@
 #include <direct.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <conio.h>
+#include <io.h>
 #endif
 
 #include <ctype.h>

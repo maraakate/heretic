@@ -1,6 +1,3 @@
-# TIC.EXE Linker directive file
-
-#option quiet
 option map
 option stack=65536
 option stub=wstub
@@ -10,15 +7,15 @@ libpath %WATCOM%\lib386\dos
 libpath 3rdparty\libs
 lib noemu387.lib
 lib dmx_s
-lib svr4dos4s
+lib svr4s
 format os2 le
 name tic
 
 file i_cyber.obj
-file i_ibm.obj
 file i_ibm_a.obj
 file i_sound.obj
 file linear.obj
+file sys_dosw.obj
 
 file am_map.obj
 file ct_chat.obj
@@ -68,6 +65,7 @@ file r_main.obj
 file r_plane.obj
 file r_segs.obj
 file r_things.obj
+file s_sound.obj
 file sb_bar.obj
 file sounds.obj
 file tables.obj
