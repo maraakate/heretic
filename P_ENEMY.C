@@ -2327,7 +2327,7 @@ void A_BossDeath(mobj_t *actor)
 
 void A_ESound(mobj_t *mo)
 {
-	int sound;
+	int sound = 0;
 
 	switch(mo->type)
 	{
@@ -2398,7 +2398,7 @@ void A_AccTeleGlitter(mobj_t *actor)
 void A_InitKeyGizmo(mobj_t *gizmo)
 {
 	mobj_t *mo;
-	statenum_t state;
+	statenum_t state = 0;
 
 	switch(gizmo->type)
 	{

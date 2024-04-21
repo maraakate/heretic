@@ -791,8 +791,6 @@ static boolean SCQuitGame(int option)
 
 static boolean M_DeleteSaveResponse(int ch) // FS: Ask if we want to delete the save game
 {
-	char savename[20];
-
 	MenuActive = false;
 	askforquit = true;
 	typeofask = 5;
@@ -1123,7 +1121,9 @@ boolean MN_Responder(event_t *event)
 	extern void G_CheckDemoStatus(void);
 	char *textBuffer;
 	char		savename[32]; // FS
-	char    tempstring[80];
+#ifdef USE_VRGOGGLES
+	char tempstring[80]; // FS
+#endif
 
 	if(event->data1 == KEY_RSHIFT)
 	{

@@ -862,7 +862,6 @@ void P_KillMobj(mobj_t *source, mobj_t *target)
 {
 	int i, z; // FS: For Player Died message
 	player_t *player, *playermsg; // FS: For Player Died message
-	char buffer[30]; // FS: For Player Died message
 	int playnum; // FS: For Player Died message
 
 	target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY|MF_NOGRAVITY);
@@ -1405,7 +1404,7 @@ void P_DamageMobj
 		{
 			return;
 		}
-		if(source->type == MT_PLAYER && source->player != player && (!M_CheckParm("-oldrules") && netgame && !deathmatch)) // FS: No friendly fire
+		if(source && (source->type == MT_PLAYER && source->player != player && (!M_CheckParm("-oldrules") && netgame && !deathmatch))) // FS: No friendly fire
 		{
 			if(P_GetPlayerNum(source->player) != P_GetPlayerNum(target->player)) // FS: Make sure we still get self-damage
 				return;

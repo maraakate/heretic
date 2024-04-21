@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AM_MAP.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ct_chat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D_MAIN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="d_net.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_ammo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_cht.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_frme.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_io.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_misc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_ptr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_snd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_text.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_thng.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="deh_wpn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="F_FINALE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G_GAME.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_CYBER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_SOUND.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IN_LUDE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="info.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="M_MISC.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MN_MENU.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_ceilng.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_doors.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P_ENEMY.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_floor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_inter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_lights.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P_MAP.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P_MAPUTL.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_mobj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_plats.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_pspr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_setup.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P_SIGHT.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_spec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_switch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_telept.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="p_tick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="P_USER.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_bsp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_data.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="R_MAIN.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="R_PLANE.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="R_SEGS.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_things.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="s_sound.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SB_BAR.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sounds.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_dosw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="v_video.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="w_merge.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="W_WAD.C">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="z_zone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

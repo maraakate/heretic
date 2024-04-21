@@ -704,7 +704,7 @@ void tprintf(char *msg,int initflag)
 {
 	if(debugmode || M_CheckParm ("-faststart") || faststart) // FS: Fast Start
 	{
-		printf(msg);
+		printf("%s", msg);
 		return;
 	}
 
@@ -1027,7 +1027,7 @@ void D_DoomMain(void)
 		char	timebuffer[128];
 		FILE	*f;
 
-		if(strstr(myargv[p+1], "-"))
+		if(strchr(myargv[p+1], '-'))
 		{
 			strcpy(statfile, "stats.txt");
 		}
@@ -1035,7 +1035,10 @@ void D_DoomMain(void)
 		f = fopen(statfile, "a+");
 
 		if (!f)
+		{
 			I_Error("Unable to open stats file!");
+			return;
+		}
 
 		time(&nowtime);
 		ptr_time = localtime(&nowtime);

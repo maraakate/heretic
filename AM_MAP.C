@@ -1339,16 +1339,17 @@ void AM_DrawTime(void)
 
 	if (drawTime == 1)
 		timefmt = "%H:%M:%S %p"; // FS: Military
-	else if (drawTime > 1)
+	else
 		timefmt = "%I:%M:%S %p"; // FS: Regular
+
 	strftime (st, sizeof (st), timefmt, local);
 	MN_DrTextA(st, 20, 20);
 }
 
 void AM_Drawer(void)
 {
-	int highestEpisode;
-	char *secrets; // FS: For SECRETS FOUND count
+	//int highestEpisode;
+	char secrets[32]; // FS: For SECRETS FOUND count
 
 	if (!automapactive) return;
 

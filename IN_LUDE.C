@@ -1043,7 +1043,7 @@ char *IN_CheckStatArgv(void) // FS: Check for -statcopy and default to stats.txt
 void IN_PrintSingleStats(void)
 {
 	FILE *f;
-	char	*statfile;
+	char	statfile[256];
 	static char buffer[1024]; // FS: For statcopy
 
 	if(!IN_CheckStatArgv())
@@ -1056,7 +1056,10 @@ void IN_PrintSingleStats(void)
 		f = fopen(statfile, "a+");
 
 		if (!f)
+		{
 			I_Error("Unable to open stats file!");
+			return;
+		}
 
 		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<SINGLE PLAYER>\n\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
 		gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
@@ -1072,7 +1075,7 @@ void IN_PrintCoopStats(void)
 {
 	int i;
 	FILE *f;
-	char	*statfile;
+	char	statfile[256];
 	static char buffer[2048]; // FS: For statcopy
 
 	if(!IN_CheckStatArgv())
@@ -1085,7 +1088,10 @@ void IN_PrintCoopStats(void)
 		f = fopen(statfile, "a+");
 
 		if (!f)
+		{
 			I_Error("Unable to open stats file!");
+			return;
+		}
 
 		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1);
 		fputs(buffer, f);
@@ -1113,7 +1119,7 @@ void IN_PrintDMStats(void)
 {
 	int i;
 	FILE *f;
-	char	*statfile;
+	char	statfile[256];
 	static char buffer[2048]; // FS: For statcopy
 
 	if(!IN_CheckStatArgv())
@@ -1126,7 +1132,10 @@ void IN_PrintDMStats(void)
 		f = fopen(statfile, "a+");
 
 		if (!f)
+		{
 			I_Error("Unable to open stats file!");
+			return;
+		}
 
 		sprintf(buffer,"MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7);
 		fputs(buffer, f);

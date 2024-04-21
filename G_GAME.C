@@ -781,8 +781,8 @@ void G_DoLoadLevel (void)
 	joyxmove = joyymove = 0;
 	mousex = mousey = 0;
 	sendpause = sendsave = paused = false;
-	memset (mousebuttons, 0, sizeof(mousebuttons));
-	memset (joybuttons, 0, sizeof(joybuttons));
+	memset (mousebuttons, 0, sizeof(*mousebuttons));
+	memset (joybuttons, 0, sizeof(*joybuttons));
 	I_InitVRGoggles();
 }
 
@@ -1236,21 +1236,21 @@ void G_PlayerReborn(int player)
 	int killcount, itemcount, secretcount;
 	boolean secret;
 
-	boolean coopkeys[NUMKEYS]; // FS: Keep keys in Coop
+	boolean coopkeys[3]; // FS: Keep keys in Coop
 	boolean coop; // FS: Is it coop?
 	boolean coopbackpack; // FS: Have a backpack?
 
 	ultimatemsg = false; // FS: Clear it out
 	coop = false; // FS: Clear it out
         coopbackpack = false; // FS: Clear it out
-        coopkeys[NUMKEYS] = false; // FS: Clear it out
+        coopkeys[3-1] = false; // FS: Clear it out
         secret = false;
 	memcpy(frags, players[player].frags, sizeof(frags));
 
 	if(netgame && !deathmatch && !M_CheckParm("-oldrules")) // FS: Check for Coop
 	{
 		coop = true;
-		memcpy(coopkeys, players[player].keys, sizeof(coopkeys)); // FS: Keep keys in Coop
+		memcpy(coopkeys, players[player].keys, sizeof(players[player].keys)); // FS: Keep keys in Coop
 		if (players[player].backpack)
 		{
 			coopbackpack = true;
@@ -1277,7 +1277,7 @@ void G_PlayerReborn(int player)
 
 	if (coop)
 	{
-		memcpy(players[player].keys, coopkeys, sizeof(coopkeys)); // FS: Keep keys in Coop
+		memcpy(players[player].keys, coopkeys, sizeof(players[player].keys)); // FS: Keep keys in Coop
 	}
 	
 	players[player].killcount = killcount;
@@ -1616,7 +1616,7 @@ void G_DoLoadGame(void)
 
 	if (convertsave) // FS: Convert old saves
 	{
-		sprintf(convertsavename, (char *)save_p-savestringsize);
+		sprintf(convertsavename, "%s", (char *)save_p - savestringsize);
 	}
 
 	// Skip the description field
@@ -1767,7 +1767,6 @@ void G_InitNew(skill_t skill, int episode, int map)
 	gameepisode = episode;
 	gamemap = map;
 	gameskill = skill;
-	viewactive = true;
 	BorderNeedRefresh = true;
 
 	// Set the sky map

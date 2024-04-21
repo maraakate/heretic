@@ -88,7 +88,7 @@ void CT_Init(void)
 	{
 		chat_dest[i] = 0;
 		msgptr[i] = 0;
-		memset(plr_lastmsg[i], 0, MESSAGESIZE);
+		memset(plr_lastmsg[i], 0, MESSAGESIZE+9);
 		memset(chat_msg[i], 0, MESSAGESIZE);
 	}
 	FontABaseLump = W_GetNumForName("FONTA_S")+1;

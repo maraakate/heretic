@@ -146,7 +146,7 @@ static char *CleanString(char *s)
    
     strending = s + strlen(s) - 1;
 
-    while (strlen(s) > 0 && isspace(*strending))
+    while (s[0] != '\0' && isspace(*strending))
     {
         *strending = '\0';
         --strending;

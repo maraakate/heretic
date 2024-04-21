@@ -599,7 +599,7 @@ void P_SetupLevel (int episode, int map, int playermask, skill_t skill)
 //	P_ConnectSubsectors ();
 
 	// preload graphics
-    if( (!noprecache) || (noprecache && netgame)) /* FS: Skip precaching, except in netgames */
+    if (!noprecache || netgame) /* FS: Skip precaching, except in netgames */
 	{
 		if (precache)
 			R_PrecacheLevel ();

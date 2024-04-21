@@ -1,4 +1,9 @@
 # ignore all make dependency files
+.vs/
+Debug/
+Release/
+*.suo
+*.user
 *.obj
 *.o
 *.exe
