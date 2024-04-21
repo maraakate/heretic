@@ -25,36 +25,36 @@ boolean P_Teleport(mobj_t *thing, fixed_t x, fixed_t y, angle_t angle)
 	oldx = thing->x;
 	oldy = thing->y;
 	oldz = thing->z;
-	aboveFloor = thing->z-thing->floorz;
-	if(!P_TeleportMove(thing, x, y))
+	aboveFloor = thing->z - thing->floorz;
+	if (!P_TeleportMove(thing, x, y))
 	{
 		return(false);
 	}
-	if(thing->player)
+	if (thing->player)
 	{
 		player = thing->player;
-		if(player->powers[pw_flight] && aboveFloor)
+		if (player->powers[pw_flight] && aboveFloor)
 		{
-			thing->z = thing->floorz+aboveFloor;
-			if(thing->z+thing->height > thing->ceilingz)
+			thing->z = thing->floorz + aboveFloor;
+			if (thing->z + thing->height > thing->ceilingz)
 			{
-				thing->z = thing->ceilingz-thing->height;
+				thing->z = thing->ceilingz - thing->height;
 			}
-			player->viewz = thing->z+player->viewheight;
+			player->viewz = thing->z + player->viewheight;
 		}
 		else
 		{
 			thing->z = thing->floorz;
-			player->viewz = thing->z+player->viewheight;
+			player->viewz = thing->z + player->viewheight;
 			player->lookdir = 0;
 		}
 	}
-	else if(thing->flags&MF_MISSILE)
+	else if (thing->flags & MF_MISSILE)
 	{
-		thing->z = thing->floorz+aboveFloor;
-		if(thing->z+thing->height > thing->ceilingz)
+		thing->z = thing->floorz + aboveFloor;
+		if (thing->z + thing->height > thing->ceilingz)
 		{
-			thing->z = thing->ceilingz-thing->height;
+			thing->z = thing->ceilingz - thing->height;
 		}
 	}
 	else
@@ -62,27 +62,27 @@ boolean P_Teleport(mobj_t *thing, fixed_t x, fixed_t y, angle_t angle)
 		thing->z = thing->floorz;
 	}
 	// Spawn teleport fog at source and destination
-	fogDelta = thing->flags&MF_MISSILE ? 0 : TELEFOGHEIGHT;
-	fog = P_SpawnMobj(oldx, oldy, oldz+fogDelta, MT_TFOG);
+	fogDelta = thing->flags & MF_MISSILE ? 0 : TELEFOGHEIGHT;
+	fog = P_SpawnMobj(oldx, oldy, oldz + fogDelta, MT_TFOG);
 	S_StartSound(fog, sfx_telept);
-	an = angle>>ANGLETOFINESHIFT;
-	fog = P_SpawnMobj(x+20*finecosine[an],
-		y+20*finesine[an], thing->z+fogDelta, MT_TFOG);
+	an = angle >> ANGLETOFINESHIFT;
+	fog = P_SpawnMobj(x + 20 * finecosine[an],
+		y + 20 * finesine[an], thing->z + fogDelta, MT_TFOG);
 	S_StartSound(fog, sfx_telept);
-	if(thing->player && !thing->player->powers[pw_weaponlevel2])
+	if (thing->player && !thing->player->powers[pw_weaponlevel2])
 	{ // Freeze player for about .5 sec
 		thing->reactiontime = 18;
 	}
 	thing->angle = angle;
-	if(thing->flags2&MF2_FOOTCLIP && P_GetThingFloorType(thing) != FLOOR_SOLID)
+	if (thing->flags2 & MF2_FOOTCLIP && P_GetThingFloorType(thing) != FLOOR_SOLID)
 	{
 		thing->flags2 |= MF2_FEETARECLIPPED;
 	}
-	else if(thing->flags2&MF2_FEETARECLIPPED)
+	else if (thing->flags2 & MF2_FEETARECLIPPED)
 	{
 		thing->flags2 &= ~MF2_FEETARECLIPPED;
 	}
-	if(thing->flags&MF_MISSILE)
+	if (thing->flags & MF_MISSILE)
 	{
 		angle >>= ANGLETOFINESHIFT;
 		thing->momx = FixedMul(thing->info->speed, finecosine[angle]);
@@ -109,34 +109,34 @@ boolean EV_Teleport(line_t *line, int side, mobj_t *thing)
 	thinker_t *thinker;
 	sector_t *sector;
 
-	if(thing->flags2&MF2_NOTELEPORT)
+	if (thing->flags2 & MF2_NOTELEPORT)
 	{
 		return(false);
 	}
-	if(side == 1)
+	if (side == 1)
 	{ // Don't teleport when crossing back side
 		return(false);
 	}
 	tag = line->tag;
-	for(i = 0; i < numsectors; i++)
+	for (i = 0; i < numsectors; i++)
 	{
-		if(sectors[i].tag == tag)
+		if (sectors[i].tag == tag)
 		{
 			thinker = thinkercap.next;
-			for(thinker = thinkercap.next; thinker != &thinkercap;
+			for (thinker = thinkercap.next; thinker != &thinkercap;
 				thinker = thinker->next)
 			{
-				if(thinker->function != P_MobjThinker)
+				if (thinker->function != P_MobjThinker)
 				{ // Not a mobj
 					continue;
 				}
 				m = (mobj_t *)thinker;
-				if(m->type != MT_TELEPORTMAN )
+				if (m->type != MT_TELEPORTMAN)
 				{ // Not a teleportman
 					continue;
 				}
 				sector = m->subsector->sector;
-				if(sector-sectors != i)
+				if (sector - sectors != i)
 				{ // Wrong sector
 					continue;
 				}

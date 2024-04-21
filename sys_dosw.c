@@ -190,26 +190,26 @@ int kbdtail, kbdhead;
 #define SC_LSHIFT       0x2a
 
 byte        scantokey[128] =
-					{
-//  0           1       2       3       4       5       6       7
-//  8           9       A       B       C       D       E       F
-	0  ,    27,     '1',    '2',    '3',    '4',    '5',    '6',
-	'7',    '8',    '9',    '0',    '-',    '=',    KEY_BACKSPACE, 9, // 0
-	'q',    'w',    'e',    'r',    't',    'y',    'u',    'i',
-	'o',    'p',    '[',    ']',    13 ,    KEY_RCTRL,'a',  's',      // 1
-	'd',    'f',    'g',    'h',    'j',    'k',    'l',    ';',
-	39 ,    '`',    KEY_LSHIFT,92,  'z',    'x',    'c',    'v',      // 2
-	'b',    'n',    'm',    ',',    '.',    '/',    KEY_RSHIFT,'*',
-	KEY_RALT,' ',   0  ,    KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5,   // 3
-	KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10,0  ,    0  , KEY_HOME,
-	KEY_UPARROW,KEY_PGUP,'-',KEY_LEFTARROW,'5',KEY_RIGHTARROW,'+',KEY_END, //4
-	KEY_DOWNARROW,KEY_PGDN,KEY_INS,KEY_DEL,0,0,             0,              KEY_F11,
-	KEY_F12,0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,        // 5
-	0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,
-	0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,        // 6
-	0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,
-	0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0         // 7
-					};
+{
+	//  0           1       2       3       4       5       6       7
+	//  8           9       A       B       C       D       E       F
+		0  ,    27,     '1',    '2',    '3',    '4',    '5',    '6',
+		'7',    '8',    '9',    '0',    '-',    '=',    KEY_BACKSPACE, 9, // 0
+		'q',    'w',    'e',    'r',    't',    'y',    'u',    'i',
+		'o',    'p',    '[',    ']',    13 ,    KEY_RCTRL,'a',  's',      // 1
+		'd',    'f',    'g',    'h',    'j',    'k',    'l',    ';',
+		39 ,    '`',    KEY_LSHIFT,92,  'z',    'x',    'c',    'v',      // 2
+		'b',    'n',    'm',    ',',    '.',    '/',    KEY_RSHIFT,'*',
+		KEY_RALT,' ',   0  ,    KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5,   // 3
+		KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10,0  ,    0  , KEY_HOME,
+		KEY_UPARROW,KEY_PGUP,'-',KEY_LEFTARROW,'5',KEY_RIGHTARROW,'+',KEY_END, //4
+		KEY_DOWNARROW,KEY_PGDN,KEY_INS,KEY_DEL,0,0,             0,              KEY_F11,
+		KEY_F12,0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,        // 5
+		0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,
+		0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,        // 6
+		0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0,
+		0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0  ,    0         // 7
+};
 
 //==========================================================================
 
@@ -241,7 +241,7 @@ void I_ColorBorder(void)
 
 	I_WaitVBL(1);
 	_outbyte(PEL_WRITE_ADR, 0);
-	for(i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++)
 	{
 		_outbyte(PEL_DATA, 63);
 	}
@@ -259,7 +259,7 @@ void I_UnColorBorder(void)
 
 	I_WaitVBL(1);
 	_outbyte(PEL_WRITE_ADR, 0);
-	for(i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++)
 	{
 		_outbyte(PEL_DATA, 0);
 	}
@@ -283,28 +283,28 @@ void I_WaitVBL(int vbls)
 {
 	int stat;
 
-	if(novideo)
+	if (novideo)
 	{
 		return;
 	}
-	while(vbls--)
+	while (vbls--)
 	{
 		do
 		{
 			stat = inp(STATUS_REGISTER_1);
-			if(stat&8)
+			if (stat & 8)
 			{
 				break;
 			}
-		} while(1);
+		} while (1);
 		do
 		{
 			stat = inp(STATUS_REGISTER_1);
-			if((stat&8) == 0)
+			if ((stat & 8) == 0)
 			{
 				break;
 			}
-		} while(1);
+		} while (1);
 	}
 }
 
@@ -320,15 +320,15 @@ void I_SetPalette(byte *palette)
 {
 	int i;
 
-	if(novideo)
+	if (novideo)
 	{
 		return;
 	}
 	I_WaitVBL(1);
 	_outbyte(PEL_WRITE_ADR, 0);
-	for(i = 0; i < 768; i++)
+	for (i = 0; i < 768; i++)
 	{
-		_outbyte(PEL_DATA, (gammatable[usegamma][*palette++])>>2);
+		_outbyte(PEL_DATA, (gammatable[usegamma][*palette++]) >> 2);
 	}
 }
 
@@ -351,24 +351,24 @@ void I_InitVRGoggles (void)
 		return;
 	}
 
-	if(netgame)
+	if (netgame)
 	{
 		I_Error("Can't use VR Goggles in a netgame!\n");
 	}
 
-	if(usevrgoggles) /* FS: Already in this mode, don't fool with it */
+	if (usevrgoggles) /* FS: Already in this mode, don't fool with it */
 		return;
 
 #ifdef USE_VRGOGGLES
 	usevrgoggles = true;
-	pcscreen = destscreen = (byte *)malloc(SCREENHEIGHT*SCREENWIDTH);
+	pcscreen = destscreen = (byte *)malloc(SCREENHEIGHT * SCREENWIDTH);
 	SVRDosInit();
 	SVRDosSetMode(SVR_320_200_X);
 	SVRDosSetBlackCode(0);
 	SVRDosSetWhiteCode(255);
 	SVRDosSetRegistration(TRUE);
-	SVRDosSetImage(LEFT,0,0,320,200,pcscreen);
-	SVRDosSetImage(RIGHT,0,0,320,200,pcscreen);
+	SVRDosSetImage(LEFT, 0, 0, 320, 200, pcscreen);
+	SVRDosSetImage(RIGHT, 0, 0, 320, 200, pcscreen);
 	I_SetPalette((byte *)W_CacheLumpName("PLAYPAL", PU_CACHE));
 #endif
 }
@@ -391,15 +391,15 @@ void I_Update (void)
 	int tics;
 	static int lasttic;
 
-	if(usevrgoggles)
+	if (usevrgoggles)
 		return;
 
-//
-// blit screen to video
-//
-	if(DisplayTicker)
+	//
+	// blit screen to video
+	//
+	if (DisplayTicker)
 	{
-		if(screenblocks > 9 || UpdateState&(I_FULLSCRN|I_MESSAGES))
+		if (screenblocks > 9 || UpdateState & (I_FULLSCRN | I_MESSAGES))
 		{
 			dest = (byte *)screen;
 		}
@@ -407,64 +407,64 @@ void I_Update (void)
 		{
 			dest = (byte *)pcscreen;
 		}
-		tics = ticcount-lasttic;
+		tics = ticcount - lasttic;
 		lasttic = ticcount;
-		if(tics > 20)
+		if (tics > 20)
 		{
 			tics = 20;
 		}
-		for(i = 0; i < tics; i++)
+		for (i = 0; i < tics; i++)
 		{
 			*dest = 0xff;
 			dest += 2;
 		}
-		for(i = tics; i < 20; i++)
+		for (i = tics; i < 20; i++)
 		{
 			*dest = 0x00;
 			dest += 2;
 		}
 	}
-	if(UpdateState == I_NOUPDATE)
+	if (UpdateState == I_NOUPDATE)
 	{
 		return;
 	}
 
-	if(UpdateState&I_FULLSCRN)
+	if (UpdateState & I_FULLSCRN)
 	{
-		memcpy(pcscreen, screen, SCREENWIDTH*SCREENHEIGHT);
+		memcpy(pcscreen, screen, SCREENWIDTH * SCREENHEIGHT);
 		UpdateState = I_NOUPDATE; // clear out all draw types
 	}
-	if(UpdateState&I_FULLVIEW)
+	if (UpdateState & I_FULLVIEW)
 	{
-		if(UpdateState&I_MESSAGES && screenblocks > 7)
+		if (UpdateState & I_MESSAGES && screenblocks > 7)
 		{
-			for(i = 0; i <
-				(viewwindowy+viewheight)*SCREENWIDTH; i += SCREENWIDTH)
+			for (i = 0; i <
+				(viewwindowy + viewheight) * SCREENWIDTH; i += SCREENWIDTH)
 			{
-				memcpy(pcscreen+i, screen+i, SCREENWIDTH);
+				memcpy(pcscreen + i, screen + i, SCREENWIDTH);
 			}
-			UpdateState &= ~(I_FULLVIEW|I_MESSAGES);
+			UpdateState &= ~(I_FULLVIEW | I_MESSAGES);
 		}
 		else
 		{
-			for(i = viewwindowy*SCREENWIDTH+viewwindowx; i <
-				(viewwindowy+viewheight)*SCREENWIDTH; i += SCREENWIDTH)
+			for (i = viewwindowy * SCREENWIDTH + viewwindowx; i <
+				(viewwindowy + viewheight) * SCREENWIDTH; i += SCREENWIDTH)
 			{
-				memcpy(pcscreen+i, screen+i, viewwidth);
+				memcpy(pcscreen + i, screen + i, viewwidth);
 			}
 			UpdateState &= ~I_FULLVIEW;
 		}
 	}
-	if(UpdateState&I_STATBAR)
+	if (UpdateState & I_STATBAR)
 	{
-		memcpy(pcscreen+SCREENWIDTH*(SCREENHEIGHT-SBARHEIGHT),
-			screen+SCREENWIDTH*(SCREENHEIGHT-SBARHEIGHT),
-			SCREENWIDTH*SBARHEIGHT);
+		memcpy(pcscreen + SCREENWIDTH * (SCREENHEIGHT - SBARHEIGHT),
+			screen + SCREENWIDTH * (SCREENHEIGHT - SBARHEIGHT),
+			SCREENWIDTH * SBARHEIGHT);
 		UpdateState &= ~I_STATBAR;
 	}
-	if(UpdateState&I_MESSAGES)
+	if (UpdateState & I_MESSAGES)
 	{
-		memcpy(pcscreen, screen, SCREENWIDTH*28);
+		memcpy(pcscreen, screen, SCREENWIDTH * 28);
 		UpdateState &= ~I_MESSAGES;
 	}
 }
@@ -477,7 +477,7 @@ void I_Update (void)
 
 void I_InitGraphics(void)
 {
-	if(novideo)
+	if (novideo)
 	{
 		return;
 	}
@@ -500,7 +500,7 @@ void I_InitGraphics(void)
 void I_ShutdownVRGoggles (boolean exit)
 {
 #ifdef USE_VRGOGGLES
-	if(usevrgoggles)
+	if (usevrgoggles)
 	{
 		SVRDosSetMode(SVR_320_200);
 		SVRDosSetRegistration(FALSE);
@@ -519,7 +519,7 @@ void I_ShutdownGraphics(void)
 {
 	I_ShutdownVRGoggles(true);
 
-	if(*(byte *)0x449 == 0x13) // don't reset mode if it didn't get set
+	if (*(byte *)0x449 == 0x13) // don't reset mode if it didn't get set
 	{
 		regs.w.ax = 3;
 		int386(0x10, &regs, &regs); // back to text mode
@@ -536,7 +536,7 @@ void I_ShutdownGraphics(void)
 
 void I_ReadScreen(byte *scr)
 {
-	memcpy(scr, screen, SCREENWIDTH*SCREENHEIGHT);
+	memcpy(scr, screen, SCREENWIDTH * SCREENHEIGHT);
 }
 
 
@@ -626,29 +626,29 @@ void   I_StartTic (void)
 
 	I_ReadMouse ();
 
-//
-// keyboard events
-//
+	//
+	// keyboard events
+	//
 	while (kbdtail < kbdhead)
 	{
-		k = keyboardque[kbdtail&(KBDQUESIZE-1)];
+		k = keyboardque[kbdtail & (KBDQUESIZE - 1)];
 		kbdtail++;
 
 		// extended keyboard shift key bullshit
-		if ( (k&0x7f)==SC_LSHIFT || (k&0x7f)==SC_RSHIFT )
+		if ((k & 0x7f) == SC_LSHIFT || (k & 0x7f) == SC_RSHIFT)
 		{
-			if ( keyboardque[(kbdtail-2)&(KBDQUESIZE-1)]==0xe0 )
+			if (keyboardque[(kbdtail - 2) & (KBDQUESIZE - 1)] == 0xe0)
 				continue;
 			k &= 0x80;
 			k |= SC_RSHIFT;
 		}
 
-		if (k==0xe0)
+		if (k == 0xe0)
 			continue;               // special / pause keys
-		if (keyboardque[(kbdtail-2)&(KBDQUESIZE-1)] == 0xe1)
+		if (keyboardque[(kbdtail - 2) & (KBDQUESIZE - 1)] == 0xe1)
 			continue;                               // pause key bullshit
 
-		if (k==0xc5 && keyboardque[(kbdtail-2)&(KBDQUESIZE-1)] == 0x9d)
+		if (k == 0xc5 && keyboardque[(kbdtail - 2) & (KBDQUESIZE - 1)] == 0x9d)
 		{
 			ev.type = ev_keydown;
 			ev.data1 = KEY_PAUSE;
@@ -656,28 +656,28 @@ void   I_StartTic (void)
 			continue;
 		}
 
-		if (k&0x80)
+		if (k & 0x80)
 			ev.type = ev_keyup;
 		else
 			ev.type = ev_keydown;
 		k &= 0x7f;
 		switch (k)
 		{
-		case SC_UPARROW:
-			ev.data1 = KEY_UPARROW;
-			break;
-		case SC_DOWNARROW:
-			ev.data1 = KEY_DOWNARROW;
-			break;
-		case SC_LEFTARROW:
-			ev.data1 = KEY_LEFTARROW;
-			break;
-		case SC_RIGHTARROW:
-			ev.data1 = KEY_RIGHTARROW;
-			break;
-		default:
-			ev.data1 = scantokey[k];
-			break;
+			case SC_UPARROW:
+				ev.data1 = KEY_UPARROW;
+				break;
+			case SC_DOWNARROW:
+				ev.data1 = KEY_DOWNARROW;
+				break;
+			case SC_LEFTARROW:
+				ev.data1 = KEY_LEFTARROW;
+				break;
+			case SC_RIGHTARROW:
+				ev.data1 = KEY_RIGHTARROW;
+				break;
+			default:
+				ev.data1 = scantokey[k];
+				break;
 		}
 		D_PostEvent (&ev);
 	}
@@ -693,14 +693,14 @@ void   I_ReadKeys (void)
 
 	while (1)
 	{
-	   while (kbdtail < kbdhead)
-	   {
-		   k = keyboardque[kbdtail&(KBDQUESIZE-1)];
-		   kbdtail++;
-		   printf ("0x%x\n",k);
-		   if (k == 1)
-			   I_Quit ();
-	   }
+		while (kbdtail < kbdhead)
+		{
+			k = keyboardque[kbdtail & (KBDQUESIZE - 1)];
+			kbdtail++;
+			printf ("0x%x\n", k);
+			if (k == 1)
+				I_Quit ();
+		}
 	}
 }
 
@@ -728,10 +728,10 @@ void I_StartFrame (void)
 
 void I_ColorBlack (int r, int g, int b)
 {
-_outbyte (PEL_WRITE_ADR,0);
-_outbyte(PEL_DATA,r);
-_outbyte(PEL_DATA,g);
-_outbyte(PEL_DATA,b);
+	_outbyte (PEL_WRITE_ADR, 0);
+	_outbyte(PEL_DATA, r);
+	_outbyte(PEL_DATA, g);
+	_outbyte(PEL_DATA, b);
 }
 
 
@@ -771,14 +771,14 @@ int lastpress;
 
 void __interrupt I_KeyboardISR (void)
 {
-// Get the scan code
+	// Get the scan code
 
-	keyboardque[kbdhead&(KBDQUESIZE-1)] = lastpress = _inbyte(0x60);
+	keyboardque[kbdhead & (KBDQUESIZE - 1)] = lastpress = _inbyte(0x60);
 	kbdhead++;
 
-// acknowledge the interrupt
+	// acknowledge the interrupt
 
-	_outbyte(0x20,0x20);
+	_outbyte(0x20, 0x20);
 }
 
 
@@ -798,7 +798,7 @@ void I_StartupKeyboard (void)
 	_dos_setvect (0x8000 | KEYBOARDINT, I_KeyboardISR);
 #endif
 
-//I_ReadKeys ();
+	//I_ReadKeys ();
 }
 
 
@@ -841,21 +841,21 @@ void I_StartupCyberMan(void);
 
 void I_StartupMouse (void)
 {
-   int  (far *function)();
+	int  (far * function)();
 
-   //
-   // General mouse detection
-   //
+	//
+	// General mouse detection
+	//
 	mousepresent = 0;
-	if ( M_CheckParm ("-nomouse") || !usemouse )
+	if (M_CheckParm ("-nomouse") || !usemouse)
 		return;
 
 	if (I_ResetMouse () != 0xffff)
 	{
-		tprintf ("Mouse: not present\n",0);
+		tprintf ("Mouse: not present\n", 0);
 		return;
 	}
-	tprintf ("Mouse: detected\n",0);
+	tprintf ("Mouse: detected\n", 0);
 
 	mousepresent = 1;
 
@@ -874,7 +874,7 @@ void I_StartupMouse (void)
 void I_ShutdownMouse (void)
 {
 	if (!mousepresent)
-	  return;
+		return;
 
 	I_ResetMouse ();
 }
@@ -892,15 +892,15 @@ void I_ReadMouse (void)
 {
 	event_t ev;
 
-//
-// mouse events
-//
+	//
+	// mouse events
+	//
 	if (!mousepresent)
 		return;
 
 	ev.type = ev_mouse;
 
-	memset (&dpmiregs,0,sizeof(dpmiregs));
+	memset (&dpmiregs, 0, sizeof(dpmiregs));
 	dpmiregs.eax = 3;                               // read buttons / position
 	DPMIInt (0x33);
 	ev.data1 = dpmiregs.ebx;
@@ -931,36 +931,36 @@ boolean WaitJoyButton (void)
 	do
 	{
 		I_WaitVBL (1);
-		buttons =  ((inp(0x201) >> 4)&1)^1;
+		buttons = ((inp(0x201) >> 4) & 1) ^ 1;
 		if (buttons != oldbuttons)
 		{
 			oldbuttons = buttons;
 			continue;
 		}
 
-		if ( (lastpress& 0x7f) == 1 )
+		if ((lastpress & 0x7f) == 1)
 		{
 			joystickpresent = false;
 			return false;
 		}
-	} while ( !buttons);
+	} while (!buttons);
 
 	do
 	{
 		I_WaitVBL (1);
-		buttons =  ((inp(0x201) >> 4)&1)^1;
+		buttons = ((inp(0x201) >> 4) & 1) ^ 1;
 		if (buttons != oldbuttons)
 		{
 			oldbuttons = buttons;
 			continue;
 		}
 
-		if ( (lastpress& 0x7f) == 1 )
+		if ((lastpress & 0x7f) == 1)
 		{
 			joystickpresent = false;
 			return false;
 		}
-	} while ( buttons);
+	} while (buttons);
 
 	return true;
 }
@@ -984,13 +984,13 @@ void I_StartupJoystick (void)
 	int     centerx, centery;
 
 	joystickpresent = 0;
-	if ( M_CheckParm ("-nojoy") || !usejoystick )
+	if (M_CheckParm ("-nojoy") || !usejoystick)
 		return;
 
 	if (!I_ReadJoystick ())
 	{
 		joystickpresent = false;
-		tprintf ("joystick not found\n",0);
+		tprintf ("joystick not found\n", 0);
 		return;
 	}
 	printf("joystick found\n");
@@ -1007,15 +1007,15 @@ void I_StartupJoystick (void)
 	if (!WaitJoyButton ())
 		return;
 	I_ReadJoystick ();
-	joyxl = (centerx + joystickx)/2;
-	joyyl = (centerx + joysticky)/2;
+	joyxl = (centerx + joystickx) / 2;
+	joyyl = (centerx + joysticky) / 2;
 
 	printf("\nPush the joystick to the LOWER RIGHT corner and press button 1:");
 	if (!WaitJoyButton ())
 		return;
 	I_ReadJoystick ();
-	joyxh = (centerx + joystickx)/2;
-	joyyh = (centery + joysticky)/2;
+	joyxh = (centerx + joystickx) / 2;
+	joyyh = (centery + joysticky) / 2;
 	printf("\n");
 }
 
@@ -1031,15 +1031,15 @@ void I_JoystickEvents (void)
 {
 	event_t ev;
 
-//
-// joystick events
-//
+	//
+	// joystick events
+	//
 	if (!joystickpresent)
 		return;
 
 	I_ReadJoystick ();
 	ev.type = ev_joystick;
-	ev.data1 =  ((inp(0x201) >> 4)&15)^15;
+	ev.data1 = ((inp(0x201) >> 4) & 15) ^ 15;
 
 	if (joystickx < joyxl)
 		ev.data2 = -1;
@@ -1084,14 +1084,14 @@ void DPMIFarCall (void)
 	regs.w.cx = 0;
 	regs.x.edi = (unsigned)&dpmiregs;
 	segregs.es = segregs.ds;
-	int386x( DPMI_INT, &regs, &regs, &segregs );
+	int386x(DPMI_INT, &regs, &regs, &segregs);
 }
 
 
 void DPMIInt (int i)
 {
 	dpmiregs.ss = realstackseg;
-	dpmiregs.sp = REALSTACKSIZE-4;
+	dpmiregs.sp = REALSTACKSIZE - 4;
 
 	segread (&segregs);
 	regs.w.ax = 0x300;
@@ -1099,7 +1099,7 @@ void DPMIInt (int i)
 	regs.w.cx = 0;
 	regs.x.edi = (unsigned)&dpmiregs;
 	segregs.es = segregs.ds;
-	int386x( DPMI_INT, &regs, &regs, &segregs );
+	int386x(DPMI_INT, &regs, &regs, &segregs);
 }
 
 
@@ -1115,41 +1115,41 @@ void I_StartupDPMI (void)
 {
 	extern char __begtext;
 	extern char ___argc;
-	int     n,d;
+	int     n, d;
 
-//
-// allocate a decent stack for real mode ISRs
-//
+	//
+	// allocate a decent stack for real mode ISRs
+	//
 	realstackseg = (int)I_AllocLow (1024) >> 4;
 
-//
-// lock the entire program down
-//
+	//
+	// lock the entire program down
+	//
 
-//      _dpmi_lockregion (&__begtext, &___argc - &__begtext);
+	//      _dpmi_lockregion (&__begtext, &___argc - &__begtext);
 
 
-//
-// catch divide by 0 exception
-//
+	//
+	// catch divide by 0 exception
+	//
 #if 0
 	segread(&segregs);
 	regs.w.ax = 0x0203;             // DPMI set processor exception handler vector
 	regs.w.bx = 0;                  // int 0
 	regs.w.cx = segregs.cs;
 	regs.x.edx = (int)&I_DivException;
- printf ("%x : %x\n",regs.w.cx, regs.x.edx);
-	int386( DPMI_INT, &regs, &regs);
+	printf ("%x : %x\n", regs.w.cx, regs.x.edx);
+	int386(DPMI_INT, &regs, &regs);
 #endif
 
 #if 0
 	n = I_SetDivException ();
-	printf ("return: %i\n",n);
+	printf ("return: %i\n", n);
 	n = 100;
 	d = 0;
-   printf ("100 / 0 = %i\n",n/d);
+	printf ("100 / 0 = %i\n", n / d);
 
-exit (1);
+	exit (1);
 #endif
 }
 
@@ -1168,10 +1168,10 @@ void (__interrupt __far *oldtimerisr) ();
 
 void IO_ColorBlack (int r, int g, int b)
 {
-_outbyte (PEL_WRITE_ADR,0);
-_outbyte(PEL_DATA,r);
-_outbyte(PEL_DATA,g);
-_outbyte(PEL_DATA,b);
+	_outbyte (PEL_WRITE_ADR, 0);
+	_outbyte(PEL_DATA, r);
+	_outbyte(PEL_DATA, g);
+	_outbyte(PEL_DATA, b);
 }
 
 
@@ -1188,7 +1188,7 @@ _outbyte(PEL_DATA,b);
 void __interrupt __far IO_TimerISR (void)
 {
 	ticcount++;
-	_outbyte(0x20,0x20);                            // Ack the interrupt
+	_outbyte(0x20, 0x20);                            // Ack the interrupt
 }
 
 /*
@@ -1204,11 +1204,11 @@ void __interrupt __far IO_TimerISR (void)
 void IO_SetTimer0(int speed)
 {
 	if (speed > 0 && speed < 150)
-		I_Error ("INT_SetTimer0: %i is a bad value",speed);
+		I_Error ("INT_SetTimer0: %i is a bad value", speed);
 
-	_outbyte(0x43,0x36);                            // Change timer 0
-	_outbyte(0x40,speed);
-	_outbyte(0x40,speed >> 8);
+	_outbyte(0x43, 0x36);                            // Change timer 0
+	_outbyte(0x40, speed);
+	_outbyte(0x40, speed >> 8);
 }
 
 
@@ -1256,15 +1256,15 @@ void I_Init (void)
 	extern void I_StartupTimer(void);
 
 	novideo = M_CheckParm("novideo");
-	tprintf("I_StartupDPMI\n",1);
+	tprintf("I_StartupDPMI\n", 1);
 	I_StartupDPMI();
-	tprintf("I_StartupMouse\n",1);
+	tprintf("I_StartupMouse\n", 1);
 	I_StartupMouse();
-//	tprintf("I_StartupJoystick\n",1);
-//	I_StartupJoystick();
-//	tprintf("I_StartupKeyboard\n",1);
-//	I_StartupKeyboard();
-	tprintf("S_Init...\n",1);
+	//	tprintf("I_StartupJoystick\n",1);
+	//	I_StartupJoystick();
+	//	tprintf("I_StartupKeyboard\n",1);
+	//	I_StartupKeyboard();
+	tprintf("S_Init...\n", 1);
 	S_Init();
 	//IO_StartupTimer();
 	S_Start();
@@ -1309,10 +1309,10 @@ void I_Error (char *error, ...)
 
 	D_QuitNetGame ();
 	I_Shutdown ();
-	va_start (argptr,error);
+	va_start (argptr, error);
 	regs.x.eax = 0x3;
 	int386(0x10, &regs, &regs);
-	vprintf (error,argptr);
+	vprintf (error, argptr);
 	va_end (argptr);
 	printf ("\n");
 	exit (1);
@@ -1338,7 +1338,7 @@ void I_Quit(void)
 	M_SaveExtendedDefaults(); // FS: For EXTEND.CFG
 	scr = (byte *)W_CacheLumpName("ENDTEXT", PU_CACHE);
 	I_Shutdown();
-	memcpy((void *)0xb8000, scr, 80*25*2);
+	memcpy((void *)0xb8000, scr, 80 * 25 * 2);
 	regs.w.ax = 0x0200;
 	regs.h.bh = 0;
 	regs.h.dl = 0;
@@ -1362,25 +1362,25 @@ byte *I_ZoneBase (int *size)
 	int             heap;
 	int             i, z; // FS: Testing Heapsize set
 	int                             block;
-	byte                    *ptr;
+	byte *ptr;
 
 
 
-	memset (meminfo,0,sizeof(meminfo));
+	memset (meminfo, 0, sizeof(meminfo));
 	segread(&segregs);
 	segregs.es = segregs.ds;
 	regs.w.ax = 0x500;      // get memory info
 	regs.x.edi = (int)&meminfo;
-	int386x( 0x31, &regs, &regs, &segregs );
+	int386x(0x31, &regs, &regs, &segregs);
 
 	heap = meminfo[0];
 	// FS: Testing manually setting heapsize
 	z = M_CheckParm("-mem");
-	if (z && z<myargc-1)
+	if (z && z < myargc - 1)
 	{
-		heap = (int) (atof(myargv[z+1]) * 1024 * 1024);
+		heap = (int)(atof(myargv[z + 1]) * 1024 * 1024);
 	}
-	printf ("DPMI memory: 0x%x, ",heap);
+	printf ("DPMI memory: 0x%x, ", heap);
 
 	do
 	{
@@ -1395,9 +1395,9 @@ byte *I_ZoneBase (int *size)
 		I_Error ("Insufficient DPMI memory!");
 #if 0
 	regs.w.ax = 0x501;      // allocate linear block
-	regs.w.bx = heap>>16;
-	regs.w.cx = heap&0xffff;
-	int386( 0x31, &regs, &regs);
+	regs.w.bx = heap >> 16;
+	regs.w.cx = heap & 0xffff;
+	int386(0x31, &regs, &regs);
 	if (regs.w.cflag)
 		I_Error ("Couldn't allocate DPMI memory!");
 
@@ -1419,13 +1419,13 @@ byte *I_ZoneBase (int *size)
 void I_InitDiskFlash (void)
 {
 #if 0
-	void    *pic;
-	byte    *temp;
+	void *pic;
+	byte *temp;
 
-	pic = W_CacheLumpName ("STDISK",PU_CACHE);
+	pic = W_CacheLumpName ("STDISK", PU_CACHE);
 	temp = destscreen;
 	destscreen = (byte *)0xac000;
-	V_DrawPatchDirect (SCREENWIDTH-16,SCREENHEIGHT-16,0,pic);
+	V_DrawPatchDirect (SCREENWIDTH - 16, SCREENHEIGHT - 16, 0, pic);
 	destscreen = temp;
 #endif
 }
@@ -1434,23 +1434,23 @@ void I_InitDiskFlash (void)
 void I_BeginRead (void)
 {
 #if 0
-	byte    *src,*dest;
+	byte *src, *dest;
 	int             y;
 
 	if (!grmode)
 		return;
 
-// write through all planes
-	outp (SC_INDEX,SC_MAPMASK);
-	outp (SC_INDEX+1,15);
-// set write mode 1
-	outp (GC_INDEX,GC_MODE);
-	outp (GC_INDEX+1,inp(GC_INDEX+1)|1);
+	// write through all planes
+	outp (SC_INDEX, SC_MAPMASK);
+	outp (SC_INDEX + 1, 15);
+	// set write mode 1
+	outp (GC_INDEX, GC_MODE);
+	outp (GC_INDEX + 1, inp(GC_INDEX + 1) | 1);
 
-// copy to backup
-	src = currentscreen + 184*80 + 304/4;
-	dest = (byte *)0xac000 + 184*80 + 288/4;
-	for (y=0 ; y<16 ; y++)
+	// copy to backup
+	src = currentscreen + 184 * 80 + 304 / 4;
+	dest = (byte *)0xac000 + 184 * 80 + 288 / 4;
+	for (y = 0; y < 16; y++)
 	{
 		dest[0] = src[0];
 		dest[1] = src[1];
@@ -1460,10 +1460,10 @@ void I_BeginRead (void)
 		dest += 80;
 	}
 
-// copy disk over
-	dest = currentscreen + 184*80 + 304/4;
-	src = (byte *)0xac000 + 184*80 + 304/4;
-	for (y=0 ; y<16 ; y++)
+	// copy disk over
+	dest = currentscreen + 184 * 80 + 304 / 4;
+	src = (byte *)0xac000 + 184 * 80 + 304 / 4;
+	for (y = 0; y < 16; y++)
 	{
 		dest[0] = src[0];
 		dest[1] = src[1];
@@ -1474,9 +1474,9 @@ void I_BeginRead (void)
 	}
 
 
-// set write mode 0
-	outp (GC_INDEX,GC_MODE);
-	outp (GC_INDEX+1,inp(GC_INDEX+1)&~1);
+	// set write mode 0
+	outp (GC_INDEX, GC_MODE);
+	outp (GC_INDEX + 1, inp(GC_INDEX + 1) & ~1);
 #endif
 }
 
@@ -1484,24 +1484,24 @@ void I_BeginRead (void)
 void I_EndRead (void)
 {
 #if 0
-	byte    *src,*dest;
+	byte *src, *dest;
 	int             y;
 
 	if (!grmode)
 		return;
 
-// write through all planes
-	outp (SC_INDEX,SC_MAPMASK);
-	outp (SC_INDEX+1,15);
-// set write mode 1
-	outp (GC_INDEX,GC_MODE);
-	outp (GC_INDEX+1,inp(GC_INDEX+1)|1);
+	// write through all planes
+	outp (SC_INDEX, SC_MAPMASK);
+	outp (SC_INDEX + 1, 15);
+	// set write mode 1
+	outp (GC_INDEX, GC_MODE);
+	outp (GC_INDEX + 1, inp(GC_INDEX + 1) | 1);
 
 
-// copy disk over
-	dest = currentscreen + 184*80 + 304/4;
-	src = (byte *)0xac000 + 184*80 + 288/4;
-	for (y=0 ; y<16 ; y++)
+	// copy disk over
+	dest = currentscreen + 184 * 80 + 304 / 4;
+	src = (byte *)0xac000 + 184 * 80 + 288 / 4;
+	for (y = 0; y < 16; y++)
 	{
 		dest[0] = src[0];
 		dest[1] = src[1];
@@ -1511,9 +1511,9 @@ void I_EndRead (void)
 		dest += 80;
 	}
 
-// set write mode 0
-	outp (GC_INDEX,GC_MODE);
-	outp (GC_INDEX+1,inp(GC_INDEX+1)&~1);
+	// set write mode 0
+	outp (GC_INDEX, GC_MODE);
+	outp (GC_INDEX + 1, inp(GC_INDEX + 1) & ~1);
 #endif
 }
 
@@ -1529,23 +1529,23 @@ void I_EndRead (void)
 
 byte *I_AllocLow (int length)
 {
-	byte    *mem;
+	byte *mem;
 
 	// DPMI call 100h allocates DOS memory
 	segread(&segregs);
 	regs.w.ax = 0x0100;          // DPMI allocate DOS memory
-	regs.w.bx = (length+15) / 16;
-	int386( DPMI_INT, &regs, &regs);
-//      segment = regs.w.ax;
-//   selector = regs.w.dx;
+	regs.w.bx = (length + 15) / 16;
+	int386(DPMI_INT, &regs, &regs);
+	//      segment = regs.w.ax;
+	//   selector = regs.w.dx;
 	if (regs.w.cflag != 0)
 		I_Error ("I_AllocLow: DOS alloc of %i failed, %i free",
-			length, regs.w.bx*16);
+			length, regs.w.bx * 16);
 
 
-	mem = (void *) ((regs.x.eax & 0xFFFF) << 4);
+	mem = (void *)((regs.x.eax & 0xFFFF) << 4);
 
-	memset (mem,0,length);
+	memset (mem, 0, length);
 	return mem;
 }
 
@@ -1598,7 +1598,7 @@ typedef struct
 } doomcom_t;
 */ // FUCKED LINES
 
-extern  doomcom_t               *doomcom;
+extern  doomcom_t *doomcom;
 
 /*
 ====================
@@ -1615,11 +1615,11 @@ void I_InitNetwork (void)
 	i = M_CheckParm ("-net");
 	if (!i)
 	{
-	//
-	// single player game
-	//
-		doomcom = malloc (sizeof (*doomcom) );
-		memset (doomcom, 0, sizeof(*doomcom) );
+		//
+		// single player game
+		//
+		doomcom = malloc (sizeof (*doomcom));
+		memset (doomcom, 0, sizeof(*doomcom));
 		netgame = false;
 		doomcom->id = DOOMCOM_ID;
 		doomcom->numplayers = doomcom->numnodes = 1;
@@ -1631,12 +1631,12 @@ void I_InitNetwork (void)
 	}
 
 	netgame = true;
-	doomcom = (doomcom_t *)atoi(myargv[i+1]);
-//DEBUG
-doomcom->skill = startskill;
-doomcom->episode = startepisode;
-doomcom->map = startmap;
-doomcom->deathmatch = deathmatch;
+	doomcom = (doomcom_t *)atoi(myargv[i + 1]);
+	//DEBUG
+	doomcom->skill = startskill;
+	doomcom->episode = startepisode;
+	doomcom->map = startmap;
+	doomcom->deathmatch = deathmatch;
 
 }
 
@@ -1663,11 +1663,11 @@ void I_CheckExternDriver(void)
 {
 	int i;
 
-	if(!(i = M_CheckParm("-externdriver")))
+	if (!(i = M_CheckParm("-externdriver")))
 	{
 		return;
 	}
-	i_ExternData = (externdata_t *)atoi(myargv[i+1]);
+	i_ExternData = (externdata_t *)atoi(myargv[i + 1]);
 	i_Vector = i_ExternData->vector;
 
 	useexterndriver = true;
@@ -1684,7 +1684,7 @@ void I_ReadExternDriver(void)
 {
 	event_t ev;
 
-	if(useexterndriver)
+	if (useexterndriver)
 	{
 		DPMIInt(i_Vector);
 	}

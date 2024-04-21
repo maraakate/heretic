@@ -20,7 +20,7 @@ void I_StartupTimer (void)
 #ifndef NOTIMER
 	extern int I_TimerISR(void);
 
-	tprintf("I_StartupTimer()\n",0);
+	tprintf("I_StartupTimer()\n", 0);
 	/* installs master timer.	Must be done before StartupTimer()! */
 	TSM_Install(SND_TICRATE);
 	tsm_ID = TSM_NewService (I_TimerISR, 35, 255, 0); /* max priority */
@@ -39,7 +39,7 @@ void I_ShutdownTimer (void)
 
 /* sound information */
 #if 0
-const char *dnames[] = {"None",
+const char *dnames[] = { "None",
 			"PC_Speaker",
 			"Adlib",
 			"Sound_Blaster",
@@ -47,7 +47,7 @@ const char *dnames[] = {"None",
 			"Gravis_Ultrasound",
 			"MPU",
 			"AWE32"
-			};
+};
 #endif
 
 const char snd_prefixen[] = { 'P', 'P', 'A', 'S', 'S', 'S', 'M', 'M', 'M', 'S' };
@@ -55,16 +55,16 @@ const char snd_prefixen[] = { 'P', 'P', 'A', 'S', 'S', 'S', 'M', 'M', 'M', 'S' }
 int snd_Channels;
 int snd_DesiredMusicDevice, snd_DesiredSfxDevice;
 int snd_MusicDevice,		/* current music card # (index to dmxCodes) */
-	snd_SfxDevice,			/* current sfx card # (index to dmxCodes) */
-	snd_MaxVolume,			/* maximum volume for sound */
-	snd_MusicVolume;		/* maximum volume for music */
+snd_SfxDevice,			/* current sfx card # (index to dmxCodes) */
+snd_MaxVolume,			/* maximum volume for sound */
+snd_MusicVolume;		/* maximum volume for music */
 int dmxCodes[NUM_SCARDS]; /* the dmx code for a given card */
 
 int snd_SBport, snd_SBirq, snd_SBdma;	/* sound blaster variables */
 int snd_Mport;							/* midi variables */
 
 extern boolean	snd_MusicAvail, /* whether music is available */
-		snd_SfxAvail;			/* whether sfx are available */
+snd_SfxAvail;			/* whether sfx are available */
 
 void I_PauseSong (int handle)
 {
@@ -78,8 +78,8 @@ void I_ResumeSong (int handle)
 
 void I_SetMusicVolume (int volume)
 {
-	MUS_SetMasterVolume(volume*8);
-//	snd_MusicVolume = volume;
+	MUS_SetMasterVolume(volume * 8);
+	//	snd_MusicVolume = volume;
 }
 
 void I_SetSfxVolume (int volume)
@@ -91,7 +91,7 @@ int I_RegisterSong (void *data)
 {
 	int rc = MUS_RegisterSong(data);
 #ifdef SNDDEBUG
-	if (rc<0)
+	if (rc < 0)
 		printf("MUS_Reg() returned %d\n", rc);
 #endif
 	return rc;
@@ -128,7 +128,7 @@ void I_StopSong (int handle) /* MUST be called before I_UnregisterSong(). */
 #endif
 
 	/* Fucking kluge pause */
-	for (s=ticcount; ticcount - s < 10; );
+	for (s = ticcount; ticcount - s < 10; );
 }
 
 void I_PlaySong (int handle, boolean looping)
@@ -158,7 +158,7 @@ int I_GetSfxLumpNum (sfxinfo_t *sound)
 {
 	char namebuf[9];
 
-	if(sound->name == 0)
+	if (sound->name == 0)
 		return 0;
 	if (sound->link)
 		sound = sound->link;
@@ -227,7 +227,7 @@ void I_sndArbitrateCards (void)
 	/* figure out what i've got to initialize */
 	gus = snd_MusicDevice == snd_GUS || snd_SfxDevice == snd_GUS;
 	sb = snd_SfxDevice == snd_SB || snd_MusicDevice == snd_SB;
-	adlib = snd_MusicDevice == snd_Adlib ;
+	adlib = snd_MusicDevice == snd_Adlib;
 	pc = snd_SfxDevice == snd_PC;
 	midi = snd_MusicDevice == snd_MPU;
 
@@ -247,15 +247,15 @@ void I_sndArbitrateCards (void)
 		{
 			hasGUS = true;
 			tprintf("SB_Init: Loading GUS patches.\n", 1);
-			hgotoxy(17,9);
+			hgotoxy(17, 9);
 			hprintf("Loading GUS patches.", 0x3f);
 
 			p = M_CheckParm("-usegusini"); /* FS: Use an external GUS ini file */
 			if (p)
 			{
-				if(p < myargc-1)
+				if (p < myargc - 1)
 				{
-					char *gusfile = myargv[p+1];
+					char *gusfile = myargv[p + 1];
 					gusfilelength = M_ReadFile(gusfile, &gusbuffer);
 					GF1_SetMap((char *)gusbuffer, gusfilelength);
 					Z_Free(gusbuffer);
@@ -286,37 +286,37 @@ void I_sndArbitrateCards (void)
 
 	if (sb)
 	{
-		if(debugmode)
+		if (debugmode)
 		{
-			sprintf(tmp,"cfg p=%03xh, i=%d, d=%d\n", snd_SBport, snd_SBirq, snd_SBdma);
-			tprintf(tmp,0);
+			sprintf(tmp, "cfg p=%03xh, i=%d, d=%d\n", snd_SBport, snd_SBirq, snd_SBdma);
+			tprintf(tmp, 0);
 		}
 
 		retval = SB_Detect(&snd_SBport, &snd_SBirq, &snd_SBdma, 0);
 		if (retval)
 		{
-			sprintf(tmp,"SB isn't responding at p=%03xh, i=%d, d=%d, retval=%d\n", snd_SBport, snd_SBirq, snd_SBdma, retval);
-			tprintf(tmp,0);
+			sprintf(tmp, "SB isn't responding at p=%03xh, i=%d, d=%d, retval=%d\n", snd_SBport, snd_SBirq, snd_SBdma, retval);
+			tprintf(tmp, 0);
 		}
 		else
 		{
 			SB_SetCard(snd_SBport, snd_SBirq, snd_SBdma);
 		}
 
-		if(debugmode)
+		if (debugmode)
 		{
-			sprintf(tmp,"SB_Detect returned p=%03xh,i=%d,d=%d,retval=%d\n",	snd_SBport, snd_SBirq, snd_SBdma, retval);
-			tprintf(tmp,0);
+			sprintf(tmp, "SB_Detect returned p=%03xh,i=%d,d=%d,retval=%d\n", snd_SBport, snd_SBirq, snd_SBdma, retval);
+			tprintf(tmp, 0);
 		}
 	}
 
 	if (adlib)
 	{
-		retval = AL_Detect(&wait,0);
+		retval = AL_Detect(&wait, 0);
 		if (retval)
 		{
 			sprintf(tmp, "Dude.	The Adlib isn't responding retval=%d.\n", retval);
-			tprintf(tmp,1);
+			tprintf(tmp, 1);
 		}
 		else
 		{
@@ -328,15 +328,15 @@ void I_sndArbitrateCards (void)
 	{
 		if (debugmode)
 		{
-			sprintf(tmp,"cfg p=%03xh\n", snd_Mport);
-			tprintf(tmp,0);
+			sprintf(tmp, "cfg p=%03xh\n", snd_Mport);
+			tprintf(tmp, 0);
 		}
 
 		retval = MPU_Detect(&snd_Mport, &i);
 		if (retval)
 		{
-			sprintf(tmp,"The MPU-401 isn't reponding @ p=%03xh, retval=%d.\n", snd_Mport, retval);
-			tprintf(tmp,0);
+			sprintf(tmp, "The MPU-401 isn't reponding @ p=%03xh, retval=%d.\n", snd_Mport, retval);
+			tprintf(tmp, 0);
 		}
 		else
 		{
@@ -352,7 +352,7 @@ void I_StartupSound (void)
 	int rc, i;
 
 	if (debugmode)
-		tprintf("I_StartupSound: Hope you hear a pop.\n",1);
+		tprintf("I_StartupSound: Hope you hear a pop.\n", 1);
 
 	dmxCodes[0] = 0;
 	dmxCodes[snd_PC] = AHW_PC_SPEAKER;
@@ -371,20 +371,20 @@ void I_StartupSound (void)
 
 	if (debugmode)
 	{
-		sprintf(tmp,"	Music device #%d & dmxCode=%d\n", snd_MusicDevice, dmxCodes[snd_MusicDevice]);
-		tprintf(tmp,0);
-		sprintf(tmp,"	Sfx device #%d & dmxCode=%d\n", snd_SfxDevice, dmxCodes[snd_SfxDevice]);
-		tprintf(tmp,0);
+		sprintf(tmp, "	Music device #%d & dmxCode=%d\n", snd_MusicDevice, dmxCodes[snd_MusicDevice]);
+		tprintf(tmp, 0);
+		sprintf(tmp, "	Sfx device #%d & dmxCode=%d\n", snd_SfxDevice, dmxCodes[snd_SfxDevice]);
+		tprintf(tmp, 0);
 	}
 
-	tprintf("	calling DMX_Init\n",0);
+	tprintf("	calling DMX_Init\n", 0);
 	rc = DMX_Init(SND_TICRATE, SND_MAXSONGS, dmxCodes[snd_MusicDevice],
-	dmxCodes[snd_SfxDevice]);
+		dmxCodes[snd_SfxDevice]);
 
 	if (debugmode)
 	{
-		sprintf(tmp,"	DMX_Init() returned %d\n", rc);
-		tprintf(tmp,0);
+		sprintf(tmp, "	DMX_Init() returned %d\n", rc);
+		tprintf(tmp, 0);
 	}
 
 }

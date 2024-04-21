@@ -306,11 +306,11 @@ static byte CheatIDDQDSeq[] =
 /* FS: From Doom */
 static byte CheatIDMUSSeq[] =
 {
-        CHEAT_ENCRYPT('i'),
-        CHEAT_ENCRYPT('d'),
-        CHEAT_ENCRYPT('m'),
-        CHEAT_ENCRYPT('u'),
-        CHEAT_ENCRYPT('s'),
+		CHEAT_ENCRYPT('i'),
+		CHEAT_ENCRYPT('d'),
+		CHEAT_ENCRYPT('m'),
+		CHEAT_ENCRYPT('u'),
+		CHEAT_ENCRYPT('s'),
 	0, 0, 0xff, 0
 };
 
@@ -366,7 +366,7 @@ void SB_Init(void)
 	PatchBARBACK = W_CacheLumpName("BARBACK", PU_STATIC);
 	PatchINVBAR = W_CacheLumpName("INVBAR", PU_STATIC);
 	PatchCHAIN = W_CacheLumpName("CHAIN", PU_STATIC);
-	if(deathmatch)
+	if (deathmatch)
 	{
 		PatchSTATBAR = W_CacheLumpName("STATBAR", PU_STATIC);
 	}
@@ -374,7 +374,7 @@ void SB_Init(void)
 	{
 		PatchSTATBAR = W_CacheLumpName("LIFEBAR", PU_STATIC);
 	}
-	if(!netgame)
+	if (!netgame)
 	{ // single player game uses red life gem
 		PatchLIFEGEM = W_CacheLumpName("LIFEGEM2", PU_STATIC);
 	}
@@ -390,25 +390,25 @@ void SB_Init(void)
 	PatchINVLFGEM2 = W_CacheLumpName("INVGEML2", PU_STATIC);
 	PatchINVRTGEM1 = W_CacheLumpName("INVGEMR1", PU_STATIC);
 	PatchINVRTGEM2 = W_CacheLumpName("INVGEMR2", PU_STATIC);
-	PatchBLACKSQ    =   W_CacheLumpName("BLACKSQ", PU_STATIC);
+	PatchBLACKSQ = W_CacheLumpName("BLACKSQ", PU_STATIC);
 	PatchARMCLEAR = W_CacheLumpName("ARMCLEAR", PU_STATIC);
 	PatchCHAINBACK = W_CacheLumpName("CHAINBACK", PU_STATIC);
 	startLump = W_GetNumForName("IN0");
-	for(i = 0; i < 10; i++)
+	for (i = 0; i < 10; i++)
 	{
-		PatchINumbers[i] = W_CacheLumpNum(startLump+i, PU_STATIC);
+		PatchINumbers[i] = W_CacheLumpNum(startLump + i, PU_STATIC);
 	}
 	PatchNEGATIVE = W_CacheLumpName("NEGNUM", PU_STATIC);
 	FontBNumBase = W_GetNumForName("FONTB16");
 	startLump = W_GetNumForName("SMALLIN0");
-	for(i = 0; i < 10; i++)
+	for (i = 0; i < 10; i++)
 	{
-		PatchSmNumbers[i] = W_CacheLumpNum(startLump+i, PU_STATIC);
+		PatchSmNumbers[i] = W_CacheLumpNum(startLump + i, PU_STATIC);
 	}
 	playpalette = W_GetNumForName("PLAYPAL");
 	spinbooklump = W_GetNumForName("SPINBK0");
 	spinflylump = W_GetNumForName("SPFLY0");
-	for(i = 0; i < 256; i++)
+	for (i = 0; i < 256; i++)
 	{
 		CheatLookup[i] = CHEAT_ENCRYPT(i);
 	}
@@ -425,36 +425,36 @@ void SB_Ticker(void)
 	int delta;
 	int curHealth;
 
-	if(leveltime&1)
+	if (leveltime & 1)
 	{
-		ChainWiggle = P_Random()&1;
+		ChainWiggle = P_Random() & 1;
 	}
 	curHealth = players[consoleplayer].mo->health;
-	if(curHealth < 0)
+	if (curHealth < 0)
 	{
 		curHealth = 0;
 	}
-	if(curHealth < HealthMarker)
+	if (curHealth < HealthMarker)
 	{
-		delta = (HealthMarker-curHealth)>>2;
-		if(delta < 1)
+		delta = (HealthMarker - curHealth) >> 2;
+		if (delta < 1)
 		{
 			delta = 1;
 		}
-		else if(delta > 8)
+		else if (delta > 8)
 		{
 			delta = 8;
 		}
 		HealthMarker -= delta;
 	}
-	else if(curHealth > HealthMarker)
+	else if (curHealth > HealthMarker)
 	{
-		delta = (curHealth-HealthMarker)>>2;
-		if(delta < 1)
+		delta = (curHealth - HealthMarker) >> 2;
+		if (delta < 1)
 		{
 			delta = 1;
 		}
-		else if(delta > 8)
+		else if (delta > 8)
 		{
 			delta = 8;
 		}
@@ -476,34 +476,34 @@ static void DrINumber(signed int val, int x, int y)
 	int oldval;
 
 	oldval = val;
-	if(val < 0)
+	if (val < 0)
 	{
-		if(val < -9)
+		if (val < -9)
 		{
-			V_DrawPatch(x+1, y+1, W_CacheLumpName("LAME", PU_CACHE));
+			V_DrawPatch(x + 1, y + 1, W_CacheLumpName("LAME", PU_CACHE));
 		}
 		else
 		{
 			val = -val;
-			V_DrawPatch(x+18, y, PatchINumbers[val]);
-			V_DrawPatch(x+9, y, PatchNEGATIVE);
+			V_DrawPatch(x + 18, y, PatchINumbers[val]);
+			V_DrawPatch(x + 9, y, PatchNEGATIVE);
 		}
 		return;
 	}
-	if(val > 99)
+	if (val > 99)
 	{
-		patch = PatchINumbers[val/100];
+		patch = PatchINumbers[val / 100];
 		V_DrawPatch(x, y, patch);
 	}
-	val = val%100;
-	if(val > 9 || oldval > 99)
+	val = val % 100;
+	if (val > 9 || oldval > 99)
 	{
-		patch = PatchINumbers[val/10];
-		V_DrawPatch(x+9, y, patch);
+		patch = PatchINumbers[val / 10];
+		V_DrawPatch(x + 9, y, patch);
 	}
-	val = val%10;
+	val = val % 10;
 	patch = PatchINumbers[val];
-	V_DrawPatch(x+18, y, patch);
+	V_DrawPatch(x + 18, y, patch);
 }
 
 //---------------------------------------------------------------------------
@@ -522,26 +522,26 @@ static void DrBNumber(signed int val, int x, int y)
 
 	oldval = val;
 	xpos = x;
-	if(val < 0)
+	if (val < 0)
 	{
 		val = 0;
 	}
-	if(val > 99)
+	if (val > 99)
 	{
-		patch = W_CacheLumpNum(FontBNumBase+val/100, PU_CACHE);
-		V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
+		patch = W_CacheLumpNum(FontBNumBase + val / 100, PU_CACHE);
+		V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
 	}
-	val = val%100;
+	val = val % 100;
 	xpos += 12;
-	if(val > 9 || oldval > 99)
+	if (val > 9 || oldval > 99)
 	{
-		patch = W_CacheLumpNum(FontBNumBase+val/10, PU_CACHE);
-		V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
+		patch = W_CacheLumpNum(FontBNumBase + val / 10, PU_CACHE);
+		V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
 	}
-	val = val%10;
+	val = val % 10;
 	xpos += 12;
-	patch = W_CacheLumpNum(FontBNumBase+val, PU_CACHE);
-	V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
+	patch = W_CacheLumpNum(FontBNumBase + val, PU_CACHE);
+	V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
 }
 
 //---------------------------------------------------------------------------
@@ -556,18 +556,18 @@ static void DrSmallNumber(int val, int x, int y)
 {
 	patch_t *patch;
 
-	if(val == 1)
+	if (val == 1)
 	{
 		return;
 	}
-	if(val > 9)
+	if (val > 9)
 	{
-		patch = PatchSmNumbers[val/10];
+		patch = PatchSmNumbers[val / 10];
 		V_DrawPatch(x, y, patch);
 	}
-	val = val%10;
+	val = val % 10;
 	patch = PatchSmNumbers[val];
-	V_DrawPatch(x+4, y, patch);
+	V_DrawPatch(x + 4, y, patch);
 }
 
 //---------------------------------------------------------------------------
@@ -581,11 +581,11 @@ static void ShadeLine(int x, int y, int height, int shade)
 	byte *dest;
 	byte *shades;
 
-	shades = colormaps+9*256+shade*2*256;
-	dest = screen+y*SCREENWIDTH+x;
-	while(height--)
+	shades = colormaps + 9 * 256 + shade * 2 * 256;
+	dest = screen + y * SCREENWIDTH + x;
+	while (height--)
 	{
-		*(dest) = *(shades+*dest);
+		*(dest) = *(shades + *dest);
 		dest += SCREENWIDTH;
 	}
 }
@@ -600,10 +600,10 @@ static void ShadeChain(void)
 {
 	int i;
 
-	for(i = 0; i < 16; i++)
+	for (i = 0; i < 16; i++)
 	{
-		ShadeLine(277+i, 190, 10, i/2);
-		ShadeLine(19+i, 190, 10, 7-(i/2));
+		ShadeLine(277 + i, 190, 10, i / 2);
+		ShadeLine(19 + i, 190, 10, 7 - (i / 2));
 	}
 }
 
@@ -623,14 +623,14 @@ static void DrawSoundInfo(void)
 	char text[32];
 	int x;
 	int y;
-	int xPos[7] = {1, 75, 112, 156, 200, 230, 260};
+	int xPos[7] = { 1, 75, 112, 156, 200, 230, 260 };
 
-	if(leveltime&16)
+	if (leveltime & 16)
 	{
 		MN_DrTextA("*** SOUND DEBUG INFO ***", xPos[0], 20);
 	}
 	S_GetChannelInfo(&s);
-	if(s.channelCount == 0)
+	if (s.channelCount == 0)
 	{
 		return;
 	}
@@ -642,12 +642,12 @@ static void DrawSoundInfo(void)
 	MN_DrTextA("ID", xPos[x++], 30);
 	MN_DrTextA("PRI", xPos[x++], 30);
 	MN_DrTextA("DIST", xPos[x++], 30);
-	for(i = 0; i < s.channelCount; i++)
+	for (i = 0; i < s.channelCount; i++)
 	{
 		c = &s.chan[i];
 		x = 0;
-		y = 40+i*10;
-		if(c->mo == NULL)
+		y = 40 + i * 10;
+		if (c->mo == NULL)
 		{ // Channel is unused
 			MN_DrTextA("------", xPos[0], y);
 			continue;
@@ -657,9 +657,9 @@ static void DrawSoundInfo(void)
 		MN_DrTextA(text, xPos[x++], y);
 		sprintf(text, "%d", c->mo->type);
 		MN_DrTextA(text, xPos[x++], y);
-		sprintf(text, "%d", c->mo->x>>FRACBITS);
+		sprintf(text, "%d", c->mo->x >> FRACBITS);
 		MN_DrTextA(text, xPos[x++], y);
-		sprintf(text, "%d", c->mo->y>>FRACBITS);
+		sprintf(text, "%d", c->mo->y >> FRACBITS);
 		MN_DrTextA(text, xPos[x++], y);
 		sprintf(text, "%d", c->id);
 		MN_DrTextA(text, xPos[x++], y);
@@ -724,22 +724,22 @@ void SB_Drawer(void)
 	static boolean hitCenterFrame;
 
 	// Sound info debug stuff
-	if(DebugSound == true)
+	if (DebugSound == true)
 	{
 		DrawSoundInfo();
 	}
 	CPlayer = &players[consoleplayer];
-	if(viewheight == SCREENHEIGHT && !automapactive)
+	if (viewheight == SCREENHEIGHT && !automapactive)
 	{
 		DrawFullScreenStuff();
 		SB_state = -1;
 	}
 	else
 	{
-		if(SB_state == -1)
+		if (SB_state == -1)
 		{
 			V_DrawPatch(0, 158, PatchBARBACK);
-			if(players[consoleplayer].cheats&CF_GODMODE)
+			if (players[consoleplayer].cheats & CF_GODMODE)
 			{
 				V_DrawPatch(16, 167, W_CacheLumpName("GOD1", PU_CACHE));
 				V_DrawPatch(287, 167, W_CacheLumpName("GOD2", PU_CACHE));
@@ -747,9 +747,9 @@ void SB_Drawer(void)
 			oldhealth = -1;
 		}
 		DrawCommonBar();
-		if(!inventory)
+		if (!inventory)
 		{
-			if(SB_state != 0)
+			if (SB_state != 0)
 			{
 				// Main interface
 				V_DrawPatch(34, 160, PatchSTATBAR);
@@ -766,7 +766,7 @@ void SB_Drawer(void)
 		}
 		else
 		{
-			if(SB_state != 1)
+			if (SB_state != 1)
 			{
 				V_DrawPatch(34, 160, PatchINVBAR);
 			}
@@ -777,37 +777,37 @@ void SB_Drawer(void)
 	SB_PaletteFlash();
 
 	// Flight icons
-	if(CPlayer->powers[pw_flight])
+	if (CPlayer->powers[pw_flight])
 	{
-		if(CPlayer->powers[pw_flight] > BLINKTHRESHOLD
-			|| !(CPlayer->powers[pw_flight]&16))
+		if (CPlayer->powers[pw_flight] > BLINKTHRESHOLD
+			|| !(CPlayer->powers[pw_flight] & 16))
 		{
-			frame = (leveltime/3)&15;
-			if(CPlayer->mo->flags2&MF2_FLY)
+			frame = (leveltime / 3) & 15;
+			if (CPlayer->mo->flags2 & MF2_FLY)
 			{
-				if(hitCenterFrame && (frame != 15 && frame != 0))
+				if (hitCenterFrame && (frame != 15 && frame != 0))
 				{
-					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump+15, 
+					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump + 15,
 						PU_CACHE));
 				}
 				else
 				{
-					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump+frame, 
+					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump + frame,
 						PU_CACHE));
 					hitCenterFrame = false;
 				}
 			}
 			else
 			{
-				if(!hitCenterFrame && (frame != 15 && frame != 0))
+				if (!hitCenterFrame && (frame != 15 && frame != 0))
 				{
-					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump+frame, 
+					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump + frame,
 						PU_CACHE));
 					hitCenterFrame = false;
 				}
 				else
 				{
-					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump+15, 
+					V_DrawPatch(20, 17, W_CacheLumpNum(spinflylump + 15,
 						PU_CACHE));
 					hitCenterFrame = true;
 				}
@@ -822,13 +822,13 @@ void SB_Drawer(void)
 		}
 	}
 
-	if(CPlayer->powers[pw_weaponlevel2] && !CPlayer->chickenTics)
+	if (CPlayer->powers[pw_weaponlevel2] && !CPlayer->chickenTics)
 	{
-		if(CPlayer->powers[pw_weaponlevel2] > BLINKTHRESHOLD
-			|| !(CPlayer->powers[pw_weaponlevel2]&16))
+		if (CPlayer->powers[pw_weaponlevel2] > BLINKTHRESHOLD
+			|| !(CPlayer->powers[pw_weaponlevel2] & 16))
 		{
-			frame = (leveltime/3)&15;
-			V_DrawPatch(300, 17, W_CacheLumpNum(spinbooklump+frame, PU_CACHE));
+			frame = (leveltime / 3) & 15;
+			V_DrawPatch(300, 17, W_CacheLumpNum(spinbooklump + frame, PU_CACHE));
 			BorderTopRefresh = true;
 			UpdateState |= I_MESSAGES;
 		}
@@ -851,21 +851,21 @@ void SB_PaletteFlash(void)
 
 	CPlayer = &players[consoleplayer];
 
-	if(CPlayer->damagecount)
+	if (CPlayer->damagecount)
 	{
-		palette = (CPlayer->damagecount+7)>>3;
-		if(palette >= NUMREDPALS)
+		palette = (CPlayer->damagecount + 7) >> 3;
+		if (palette >= NUMREDPALS)
 		{
-			palette = NUMREDPALS-1;
+			palette = NUMREDPALS - 1;
 		}
 		palette += STARTREDPALS;
 	}
-	else if(CPlayer->bonuscount)
+	else if (CPlayer->bonuscount)
 	{
-		palette = (CPlayer->bonuscount+7)>>3;
-		if(palette >= NUMBONUSPALS)
+		palette = (CPlayer->bonuscount + 7) >> 3;
+		if (palette >= NUMBONUSPALS)
 		{
-			palette = NUMBONUSPALS-1;
+			palette = NUMBONUSPALS - 1;
 		}
 		palette += STARTBONUSPALS;
 	}
@@ -877,10 +877,10 @@ void SB_PaletteFlash(void)
 	if (usePalFlash == false || usevrgoggles) /* FS: Palette flashing toggle or FIXME: No palette flashing with SimulEyes as it fucks up the shutters */
 		palette = 0;
 
-	if(palette != sb_palette)
+	if (palette != sb_palette)
 	{
 		sb_palette = palette;
-		pal = (byte *)W_CacheLumpNum(playpalette, PU_CACHE)+palette*768;
+		pal = (byte *)W_CacheLumpNum(playpalette, PU_CACHE) + palette * 768;
 		I_SetPalette(pal);
 	}
 }
@@ -899,23 +899,23 @@ void DrawCommonBar(void)
 	V_DrawPatch(0, 148, PatchLTFCTOP);
 	V_DrawPatch(290, 148, PatchRTFCTOP);
 
-	if(oldhealth != HealthMarker)
+	if (oldhealth != HealthMarker)
 	{
 		oldhealth = HealthMarker;
 		healthPos = HealthMarker;
-		if(healthPos < 0)
+		if (healthPos < 0)
 		{
 			healthPos = 0;
 		}
-		if(healthPos > 100)
+		if (healthPos > 100)
 		{
 			healthPos = 100;
 		}
-		healthPos = (healthPos*256)/100;
-		chainY = (HealthMarker == CPlayer->mo->health) ? 191 : 191+ChainWiggle;
+		healthPos = (healthPos * 256) / 100;
+		chainY = (HealthMarker == CPlayer->mo->health) ? 191 : 191 + ChainWiggle;
 		V_DrawPatch(0, 190, PatchCHAINBACK);
-		V_DrawPatch(2+(healthPos%17), chainY, PatchCHAIN);
-		V_DrawPatch(17+healthPos, chainY, PatchLIFEGEM);
+		V_DrawPatch(2 + (healthPos % 17), chainY, PatchCHAIN);
+		V_DrawPatch(17 + healthPos, chainY, PatchLIFEGEM);
 		V_DrawPatch(0, 190, PatchLTFACE);
 		V_DrawPatch(276, 190, PatchRTFACE);
 		ShadeChain();
@@ -935,7 +935,7 @@ void DrawMainBar(void)
 	int temp;
 
 	// Ready artifact
-	if(ArtifactFlash)
+	if (ArtifactFlash)
 	{
 		V_DrawPatch(180, 161, PatchBLACKSQ);
 		V_DrawPatch(182, 161, W_CacheLumpNum(W_GetNumForName("useartia")
@@ -944,13 +944,13 @@ void DrawMainBar(void)
 		oldarti = -1; // so that the correct artifact fills in after the flash
 		UpdateState |= I_STATBAR;
 	}
-	else if(oldarti != CPlayer->readyArtifact
+	else if (oldarti != CPlayer->readyArtifact
 		|| oldartiCount != CPlayer->inventory[inv_ptr].count)
 	{
 		V_DrawPatch(180, 161, PatchBLACKSQ);
-		if(CPlayer->readyArtifact > 0)
+		if (CPlayer->readyArtifact > 0)
 		{
-			V_DrawPatch(179,160, W_CacheLumpName(patcharti[CPlayer->readyArtifact],
+			V_DrawPatch(179, 160, W_CacheLumpName(patcharti[CPlayer->readyArtifact],
 				PU_CACHE));
 			DrSmallNumber(CPlayer->inventory[inv_ptr].count, 201, 182);
 		}
@@ -960,14 +960,14 @@ void DrawMainBar(void)
 	}
 
 	// Frags
-	if(deathmatch)
+	if (deathmatch)
 	{
 		temp = 0;
-		for(i = 0; i < MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
 			temp += CPlayer->frags[i];
 		}
-		if(temp != oldfrags)
+		if (temp != oldfrags)
 		{
 			V_DrawPatch(57, 171, PatchARMCLEAR);
 			DrINumber(temp, 61, 170);
@@ -978,15 +978,15 @@ void DrawMainBar(void)
 	else
 	{
 		temp = HealthMarker;
-		if(temp < 0)
+		if (temp < 0)
 		{
 			temp = 0;
 		}
-		else if(temp > 100)
+		else if (temp > 100)
 		{
 			temp = 100;
 		}
-		if(oldlife != temp)
+		if (oldlife != temp)
 		{
 			oldlife = temp;
 			V_DrawPatch(57, 171, PatchARMCLEAR);
@@ -996,17 +996,17 @@ void DrawMainBar(void)
 	}
 
 	// Keys
-	if(oldkeys != playerkeys)
+	if (oldkeys != playerkeys)
 	{
-		if(CPlayer->keys[key_yellow])
+		if (CPlayer->keys[key_yellow])
 		{
 			V_DrawPatch(153, 164, W_CacheLumpName("ykeyicon", PU_CACHE));
 		}
-		if(CPlayer->keys[key_green])
+		if (CPlayer->keys[key_green])
 		{
 			V_DrawPatch(153, 172, W_CacheLumpName("gkeyicon", PU_CACHE));
 		}
-		if(CPlayer->keys[key_blue])
+		if (CPlayer->keys[key_blue])
 		{
 			V_DrawPatch(153, 180, W_CacheLumpName("bkeyicon", PU_CACHE));
 		}
@@ -1015,14 +1015,14 @@ void DrawMainBar(void)
 	}
 	// Ammo
 	temp = CPlayer->ammo[wpnlev1info[CPlayer->readyweapon].ammo];
-	if(oldammo != temp || oldweapon != CPlayer->readyweapon)
+	if (oldammo != temp || oldweapon != CPlayer->readyweapon)
 	{
 		V_DrawPatch(108, 161, PatchBLACKSQ);
-		if(temp && CPlayer->readyweapon > 0 && CPlayer->readyweapon < 7)
+		if (temp && CPlayer->readyweapon > 0 && CPlayer->readyweapon < 7)
 		{
 			DrINumber(temp, 109, 162);
 			V_DrawPatch(111, 172, W_CacheLumpName(
-				ammopic[CPlayer->readyweapon-1], PU_CACHE));
+				ammopic[CPlayer->readyweapon - 1], PU_CACHE));
 		}
 		oldammo = temp;
 		oldweapon = CPlayer->readyweapon;
@@ -1030,7 +1030,7 @@ void DrawMainBar(void)
 	}
 
 	// Armor
-	if(oldarmor != CPlayer->armorpoints)
+	if (oldarmor != CPlayer->armorpoints)
 	{
 		V_DrawPatch(224, 171, PatchARMCLEAR);
 		DrINumber(CPlayer->armorpoints, 228, 170);
@@ -1050,28 +1050,28 @@ void DrawInventoryBar(void)
 	int i;
 	int x;
 
-	x = inv_ptr-curpos;
+	x = inv_ptr - curpos;
 	UpdateState |= I_STATBAR;
 	V_DrawPatch(34, 160, PatchINVBAR);
-	for(i = 0; i < 7; i++)
+	for (i = 0; i < 7; i++)
 	{
-		if(CPlayer->inventorySlotNum > x+i
-			&& CPlayer->inventory[x+i].type != arti_none)
+		if (CPlayer->inventorySlotNum > x + i
+			&& CPlayer->inventory[x + i].type != arti_none)
 		{
-			V_DrawPatch(50+i*31, 160, W_CacheLumpName(
-				patcharti[CPlayer->inventory[x+i].type], PU_CACHE));
-			DrSmallNumber(CPlayer->inventory[x+i].count, 69+i*31, 182);
+			V_DrawPatch(50 + i * 31, 160, W_CacheLumpName(
+				patcharti[CPlayer->inventory[x + i].type], PU_CACHE));
+			DrSmallNumber(CPlayer->inventory[x + i].count, 69 + i * 31, 182);
 		}
 	}
-	V_DrawPatch(50+curpos*31, 189, PatchSELECTBOX);
-	if(x != 0)
+	V_DrawPatch(50 + curpos * 31, 189, PatchSELECTBOX);
+	if (x != 0)
 	{
-		V_DrawPatch(38, 159,!(leveltime&4) ? PatchINVLFGEM1 :
+		V_DrawPatch(38, 159, !(leveltime & 4) ? PatchINVLFGEM1 :
 			PatchINVLFGEM2);
 	}
-	if(CPlayer->inventorySlotNum-x > 7)
+	if (CPlayer->inventorySlotNum - x > 7)
 	{
-		V_DrawPatch(269, 159,!(leveltime&4) ?
+		V_DrawPatch(269, 159, !(leveltime & 4) ?
 			PatchINVRTGEM1 : PatchINVRTGEM2);
 	}
 }
@@ -1083,7 +1083,7 @@ void DrawFullScreenStuff(void)
 	int temp;
 
 	UpdateState |= I_FULLSCRN;
-	if(CPlayer->mo->health > 0)
+	if (CPlayer->mo->health > 0)
 	{
 		DrBNumber(CPlayer->mo->health, 5, 180);
 	}
@@ -1095,17 +1095,17 @@ void DrawFullScreenStuff(void)
 	/* FS: For Armor */
 	if (!inventory)
 		DrBNumber(CPlayer->armorpoints, 240, 180);
-	
+
 	/* FS: For Ammo */
 	if (!inventory)
-	{	
+	{
 		temp = CPlayer->ammo[wpnlev1info[CPlayer->readyweapon].ammo];
 		{
-			if(temp && CPlayer->readyweapon > 0 && CPlayer->readyweapon < 7)
+			if (temp && CPlayer->readyweapon > 0 && CPlayer->readyweapon < 7)
 			{
 				if (temp < 100)
 				{
-					switch(CPlayer->readyweapon)
+					switch (CPlayer->readyweapon)
 					{
 						case 1:
 						case 2:
@@ -1121,40 +1121,40 @@ void DrawFullScreenStuff(void)
 					DrINumber(temp, 25, 162);
 
 				V_DrawPatch(0, 162, W_CacheLumpName(
-					ammopic[CPlayer->readyweapon-1], PU_CACHE));			
+					ammopic[CPlayer->readyweapon - 1], PU_CACHE));
 			}
 		}
 	}
 
 	/* FS: Draw keys */
-	if(CPlayer->keys[key_yellow])
+	if (CPlayer->keys[key_yellow])
 	{
 		V_DrawPatch(286, 162, W_CacheLumpName("ykeyicon", PU_CACHE));
 	}
-	if(CPlayer->keys[key_green])
+	if (CPlayer->keys[key_green])
 	{
 		V_DrawPatch(296, 162, W_CacheLumpName("gkeyicon", PU_CACHE));
 	}
-	if(CPlayer->keys[key_blue])
+	if (CPlayer->keys[key_blue])
 	{
 		V_DrawPatch(306, 162, W_CacheLumpName("bkeyicon", PU_CACHE));
 	}
 
-	if(deathmatch)
+	if (deathmatch)
 	{
 		temp = 0;
-		for(i=0; i<MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
-			if(playeringame[i])
+			if (playeringame[i])
 			{
 				temp += CPlayer->frags[i];
 			}
 		}
 		DrINumber(temp, 45, 185);
 	}
-	if(!inventory)
+	if (!inventory)
 	{
-		if(CPlayer->readyArtifact > 0)
+		if (CPlayer->readyArtifact > 0)
 		{
 			V_DrawFuzzPatch(286, 170, W_CacheLumpName("ARTIBOX",
 				PU_CACHE));
@@ -1165,28 +1165,28 @@ void DrawFullScreenStuff(void)
 	}
 	else
 	{
-		x = inv_ptr-curpos;
-		for(i = 0; i < 7; i++)
+		x = inv_ptr - curpos;
+		for (i = 0; i < 7; i++)
 		{
-			V_DrawFuzzPatch(50+i*31, 168, W_CacheLumpName("ARTIBOX",
+			V_DrawFuzzPatch(50 + i * 31, 168, W_CacheLumpName("ARTIBOX",
 				PU_CACHE));
-			if(CPlayer->inventorySlotNum > x+i
-				&& CPlayer->inventory[x+i].type != arti_none)
+			if (CPlayer->inventorySlotNum > x + i
+				&& CPlayer->inventory[x + i].type != arti_none)
 			{
-				V_DrawPatch(50+i*31, 168, W_CacheLumpName(
-					patcharti[CPlayer->inventory[x+i].type], PU_CACHE));
-				DrSmallNumber(CPlayer->inventory[x+i].count, 69+i*31, 190);
+				V_DrawPatch(50 + i * 31, 168, W_CacheLumpName(
+					patcharti[CPlayer->inventory[x + i].type], PU_CACHE));
+				DrSmallNumber(CPlayer->inventory[x + i].count, 69 + i * 31, 190);
 			}
 		}
-		V_DrawPatch(50+curpos*31, 197, PatchSELECTBOX);
-		if(x != 0)
+		V_DrawPatch(50 + curpos * 31, 197, PatchSELECTBOX);
+		if (x != 0)
 		{
-			V_DrawPatch(38, 167, !(leveltime&4) ? PatchINVLFGEM1 :
+			V_DrawPatch(38, 167, !(leveltime & 4) ? PatchINVLFGEM1 :
 				PatchINVLFGEM2);
 		}
-		if(CPlayer->inventorySlotNum-x > 7)
+		if (CPlayer->inventorySlotNum - x > 7)
 		{
-			V_DrawPatch(269, 167, !(leveltime&4) ?
+			V_DrawPatch(269, 167, !(leveltime & 4) ?
 				PatchINVRTGEM1 : PatchINVRTGEM2);
 		}
 	}
@@ -1200,9 +1200,9 @@ void DrawFullScreenStuff(void)
 
 boolean SB_Responder(event_t *event)
 {
-	if(event->type == ev_keydown)
+	if (event->type == ev_keydown)
 	{
-		if(HandleCheats(event->data1))
+		if (HandleCheats(event->data1))
 		{ // Need to eat the key
 			return(true);
 		}
@@ -1226,21 +1226,21 @@ static boolean HandleCheats(byte key)
 #if 0
 	if (!M_CheckParm("-cheats")) /* FS: Cheating in multiplayer */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 		{ // Can't cheat in a net-game, or in nightmare mode
 			return(false);
 		}
 	}
 #endif
 
-	if(players[consoleplayer].health <= 0)
+	if (players[consoleplayer].health <= 0)
 	{ // Dead players can't cheat
 		return(false);
 	}
 	eat = false;
-	for(i = 0; Cheats[i].func != NULL; i++)
+	for (i = 0; Cheats[i].func != NULL; i++)
 	{
-		if(CheatAddKey(&Cheats[i], key, &eat))
+		if (CheatAddKey(&Cheats[i], key, &eat))
 		{
 			Cheats[i].func(&players[consoleplayer], &Cheats[i]);
 		}
@@ -1258,18 +1258,18 @@ static boolean HandleCheats(byte key)
 
 static boolean CheatAddKey(Cheat_t *cheat, byte key, boolean *eat)
 {
-	if(!cheat->pos)
+	if (!cheat->pos)
 	{
 		cheat->pos = cheat->sequence;
 		cheat->currentArg = 0;
 	}
-	if(*cheat->pos == 0)
+	if (*cheat->pos == 0)
 	{
 		*eat = true;
 		cheat->args[cheat->currentArg++] = key;
 		cheat->pos++;
 	}
-	else if(CheatLookup[key] == *cheat->pos)
+	else if (CheatLookup[key] == *cheat->pos)
 	{
 		cheat->pos++;
 	}
@@ -1278,7 +1278,7 @@ static boolean CheatAddKey(Cheat_t *cheat, byte key, boolean *eat)
 		cheat->pos = cheat->sequence;
 		cheat->currentArg = 0;
 	}
-	if(*cheat->pos == 0xff)
+	if (*cheat->pos == 0xff)
 	{
 		cheat->pos = cheat->sequence;
 		cheat->currentArg = 0;
@@ -1297,13 +1297,13 @@ static void CheatGodFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
 	player->cheats ^= CF_GODMODE;
-	if(player->cheats&CF_GODMODE)
+	if (player->cheats & CF_GODMODE)
 	{
 		P_SetMessage(player, TXT_CHEATGODON, false);
 	}
@@ -1318,13 +1318,13 @@ static void CheatNoClipFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
 	player->cheats ^= CF_NOCLIP;
-	if(player->cheats&CF_NOCLIP)
+	if (player->cheats & CF_NOCLIP)
 	{
 		P_SetMessage(player, TXT_CHEATNOCLIPON, false);
 	}
@@ -1341,32 +1341,32 @@ static void CheatWeaponsFunc(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
 	player->armorpoints = 200;
 	player->armortype = 2;
-	if(!player->backpack)
+	if (!player->backpack)
 	{
-		for(i = 0; i < NUMAMMO; i++)
+		for (i = 0; i < NUMAMMO; i++)
 		{
 			player->maxammo[i] *= 2;
 		}
 		player->backpack = true;
 	}
-	for(i = 0; i < NUMWEAPONS-1; i++)
+	for (i = 0; i < NUMWEAPONS - 1; i++)
 	{
 		player->weaponowned[i] = true;
 	}
-	if(shareware)
+	if (shareware)
 	{
 		player->weaponowned[wp_skullrod] = false;
 		player->weaponowned[wp_phoenixrod] = false;
 		player->weaponowned[wp_mace] = false;
 	}
-	for(i = 0; i < NUMAMMO; i++)
+	for (i = 0; i < NUMAMMO; i++)
 	{
 		player->ammo[i] = player->maxammo[i];
 	}
@@ -1377,12 +1377,12 @@ static void CheatPowerFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	if(player->powers[pw_weaponlevel2])
+	if (player->powers[pw_weaponlevel2])
 	{
 		player->powers[pw_weaponlevel2] = 0;
 		P_SetMessage(player, TXT_CHEATPOWEROFF, false);
@@ -1398,12 +1398,12 @@ static void CheatHealthFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	if(player->chickenTics)
+	if (player->chickenTics)
 	{
 		player->health = player->mo->health = MAXCHICKENHEALTH;
 	}
@@ -1420,7 +1420,7 @@ static void CheatKeysFunc(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
@@ -1436,13 +1436,13 @@ static void CheatSoundFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
 	DebugSound = !DebugSound;
-	if(DebugSound)
+	if (DebugSound)
 	{
 		P_SetMessage(player, TXT_CHEATSOUNDON, false);
 	}
@@ -1458,13 +1458,13 @@ static void CheatTickerFunc(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
 	DisplayTicker = !DisplayTicker;
-	if(DisplayTicker)
+	if (DisplayTicker)
 	{
 		P_SetMessage(player, TXT_CHEATTICKERON, false);
 	}
@@ -1478,7 +1478,7 @@ static void CheatArtifact1Func(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
@@ -1490,7 +1490,7 @@ static void CheatArtifact2Func(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
@@ -1507,38 +1507,38 @@ static void CheatArtifact3Func(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	type = cheat->args[0]-'a'+1;
-	count = cheat->args[1]-'0';
-	if(type == 26 && count == 0)
+	type = cheat->args[0] - 'a' + 1;
+	count = cheat->args[1] - '0';
+	if (type == 26 && count == 0)
 	{ // All artifacts
-		for(i = arti_none+1; i < NUMARTIFACTS; i++)
+		for (i = arti_none + 1; i < NUMARTIFACTS; i++)
 		{
-			if(shareware && (i == arti_superhealth
+			if (shareware && (i == arti_superhealth
 				|| i == arti_teleport))
 			{
 				continue;
 			}
-			for(j = 0; j < 16; j++)
+			for (j = 0; j < 16; j++)
 			{
 				P_GiveArtifact(player, i, NULL);
 			}
 		}
 		P_SetMessage(player, TXT_CHEATARTIFACTS3, false);
 	}
-	else if(type > arti_none && type < NUMARTIFACTS
+	else if (type > arti_none && type < NUMARTIFACTS
 		&& count > 0 && count < 10)
 	{
-		if(shareware && (type == arti_superhealth || type == arti_teleport))
+		if (shareware && (type == arti_superhealth || type == arti_teleport))
 		{
 			P_SetMessage(player, TXT_CHEATARTIFACTSFAIL, false);
 			return;
 		}
-		for(i = 0; i < count; i++)
+		for (i = 0; i < count; i++)
 		{
 			P_GiveArtifact(player, type, NULL);
 		}
@@ -1557,14 +1557,14 @@ static void CheatWarpFunc(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	episode = cheat->args[0]-'0';
-	map = cheat->args[1]-'0';
-	if(M_ValidEpisodeMap(episode, map))
+	episode = cheat->args[0] - '0';
+	map = cheat->args[1] - '0';
+	if (M_ValidEpisodeMap(episode, map))
 	{
 		G_DeferedInitNew(gameskill, episode, map);
 		P_SetMessage(player, TXT_CHEATWARP, false);
@@ -1573,23 +1573,23 @@ static void CheatWarpFunc(player_t *player, Cheat_t *cheat)
 
 static void CheatChickenFunc(player_t *player, Cheat_t *cheat)
 {
-	extern boolean P_UndoPlayerChicken(player_t *player);
+	extern boolean P_UndoPlayerChicken(player_t * player);
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	if(player->chickenTics)
+	if (player->chickenTics)
 	{
-		if(P_UndoPlayerChicken(player))
+		if (P_UndoPlayerChicken(player))
 		{
 			P_SetMessage(player, TXT_CHEATCHICKENOFF, false);
 		}
 	}
-	else if(P_ChickenMorphPlayer(player))
+	else if (P_ChickenMorphPlayer(player))
 	{
 		P_SetMessage(player, TXT_CHEATCHICKENON, false);
 	}
@@ -1599,7 +1599,7 @@ static void CheatMassacreFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
@@ -1614,16 +1614,16 @@ static void CheatIDKFAFunc(player_t *player, Cheat_t *cheat)
 
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
 	S_StartSound(NULL, sfx_dorcls);
-	if(player->chickenTics)
+	if (player->chickenTics)
 	{
 		return;
 	}
-	for(i = 1; i < 8; i++)
+	for (i = 1; i < 8; i++)
 	{
 		player->weaponowned[i] = false;
 	}
@@ -1635,7 +1635,7 @@ static void CheatIDDQDFunc(player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
 
@@ -1651,17 +1651,17 @@ static void CheatIDMUSFunc(player_t *player, Cheat_t *cheat)
 
 	S_StartSound(NULL, sfx_dorcls);
 
-	episode = cheat->args[0]-'0';
-	map = cheat->args[1]-'0';
+	episode = cheat->args[0] - '0';
+	map = cheat->args[1] - '0';
 
-	if(M_ValidEpisodeMap(episode, map))
+	if (M_ValidEpisodeMap(episode, map))
 	{
 		P_SetMessage(player, "MUSIC CHANGE", true);
-		S_StartSong((episode-1)*9 + map-1, true);
+		S_StartSong((episode - 1) * 9 + map - 1, true);
 	}
 	else if (episode == 9)
 	{
-		switch(map)
+		switch (map)
 		{
 			case 9:
 				P_SetMessage(player, "MUSIC CHANGE", true);
@@ -1690,27 +1690,27 @@ static void CheatFinishLevelFunc (player_t *player, Cheat_t *cheat)
 {
 	if (!M_CheckParm("-cheats")) /* FS */
 	{
-		if(netgame || gameskill == sk_nightmare)
+		if (netgame || gameskill == sk_nightmare)
 			return;
 	}
-	
+
 	S_StartSound(NULL, sfx_dorcls);
-	switch(gamemap)
+	switch (gamemap)
 	{
 		case 3:
-			if(gameepisode == 5)
+			if (gameepisode == 5)
 				G_SecretExitLevel();
 			else
 				G_ExitLevel();
-			break;		
+			break;
 		case 4:
-			if(gameepisode == 2 || gameepisode == 3 || gameepisode == 4)
+			if (gameepisode == 2 || gameepisode == 3 || gameepisode == 4)
 				G_SecretExitLevel();
 			else
 				G_ExitLevel();
 			break;
 		case 6:
-			if(gameepisode == 1)
+			if (gameepisode == 1)
 				G_SecretExitLevel();
 			else
 				G_ExitLevel();

@@ -42,29 +42,29 @@ void V_DrawPatch(int x, int y, patch_t *patch)
 
 	y -= SHORT(patch->topoffset);
 	x -= SHORT(patch->leftoffset);
-	if(x < 0 || x+SHORT(patch->width) > SCREENWIDTH || y < 0
-		|| y+SHORT(patch->height) > SCREENHEIGHT)
+	if (x < 0 || x + SHORT(patch->width) > SCREENWIDTH || y < 0
+		|| y + SHORT(patch->height) > SCREENHEIGHT)
 	{
 		I_Error("Bad V_DrawPatch");
 	}
 	col = 0;
-	desttop = screen+y*SCREENWIDTH+x;
+	desttop = screen + y * SCREENWIDTH + x;
 	w = SHORT(patch->width);
-	for(; col < w; x++, col++, desttop++)
+	for (; col < w; x++, col++, desttop++)
 	{
-		column = (column_t *)((byte *)patch+LONG(patch->columnofs[col]));
+		column = (column_t *)((byte *)patch + LONG(patch->columnofs[col]));
 		// Step through the posts in a column
-		while(column->topdelta != 0xff)
+		while (column->topdelta != 0xff)
 		{
-			source = (byte *)column+3;
-			dest = desttop+column->topdelta*SCREENWIDTH;
+			source = (byte *)column + 3;
+			dest = desttop + column->topdelta * SCREENWIDTH;
 			count = column->length;
-			while(count--)
+			while (count--)
 			{
 				*dest = *source++;
 				dest += SCREENWIDTH;
 			}
-			column = (column_t *)((byte *)column+column->length+4);
+			column = (column_t *)((byte *)column + column->length + 4);
 		}
 	}
 }
@@ -82,41 +82,41 @@ extern byte *tinttable;
 
 void V_DrawFuzzPatch (int x, int y, patch_t *patch)
 {
-	int			count,col;
-	column_t	*column;
-	byte		*desttop, *dest, *source;
+	int			count, col;
+	column_t *column;
+	byte *desttop, *dest, *source;
 	int			w;
-	
+
 	y -= SHORT(patch->topoffset);
 	x -= SHORT(patch->leftoffset);
 
-	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
+	if (x<0 || x + SHORT(patch->width) >SCREENWIDTH || y<0 || y + SHORT(patch->height)>SCREENHEIGHT)
 		I_Error ("Bad V_DrawPatch");
 
 	col = 0;
-	desttop = screen+y*SCREENWIDTH+x;
-	
+	desttop = screen + y * SCREENWIDTH + x;
+
 	w = SHORT(patch->width);
-	for ( ; col<w ; x++, col++, desttop++)
+	for (; col < w; x++, col++, desttop++)
 	{
 		column = (column_t *)((byte *)patch + LONG(patch->columnofs[col]));
 
-// step through the posts in a column
-	
-		while (column->topdelta != 0xff )
+		// step through the posts in a column
+
+		while (column->topdelta != 0xff)
 		{
 			source = (byte *)column + 3;
-			dest = desttop + column->topdelta*SCREENWIDTH;
+			dest = desttop + column->topdelta * SCREENWIDTH;
 			count = column->length;
-			
+
 			while (count--)
 			{
-				*dest = tinttable[((*dest)<<8) + *source++];
+				*dest = tinttable[((*dest) << 8) + *source++];
 				dest += SCREENWIDTH;
 			}
-			column = (column_t *)(  (byte *)column + column->length + 4 );
+			column = (column_t *)((byte *)column + column->length + 4);
 		}
-	}			
+	}
 }
 
 /*
@@ -131,48 +131,48 @@ void V_DrawFuzzPatch (int x, int y, patch_t *patch)
 
 void V_DrawShadowedPatch(int x, int y, patch_t *patch)
 {
-	int			count,col;
-	column_t	*column;
-	byte		*desttop, *dest, *source;
-	byte		*desttop2, *dest2;
+	int			count, col;
+	column_t *column;
+	byte *desttop, *dest, *source;
+	byte *desttop2, *dest2;
 	int			w;
-	
+
 	y -= SHORT(patch->topoffset);
 	x -= SHORT(patch->leftoffset);
 
-	if (x<0||x+SHORT(patch->width) >SCREENWIDTH || y<0 || y+SHORT(patch->height)>SCREENHEIGHT)
+	if (x<0 || x + SHORT(patch->width) >SCREENWIDTH || y<0 || y + SHORT(patch->height)>SCREENHEIGHT)
 		I_Error ("Bad V_DrawPatch");
 
 	col = 0;
-	desttop = screen+y*SCREENWIDTH+x;
-	desttop2 = screen+(y+2)*SCREENWIDTH+x+2;
-	
+	desttop = screen + y * SCREENWIDTH + x;
+	desttop2 = screen + (y + 2) * SCREENWIDTH + x + 2;
+
 	w = SHORT(patch->width);
-	for ( ; col<w ; x++, col++, desttop++, desttop2++)
+	for (; col < w; x++, col++, desttop++, desttop2++)
 	{
 		column = (column_t *)((byte *)patch + LONG(patch->columnofs[col]));
 
-// step through the posts in a column
-	
-		while (column->topdelta != 0xff )
+		// step through the posts in a column
+
+		while (column->topdelta != 0xff)
 		{
 			source = (byte *)column + 3;
-			dest = desttop + column->topdelta*SCREENWIDTH;
-			dest2 = desttop2 + column->topdelta*SCREENWIDTH;
+			dest = desttop + column->topdelta * SCREENWIDTH;
+			dest2 = desttop2 + column->topdelta * SCREENWIDTH;
 			count = column->length;
-			
+
 			while (count--)
 			{
-				*dest2 = tinttable[((*dest2)<<8)];
+				*dest2 = tinttable[((*dest2) << 8)];
 				dest2 += SCREENWIDTH;
 				*dest = *source++;
 				dest += SCREENWIDTH;
 
 			}
-			column = (column_t *)(  (byte *)column + column->length
-+ 4 );
+			column = (column_t *)((byte *)column + column->length
+				+ 4);
 		}
-	}			
+	}
 }
 
 //---------------------------------------------------------------------------
@@ -183,7 +183,7 @@ void V_DrawShadowedPatch(int x, int y, patch_t *patch)
 
 void V_DrawRawScreen(byte *raw)
 {
-	memcpy(screen, raw, SCREENWIDTH*SCREENHEIGHT);
+	memcpy(screen, raw, SCREENWIDTH * SCREENHEIGHT);
 }
 
 //---------------------------------------------------------------------------
@@ -195,5 +195,5 @@ void V_DrawRawScreen(byte *raw)
 void V_Init(void)
 {
 	// I_AllocLow will put screen in low dos memory on PCs.
-	screen = I_AllocLow(SCREENWIDTH*SCREENHEIGHT);
+	screen = I_AllocLow(SCREENWIDTH * SCREENHEIGHT);
 }

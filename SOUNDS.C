@@ -163,7 +163,7 @@ sfxinfo_t S_sfx[] =
 	{ "sbtpai", NULL, 32, -1, NULL, 0, 2 },
 	{ "plroof", NULL, 32, -1, NULL, 0, 2 },
 	{ "plrpai", NULL, 32, -1, NULL, 0, 2 },
- 	{ "plrdth", NULL, 80, -1, NULL, 0, 2 },
+	{ "plrdth", NULL, 80, -1, NULL, 0, 2 },
 	{ "gibdth", NULL, 100, -1, NULL, 0, 2 },
 	{ "plrwdth", NULL, 80, -1, NULL, 0, 2 },
 	{ "plrcdth", NULL, 100, -1, NULL, 0, 2 },

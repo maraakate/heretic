@@ -1372,8 +1372,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -1399,8 +1399,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -1426,8 +1426,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -1453,12 +1453,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1480,12 +1480,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1507,12 +1507,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_SHADOW|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_SHADOW | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1534,12 +1534,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1561,12 +1561,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1588,12 +1588,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1615,12 +1615,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1642,12 +1642,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1668,13 +1668,13 @@ S_NULL,		// crashstate
 S_EGGFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-18*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+18 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -1696,12 +1696,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1723,12 +1723,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1750,12 +1750,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1777,12 +1777,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_phohit,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOGRAVITY|MF_SHADOW,		// flags
+MF_NOGRAVITY | MF_SHADOW,		// flags
 0		// flags2
  },
 
@@ -1804,12 +1804,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_COUNTITEM,		// flags
+MF_SPECIAL | MF_COUNTITEM,		// flags
 MF2_FLOATBOB		// flags2
  },
 
@@ -1831,13 +1831,13 @@ S_POD_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_podexp,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-54*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+54 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_NOBLOOD|MF_SHOOTABLE|MF_DROPOFF,		// flags
-MF2_WINDTHRUST|MF2_PUSHABLE|MF2_SLIDE|MF2_PASSMOBJ|MF2_TELESTOMP		// flags2
+MF_SOLID | MF_NOBLOOD | MF_SHOOTABLE | MF_DROPOFF,		// flags
+MF2_WINDTHRUST | MF2_PUSHABLE | MF2_SLIDE | MF2_PASSMOBJ | MF2_TELESTOMP		// flags2
  },
 
 {		// MT_PODGOO
@@ -1858,13 +1858,13 @@ S_PODGOOX,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-2*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+2 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_NOTELEPORT|MF2_LOGRAV|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_NOTELEPORT | MF2_LOGRAV | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_PODGENERATOR
@@ -1885,12 +1885,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOSECTOR,		// flags
 0		// flags2
  },
 
@@ -1912,13 +1912,13 @@ S_SPLASHX,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-2*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+2 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_NOTELEPORT|MF2_LOGRAV|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_NOTELEPORT | MF2_LOGRAV | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_SPLASHBASE
@@ -1939,8 +1939,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -1966,8 +1966,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -1993,12 +1993,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_SHADOW,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_SHADOW,		// flags
 0		// flags2
  },
 
@@ -2020,13 +2020,13 @@ S_SLUDGECHUNKX,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-2*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+2 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_NOTELEPORT|MF2_LOGRAV|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_NOTELEPORT | MF2_LOGRAV | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_SLUDGESPLASH
@@ -2047,8 +2047,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2074,12 +2074,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-70*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+70 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2101,12 +2101,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-60*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+60 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2128,12 +2128,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-45*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+45 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2155,12 +2155,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-35*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+35 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2182,12 +2182,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-60*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+60 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2209,8 +2209,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-12*FRACUNIT,		// radius
-54*FRACUNIT,		// height
+12 * FRACUNIT,		// radius
+54 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2236,8 +2236,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-34*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+34 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2263,8 +2263,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-8*FRACUNIT,		// radius
-32*FRACUNIT,		// height
+8 * FRACUNIT,		// radius
+32 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2290,8 +2290,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-12*FRACUNIT,		// radius
-64*FRACUNIT,		// height
+12 * FRACUNIT,		// radius
+64 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2317,12 +2317,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-8*FRACUNIT,		// radius
-36*FRACUNIT,		// height
+8 * FRACUNIT,		// radius
+36 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SOLID | MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2344,12 +2344,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-12*FRACUNIT,		// radius
-68*FRACUNIT,		// height
+12 * FRACUNIT,		// radius
+68 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SOLID | MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2371,8 +2371,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-44*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+44 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2398,8 +2398,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-12*FRACUNIT,		// radius
-32*FRACUNIT,		// height
+12 * FRACUNIT,		// radius
+32 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2425,8 +2425,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-14*FRACUNIT,		// radius
-128*FRACUNIT,		// height
+14 * FRACUNIT,		// radius
+128 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2452,12 +2452,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-23*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+23 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2479,12 +2479,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-27*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+27 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2506,8 +2506,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2533,12 +2533,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-8*FRACUNIT,		// radius
-104*FRACUNIT,		// height
+8 * FRACUNIT,		// radius
+104 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_SPAWNCEILING|MF_NOGRAVITY,		// flags
+MF_SOLID | MF_SPAWNCEILING | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2560,8 +2560,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-50*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+50 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2587,8 +2587,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-50*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+50 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2614,8 +2614,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-50*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+50 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2641,12 +2641,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_NOGRAVITY,		// flags
+MF_SOLID | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2668,8 +2668,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-12*FRACUNIT,		// radius
-20*FRACUNIT,		// height
+12 * FRACUNIT,		// radius
+20 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -2694,14 +2694,14 @@ S_NULL,		// crashstate
 S_VOLCANOBALLX1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_volhit,		// deathsound
-2*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+2 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_VOLCANOTBLAST
@@ -2721,14 +2721,14 @@ S_NULL,		// crashstate
 S_VOLCANOTBALLX1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
-2*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+2 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_TELEGLITGEN
@@ -2749,12 +2749,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_NOSECTOR,		// flags
 0		// flags2
  },
 
@@ -2776,12 +2776,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_NOSECTOR,		// flags
 0		// flags2
  },
 
@@ -2803,12 +2803,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_MISSILE,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_MISSILE,		// flags
 0		// flags2
  },
 
@@ -2830,12 +2830,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_MISSILE,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_MISSILE,		// flags
 0		// flags2
  },
 
@@ -2857,12 +2857,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2884,12 +2884,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOSECTOR,		// flags
 0		// flags2
  },
 
@@ -2911,12 +2911,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2938,12 +2938,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2965,12 +2965,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -2992,8 +2992,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3019,12 +3019,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_SHADOW,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_SHADOW,		// flags
 0		// flags2
  },
 
@@ -3046,12 +3046,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_SHADOW,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_SHADOW,		// flags
 0		// flags2
  },
 
@@ -3073,8 +3073,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3099,13 +3099,13 @@ S_NULL,		// crashstate
 S_BLASTERFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_blshit,		// deathsound
-184*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+184 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3127,13 +3127,13 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_SHADOW,		// flags
-MF2_NOTELEPORT|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_SHADOW,		// flags
+MF2_NOTELEPORT | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_RIPPER
@@ -3153,14 +3153,14 @@ S_NULL,		// crashstate
 S_RIPPERX1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-14*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+14 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_RIP		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_RIP		// flags2
  },
 
 {		// MT_BLASTERPUFF1
@@ -3181,12 +3181,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -3208,12 +3208,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -3235,8 +3235,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3261,14 +3261,14 @@ S_NULL,		// crashstate
 S_MACEFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-20*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_FLOORBOUNCE|MF2_THRUGHOST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_FLOORBOUNCE | MF2_THRUGHOST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_MACEFX2
@@ -3288,14 +3288,14 @@ S_NULL,		// crashstate
 S_MACEFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 6,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_FLOORBOUNCE|MF2_THRUGHOST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_FLOORBOUNCE | MF2_THRUGHOST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_MACEFX3
@@ -3315,14 +3315,14 @@ S_NULL,		// crashstate
 S_MACEFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-7*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+7 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 4,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_FLOORBOUNCE|MF2_THRUGHOST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_FLOORBOUNCE | MF2_THRUGHOST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_MACEFX4
@@ -3342,14 +3342,14 @@ S_NULL,		// crashstate
 S_MACEFXI4_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-7*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+7 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 18,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_FLOORBOUNCE|MF2_THRUGHOST|MF2_TELESTOMP		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_FLOORBOUNCE | MF2_THRUGHOST | MF2_TELESTOMP		// flags2
  },
 
 {		// MT_WSKULLROD
@@ -3370,8 +3370,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3396,20 +3396,20 @@ S_NULL,		// crashstate
 S_HRODFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-22*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+22 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 3,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_HORNRODFX2
 -1,		// doomednum
 S_HRODFX2_1,		// spawnstate
-4*35,		// spawnhealth
+4 * 35,		// spawnhealth
 S_NULL,		// seestate
 sfx_hrnsht,		// seesound
 8,		// reactiontime
@@ -3423,13 +3423,13 @@ S_NULL,		// crashstate
 S_HRODFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_ramphit,		// deathsound
-22*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+22 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 10,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3450,13 +3450,13 @@ S_NULL,		// crashstate
 S_RAINPLR1X_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-12*FRACUNIT,		// speed
-5*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+12 * FRACUNIT,		// speed
+5 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 5,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3477,13 +3477,13 @@ S_NULL,		// crashstate
 S_RAINPLR2X_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-12*FRACUNIT,		// speed
-5*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+12 * FRACUNIT,		// speed
+5 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 5,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3504,13 +3504,13 @@ S_NULL,		// crashstate
 S_RAINPLR3X_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-12*FRACUNIT,		// speed
-5*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+12 * FRACUNIT,		// speed
+5 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 5,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3531,13 +3531,13 @@ S_NULL,		// crashstate
 S_RAINPLR4X_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-12*FRACUNIT,		// speed
-5*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+12 * FRACUNIT,		// speed
+5 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 5,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3558,13 +3558,13 @@ S_NULL,		// crashstate
 S_GWANDFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_gldhit,		// deathsound
-22*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+22 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3585,13 +3585,13 @@ S_NULL,		// crashstate
 S_GWANDFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-18*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+18 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3613,12 +3613,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -3640,12 +3640,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -3667,8 +3667,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3693,14 +3693,14 @@ S_NULL,		// crashstate
 S_PHOENIXFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_phohit,		// deathsound
-20*FRACUNIT,		// speed
-11*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+11 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 20,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_THRUGHOST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_THRUGHOST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_PHOENIXPUFF
@@ -3721,13 +3721,13 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_SHADOW,		// flags
-MF2_NOTELEPORT|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_SHADOW,		// flags
+MF2_NOTELEPORT | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_PHOENIXFX2
@@ -3747,14 +3747,14 @@ S_NULL,		// crashstate
 S_PHOENIXFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-6*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+6 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_MISC15
@@ -3775,8 +3775,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3801,13 +3801,13 @@ S_NULL,		// crashstate
 S_CRBOWFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-30*FRACUNIT,		// speed
-11*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+30 * FRACUNIT,		// speed
+11 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 10,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3828,13 +3828,13 @@ S_NULL,		// crashstate
 S_CRBOWFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-32*FRACUNIT,		// speed
-11*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+32 * FRACUNIT,		// speed
+11 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 6,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -3855,14 +3855,14 @@ S_NULL,		// crashstate
 S_CRBOWFXI3_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-20*FRACUNIT,		// speed
-11*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+11 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_THRUGHOST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_THRUGHOST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_CRBOWFX4
@@ -3883,8 +3883,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3910,8 +3910,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -3937,13 +3937,13 @@ S_BLOODSPLATTERX,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-2*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+2 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_NOTELEPORT|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_NOTELEPORT | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_PLAYER
@@ -3964,13 +3964,13 @@ S_PLAY_DIE1,		// deathstate
 S_PLAY_XDIE1,		// xdeathstate
 sfx_plrdth,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-56*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+56 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_DROPOFF|MF_PICKUP|MF_NOTDMATCH,		// flags
-MF2_WINDTHRUST|MF2_FOOTCLIP|MF2_SLIDE|MF2_PASSMOBJ|MF2_TELESTOMP		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_DROPOFF | MF_PICKUP | MF_NOTDMATCH,		// flags
+MF2_WINDTHRUST | MF2_FOOTCLIP | MF2_SLIDE | MF2_PASSMOBJ | MF2_TELESTOMP		// flags2
  },
 
 {		// MT_BLOODYSKULL
@@ -3991,13 +3991,13 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-4*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+4 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_DROPOFF,		// flags
-MF2_LOGRAV|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_DROPOFF,		// flags
+MF2_LOGRAV | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_CHICPLAYER
@@ -4018,13 +4018,13 @@ S_CHICKEN_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_chicdth,		// deathsound
 0,		// speed
-16*FRACUNIT,		// radius
-24*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+24 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_DROPOFF|MF_NOTDMATCH,		// flags
-MF2_WINDTHRUST|MF2_SLIDE|MF2_PASSMOBJ|MF2_FOOTCLIP|MF2_LOGRAV|MF2_TELESTOMP		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_DROPOFF | MF_NOTDMATCH,		// flags
+MF2_WINDTHRUST | MF2_SLIDE | MF2_PASSMOBJ | MF2_FOOTCLIP | MF2_LOGRAV | MF2_TELESTOMP		// flags2
  },
 
 {		// MT_CHICKEN
@@ -4045,13 +4045,13 @@ S_CHICKEN_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_chicdth,		// deathsound
 4,		// speed
-9*FRACUNIT,		// radius
-22*FRACUNIT,		// height
+9 * FRACUNIT,		// radius
+22 * FRACUNIT,		// height
 40,		// mass
 0,		// damage
 sfx_chicact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_DROPOFF,		// flags
-MF2_WINDTHRUST|MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_DROPOFF,		// flags
+MF2_WINDTHRUST | MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_FEATHER
@@ -4072,13 +4072,13 @@ S_FEATHERX,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-2*FRACUNIT,		// radius
-4*FRACUNIT,		// height
+2 * FRACUNIT,		// radius
+4 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF,		// flags
-MF2_NOTELEPORT|MF2_LOGRAV|MF2_CANNOTPUSH|MF2_WINDTHRUST		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF,		// flags
+MF2_NOTELEPORT | MF2_LOGRAV | MF2_CANNOTPUSH | MF2_WINDTHRUST		// flags2
  },
 
 {		// MT_MUMMY
@@ -4099,13 +4099,13 @@ S_MUMMY_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_mumdth,		// deathsound
 12,		// speed
-22*FRACUNIT,		// radius
-62*FRACUNIT,		// height
+22 * FRACUNIT,		// radius
+62 * FRACUNIT,		// height
 75,		// mass
 0,		// damage
 sfx_mumact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_MUMMYLEADER
@@ -4126,13 +4126,13 @@ S_MUMMY_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_mumdth,		// deathsound
 12,		// speed
-22*FRACUNIT,		// radius
-62*FRACUNIT,		// height
+22 * FRACUNIT,		// radius
+62 * FRACUNIT,		// height
 75,		// mass
 0,		// damage
 sfx_mumact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_MUMMYGHOST
@@ -4153,13 +4153,13 @@ S_MUMMY_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_mumdth,		// deathsound
 12,		// speed
-22*FRACUNIT,		// radius
-62*FRACUNIT,		// height
+22 * FRACUNIT,		// radius
+62 * FRACUNIT,		// height
 75,		// mass
 0,		// damage
 sfx_mumact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_SHADOW,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_SHADOW,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_MUMMYLEADERGHOST
@@ -4180,13 +4180,13 @@ S_MUMMY_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_mumdth,		// deathsound
 12,		// speed
-22*FRACUNIT,		// radius
-62*FRACUNIT,		// height
+22 * FRACUNIT,		// radius
+62 * FRACUNIT,		// height
 75,		// mass
 0,		// damage
 sfx_mumact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_SHADOW,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_SHADOW,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_MUMMYSOUL
@@ -4207,12 +4207,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
 0		// flags2
  },
 
@@ -4233,13 +4233,13 @@ S_NULL,		// crashstate
 S_MUMMYFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-9*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-14*FRACUNIT,		// height
+9 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+14 * FRACUNIT,		// height
 100,		// mass
 4,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4261,13 +4261,13 @@ S_BEAST_DIE1,		// deathstate
 S_BEAST_XDIE1,		// xdeathstate
 sfx_bstdth,		// deathsound
 14,		// speed
-32*FRACUNIT,		// radius
-74*FRACUNIT,		// height
+32 * FRACUNIT,		// radius
+74 * FRACUNIT,		// height
 200,		// mass
 0,		// damage
 sfx_bstact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_BEASTBALL
@@ -4287,14 +4287,14 @@ S_NULL,		// crashstate
 S_BEASTBALLX1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-12*FRACUNIT,		// speed
-9*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+12 * FRACUNIT,		// speed
+9 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 4,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_BURNBALL
@@ -4314,13 +4314,13 @@ S_NULL,		// crashstate
 S_BEASTBALLX1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-6*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+6 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_MISSILE,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_MISSILE,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4341,13 +4341,13 @@ S_NULL,		// crashstate
 S_BEASTBALLX1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-6*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+6 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_MISSILE,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_MISSILE,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4368,13 +4368,13 @@ S_NULL,		// crashstate
 S_PUFFY1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-6*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+6 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY|MF_MISSILE,		// flags
+MF_NOBLOCKMAP | MF_NOGRAVITY | MF_MISSILE,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4396,13 +4396,13 @@ S_SNAKE_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_snkdth,		// deathsound
 10,		// speed
-22*FRACUNIT,		// radius
-70*FRACUNIT,		// height
+22 * FRACUNIT,		// radius
+70 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_snkact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_SNAKEPRO_A
@@ -4422,14 +4422,14 @@ S_NULL,		// crashstate
 S_SNAKEPRO_AX1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-14*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+14 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_SNAKEPRO_B
@@ -4449,13 +4449,13 @@ S_NULL,		// crashstate
 S_SNAKEPRO_BX1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-14*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+14 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 3,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4477,12 +4477,12 @@ S_HEAD_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_heddth,		// deathsound
 6,		// speed
-40*FRACUNIT,		// radius
-72*FRACUNIT,		// height
+40 * FRACUNIT,		// radius
+72 * FRACUNIT,		// height
 325,		// mass
 0,		// damage
 sfx_hedact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_NOBLOOD,		// flags
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_NOBLOOD,		// flags
 MF2_PASSMOBJ		// flags2
  },
 
@@ -4503,14 +4503,14 @@ S_NULL,		// crashstate
 S_HEADFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-13*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+13 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_THRUGHOST		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_THRUGHOST		// flags2
  },
 
 {		// MT_HEADFX2
@@ -4530,13 +4530,13 @@ S_NULL,		// crashstate
 S_HEADFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-8*FRACUNIT,		// speed
-12*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+8 * FRACUNIT,		// speed
+12 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 3,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4557,14 +4557,14 @@ S_NULL,		// crashstate
 S_HEADFXI3_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-14*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+14 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 5,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_WHIRLWIND
@@ -4584,13 +4584,13 @@ S_NULL,		// crashstate
 S_HEADFXI4_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-16*FRACUNIT,		// radius
-74*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+16 * FRACUNIT,		// radius
+74 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY|MF_SHADOW,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY | MF_SHADOW,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4612,13 +4612,13 @@ S_CLINK_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_clkdth,		// deathsound
 14,		// speed
-20*FRACUNIT,		// radius
-64*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+64 * FRACUNIT,		// height
 75,		// mass
 0,		// damage
 sfx_clkact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_NOBLOOD,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_NOBLOOD,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_WIZARD
@@ -4639,12 +4639,12 @@ S_WIZARD_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_wizdth,		// deathsound
 12,		// speed
-16*FRACUNIT,		// radius
-68*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+68 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_wizact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_FLOAT|MF_NOGRAVITY,		// flags
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_FLOAT | MF_NOGRAVITY,		// flags
 MF2_PASSMOBJ		// flags2
  },
 
@@ -4665,13 +4665,13 @@ S_NULL,		// crashstate
 S_WIZFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-18*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+18 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 3,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -4693,13 +4693,13 @@ S_IMP_DIE1,		// deathstate
 S_IMP_XDIE1,		// xdeathstate
 sfx_impdth,		// deathsound
 10,		// speed
-16*FRACUNIT,		// radius
-36*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+36 * FRACUNIT,		// height
 50,		// mass
 0,		// damage
 sfx_impact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_FLOAT|MF_NOGRAVITY|MF_COUNTKILL,		// flags
-MF2_SPAWNFLOAT|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_FLOAT | MF_NOGRAVITY | MF_COUNTKILL,		// flags
+MF2_SPAWNFLOAT | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_IMPLEADER
@@ -4720,13 +4720,13 @@ S_IMP_DIE1,		// deathstate
 S_IMP_XDIE1,		// xdeathstate
 sfx_impdth,		// deathsound
 10,		// speed
-16*FRACUNIT,		// radius
-36*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+36 * FRACUNIT,		// height
 50,		// mass
 0,		// damage
 sfx_impact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_FLOAT|MF_NOGRAVITY|MF_COUNTKILL,		// flags
-MF2_SPAWNFLOAT|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_FLOAT | MF_NOGRAVITY | MF_COUNTKILL,		// flags
+MF2_SPAWNFLOAT | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_IMPCHUNK1
@@ -4747,8 +4747,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -4774,8 +4774,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -4800,14 +4800,14 @@ S_NULL,		// crashstate
 S_IMPFXI1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-10*FRACUNIT,		// speed
-8*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+10 * FRACUNIT,		// speed
+8 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT		// flags2
  },
 
 {		// MT_KNIGHT
@@ -4828,13 +4828,13 @@ S_KNIGHT_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_kgtdth,		// deathsound
 12,		// speed
-24*FRACUNIT,		// radius
-78*FRACUNIT,		// height
+24 * FRACUNIT,		// radius
+78 * FRACUNIT,		// height
 150,		// mass
 0,		// damage
 sfx_kgtact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_KNIGHTGHOST
@@ -4855,13 +4855,13 @@ S_KNIGHT_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_kgtdth,		// deathsound
 12,		// speed
-24*FRACUNIT,		// radius
-78*FRACUNIT,		// height
+24 * FRACUNIT,		// radius
+78 * FRACUNIT,		// height
 150,		// mass
 0,		// damage
 sfx_kgtact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_SHADOW,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_SHADOW,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ		// flags2
  },
 
 {		// MT_KNIGHTAXE
@@ -4881,14 +4881,14 @@ S_NULL,		// crashstate
 S_SPINAXEX1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-9*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+9 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 2,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_WINDTHRUST|MF2_NOTELEPORT|MF2_THRUGHOST		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_WINDTHRUST | MF2_NOTELEPORT | MF2_THRUGHOST		// flags2
  },
 
 {		// MT_REDAXE
@@ -4908,14 +4908,14 @@ S_NULL,		// crashstate
 S_REDAXEX1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_hrnhit,		// deathsound
-9*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-8*FRACUNIT,		// height
+9 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+8 * FRACUNIT,		// height
 100,		// mass
 7,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_THRUGHOST		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_THRUGHOST		// flags2
  },
 
 {		// MT_SORCERER1
@@ -4936,13 +4936,13 @@ S_SRCR1_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_sbtdth,		// deathsound
 16,		// speed
-28*FRACUNIT,		// radius
-100*FRACUNIT,		// height
+28 * FRACUNIT,		// radius
+100 * FRACUNIT,		// height
 800,		// mass
 0,		// damage
 sfx_sbtact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ|MF2_BOSS		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ | MF2_BOSS		// flags2
  },
 
 {		// MT_SRCRFX1
@@ -4962,14 +4962,14 @@ S_NULL,		// crashstate
 S_SRCRFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-20*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-10*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+10 * FRACUNIT,		// height
 100,		// mass
 10,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_SORCERER2
@@ -4990,13 +4990,13 @@ S_SOR2_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
 14,		// speed
-16*FRACUNIT,		// radius
-70*FRACUNIT,		// height
+16 * FRACUNIT,		// radius
+70 * FRACUNIT,		// height
 300,		// mass
 0,		// damage
 sfx_soract,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_DROPOFF,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ|MF2_BOSS		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_DROPOFF,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ | MF2_BOSS		// flags2
  },
 
 {		// MT_SOR2FX1
@@ -5016,13 +5016,13 @@ S_NULL,		// crashstate
 S_SOR2FXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-20*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 1,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -5044,13 +5044,13 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_CANNOTPUSH		// flags2
+MF_NOBLOCKMAP | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_CANNOTPUSH		// flags2
  },
 
 {		// MT_SOR2FX2
@@ -5070,13 +5070,13 @@ S_NULL,		// crashstate
 S_SOR2FXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-6*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+6 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 10,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
 MF2_NOTELEPORT		// flags2
  },
 
@@ -5098,8 +5098,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5125,13 +5125,13 @@ S_MNTR_DIE1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_mindth,		// deathsound
 16,		// speed
-28*FRACUNIT,		// radius
-100*FRACUNIT,		// height
+28 * FRACUNIT,		// radius
+100 * FRACUNIT,		// height
 800,		// mass
 7,		// damage
 sfx_minact,		// activesound
-MF_SOLID|MF_SHOOTABLE|MF_COUNTKILL|MF_DROPOFF,		// flags
-MF2_FOOTCLIP|MF2_PASSMOBJ|MF2_BOSS		// flags2
+MF_SOLID | MF_SHOOTABLE | MF_COUNTKILL | MF_DROPOFF,		// flags
+MF2_FOOTCLIP | MF2_PASSMOBJ | MF2_BOSS		// flags2
  },
 
 {		// MT_MNTRFX1
@@ -5151,14 +5151,14 @@ S_NULL,		// crashstate
 S_MNTRFXI1_1,		// deathstate
 S_NULL,		// xdeathstate
 0,		// deathsound
-20*FRACUNIT,		// speed
-10*FRACUNIT,		// radius
-6*FRACUNIT,		// height
+20 * FRACUNIT,		// speed
+10 * FRACUNIT,		// radius
+6 * FRACUNIT,		// height
 100,		// mass
 3,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_MNTRFX2
@@ -5178,14 +5178,14 @@ S_NULL,		// crashstate
 S_MNTRFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_phohit,		// deathsound
-14*FRACUNIT,		// speed
-5*FRACUNIT,		// radius
-12*FRACUNIT,		// height
+14 * FRACUNIT,		// speed
+5 * FRACUNIT,		// radius
+12 * FRACUNIT,		// height
 100,		// mass
 4,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_MNTRFX3
@@ -5206,13 +5206,13 @@ S_MNTRFXI2_1,		// deathstate
 S_NULL,		// xdeathstate
 sfx_phohit,		// deathsound
 0,		// speed
-8*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+8 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 4,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_MISSILE|MF_DROPOFF|MF_NOGRAVITY,		// flags
-MF2_NOTELEPORT|MF2_FIREDAMAGE		// flags2
+MF_NOBLOCKMAP | MF_MISSILE | MF_DROPOFF | MF_NOGRAVITY,		// flags
+MF2_NOTELEPORT | MF2_FIREDAMAGE		// flags2
  },
 
 {		// MT_AKYY
@@ -5233,12 +5233,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_NOTDMATCH,		// flags
+MF_SPECIAL | MF_NOTDMATCH,		// flags
 0		// flags2
  },
 
@@ -5260,12 +5260,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_NOTDMATCH,		// flags
+MF_SPECIAL | MF_NOTDMATCH,		// flags
 0		// flags2
  },
 
@@ -5287,12 +5287,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_SPECIAL|MF_NOTDMATCH,		// flags
+MF_SPECIAL | MF_NOTDMATCH,		// flags
 0		// flags2
  },
 
@@ -5314,8 +5314,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5341,8 +5341,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5368,8 +5368,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5395,8 +5395,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5422,8 +5422,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5449,8 +5449,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5476,8 +5476,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5503,8 +5503,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5530,8 +5530,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5557,8 +5557,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5584,8 +5584,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5611,8 +5611,8 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
@@ -5638,12 +5638,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOSECTOR,		// flags
 0		// flags2
  },
 
@@ -5665,12 +5665,12 @@ S_NULL,		// deathstate
 S_NULL,		// xdeathstate
 sfx_None,		// deathsound
 0,		// speed
-20*FRACUNIT,		// radius
-16*FRACUNIT,		// height
+20 * FRACUNIT,		// radius
+16 * FRACUNIT,		// height
 100,		// mass
 0,		// damage
 sfx_None,		// activesound
-MF_NOBLOCKMAP|MF_NOSECTOR,		// flags
+MF_NOBLOCKMAP | MF_NOSECTOR,		// flags
 0		// flags2
  }
 };

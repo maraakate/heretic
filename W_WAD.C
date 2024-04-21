@@ -43,10 +43,10 @@ typedef struct
 // GLOBALS
 //=============
 
-lumpinfo_t	*lumpinfo;		// location of each lump on disk
+lumpinfo_t *lumpinfo;		// location of each lump on disk
 int			numlumps;
 
-void		**lumpcache;
+void **lumpcache;
 
 
 //===================
@@ -57,8 +57,8 @@ void		**lumpcache;
 
 void strupr (char *s)
 {
-    while (*s)
-	*s++ = toupper(*s);
+	while (*s)
+		*s++ = toupper(*s);
 }
 
 /*
@@ -71,12 +71,12 @@ void strupr (char *s)
 
 int filelength (int handle)
 {
-    struct stat	fileinfo;
-    
-    if (fstat (handle,&fileinfo) == -1)
-	I_Error ("Error fstating");
+	struct stat	fileinfo;
 
-    return fileinfo.st_size;
+	if (fstat (handle, &fileinfo) == -1)
+		I_Error ("Error fstating");
+
+	return fileinfo.st_size;
 }
 
 #endif
@@ -84,26 +84,26 @@ int filelength (int handle)
 
 void ExtractFileBase (char *path, char *dest)
 {
-	char	*src;
+	char *src;
 	int		length;
 
 	src = path + strlen(path) - 1;
 
-//
-// back up until a \ or the start
-//
-	while (src != path && *(src-1) != '\\' && *(src-1) != '/')
+	//
+	// back up until a \ or the start
+	//
+	while (src != path && *(src - 1) != '\\' && *(src - 1) != '/')
 		src--;
 
-//
-// copy up to eight characters
-//
-	memset (dest,0,8);
+	//
+	// copy up to eight characters
+	//
+	memset (dest, 0, 8);
 	length = 0;
 	while (*src && *src != '.')
 	{
 		if (++length == 9)
-			I_Error ("Filename base of %s >8 chars",path);
+			I_Error ("Filename base of %s >8 chars", path);
 		*dest++ = toupper((int)*src++);
 	}
 }
@@ -131,57 +131,57 @@ void ExtractFileBase (char *path, char *dest)
 void W_AddFile (char *filename)
 {
 	wadinfo_t		header;
-	lumpinfo_t		*lump_p;
+	lumpinfo_t *lump_p;
 	unsigned		i;
 	int				handle, length;
 	int				startlump;
-	filelump_t		*fileinfo, singleinfo;
-	
-//
-// open the file and add to directory
-//	
-	if ( (handle = open (filename,O_RDONLY | O_BINARY)) == -1)
+	filelump_t *fileinfo, singleinfo;
+
+	//
+	// open the file and add to directory
+	//	
+	if ((handle = open (filename, O_RDONLY | O_BINARY)) == -1)
 		return;
 
 	startlump = numlumps;
-	
-	if (strcmpi (filename+strlen(filename)-3 , "wad" ) )
+
+	if (strcmpi (filename + strlen(filename) - 3, "wad"))
 	{
-	// single lump file
+		// single lump file
 		fileinfo = &singleinfo;
 		singleinfo.filepos = 0;
 		singleinfo.size = LONG(filelength(handle));
 		ExtractFileBase (filename, singleinfo.name);
 		numlumps++;
 	}
-	else 
+	else
 	{
-	// WAD file
+		// WAD file
 		read (handle, &header, sizeof(header));
-		if (strncmp(header.identification,"IWAD",4))
+		if (strncmp(header.identification, "IWAD", 4))
 		{
-			if (strncmp(header.identification,"PWAD",4))
+			if (strncmp(header.identification, "PWAD", 4))
 				I_Error ("Wad file %s doesn't have IWAD or PWAD id\n"
-				,filename);
+					, filename);
 		}
 		header.numlumps = LONG(header.numlumps);
 		header.infotableofs = LONG(header.infotableofs);
-		length = header.numlumps*sizeof(filelump_t);
+		length = header.numlumps * sizeof(filelump_t);
 		fileinfo = alloca (length);
 		lseek (handle, header.infotableofs, SEEK_SET);
 		read (handle, fileinfo, length);
 		numlumps += header.numlumps;
 	}
 
-//
-// Fill in lumpinfo
-//
-	lumpinfo = realloc (lumpinfo, numlumps*sizeof(lumpinfo_t));
+	//
+	// Fill in lumpinfo
+	//
+	lumpinfo = realloc (lumpinfo, numlumps * sizeof(lumpinfo_t));
 	if (!lumpinfo)
 		I_Error ("Couldn't realloc lumpinfo");
 	lump_p = &lumpinfo[startlump];
-	
-	for (i=startlump ; i<numlumps ; i++,lump_p++, fileinfo++)
+
+	for (i = startlump; i < numlumps; i++, lump_p++, fileinfo++)
 	{
 		lump_p->handle = handle;
 		lump_p->position = LONG(fileinfo->filepos);
@@ -214,29 +214,29 @@ void W_AddFile (char *filename)
 */
 
 void W_InitMultipleFiles (char **filenames)
-{	
+{
 	int		size;
-	
-//
-// open all the files, load headers, and count lumps
-//
+
+	//
+	// open all the files, load headers, and count lumps
+	//
 	numlumps = 0;
 	lumpinfo = malloc(1);	// will be realloced as lumps are added
 
-	for ( ; *filenames ; filenames++)
+	for (; *filenames; filenames++)
 		W_AddFile (*filenames);
 
 	if (!numlumps)
 		I_Error ("W_InitFiles: no files found");
-		
-//
-// set up caching
-//
+
+	//
+	// set up caching
+	//
 	size = numlumps * sizeof(*lumpcache);
 	lumpcache = malloc (size);
 	if (!lumpcache)
 		I_Error ("Couldn't allocate lumpcache");
-	memset (lumpcache,0, size);
+	memset (lumpcache, 0, size);
 }
 
 
@@ -253,7 +253,7 @@ void W_InitMultipleFiles (char **filenames)
 
 void W_InitFile (char *filename)
 {
-	char	*names[2];
+	char *names[2];
 
 	names[0] = filename;
 	names[1] = NULL;
@@ -290,12 +290,12 @@ int	W_NumLumps (void)
 int	W_CheckNumForName (char *name)
 {
 	char	name8[9];
-	int		v1,v2;
-	lumpinfo_t	*lump_p;
+	int		v1, v2;
+	lumpinfo_t *lump_p;
 
-// make the name into two integers for easy compares
+	// make the name into two integers for easy compares
 
-	strncpy (name8,name,8);
+	strncpy (name8, name, 8);
 	name8[8] = 0;			// in case the name was a fill 8 chars
 	strupr (name8);			// case insensitive
 
@@ -303,12 +303,12 @@ int	W_CheckNumForName (char *name)
 	v2 = *(int *)&name8[4];
 
 
-// scan backwards so patch lump files take precedence
+	// scan backwards so patch lump files take precedence
 
 	lump_p = lumpinfo + numlumps;
 
 	while (lump_p-- != lumpinfo)
-		if ( *(int *)lump_p->name == v1 && *(int *)&lump_p->name[4] == v2)
+		if (*(int *)lump_p->name == v1 && *(int *)&lump_p->name[4] == v2)
 			return lump_p - lumpinfo;
 
 
@@ -334,7 +334,7 @@ int	W_GetNumForName (char *name)
 	if (i != -1)
 		return i;
 
-	I_Error ("W_GetNumForName: %s not found!",name);
+	I_Error ("W_GetNumForName: %s not found!", name);
 	return -1;
 }
 
@@ -352,7 +352,7 @@ int	W_GetNumForName (char *name)
 int W_LumpLength (int lump)
 {
 	if (lump >= numlumps)
-		I_Error ("W_LumpLength: %i >= numlumps",lump);
+		I_Error ("W_LumpLength: %i >= numlumps", lump);
 	return lumpinfo[lump].size;
 }
 
@@ -370,18 +370,18 @@ int W_LumpLength (int lump)
 void W_ReadLump (int lump, void *dest)
 {
 	int			c;
-	lumpinfo_t	*l;
-	
+	lumpinfo_t *l;
+
 	if (lump >= numlumps)
-		I_Error ("W_ReadLump: %i >= numlumps",lump);
-	l = lumpinfo+lump;
-	
+		I_Error ("W_ReadLump: %i >= numlumps", lump);
+	l = lumpinfo + lump;
+
 	I_BeginRead ();
-	
+
 	lseek (l->handle, l->position, SEEK_SET);
 	c = read (l->handle, dest, l->size);
 	if (c < l->size)
-		I_Error ("W_ReadLump: only read %i of %i on lump %i",c,l->size,lump);	
+		I_Error ("W_ReadLump: only read %i of %i on lump %i", c, l->size, lump);
 	I_EndRead ();
 }
 
@@ -395,13 +395,13 @@ void W_ReadLump (int lump, void *dest)
 ====================
 */
 
-void	*W_CacheLumpNum (int lump, int tag)
+void *W_CacheLumpNum (int lump, int tag)
 {
-byte *ptr;
+	byte *ptr;
 
 	if ((unsigned)lump >= numlumps)
-		I_Error ("W_CacheLumpNum: %i >= numlumps",lump);
-		
+		I_Error ("W_CacheLumpNum: %i >= numlumps", lump);
+
 	if (!lumpcache[lump])
 	{	// read the lump in
 //printf ("cache miss on lump %i\n",lump);
@@ -410,10 +410,10 @@ byte *ptr;
 	}
 	else
 	{
-//printf ("cache hit on lump %i\n",lump);
-		Z_ChangeTag (lumpcache[lump],tag);
+		//printf ("cache hit on lump %i\n",lump);
+		Z_ChangeTag (lumpcache[lump], tag);
 	}
-	
+
 	return lumpcache[lump];
 }
 
@@ -426,7 +426,7 @@ byte *ptr;
 ====================
 */
 
-void	*W_CacheLumpName (char *name, int tag)
+void *W_CacheLumpName (char *name, int tag)
 {
 	return W_CacheLumpNum (W_GetNumForName(name), tag);
 }
@@ -454,10 +454,10 @@ void W_Profile (void)
 	FILE	*f;
 	int		j;
 	char	name[9];
-	
-	
+
+
 	for (i=0 ; i<numlumps ; i++)
-	{	
+	{
 		ptr = lumpcache[i];
 		if (!ptr)
 		{
@@ -475,7 +475,7 @@ void W_Profile (void)
 		info[i][profilecount] = ch;
 	}
 	profilecount++;
-	
+
 	f = fopen ("waddump.txt","w");
 	name[8] = 0;
 	for (i=0 ; i<numlumps ; i++)

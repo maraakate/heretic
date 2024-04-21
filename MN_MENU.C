@@ -123,8 +123,8 @@ boolean askforquit;
 boolean typeofask;
 static boolean FileMenuKeySteal;
 static boolean slottextloaded;
-static char SlotText[6][SLOTTEXTLEN+2];
-static char oldSlotText[SLOTTEXTLEN+2];
+static char SlotText[6][SLOTTEXTLEN + 2];
+static char oldSlotText[SLOTTEXTLEN + 2];
 static int SlotStatus[6];
 static int slotptr;
 static int currentSlot;
@@ -303,7 +303,7 @@ void MN_Init(void)
 	MenuActive = false;
 	messageson = true;
 	SkullBaseLump = W_GetNumForName("M_SKL00");
-	if(ExtendedWAD)
+	if (ExtendedWAD)
 	{ // Add episodes 4 and 5 to the menu
 		EpisodeMenu.itemCount = 5;
 		EpisodeMenu.y -= ITEM_HEIGHT;
@@ -318,8 +318,8 @@ void MN_Init(void)
 
 static void InitFonts(void)
 {
-	FontABaseLump = W_GetNumForName("FONTA_S")+1;
-	FontBBaseLump = W_GetNumForName("FONTB_S")+1;
+	FontABaseLump = W_GetNumForName("FONTA_S") + 1;
+	FontBBaseLump = W_GetNumForName("FONTB_S") + 1;
 }
 
 //---------------------------------------------------------------------------
@@ -335,17 +335,17 @@ void MN_DrTextA(char *text, int x, int y)
 	char c;
 	patch_t *p;
 
-	while((c = *text++) != 0)
+	while ((c = *text++) != 0)
 	{
-		if(c < 33)
+		if (c < 33)
 		{
 			x += 5;
 		}
 		else
 		{
-			p = W_CacheLumpNum(FontABaseLump+c-33, PU_CACHE);
+			p = W_CacheLumpNum(FontABaseLump + c - 33, PU_CACHE);
 			V_DrawPatch(x, y, p);
-			x += p->width-1;
+			x += p->width - 1;
 		}
 	}
 }
@@ -365,16 +365,16 @@ int MN_TextAWidth(char *text)
 	patch_t *p;
 
 	width = 0;
-	while((c = *text++) != 0)
+	while ((c = *text++) != 0)
 	{
-		if(c < 33)
+		if (c < 33)
 		{
 			width += 5;
 		}
 		else
 		{
-			p = W_CacheLumpNum(FontABaseLump+c-33, PU_CACHE);
-			width += p->width-1;
+			p = W_CacheLumpNum(FontABaseLump + c - 33, PU_CACHE);
+			width += p->width - 1;
 		}
 	}
 	return(width);
@@ -393,17 +393,17 @@ void MN_DrTextB(char *text, int x, int y)
 	char c;
 	patch_t *p;
 
-	while((c = *text++) != 0)
+	while ((c = *text++) != 0)
 	{
-		if(c < 33)
+		if (c < 33)
 		{
 			x += 8;
 		}
 		else
 		{
-			p = W_CacheLumpNum(FontBBaseLump+c-33, PU_CACHE);
+			p = W_CacheLumpNum(FontBBaseLump + c - 33, PU_CACHE);
 			V_DrawPatch(x, y, p);
-			x += p->width-1;
+			x += p->width - 1;
 		}
 	}
 }
@@ -423,16 +423,16 @@ int MN_TextBWidth(char *text)
 	patch_t *p;
 
 	width = 0;
-	while((c = *text++) != 0)
+	while ((c = *text++) != 0)
 	{
-		if(c < 33)
+		if (c < 33)
 		{
 			width += 5;
 		}
 		else
 		{
-			p = W_CacheLumpNum(FontBBaseLump+c-33, PU_CACHE);
-			width += p->width-1;
+			p = W_CacheLumpNum(FontBBaseLump + c - 33, PU_CACHE);
+			width += p->width - 1;
 		}
 	}
 	return(width);
@@ -446,7 +446,7 @@ int MN_TextBWidth(char *text)
 
 void MN_Ticker(void)
 {
-	if(MenuActive == false)
+	if (MenuActive == false)
 	{
 		return;
 	}
@@ -476,25 +476,25 @@ void MN_Drawer(void)
 	MenuItem_t *item;
 	char *selName;
 
-	if(MenuActive == false)
+	if (MenuActive == false)
 	{
-		if(askforquit)
+		if (askforquit)
 		{
-			MN_DrTextA(QuitEndMsg[typeofask-1], 160-
-				MN_TextAWidth(QuitEndMsg[typeofask-1])/2, 80);
-			if(typeofask == 3)
+			MN_DrTextA(QuitEndMsg[typeofask - 1], 160 -
+				MN_TextAWidth(QuitEndMsg[typeofask - 1]) / 2, 80);
+			if (typeofask == 3)
 			{
-				MN_DrTextA(SlotText[quicksave-1], 160-
-					MN_TextAWidth(SlotText[quicksave-1])/2, 90);
-				MN_DrTextA("?", 160+
-					MN_TextAWidth(SlotText[quicksave-1])/2, 90);
+				MN_DrTextA(SlotText[quicksave - 1], 160 -
+					MN_TextAWidth(SlotText[quicksave - 1]) / 2, 90);
+				MN_DrTextA("?", 160 +
+					MN_TextAWidth(SlotText[quicksave - 1]) / 2, 90);
 			}
-			if(typeofask == 4)
+			if (typeofask == 4)
 			{
-				MN_DrTextA(SlotText[quickload-1], 160-
-					MN_TextAWidth(SlotText[quickload-1])/2, 90);
-				MN_DrTextA("?", 160+
-					MN_TextAWidth(SlotText[quickload-1])/2, 90);
+				MN_DrTextA(SlotText[quickload - 1], 160 -
+					MN_TextAWidth(SlotText[quickload - 1]) / 2, 90);
+				MN_DrTextA("?", 160 +
+					MN_TextAWidth(SlotText[quickload - 1]) / 2, 90);
 			}
 			UpdateState |= I_FULLSCRN;
 		}
@@ -503,34 +503,34 @@ void MN_Drawer(void)
 	else
 	{
 		UpdateState |= I_FULLSCRN;
-		if(InfoType)
+		if (InfoType)
 		{
 			MN_DrawInfo();
 			return;
 		}
-		if(screenblocks < 10)
+		if (screenblocks < 10)
 		{
 			BorderNeedRefresh = true;
 		}
-		if(CurrentMenu->drawFunc != NULL)
+		if (CurrentMenu->drawFunc != NULL)
 		{
 			CurrentMenu->drawFunc();
 		}
 		x = CurrentMenu->x;
 		y = CurrentMenu->y;
 		item = CurrentMenu->items;
-		for(i = 0; i < CurrentMenu->itemCount; i++)
+		for (i = 0; i < CurrentMenu->itemCount; i++)
 		{
-			if(item->type != ITT_EMPTY && item->text)
+			if (item->type != ITT_EMPTY && item->text)
 			{
 				MN_DrTextB(DEH_String(item->text), x, y); // FS: For HHE
 			}
 			y += ITEM_HEIGHT;
 			item++;
 		}
-		y = CurrentMenu->y+(CurrentItPos*ITEM_HEIGHT)+SELECTOR_YOFFSET;
-		selName = MenuTime&16 ? "M_SLCTR1" : "M_SLCTR2";
-		V_DrawPatch(x+SELECTOR_XOFFSET, y,
+		y = CurrentMenu->y + (CurrentItPos * ITEM_HEIGHT) + SELECTOR_YOFFSET;
+		selName = MenuTime & 16 ? "M_SLCTR1" : "M_SLCTR2";
+		V_DrawPatch(x + SELECTOR_XOFFSET, y,
 			W_CacheLumpName(selName, PU_CACHE));
 	}
 }
@@ -545,11 +545,11 @@ static void DrawMainMenu(void)
 {
 	int frame;
 
-	frame = (MenuTime/3)%18;
+	frame = (MenuTime / 3) % 18;
 	V_DrawPatch(88, 0, W_CacheLumpName("M_HTIC", PU_CACHE));
-	V_DrawPatch(40, 10, W_CacheLumpNum(SkullBaseLump+(17-frame),
+	V_DrawPatch(40, 10, W_CacheLumpNum(SkullBaseLump + (17 - frame),
 		PU_CACHE));
-	V_DrawPatch(232, 10, W_CacheLumpNum(SkullBaseLump+frame, PU_CACHE));
+	V_DrawPatch(232, 10, W_CacheLumpNum(SkullBaseLump + frame, PU_CACHE));
 }
 
 //---------------------------------------------------------------------------
@@ -580,7 +580,7 @@ static void DrawSkillMenu(void)
 
 static void DrawFilesMenu(void)
 {
-// clear out the quicksave/quickload stuff
+	// clear out the quicksave/quickload stuff
 	quicksave = 0;
 	quickload = 0;
 	players[consoleplayer].message = NULL;
@@ -595,8 +595,8 @@ static void DrawFilesMenu(void)
 
 static void DrawLoadMenu(void)
 {
-	MN_DrTextB("LOAD GAME", 160-MN_TextBWidth("LOAD GAME")/2, 10);
-	if(!slottextloaded)
+	MN_DrTextB("LOAD GAME", 160 - MN_TextBWidth("LOAD GAME") / 2, 10);
+	if (!slottextloaded)
 	{
 		MN_LoadSlotText();
 	}
@@ -611,8 +611,8 @@ static void DrawLoadMenu(void)
 
 static void DrawSaveMenu(void)
 {
-	MN_DrTextB("SAVE GAME", 160-MN_TextBWidth("SAVE GAME")/2, 10);
-	if(!slottextloaded)
+	MN_DrTextB("SAVE GAME", 160 - MN_TextBWidth("SAVE GAME") / 2, 10);
+	if (!slottextloaded)
 	{
 		MN_LoadSlotText();
 	}
@@ -635,7 +635,7 @@ void MN_LoadSlotText(void)
 
 	for (i = 0; i < 6; i++)
 	{
-		if(cdrom)
+		if (cdrom)
 		{
 			sprintf(name, SAVEGAMENAMECD"%d.hsg", i);
 		}
@@ -671,12 +671,12 @@ static void DrawFileSlots(Menu_t *menu)
 
 	x = menu->x;
 	y = menu->y;
-	for(i = 0; i < 6; i++)
+	for (i = 0; i < 6; i++)
 	{
 		V_DrawPatch(x, y, W_CacheLumpName("M_FSLOT", PU_CACHE));
-		if(SlotStatus[i])
+		if (SlotStatus[i])
 		{
-			MN_DrTextA(SlotText[i], x+5, y+5);
+			MN_DrTextA(SlotText[i], x + 5, y + 5);
 		}
 		y += ITEM_HEIGHT;
 	}
@@ -693,7 +693,7 @@ static void DrawOptionsMenu(void)
 	extern boolean usePalFlash;
 	extern int headBob;
 
-	if(messageson)
+	if (messageson)
 	{
 		MN_DrTextB("ON", 196, 35);
 	}
@@ -702,7 +702,7 @@ static void DrawOptionsMenu(void)
 		MN_DrTextB("OFF", 196, 35);
 	}
 
-	if(usePalFlash) // FS: Draw Pal Flash
+	if (usePalFlash) // FS: Draw Pal Flash
 	{
 		MN_DrTextB("ON", 240, 55);
 	}
@@ -711,7 +711,7 @@ static void DrawOptionsMenu(void)
 		MN_DrTextB("OFF", 240, 55);
 	}
 
-	if(headBob) // FS: Headbob Toggle
+	if (headBob) // FS: Headbob Toggle
 	{
 		MN_DrTextB("ON", 188, 75);
 	}
@@ -720,7 +720,7 @@ static void DrawOptionsMenu(void)
 		MN_DrTextB("OFF", 188, 75);
 	}
 
-        DrawSlider(&OptionsMenu, 5, 10, mouseSensitivity/5); // FS: We using 20 now and was 3,10, etc..
+	DrawSlider(&OptionsMenu, 5, 10, mouseSensitivity / 5); // FS: We using 20 now and was 3,10, etc..
 }
 
 //---------------------------------------------------------------------------
@@ -731,7 +731,7 @@ static void DrawOptionsMenu(void)
 
 static void DrawOptions2Menu(void)
 {
-	DrawSlider(&Options2Menu, 1, 9, screenblocks-3);
+	DrawSlider(&Options2Menu, 1, 9, screenblocks - 3);
 	DrawSlider(&Options2Menu, 3, 16, snd_MaxVolume);
 	DrawSlider(&Options2Menu, 5, 16, snd_MusicVolume);
 }
@@ -744,17 +744,17 @@ static void DrawOptions2Menu(void)
 
 static boolean SCNetCheck(int option)
 {
-	
-	if(!netgame)
+
+	if (!netgame)
 	{ // okay to go into the menu
 		return true;
 	}
-	
-	
-	if(NetGetPlayerCount() == 1)
+
+
+	if (NetGetPlayerCount() == 1)
 		return true;
-		
-	switch(option)
+
+	switch (option)
 	{
 		case 1:
 			P_SetMessage(&players[consoleplayer],
@@ -782,7 +782,7 @@ static boolean SCQuitGame(int option)
 	MenuActive = false;
 	askforquit = true;
 	typeofask = 1; //quit game
-	if(!netgame && !demoplayback)
+	if (!netgame && !demoplayback)
 	{
 		paused = true;
 	}
@@ -805,14 +805,14 @@ static boolean M_DeleteSaveResponse(int ch) // FS: Ask if we want to delete the 
 
 static boolean SCEndGame(int option)
 {
-	if(demoplayback || netgame)
+	if (demoplayback || netgame)
 	{
 		return false;
 	}
 	MenuActive = false;
 	askforquit = true;
 	typeofask = 2; //endgame
-	if(!netgame && !demoplayback)
+	if (!netgame && !demoplayback)
 	{
 		paused = true;
 	}
@@ -828,7 +828,7 @@ static boolean SCEndGame(int option)
 static boolean SCMessages(int option)
 {
 	messageson ^= 1;
-	if(messageson)
+	if (messageson)
 	{
 		P_SetMessage(&players[consoleplayer], DEH_String("MESSAGES ON"), true);
 	}
@@ -844,7 +844,7 @@ static boolean SCPalFlashes(int option) // FS: Palette Flashes Toggle
 {
 	extern boolean usePalFlash;
 	usePalFlash ^= 1;
-	if(usePalFlash)
+	if (usePalFlash)
 	{
 		P_SetMessage(&players[consoleplayer], "PALETTE FLASHES ON", true);
 	}
@@ -860,7 +860,7 @@ static boolean SCHeadBob(int option) // FS: Headbob Toggle
 {
 	extern int headBob;
 	headBob ^= 1;
-	if(headBob)
+	if (headBob)
 	{
 		P_SetMessage(&players[consoleplayer], "HEADBOBBING ON", true);
 	}
@@ -882,11 +882,11 @@ static boolean SCLoadGame(int option)
 {
 	char name[256];
 
-	if(!SlotStatus[option])
+	if (!SlotStatus[option])
 	{ // slot's empty...don't try and load
 		return false;
 	}
-	if(cdrom)
+	if (cdrom)
 	{
 		sprintf(name, SAVEGAMENAMECD"%d.hsg", option);
 	}
@@ -898,9 +898,9 @@ static boolean SCLoadGame(int option)
 	G_LoadGame(name);
 	MN_DeactivateMenu();
 	BorderNeedRefresh = true;
-	if(quickload == -1)
+	if (quickload == -1)
 	{
-		quickload = option+1;
+		quickload = option + 1;
 		players[consoleplayer].message = NULL;
 		players[consoleplayer].messageTics = 1;
 	}
@@ -917,20 +917,20 @@ static boolean SCSaveGame(int option)
 {
 	char *ptr;
 
-	if(!FileMenuKeySteal)
+	if (!FileMenuKeySteal)
 	{
 		FileMenuKeySteal = true;
 		strcpy(oldSlotText, SlotText[option]);
 		ptr = SlotText[option];
-		while(*ptr)
+		while (*ptr)
 		{
 			ptr++;
 		}
 		*ptr = '[';
-		*(ptr+1) = 0;
+		*(ptr + 1) = 0;
 		SlotStatus[option]++;
 		currentSlot = option;
-		slotptr = ptr-SlotText[option];
+		slotptr = ptr - SlotText[option];
 		return false;
 	}
 	else
@@ -941,9 +941,9 @@ static boolean SCSaveGame(int option)
 		MN_DeactivateMenu();
 	}
 	BorderNeedRefresh = true;
-	if(quicksave == -1)
+	if (quicksave == -1)
 	{
-		quicksave = option+1;
+		quicksave = option + 1;
 		players[consoleplayer].message = NULL;
 		players[consoleplayer].messageTics = 1;
 	}
@@ -958,7 +958,7 @@ static boolean SCSaveGame(int option)
 
 static boolean SCEpisode(int option)
 {
-	if(shareware && option > 1)
+	if (shareware && option > 1)
 	{
 		P_SetMessage(&players[consoleplayer],
 			"ONLY AVAILABLE IN THE REGISTERED VERSION", true);
@@ -992,14 +992,14 @@ static boolean SCSkill(int option)
 
 static boolean SCMouseSensi(int option)
 {
-	if(option == RIGHT_DIR)
+	if (option == RIGHT_DIR)
 	{
-                if(mouseSensitivity < 50) // FS: Go up to 50
+		if (mouseSensitivity < 50) // FS: Go up to 50
 		{
 			mouseSensitivity++;
 		}
 	}
-	else if(mouseSensitivity)
+	else if (mouseSensitivity)
 	{
 		mouseSensitivity--;
 	}
@@ -1014,14 +1014,14 @@ static boolean SCMouseSensi(int option)
 
 static boolean SCSfxVolume(int option)
 {
-	if(option == RIGHT_DIR)
+	if (option == RIGHT_DIR)
 	{
-		if(snd_MaxVolume < 15)
+		if (snd_MaxVolume < 15)
 		{
 			snd_MaxVolume++;
 		}
 	}
-	else if(snd_MaxVolume)
+	else if (snd_MaxVolume)
 	{
 		snd_MaxVolume--;
 	}
@@ -1038,14 +1038,14 @@ static boolean SCSfxVolume(int option)
 
 static boolean SCMusicVolume(int option)
 {
-	if(option == RIGHT_DIR)
+	if (option == RIGHT_DIR)
 	{
-		if(snd_MusicVolume < 15)
+		if (snd_MusicVolume < 15)
 		{
 			snd_MusicVolume++;
 		}
 	}
-	else if(snd_MusicVolume)
+	else if (snd_MusicVolume)
 	{
 		snd_MusicVolume--;
 	}
@@ -1061,14 +1061,14 @@ static boolean SCMusicVolume(int option)
 
 static boolean SCScreenSize(int option)
 {
-	if(option == RIGHT_DIR)
+	if (option == RIGHT_DIR)
 	{
-		if(screenblocks < 11)
+		if (screenblocks < 11)
 		{
 			screenblocks++;
 		}
 	}
-	else if(screenblocks > 3)
+	else if (screenblocks > 3)
 	{
 		screenblocks--;
 	}
@@ -1086,7 +1086,7 @@ static boolean SCInfo(int option)
 {
 	InfoType = 1;
 	S_StartSound(NULL, sfx_dorcls);
-	if(!netgame && !demoplayback)
+	if (!netgame && !demoplayback)
 	{
 		paused = true;
 	}
@@ -1125,30 +1125,30 @@ boolean MN_Responder(event_t *event)
 	char tempstring[80]; // FS
 #endif
 
-	if(event->data1 == KEY_RSHIFT)
+	if (event->data1 == KEY_RSHIFT)
 	{
 		shiftdown = (event->type == ev_keydown);
 	}
-	if(event->type != ev_keydown)
+	if (event->type != ev_keydown)
 	{
 		return(false);
 	}
 	key = event->data1;
-	if(InfoType)
+	if (InfoType)
 	{
-		if(shareware)
+		if (shareware)
 		{
-			InfoType = (InfoType+1)%5;
+			InfoType = (InfoType + 1) % 5;
 		}
 		else
 		{
-			InfoType = (InfoType+1)%4;
+			InfoType = (InfoType + 1) % 4;
 		}
-		if(key == KEY_ESCAPE)
+		if (key == KEY_ESCAPE)
 		{
 			InfoType = 0;
 		}
-		if(!InfoType)
+		if (!InfoType)
 		{
 			paused = false;
 			MN_DeactivateMenu();
@@ -1159,21 +1159,21 @@ boolean MN_Responder(event_t *event)
 		return(true); //make the info screen eat the keypress
 	}
 
-	if(ravpic && key == KEY_F1)
+	if (ravpic && key == KEY_F1)
 	{
 		G_ScreenShot();
 		return(true);
 	}
 
-	if(askforquit)
+	if (askforquit)
 	{
-		switch(key)
+		switch (key)
 		{
 			case KEY_ENTER: // FS: Wanted the option
 			case 'y':
-				if(askforquit)
+				if (askforquit)
 				{
-					switch(typeofask)
+					switch (typeofask)
 					{
 						case 1:
 							G_CheckDemoStatus();
@@ -1181,7 +1181,7 @@ boolean MN_Responder(event_t *event)
 							break;
 						case 2:
 							players[consoleplayer].messageTics = 0;
-								//set the msg to be cleared
+							//set the msg to be cleared
 							players[consoleplayer].message = NULL;
 							typeofask = 0;
 							askforquit = false;
@@ -1192,23 +1192,23 @@ boolean MN_Responder(event_t *event)
 						case 3:
 							P_SetMessage(&players[consoleplayer], "QUICKSAVING....", false);
 							FileMenuKeySteal = true;
-							SCSaveGame(quicksave-1);
+							SCSaveGame(quicksave - 1);
 							askforquit = false;
 							typeofask = 0;
 							BorderNeedRefresh = true;
 							return true;
 						case 4:
 							P_SetMessage(&players[consoleplayer], "QUICKLOADING....", false);
-							SCLoadGame(quickload-1);
+							SCLoadGame(quickload - 1);
 							askforquit = false;
 							typeofask = 0;
 							BorderNeedRefresh = true;
 							return true;
 						case 5: // FS: Delete saves
-							sprintf(savename,SAVEGAMENAME"%d.hsg",saveOn);
+							sprintf(savename, SAVEGAMENAME"%d.hsg", saveOn);
 							remove(savename);
-							S_StartSound(NULL,sfx_dorcls);
-							for (z = 0; z < SLOTTEXTLEN+2; z++)
+							S_StartSound(NULL, sfx_dorcls);
+							for (z = 0; z < SLOTTEXTLEN + 2; z++)
 							{
 								SlotText[saveOn][z] = 0; // empty the string
 								oldSlotText[z] = 0;
@@ -1228,7 +1228,7 @@ boolean MN_Responder(event_t *event)
 				return false;
 			case 'n':
 			case KEY_ESCAPE:
-				if(askforquit)
+				if (askforquit)
 				{
 					players[consoleplayer].messageTics = 1; //set the msg to be cleared
 					askforquit = false;
@@ -1242,50 +1242,50 @@ boolean MN_Responder(event_t *event)
 		}
 		return false; // don't let the keys filter thru
 	}
-	if(MenuActive == false && !chatmodeon)
+	if (MenuActive == false && !chatmodeon)
 	{
-		switch(key)
+		switch (key)
 		{
 #ifdef USE_VRGOGGLES
 			case KEY_INS:
-				if(usevrgoggles)
+				if (usevrgoggles)
 				{
 					vrdist = FixedMul(vrdist, 72090);//vrdist + 72090;
-					if(vrdist >295000)
+					if (vrdist > 295000)
 						vrdist = 29500;
-					printf(tempstring,"VR DIST INCR %1.1f\n", ((float)vrdist/(float)65536));
-//					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring, "VR DIST INCR %1.1f\n", ((float)vrdist / (float)65536));
+					//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_DEL:
-				if(usevrgoggles)
+				if (usevrgoggles)
 				{
 					vrdist = FixedMul(vrdist, 59758);//vrdist - 59578;
-					if (vrdist<20000)
-						vrdist=20000;
-					printf(tempstring,"VR DIST DECR %1.1f\n", ((float)vrdist/(float)65536));
-//					P_SetMessage(&players[consoleplayer], tempstring, false);
+					if (vrdist < 20000)
+						vrdist = 20000;
+					printf(tempstring, "VR DIST DECR %1.1f\n", ((float)vrdist / (float)65536));
+					//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_PGUP:
-				if(usevrgoggles)
+				if (usevrgoggles)
 				{
 					vrangle = vrangle + 1;
-					printf(tempstring,"VR ANG INCR %d\n", vrangle);
-//					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring, "VR ANG INCR %d\n", vrangle);
+					//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 			case KEY_PGDN:
-				if(usevrgoggles)
+				if (usevrgoggles)
 				{
 					vrangle = vrangle - 1;
-					printf(tempstring,"VR ANG DECR %d\n", vrangle);
-//					P_SetMessage(&players[consoleplayer], tempstring, false);
+					printf(tempstring, "VR ANG DECR %d\n", vrangle);
+					//					P_SetMessage(&players[consoleplayer], tempstring, false);
 				}
 				break;
 #endif
 			case KEY_MINUS:
-				if(automapactive)
+				if (automapactive)
 				{ // Don't screen size in automap
 					return(false);
 				}
@@ -1295,7 +1295,7 @@ boolean MN_Responder(event_t *event)
 				UpdateState |= I_FULLSCRN;
 				return(true);
 			case KEY_EQUALS:
-				if(automapactive)
+				if (automapactive)
 				{ // Don't screen size in automap
 					return(false);
 				}
@@ -1310,14 +1310,14 @@ boolean MN_Responder(event_t *event)
 				MenuActive = true;
 				return(true);
 			case KEY_F2: // save game
-				if(gamestate == GS_LEVEL && !demoplayback)
+				if (gamestate == GS_LEVEL && !demoplayback)
 				{
 					MenuActive = true;
 					FileMenuKeySteal = false;
 					MenuTime = 0;
 					CurrentMenu = &SaveMenu;
 					CurrentItPos = CurrentMenu->oldItPos;
-					if(!netgame && !demoplayback)
+					if (!netgame && !demoplayback)
 					{
 						paused = true;
 					}
@@ -1326,14 +1326,14 @@ boolean MN_Responder(event_t *event)
 				}
 				return true;
 			case KEY_F3: // load game
-				if(SCNetCheck(2))
+				if (SCNetCheck(2))
 				{
 					MenuActive = true;
 					FileMenuKeySteal = false;
 					MenuTime = 0;
 					CurrentMenu = &LoadMenu;
 					CurrentItPos = CurrentMenu->oldItPos;
-					if(!netgame && !demoplayback)
+					if (!netgame && !demoplayback)
 					{
 						paused = true;
 					}
@@ -1347,7 +1347,7 @@ boolean MN_Responder(event_t *event)
 				MenuTime = 0;
 				CurrentMenu = &Options2Menu;
 				CurrentItPos = CurrentMenu->oldItPos;
-				if(!netgame && !demoplayback)
+				if (!netgame && !demoplayback)
 				{
 					paused = true;
 				}
@@ -1355,7 +1355,7 @@ boolean MN_Responder(event_t *event)
 				slottextloaded = false; //reload the slot text, when needed
 				return true;
 			case KEY_F5: // F5 isn't used in Heretic. (detail level)
-				if(usePalFlash == true)
+				if (usePalFlash == true)
 				{
 					P_SetMessage(&players[consoleplayer], "PALETTE FLASHES OFF", false);
 					usePalFlash = false;
@@ -1369,16 +1369,16 @@ boolean MN_Responder(event_t *event)
 				}
 				return true;
 			case KEY_F6: // quicksave
-				if(gamestate == GS_LEVEL && !demoplayback)
+				if (gamestate == GS_LEVEL && !demoplayback)
 				{
-					if(!quicksave || quicksave == -1)
+					if (!quicksave || quicksave == -1)
 					{
 						MenuActive = true;
 						FileMenuKeySteal = false;
 						MenuTime = 0;
 						CurrentMenu = &SaveMenu;
 						CurrentItPos = CurrentMenu->oldItPos;
-						if(!netgame && !demoplayback)
+						if (!netgame && !demoplayback)
 						{
 							paused = true;
 						}
@@ -1392,7 +1392,7 @@ boolean MN_Responder(event_t *event)
 					{
 						askforquit = true;
 						typeofask = 3;
-						if(!netgame && !demoplayback)
+						if (!netgame && !demoplayback)
 						{
 							paused = true;
 						}
@@ -1401,7 +1401,7 @@ boolean MN_Responder(event_t *event)
 				}
 				return true;
 			case KEY_F7: // endgame
-				if(gamestate == GS_LEVEL && !demoplayback)
+				if (gamestate == GS_LEVEL && !demoplayback)
 				{
 					S_StartSound(NULL, sfx_chat);
 					SCEndGame(0);
@@ -1411,14 +1411,14 @@ boolean MN_Responder(event_t *event)
 				SCMessages(0);
 				return true;
 			case KEY_F9: // quickload
-				if(!quickload || quickload == -1)
+				if (!quickload || quickload == -1)
 				{
 					MenuActive = true;
 					FileMenuKeySteal = false;
 					MenuTime = 0;
 					CurrentMenu = &LoadMenu;
 					CurrentItPos = CurrentMenu->oldItPos;
-					if(!netgame && !demoplayback)
+					if (!netgame && !demoplayback)
 					{
 						paused = true;
 					}
@@ -1431,7 +1431,7 @@ boolean MN_Responder(event_t *event)
 				else
 				{
 					askforquit = true;
-					if(!netgame && !demoplayback)
+					if (!netgame && !demoplayback)
 					{
 						paused = true;
 					}
@@ -1441,40 +1441,40 @@ boolean MN_Responder(event_t *event)
 				return true;
 			case KEY_F10: // quit
 //				if(gamestate == GS_LEVEL) // FS: Quit with F10 at title screen like Doom
-				{
-					SCQuitGame(0);
-					S_StartSound(NULL, sfx_chat);
-				}
-				return true;
+			{
+				SCQuitGame(0);
+				S_StartSound(NULL, sfx_chat);
+			}
+			return true;
 			case KEY_F11: // F11 - gamma mode correction
 				usegamma++;
-				if((usegamma > 4) || (usegamma < 0))
+				if ((usegamma > 4) || (usegamma < 0))
 				{
 					usegamma = 0;
 				}
 				I_SetPalette((byte *)W_CacheLumpName("PLAYPAL", PU_CACHE));
 
-				switch(usegamma) // FS: Could be smart but it's 2AM.  I'm lazy, and you won't ever play this version.
+				switch (usegamma) // FS: Could be smart but it's 2AM.  I'm lazy, and you won't ever play this version.
 				{
 					case 0:
-						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION OFF", false);
+						P_SetMessage(&players[consoleplayer], "GAMMA CORRECTION OFF", false);
 						break;
 					case 1:
-						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 1", false);
+						P_SetMessage(&players[consoleplayer], "GAMMA CORRECTION LEVEL 1", false);
 						break;
 					case 2:
-						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 2", false);
+						P_SetMessage(&players[consoleplayer], "GAMMA CORRECTION LEVEL 2", false);
 						break;
 					case 3:
-						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 3", false);
+						P_SetMessage(&players[consoleplayer], "GAMMA CORRECTION LEVEL 3", false);
 						break;
 					case 4:
-						P_SetMessage(&players[consoleplayer],"GAMMA CORRECTION LEVEL 4", false);
+						P_SetMessage(&players[consoleplayer], "GAMMA CORRECTION LEVEL 4", false);
 						break;
 				}
 				return true;
 			case KEY_F12: /* FS: Always run toggle */
-				if(alwaysrun)
+				if (alwaysrun)
 				{
 					P_SetMessage(&players[consoleplayer], "ALWAYS RUN OFF", false);
 					alwaysrun = 0;
@@ -1490,37 +1490,37 @@ boolean MN_Responder(event_t *event)
 
 	}
 
-	if(MenuActive == false)
+	if (MenuActive == false)
 	{
-		if(key == KEY_ESCAPE || gamestate == GS_DEMOSCREEN || demoplayback)
+		if (key == KEY_ESCAPE || gamestate == GS_DEMOSCREEN || demoplayback)
 		{
 			MN_ActivateMenu();
 			return(true);
 		}
 		return(false);
 	}
-	if(!FileMenuKeySteal)
+	if (!FileMenuKeySteal)
 	{
 		item = &CurrentMenu->items[CurrentItPos];
-		switch(key)
+		switch (key)
 		{
-			case (0x80+0x53): // FS: KEY_DEL
+			case (0x80 + 0x53): // FS: KEY_DEL
 				// FS: Ask us if we want to delete the current save
-				if(CurrentMenu == &LoadMenu || CurrentMenu == &SaveMenu)
+				if (CurrentMenu == &LoadMenu || CurrentMenu == &SaveMenu)
 				{
-					sprintf(savename,SAVEGAMENAME"%d.hsg",item->option);
+					sprintf(savename, SAVEGAMENAME"%d.hsg", item->option);
 					saveOn = item->option;
-					if(!access(savename,0))
+					if (!access(savename, 0))
 					{
 						M_DeleteSaveResponse(0);
 					}
 				}
-				return true;		
+				return true;
 				break;
 			case KEY_DOWNARROW:
 				do
 				{
-					if(CurrentItPos+1 > CurrentMenu->itemCount-1)
+					if (CurrentItPos + 1 > CurrentMenu->itemCount - 1)
 					{
 						CurrentItPos = 0;
 					}
@@ -1528,27 +1528,27 @@ boolean MN_Responder(event_t *event)
 					{
 						CurrentItPos++;
 					}
-				} while(CurrentMenu->items[CurrentItPos].type == ITT_EMPTY);
+				} while (CurrentMenu->items[CurrentItPos].type == ITT_EMPTY);
 				S_StartSound(NULL, sfx_switch);
 				return(true);
 				break;
 			case KEY_UPARROW:
 				do
 				{
-					if(CurrentItPos == 0)
+					if (CurrentItPos == 0)
 					{
-						CurrentItPos = CurrentMenu->itemCount-1;
+						CurrentItPos = CurrentMenu->itemCount - 1;
 					}
 					else
 					{
 						CurrentItPos--;
 					}
-				} while(CurrentMenu->items[CurrentItPos].type == ITT_EMPTY);
+				} while (CurrentMenu->items[CurrentItPos].type == ITT_EMPTY);
 				S_StartSound(NULL, sfx_switch);
 				return(true);
 				break;
 			case KEY_LEFTARROW:
-				if(item->type == ITT_LRFUNC && item->func != NULL)
+				if (item->type == ITT_LRFUNC && item->func != NULL)
 				{
 					item->func(LEFT_DIR);
 					S_StartSound(NULL, sfx_keyup);
@@ -1556,7 +1556,7 @@ boolean MN_Responder(event_t *event)
 				return(true);
 				break;
 			case KEY_RIGHTARROW:
-				if(item->type == ITT_LRFUNC && item->func != NULL)
+				if (item->type == ITT_LRFUNC && item->func != NULL)
 				{
 					item->func(RIGHT_DIR);
 					S_StartSound(NULL, sfx_keyup);
@@ -1564,22 +1564,22 @@ boolean MN_Responder(event_t *event)
 				return(true);
 				break;
 			case KEY_ENTER:
-				if(item->type == ITT_SETMENU)
+				if (item->type == ITT_SETMENU)
 				{
 					SetMenu(item->menu);
 				}
-				else if(item->func != NULL)
+				else if (item->func != NULL)
 				{
 					CurrentMenu->oldItPos = CurrentItPos;
-					if(item->type == ITT_LRFUNC)
+					if (item->type == ITT_LRFUNC)
 					{
 						item->func(RIGHT_DIR);
 					}
-					else if(item->type == ITT_EFUNC)
+					else if (item->type == ITT_EFUNC)
 					{
-						if(item->func(item->option))
+						if (item->func(item->option))
 						{
-							if(item->menu != MENU_NONE)
+							if (item->menu != MENU_NONE)
 							{
 								SetMenu(item->menu);
 							}
@@ -1594,7 +1594,7 @@ boolean MN_Responder(event_t *event)
 				return(true);
 			case KEY_BACKSPACE:
 				S_StartSound(NULL, sfx_switch);
-				if(CurrentMenu->prevMenu == MENU_NONE)
+				if (CurrentMenu->prevMenu == MENU_NONE)
 				{
 					MN_DeactivateMenu();
 				}
@@ -1604,11 +1604,11 @@ boolean MN_Responder(event_t *event)
 				}
 				return(true);
 			default:
-				for(i = 0; i < CurrentMenu->itemCount; i++)
+				for (i = 0; i < CurrentMenu->itemCount; i++)
 				{
-					if(CurrentMenu->items[i].text)
+					if (CurrentMenu->items[i].text)
 					{
-						if(toupper(key)
+						if (toupper(key)
 							== toupper(CurrentMenu->items[i].text[0]))
 						{
 							CurrentItPos = i;
@@ -1623,9 +1623,9 @@ boolean MN_Responder(event_t *event)
 	else
 	{ // Editing file names
 		textBuffer = &SlotText[currentSlot][slotptr];
-		if(key == KEY_BACKSPACE)
+		if (key == KEY_BACKSPACE)
 		{
-			if(slotptr)
+			if (slotptr)
 			{
 				*textBuffer-- = 0;
 				*textBuffer = ASCII_CURSOR;
@@ -1633,39 +1633,39 @@ boolean MN_Responder(event_t *event)
 			}
 			return(true);
 		}
-		if(key == KEY_ESCAPE)
+		if (key == KEY_ESCAPE)
 		{
-			memset(SlotText[currentSlot], 0, SLOTTEXTLEN+2);
+			memset(SlotText[currentSlot], 0, SLOTTEXTLEN + 2);
 			strcpy(SlotText[currentSlot], oldSlotText);
 			SlotStatus[currentSlot]--;
 			MN_DeactivateMenu();
 			return(true);
 		}
-		if(key == KEY_ENTER)
+		if (key == KEY_ENTER)
 		{
 			SlotText[currentSlot][slotptr] = 0; // clear the cursor
 			item = &CurrentMenu->items[CurrentItPos];
 			CurrentMenu->oldItPos = CurrentItPos;
-			if(item->type == ITT_EFUNC)
+			if (item->type == ITT_EFUNC)
 			{
 				item->func(item->option);
-				if(item->menu != MENU_NONE)
+				if (item->menu != MENU_NONE)
 				{
 					SetMenu(item->menu);
 				}
 			}
 			return(true);
 		}
-		if(slotptr < SLOTTEXTLEN && key != KEY_BACKSPACE)
+		if (slotptr < SLOTTEXTLEN && key != KEY_BACKSPACE)
 		{
-			if((key >= 'a' && key <= 'z'))
+			if ((key >= 'a' && key <= 'z'))
 			{
-				*textBuffer++ = key-32;
+				*textBuffer++ = key - 32;
 				*textBuffer = ASCII_CURSOR;
 				slotptr++;
 				return(true);
 			}
-			if(((key >= '0' && key <= '9') || key == ' '
+			if (((key >= '0' && key <= '9') || key == ' '
 				|| key == ',' || key == '.' || key == '-')
 				&& !shiftdown)
 			{
@@ -1674,7 +1674,7 @@ boolean MN_Responder(event_t *event)
 				slotptr++;
 				return(true);
 			}
-			if(shiftdown && key == '1')
+			if (shiftdown && key == '1')
 			{
 				*textBuffer++ = '!';
 				*textBuffer = ASCII_CURSOR;
@@ -1695,11 +1695,11 @@ boolean MN_Responder(event_t *event)
 
 void MN_ActivateMenu(void)
 {
-	if(MenuActive)
+	if (MenuActive)
 	{
 		return;
 	}
-	if(paused)
+	if (paused)
 	{
 		S_ResumeSound();
 	}
@@ -1708,7 +1708,7 @@ void MN_ActivateMenu(void)
 	MenuTime = 0;
 	CurrentMenu = &MainMenu;
 	CurrentItPos = CurrentMenu->oldItPos;
-	if(!netgame && !demoplayback)
+	if (!netgame && !demoplayback)
 	{
 		paused = true;
 	}
@@ -1726,12 +1726,12 @@ void MN_DeactivateMenu(void)
 {
 	CurrentMenu->oldItPos = CurrentItPos;
 	MenuActive = false;
-	if(!netgame)
+	if (!netgame)
 	{
 		paused = false;
 	}
 	S_StartSound(NULL, sfx_dorcls);
-	if(soundchanged)
+	if (soundchanged)
 	{
 		S_SetMaxVolume(true); //recalc the sound curve
 		soundchanged = false;
@@ -1749,10 +1749,10 @@ void MN_DeactivateMenu(void)
 void MN_DrawInfo(void)
 {
 	I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
-	memcpy(screen, (byte *)W_CacheLumpNum(W_GetNumForName("TITLE")+InfoType,
-		PU_CACHE), SCREENWIDTH*SCREENHEIGHT);
-//      V_DrawPatch(0, 0, W_CacheLumpNum(W_GetNumForName("TITLE")+InfoType,
-//              PU_CACHE));
+	memcpy(screen, (byte *)W_CacheLumpNum(W_GetNumForName("TITLE") + InfoType,
+		PU_CACHE), SCREENWIDTH * SCREENHEIGHT);
+	//      V_DrawPatch(0, 0, W_CacheLumpNum(W_GetNumForName("TITLE")+InfoType,
+	//              PU_CACHE));
 }
 
 
@@ -1782,14 +1782,14 @@ static void DrawSlider(Menu_t *menu, int item, int width, int slot)
 	int x2;
 	int count;
 
-	x = menu->x+24;
-	y = menu->y+2+(item*ITEM_HEIGHT);
-	V_DrawPatch(x-32, y, W_CacheLumpName("M_SLDLT", PU_CACHE));
-	for(x2 = x, count = width; count--; x2 += 8)
+	x = menu->x + 24;
+	y = menu->y + 2 + (item * ITEM_HEIGHT);
+	V_DrawPatch(x - 32, y, W_CacheLumpName("M_SLDLT", PU_CACHE));
+	for (x2 = x, count = width; count--; x2 += 8)
 	{
-		V_DrawPatch(x2, y, W_CacheLumpName(count&1 ? "M_SLDMD1"
+		V_DrawPatch(x2, y, W_CacheLumpName(count & 1 ? "M_SLDMD1"
 			: "M_SLDMD2", PU_CACHE));
 	}
 	V_DrawPatch(x2, y, W_CacheLumpName("M_SLDRT", PU_CACHE));
-	V_DrawPatch(x+4+slot*8, y+7, W_CacheLumpName("M_SLDKB", PU_CACHE));
+	V_DrawPatch(x + 4 + slot * 8, y + 7, W_CacheLumpName("M_SLDKB", PU_CACHE));
 }

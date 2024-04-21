@@ -167,7 +167,7 @@ void IN_Start(void)
 
 void IN_WaitStop(void)
 {
-	if(!--cnt)
+	if (!--cnt)
 	{
 		IN_Stop();
 		G_WorldDone();
@@ -206,37 +206,37 @@ void IN_InitStats(void)
 
 	didStatCopy = 0; // FS: For statcopy
 
-	if(!netgame)
+	if (!netgame)
 	{
 		gametype = SINGLE;
-		time = leveltime/35;
-		hours = time/3600;
-		time -= hours*3600;
-		minutes = time/60;
-		time -= minutes*60;
+		time = leveltime / 35;
+		hours = time / 3600;
+		time -= hours * 3600;
+		minutes = time / 60;
+		time -= minutes * 60;
 		seconds = time;
 	}
-	else if(netgame && !deathmatch)
+	else if (netgame && !deathmatch)
 	{
 		gametype = COOPERATIVE;
-		memset(killPercent, 0, MAXPLAYERS*sizeof(int));
-		memset(bonusPercent, 0, MAXPLAYERS*sizeof(int));
-		memset(secretPercent, 0, MAXPLAYERS*sizeof(int));
-		for(i=0; i<MAXPLAYERS; i++)
+		memset(killPercent, 0, MAXPLAYERS * sizeof(int));
+		memset(bonusPercent, 0, MAXPLAYERS * sizeof(int));
+		memset(secretPercent, 0, MAXPLAYERS * sizeof(int));
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
-			if(playeringame[i])
+			if (playeringame[i])
 			{
-				if(totalkills)
+				if (totalkills)
 				{
-					killPercent[i] = players[i].killcount*100/totalkills;
+					killPercent[i] = players[i].killcount * 100 / totalkills;
 				}
-				if(totalitems)
+				if (totalitems)
 				{
-					bonusPercent[i] = players[i].itemcount*100/totalitems;
+					bonusPercent[i] = players[i].itemcount * 100 / totalitems;
 				}
-				if(totalsecret)
+				if (totalsecret)
 				{
-					secretPercent[i] = players[i].secretcount*100/totalsecret;
+					secretPercent[i] = players[i].secretcount * 100 / totalsecret;
 				}
 			}
 		}
@@ -249,36 +249,36 @@ void IN_InitStats(void)
 		posnum = 0;
 		playercount = 0;
 		slaughtercount = 0;
-		for(i=0; i<MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
 			totalFrags[i] = 0;
-			if(playeringame[i])
+			if (playeringame[i])
 			{
 				playercount++;
-				for(j=0; j<MAXPLAYERS; j++)
+				for (j = 0; j < MAXPLAYERS; j++)
 				{
-					if(playeringame[j])
+					if (playeringame[j])
 					{
 						totalFrags[i] += players[i].frags[j];
 					}
 				}
-				dSlideX[i] = (43*posnum*FRACUNIT)/20;
-				dSlideY[i] = (36*posnum*FRACUNIT)/20;
+				dSlideX[i] = (43 * posnum * FRACUNIT) / 20;
+				dSlideY[i] = (36 * posnum * FRACUNIT) / 20;
 				posnum++;
 			}
-			if(totalFrags[i] > slaughterfrags)
+			if (totalFrags[i] > slaughterfrags)
 			{
-				slaughterboy = 1<<i;
+				slaughterboy = 1 << i;
 				slaughterfrags = totalFrags[i];
 				slaughtercount = 1;
 			}
-			else if(totalFrags[i] == slaughterfrags)
+			else if (totalFrags[i] == slaughterfrags)
 			{
-				slaughterboy |= 1<<i;
+				slaughterboy |= 1 << i;
 				slaughtercount++;
 			}
 		}
-		if(playercount == slaughtercount)
+		if (playercount == slaughtercount)
 		{ // don't do the slaughter stuff if everyone is equal
 			slaughterboy = 0;
 		}
@@ -295,7 +295,7 @@ void IN_LoadPics(void)
 {
 	int i;
 
-	switch(gameepisode)
+	switch (gameepisode)
 	{
 		case 1:
 			patchINTERPIC = W_CacheLumpName("MAPE1", PU_STATIC);
@@ -312,11 +312,11 @@ void IN_LoadPics(void)
 	patchBEENTHERE = W_CacheLumpName("IN_X", PU_STATIC);
 	patchGOINGTHERE = W_CacheLumpName("IN_YAH", PU_STATIC);
 	FontBLumpBase = W_GetNumForName("FONTB16");
-	for(i=0; i<10; i++)
+	for (i = 0; i < 10; i++)
 	{
-		FontBNumbers[i] = W_CacheLumpNum(FontBLumpBase+i, PU_STATIC);
+		FontBNumbers[i] = W_CacheLumpNum(FontBLumpBase + i, PU_STATIC);
 	}
-	FontBLump = W_GetNumForName("FONTB_S")+1;
+	FontBLump = W_GetNumForName("FONTB_S") + 1;
 	FontBNegative = W_CacheLumpName("FONTB13", PU_STATIC);
 
 	FontBSlash = W_CacheLumpName("FONTB15", PU_STATIC);
@@ -335,13 +335,13 @@ void IN_UnloadPics(void)
 {
 	int i;
 
-	if(patchINTERPIC)
+	if (patchINTERPIC)
 	{
 		Z_ChangeTag(patchINTERPIC, PU_CACHE);
 	}
 	Z_ChangeTag(patchBEENTHERE, PU_CACHE);
 	Z_ChangeTag(patchGOINGTHERE, PU_CACHE);
-	for(i=0; i<10; i++)
+	for (i = 0; i < 10; i++)
 	{
 		Z_ChangeTag(FontBNumbers[i], PU_CACHE);
 	}
@@ -358,35 +358,35 @@ void IN_UnloadPics(void)
 
 void IN_Ticker(void)
 {
-	if(!intermission)
+	if (!intermission)
 	{
 		return;
 	}
-	if(interstate == 3)
+	if (interstate == 3)
 	{
 		IN_WaitStop();
 		return;
 	}
 	IN_CheckForSkip();
 	intertime++;
-	if(oldintertime < intertime)
+	if (oldintertime < intertime)
 	{
 		interstate++;
-		if(gameepisode > 3 && interstate >= 1)
+		if (gameepisode > 3 && interstate >= 1)
 		{ // Extended Wad levels:  skip directly to the next level
 			interstate = 3;
 		}
-		switch(interstate)
+		switch (interstate)
 		{
 			case 0:
-				oldintertime = intertime+300;
-				if(gameepisode > 3)
+				oldintertime = intertime + 300;
+				if (gameepisode > 3)
 				{
-					oldintertime = intertime+1200;
+					oldintertime = intertime + 1200;
 				}
 				break;
 			case 1:
-				oldintertime = intertime+200;
+				oldintertime = intertime + 200;
 				break;
 			case 2:
 				oldintertime = MAXINT;
@@ -398,15 +398,15 @@ void IN_Ticker(void)
 				break;
 		}
 	}
-	if(skipintermission)
+	if (skipintermission)
 	{
-		if(interstate == 0 && intertime < 150)
+		if (interstate == 0 && intertime < 150)
 		{
 			intertime = 150;
 			skipintermission = false;
 			return;
 		}
-		else if(interstate < 2 && gameepisode < 4)
+		else if (interstate < 2 && gameepisode < 4)
 		{
 			interstate = 2;
 			skipintermission = false;
@@ -430,13 +430,13 @@ void IN_Ticker(void)
 void IN_CheckForSkip(void)
 {
 	int   i;
-	player_t  *player;
+	player_t *player;
 
-	for (i=0, player = players ; i<MAXPLAYERS ; i++, player++)
+	for (i = 0, player = players; i < MAXPLAYERS; i++, player++)
 	{
 		if (playeringame[i])
 		{
-			if (player->cmd.buttons&BT_ATTACK)
+			if (player->cmd.buttons & BT_ATTACK)
 			{
 				if (!player->attackdown)
 				{
@@ -448,7 +448,7 @@ void IN_CheckForSkip(void)
 			{
 				player->attackdown = false;
 			}
-			if (player->cmd.buttons&BT_USE)
+			if (player->cmd.buttons & BT_USE)
 			{
 				if (!player->usedown)
 				{
@@ -474,26 +474,26 @@ void IN_Drawer(void)
 {
 	static int oldinterstate;
 
-	if(!intermission)
+	if (!intermission)
 	{
 		return;
 	}
-	if(interstate == 3)
+	if (interstate == 3)
 	{
 		return;
 	}
 	UpdateState |= I_FULLSCRN;
-	if(oldinterstate != 2 && interstate == 2)
+	if (oldinterstate != 2 && interstate == 2)
 	{
 		S_StartSound(NULL, sfx_pstop);
 	}
 	oldinterstate = interstate;
 
-	switch(interstate)
+	switch (interstate)
 	{
 		case 0: // draw stats
 			IN_DrawStatBack();
-			switch(gametype)
+			switch (gametype)
 			{
 				case SINGLE:
 					IN_DrawSingleStats();
@@ -507,21 +507,21 @@ void IN_Drawer(void)
 			}
 			break;
 		case 1: // leaving old level
-			if(gameepisode < 4)
+			if (gameepisode < 4)
 			{
 				V_DrawPatch(0, 0, patchINTERPIC);
 				IN_DrawOldLevel();
 			}
 			break;
 		case 2: // going to the next level
-			if(gameepisode < 4)
+			if (gameepisode < 4)
 			{
 				V_DrawPatch(0, 0, patchINTERPIC);
 				IN_DrawYAH();
 			}
 			break;
 		case 3: // waiting before going to the next level
-			if(gameepisode < 4)
+			if (gameepisode < 4)
 			{
 				V_DrawPatch(0, 0, patchINTERPIC);
 			}
@@ -549,17 +549,17 @@ void IN_DrawStatBack(void)
 	src = W_CacheLumpName ("FLOOR16", PU_CACHE);
 	dest = screen;
 
-	for (y=0 ; y<SCREENHEIGHT ; y++)
+	for (y = 0; y < SCREENHEIGHT; y++)
 	{
-		for (x=0 ; x<SCREENWIDTH/64 ; x++)
+		for (x = 0; x < SCREENWIDTH / 64; x++)
 		{
-			memcpy (dest, src+((y&63)<<6), 64);
+			memcpy (dest, src + ((y & 63) << 6), 64);
 			dest += 64;
 		}
-		if (SCREENWIDTH&63)
+		if (SCREENWIDTH & 63)
 		{
-			memcpy (dest, src+((y&63)<<6), SCREENWIDTH&63);
-			dest += (SCREENWIDTH&63);
+			memcpy (dest, src + ((y & 63) << 6), SCREENWIDTH & 63);
+			dest += (SCREENWIDTH & 63);
 		}
 	}
 }
@@ -575,39 +575,39 @@ void IN_DrawOldLevel(void)
 	int i;
 	int x;
 
-	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
-	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
-	x = 160-MN_TextAWidth("FINISHED")/2;
+	x = 160 - MN_TextBWidth(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7) / 2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7, x, 3);
+	x = 160 - MN_TextAWidth("FINISHED") / 2;
 	MN_DrTextA("FINISHED", x, 25);
 
-	if(prevmap == 9)
+	if (prevmap == 9)
 	{
-		for(i=0; i<gamemap-1; i++)
+		for (i = 0; i < gamemap - 1; i++)
 		{
-			V_DrawPatch(YAHspot[gameepisode-1][i].x, YAHspot[gameepisode-1][i].y,
+			V_DrawPatch(YAHspot[gameepisode - 1][i].x, YAHspot[gameepisode - 1][i].y,
 				patchBEENTHERE);
 		}
-		if(!(intertime&16))
+		if (!(intertime & 16))
 		{
-			V_DrawPatch(YAHspot[gameepisode-1][8].x, YAHspot[gameepisode-1][8].y,
+			V_DrawPatch(YAHspot[gameepisode - 1][8].x, YAHspot[gameepisode - 1][8].y,
 				patchBEENTHERE);
 		}
 	}
 	else
 	{
-		for(i=0; i<prevmap-1; i++)
+		for (i = 0; i < prevmap - 1; i++)
 		{
-			V_DrawPatch(YAHspot[gameepisode-1][i].x, YAHspot[gameepisode-1][i].y,
+			V_DrawPatch(YAHspot[gameepisode - 1][i].x, YAHspot[gameepisode - 1][i].y,
 				patchBEENTHERE);
 		}
-		if(players[consoleplayer].didsecret)
+		if (players[consoleplayer].didsecret)
 		{
-			V_DrawPatch(YAHspot[gameepisode-1][8].x, YAHspot[gameepisode-1][8].y,
+			V_DrawPatch(YAHspot[gameepisode - 1][8].x, YAHspot[gameepisode - 1][8].y,
 				patchBEENTHERE);
 		}
-		if(!(intertime&16))
+		if (!(intertime & 16))
 		{
-			V_DrawPatch(YAHspot[gameepisode-1][prevmap-1].x, YAHspot[gameepisode-1][prevmap-1].y,
+			V_DrawPatch(YAHspot[gameepisode - 1][prevmap - 1].x, YAHspot[gameepisode - 1][prevmap - 1].y,
 				patchBEENTHERE);
 		}
 	}
@@ -624,29 +624,29 @@ void IN_DrawYAH(void)
 	int i;
 	int x;
 
-	x = 160-MN_TextAWidth("NOW ENTERING:")/2;
+	x = 160 - MN_TextAWidth("NOW ENTERING:") / 2;
 	MN_DrTextA("NOW ENTERING:", x, 10);
-	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7)/2;
-	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7, x, 20);
+	x = 160 - MN_TextBWidth(DEH_String(LevelNames[(gameepisode - 1) * 9 + gamemap - 1]) + 7) / 2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode - 1) * 9 + gamemap - 1]) + 7, x, 20);
 
-	if(prevmap == 9)
+	if (prevmap == 9)
 	{
-		prevmap = gamemap-1;
+		prevmap = gamemap - 1;
 	}
-	for(i=0; i<prevmap; i++)
+	for (i = 0; i < prevmap; i++)
 	{
-		V_DrawPatch(YAHspot[gameepisode-1][i].x, YAHspot[gameepisode-1][i].y,
+		V_DrawPatch(YAHspot[gameepisode - 1][i].x, YAHspot[gameepisode - 1][i].y,
 			patchBEENTHERE);
 	}
-	if(players[consoleplayer].didsecret)
+	if (players[consoleplayer].didsecret)
 	{
-		V_DrawPatch(YAHspot[gameepisode-1][8].x, YAHspot[gameepisode-1][8].y,
+		V_DrawPatch(YAHspot[gameepisode - 1][8].x, YAHspot[gameepisode - 1][8].y,
 			patchBEENTHERE);
 	}
-	if(!(intertime&16) || interstate == 3)
+	if (!(intertime & 16) || interstate == 3)
 	{ // draw the destination 'X'
-		V_DrawPatch(YAHspot[gameepisode-1][gamemap-1].x,
-			YAHspot[gameepisode-1][gamemap-1].y, patchGOINGTHERE);
+		V_DrawPatch(YAHspot[gameepisode - 1][gamemap - 1].x,
+			YAHspot[gameepisode - 1][gamemap - 1].y, patchGOINGTHERE);
 	}
 }
 
@@ -667,17 +667,17 @@ void IN_DrawSingleStats(void)
 	IN_DrTextB("ITEMS", 50, 90);
 	IN_DrTextB("SECRETS", 50, 115);
 
-	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
-	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
-	x = 160-MN_TextAWidth("FINISHED")/2;
+	x = 160 - MN_TextBWidth(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7) / 2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7, x, 3);
+	x = 160 - MN_TextAWidth("FINISHED") / 2;
 	MN_DrTextA("FINISHED", x, 25);
-	
-	if(intertime < 30)
+
+	if (intertime < 30)
 	{
 		sounds = 0;
 		return;
 	}
-	if(sounds < 1 && intertime >= 30)
+	if (sounds < 1 && intertime >= 30)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -685,11 +685,11 @@ void IN_DrawSingleStats(void)
 	IN_DrawNumber(players[consoleplayer].killcount, 200, 65, 3);
 	V_DrawShadowedPatch(237, 65, FontBSlash);
 	IN_DrawNumber(totalkills, 248, 65, 3);
-	if(intertime < 60)
+	if (intertime < 60)
 	{
 		return;
 	}
-	if(sounds < 2 && intertime >= 60)
+	if (sounds < 2 && intertime >= 60)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -697,11 +697,11 @@ void IN_DrawSingleStats(void)
 	IN_DrawNumber(players[consoleplayer].itemcount, 200, 90, 3);
 	V_DrawShadowedPatch(237, 90, FontBSlash);
 	IN_DrawNumber(totalitems, 248, 90, 3);
-	if(intertime < 90)
+	if (intertime < 90)
 	{
 		return;
 	}
-	if(sounds < 3 && intertime >= 90)
+	if (sounds < 3 && intertime >= 90)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -709,27 +709,27 @@ void IN_DrawSingleStats(void)
 	IN_DrawNumber(players[consoleplayer].secretcount, 200, 115, 3);
 	V_DrawShadowedPatch(237, 115, FontBSlash);
 	IN_DrawNumber(totalsecret, 248, 115, 3);
-	if(intertime < 150)
+	if (intertime < 150)
 	{
 		return;
 	}
-	if(sounds < 4 && intertime >= 150)
+	if (sounds < 4 && intertime >= 150)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
 	}
 
-	if(!ExtendedWAD || gameepisode < 4)
+	if (!ExtendedWAD || gameepisode < 4)
 	{
 		IN_DrTextB("TIME", 85, 160);
 		IN_DrawTime(155, 160, hours, minutes, seconds);
 	}
 	else
 	{
-		x = 160-MN_TextAWidth("NOW ENTERING:")/2;
+		x = 160 - MN_TextAWidth("NOW ENTERING:") / 2;
 		MN_DrTextA("NOW ENTERING:", x, 160);
-		x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7)/2;
-		IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+gamemap-1])+7, x, 170);
+		x = 160 - MN_TextBWidth(DEH_String(LevelNames[(gameepisode - 1) * 9 + gamemap - 1]) + 7) / 2;
+		IN_DrTextB(DEH_String(LevelNames[(gameepisode - 1) * 9 + gamemap - 1]) + 7, x, 170);
 		skipintermission = false;
 	}
 }
@@ -753,34 +753,34 @@ void IN_DrawCoopStats(void)
 	IN_DrTextB("KILLS", 95, 35);
 	IN_DrTextB("BONUS", 155, 35);
 	IN_DrTextB("SECRET", 232, 35);
-	x = 160-MN_TextBWidth(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7)/2;
-	IN_DrTextB(DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, x, 3);
-	x = 160-MN_TextAWidth("FINISHED")/2;
+	x = 160 - MN_TextBWidth(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7) / 2;
+	IN_DrTextB(DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7, x, 3);
+	x = 160 - MN_TextAWidth("FINISHED") / 2;
 	MN_DrTextA("FINISHED", x, 25);
 
 	ypos = 50;
-	for(i=0; i<MAXPLAYERS; i++)
+	for (i = 0; i < MAXPLAYERS; i++)
 	{
-		if(playeringame[i])
+		if (playeringame[i])
 		{
-			V_DrawShadowedPatch(25, ypos, W_CacheLumpNum(patchFaceOkayBase+i, PU_CACHE));
-			if(intertime < 40)
+			V_DrawShadowedPatch(25, ypos, W_CacheLumpNum(patchFaceOkayBase + i, PU_CACHE));
+			if (intertime < 40)
 			{
 				sounds = 0;
 				ypos += 37;
 				continue;
 			}
-			else if(intertime >= 40 && sounds < 1)
+			else if (intertime >= 40 && sounds < 1)
 			{
 				S_StartSound(NULL, sfx_dorcls);
 				sounds++;
 			}
-			IN_DrawNumber(killPercent[i], 85, ypos+10, 3);
-			V_DrawShadowedPatch(121, ypos+10, FontBPercent);
-			IN_DrawNumber(bonusPercent[i], 160, ypos+10, 3);
-			V_DrawShadowedPatch(196, ypos+10, FontBPercent);
-			IN_DrawNumber(secretPercent[i], 237, ypos+10, 3);
-			V_DrawShadowedPatch(273, ypos+10, FontBPercent);
+			IN_DrawNumber(killPercent[i], 85, ypos + 10, 3);
+			V_DrawShadowedPatch(121, ypos + 10, FontBPercent);
+			IN_DrawNumber(bonusPercent[i], 160, ypos + 10, 3);
+			V_DrawShadowedPatch(196, ypos + 10, FontBPercent);
+			IN_DrawNumber(secretPercent[i], 237, ypos + 10, 3);
+			V_DrawShadowedPatch(273, ypos + 10, FontBPercent);
 			ypos += 37;
 		}
 	}
@@ -810,68 +810,68 @@ void IN_DrawDMStats(void)
 
 	IN_DrTextB("TOTAL", 265, 30);
 	MN_DrTextA("VICTIMS", 140, 8);
-	for(i=0; i<7; i++)
+	for (i = 0; i < 7; i++)
 	{
-		MN_DrTextA(KillersText[i], 10, 80+9*i);
+		MN_DrTextA(KillersText[i], 10, 80 + 9 * i);
 	}
-	if(intertime < 20)
+	if (intertime < 20)
 	{
-		for(i=0; i<MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
-			if(playeringame[i])
+			if (playeringame[i])
 			{
-				V_DrawShadowedPatch(40, ((ypos<<FRACBITS)+dSlideY[i]*intertime)
-					>>FRACBITS, W_CacheLumpNum(patchFaceOkayBase+i, PU_CACHE));
-				V_DrawShadowedPatch(((xpos<<FRACBITS)+dSlideX[i]*intertime)
-					>>FRACBITS, 18, W_CacheLumpNum(patchFaceDeadBase+i, PU_CACHE));
+				V_DrawShadowedPatch(40, ((ypos << FRACBITS) + dSlideY[i] * intertime)
+					>> FRACBITS, W_CacheLumpNum(patchFaceOkayBase + i, PU_CACHE));
+				V_DrawShadowedPatch(((xpos << FRACBITS) + dSlideX[i] * intertime)
+					>> FRACBITS, 18, W_CacheLumpNum(patchFaceDeadBase + i, PU_CACHE));
 			}
 		}
 		sounds = 0;
 		return;
 	}
-	if(intertime >= 20 && sounds < 1)
+	if (intertime >= 20 && sounds < 1)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
 	}
-	if(intertime >= 100 && slaughterboy && sounds < 2)
+	if (intertime >= 100 && slaughterboy && sounds < 2)
 	{
 		S_StartSound(NULL, sfx_wpnup);
 		sounds++;
 	}
-	for(i=0; i<MAXPLAYERS; i++)
+	for (i = 0; i < MAXPLAYERS; i++)
 	{
-		if(playeringame[i])
+		if (playeringame[i])
 		{
-			if(intertime < 100 || i == consoleplayer)
+			if (intertime < 100 || i == consoleplayer)
 			{
-				V_DrawShadowedPatch(40, ypos, W_CacheLumpNum(patchFaceOkayBase+i, PU_CACHE));
-				V_DrawShadowedPatch(xpos, 18, W_CacheLumpNum(patchFaceDeadBase+i, PU_CACHE));
+				V_DrawShadowedPatch(40, ypos, W_CacheLumpNum(patchFaceOkayBase + i, PU_CACHE));
+				V_DrawShadowedPatch(xpos, 18, W_CacheLumpNum(patchFaceDeadBase + i, PU_CACHE));
 			}
 			else
 			{
-				V_DrawFuzzPatch(40, ypos, W_CacheLumpNum(patchFaceOkayBase+i, PU_CACHE));
-				V_DrawFuzzPatch(xpos, 18, W_CacheLumpNum(patchFaceDeadBase+i, PU_CACHE));
+				V_DrawFuzzPatch(40, ypos, W_CacheLumpNum(patchFaceOkayBase + i, PU_CACHE));
+				V_DrawFuzzPatch(xpos, 18, W_CacheLumpNum(patchFaceDeadBase + i, PU_CACHE));
 			}
 			kpos = 86;
-			for(j=0; j<MAXPLAYERS; j++)
+			for (j = 0; j < MAXPLAYERS; j++)
 			{
-				if(playeringame[j])
+				if (playeringame[j])
 				{
-					IN_DrawNumber(players[i].frags[j], kpos, ypos+10, 3);
+					IN_DrawNumber(players[i].frags[j], kpos, ypos + 10, 3);
 					kpos += 43;
 				}
-	      }
-			if(slaughterboy&(1<<i))
+			}
+			if (slaughterboy & (1 << i))
 			{
-				if(!(intertime&16))
+				if (!(intertime & 16))
 				{
-					IN_DrawNumber(totalFrags[i], 263, ypos+10, 3);
+					IN_DrawNumber(totalFrags[i], 263, ypos + 10, 3);
 				}
 			}
 			else
 			{
-				IN_DrawNumber(totalFrags[i], 263, ypos+10, 3);
+				IN_DrawNumber(totalFrags[i], 263, ypos + 10, 3);
 			}
 			ypos += 36;
 			xpos += 43;
@@ -887,20 +887,20 @@ void IN_DrawDMStats(void)
 
 void IN_DrawTime(int x, int y, int h, int m, int s)
 {
-	if(h)
+	if (h)
 	{
 		IN_DrawNumber(h, x, y, 2);
-		IN_DrTextB(":", x+26, y);
+		IN_DrTextB(":", x + 26, y);
 	}
 	x += 34;
-	if(m || h)
+	if (m || h)
 	{
 		IN_DrawNumber(m, x, y, 2);
 	}
 	x += 34;
-	if(s)
+	if (s)
 	{
-		IN_DrTextB(":", x-8, y);
+		IN_DrTextB(":", x - 8, y);
 		IN_DrawNumber(s, x, y, 2);
 	}
 }
@@ -924,77 +924,77 @@ void IN_DrawNumber(int val, int x, int y, int digits)
 	neg = false;
 	realdigits = 1;
 
-	if(val < 0)
+	if (val < 0)
 	{ //...this should reflect negative frags
 		val = -val;
 		neg = true;
-		if(val > 99)
+		if (val > 99)
 		{
 			val = 99;
 		}
 	}
-	if(val > 9)
+	if (val > 9)
 	{
 		realdigits++;
-		if(digits < realdigits)
+		if (digits < realdigits)
 		{
 			realdigits = digits;
 			val = 9;
 		}
 	}
-	if(val > 99)
+	if (val > 99)
 	{
 		realdigits++;
-		if(digits < realdigits)
+		if (digits < realdigits)
 		{
 			realdigits = digits;
 			val = 99;
 		}
 	}
-	if(val > 999)
+	if (val > 999)
 	{
 		realdigits++;
-		if(digits < realdigits)
+		if (digits < realdigits)
 		{
 			realdigits = digits;
 			val = 999;
 		}
 	}
-	if(digits == 4)
+	if (digits == 4)
 	{
-		patch = FontBNumbers[val/1000];
-		V_DrawShadowedPatch(xpos+6-patch->width/2-12, y, patch);
+		patch = FontBNumbers[val / 1000];
+		V_DrawShadowedPatch(xpos + 6 - patch->width / 2 - 12, y, patch);
 	}
-	if(digits > 2)
+	if (digits > 2)
 	{
-		if(realdigits > 2)
+		if (realdigits > 2)
 		{
-			patch = FontBNumbers[val/100];
-			V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
+			patch = FontBNumbers[val / 100];
+			V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
 		}
 		xpos += 12;
 	}
-	val = val%100;
-	if(digits > 1)
+	val = val % 100;
+	if (digits > 1)
 	{
-		if(val > 9)
+		if (val > 9)
 		{
-			patch = FontBNumbers[val/10];
-			V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
+			patch = FontBNumbers[val / 10];
+			V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
 		}
-		else if(digits == 2 || oldval > 99)
+		else if (digits == 2 || oldval > 99)
 		{
 			V_DrawShadowedPatch(xpos, y, FontBNumbers[0]);
 		}
 		xpos += 12;
 	}
-	val = val%10;
+	val = val % 10;
 	patch = FontBNumbers[val];
-	V_DrawShadowedPatch(xpos+6-patch->width/2, y, patch);
-	if(neg)
+	V_DrawShadowedPatch(xpos + 6 - patch->width / 2, y, patch);
+	if (neg)
 	{
 		patch = FontBNegative;
-		V_DrawShadowedPatch(xpos+6-patch->width/2-12*(realdigits), y, patch);
+		V_DrawShadowedPatch(xpos + 6 - patch->width / 2 - 12 * (realdigits), y, patch);
 	}
 }
 
@@ -1009,17 +1009,17 @@ void IN_DrTextB(char *text, int x, int y)
 	char c;
 	patch_t *p;
 
-	while((c = *text++) != 0)
+	while ((c = *text++) != 0)
 	{
-		if(c < 33)
+		if (c < 33)
 		{
 			x += 8;
 		}
 		else
 		{
-			p = W_CacheLumpNum(FontBLump+c-33, PU_CACHE);
+			p = W_CacheLumpNum(FontBLump + c - 33, PU_CACHE);
 			V_DrawShadowedPatch(x, y, p);
-			x += p->width-1;
+			x += p->width - 1;
 		}
 	}
 }
@@ -1027,17 +1027,17 @@ void IN_DrTextB(char *text, int x, int y)
 char *IN_CheckStatArgv(void) // FS: Check for -statcopy and default to stats.txt
 {
 	int p;
-	char	*statfile;
+	char *statfile;
 
-	if(p = M_CheckParm("-statcopy"))
+	if (p = M_CheckParm("-statcopy"))
 	{
-		if(p && p<myargc-1)
+		if (p && p < myargc - 1)
 		{
-			statfile = myargv[p+1];
+			statfile = myargv[p + 1];
 			return(statfile);
 		}
 	}
-	return NULL; 
+	return NULL;
 }
 
 void IN_PrintSingleStats(void)
@@ -1046,10 +1046,10 @@ void IN_PrintSingleStats(void)
 	char	statfile[256];
 	static char buffer[1024]; // FS: For statcopy
 
-	if(!IN_CheckStatArgv())
+	if (!IN_CheckStatArgv())
 		return;
 
-	if(didStatCopy < 1)
+	if (didStatCopy < 1)
 	{
 		strcpy(statfile, IN_CheckStatArgv());
 
@@ -1061,9 +1061,9 @@ void IN_PrintSingleStats(void)
 			return;
 		}
 
-		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<SINGLE PLAYER>\n\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n", 
-		gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1, players[consoleplayer].killcount,totalkills, players[consoleplayer].itemcount, 		totalitems,players[consoleplayer].secretcount,totalsecret,hours,minutes,seconds);
-		fseek(f,0, SEEK_END);
+		sprintf(buffer, "MAP: E%iM%i %s\nSKILL: %i\n<SINGLE PLAYER>\n\n - PLAYER 1\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n  * TIME: %i:%i:%i\n\n",
+			gameepisode, prevmap, DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7, gameskill + 1, players[consoleplayer].killcount, totalkills, players[consoleplayer].itemcount, totalitems, players[consoleplayer].secretcount, totalsecret, hours, minutes, seconds);
+		fseek(f, 0, SEEK_END);
 		fputs(buffer, f);
 		fflush(f);
 		fclose(f);
@@ -1078,10 +1078,10 @@ void IN_PrintCoopStats(void)
 	char	statfile[256];
 	static char buffer[2048]; // FS: For statcopy
 
-	if(!IN_CheckStatArgv())
+	if (!IN_CheckStatArgv())
 		return;
 
-	if(didStatCopy < 1)
+	if (didStatCopy < 1)
 	{
 		strcpy(statfile, IN_CheckStatArgv());
 
@@ -1093,17 +1093,17 @@ void IN_PrintCoopStats(void)
 			return;
 		}
 
-		sprintf(buffer,"MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7, gameskill+1);
+		sprintf(buffer, "MAP: E%iM%i %s\nSKILL: %i\n<COOPERATIVE>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7, gameskill + 1);
 		fputs(buffer, f);
 		fflush(f);
 
-		for(i = 0; i < MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
-			if(playeringame[i])
+			if (playeringame[i])
 			{
-				sprintf(buffer," - PLAYER %i\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n\n", i+1, players[i].killcount, totalkills, players[i].itemcount, totalitems, players[i].secretcount, totalsecret);
+				sprintf(buffer, " - PLAYER %i\n  * KILLS: %i/%i\n  * ITEMS: %i/%i\n  * SECRETS: %i/%i\n\n", i + 1, players[i].killcount, totalkills, players[i].itemcount, totalitems, players[i].secretcount, totalsecret);
 
-				fseek(f,0, SEEK_END);
+				fseek(f, 0, SEEK_END);
 				fputs(buffer, f);
 				fflush(f);
 			}
@@ -1122,10 +1122,10 @@ void IN_PrintDMStats(void)
 	char	statfile[256];
 	static char buffer[2048]; // FS: For statcopy
 
-	if(!IN_CheckStatArgv())
+	if (!IN_CheckStatArgv())
 		return;
 
-	if(didStatCopy < 1)
+	if (didStatCopy < 1)
 	{
 		strcpy(statfile, IN_CheckStatArgv());
 
@@ -1137,18 +1137,18 @@ void IN_PrintDMStats(void)
 			return;
 		}
 
-		sprintf(buffer,"MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode-1)*9+prevmap-1])+7);
+		sprintf(buffer, "MAP: E%iM%i %s\n<DEATHMATCH>\n\n", gameepisode, prevmap, DEH_String(LevelNames[(gameepisode - 1) * 9 + prevmap - 1]) + 7);
 		fputs(buffer, f);
 		fflush(f);
 
-		for(i = 0; i < MAXPLAYERS; i++)
+		for (i = 0; i < MAXPLAYERS; i++)
 		{
 			totalFrags[i] = 0;
-			if(playeringame[i])
+			if (playeringame[i])
 			{
 				totalFrags[i] += players[i].frags[i];
-				sprintf(buffer," - PLAYER %i\n  * FRAGS: %i\n\n", i+1, totalFrags[i]);
-				fseek(f,0, SEEK_END);
+				sprintf(buffer, " - PLAYER %i\n  * FRAGS: %i\n\n", i + 1, totalFrags[i]);
+				fseek(f, 0, SEEK_END);
 				fputs(buffer, f);
 				fflush(f);
 			}

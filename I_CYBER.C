@@ -47,18 +47,20 @@ normal speed to help aiming.
 
 #define DOSMEMSIZE      64      // enough for any SWIFT structure
 
-typedef struct {
-   short        x;
-   short        y;
-   short        z;
-   short        pitch;
-   short        roll;
-   short        yaw;
-   short        buttons;
+typedef struct
+{
+	short        x;
+	short        y;
+	short        z;
+	short        pitch;
+	short        roll;
+	short        yaw;
+	short        buttons;
 } SWIFT_3DStatus;
 
 // DPMI real mode interrupt structure
-static struct rminfo {
+static struct rminfo
+{
 	long EDI;
 	long ESI;
 	long EBP;
@@ -68,16 +70,17 @@ static struct rminfo {
 	long ECX;
 	long EAX;
 	short flags;
-	short ES,DS,FS,GS,IP,CS,SP,SS;
+	short ES, DS, FS, GS, IP, CS, SP, SS;
 } RMI;
 
-typedef struct {
-   unsigned char        deviceType;
-   unsigned char        majorVersion;
-   unsigned char        minorVersion;
-   unsigned char        absRelFlags;
-   unsigned char        centeringFlags;
-   unsigned char        reserved[5];
+typedef struct
+{
+	unsigned char        deviceType;
+	unsigned char        majorVersion;
+	unsigned char        minorVersion;
+	unsigned char        absRelFlags;
+	unsigned char        centeringFlags;
+	unsigned char        reserved[5];
 } StaticDeviceData;
 
 // values for deviceType:
@@ -85,7 +88,7 @@ typedef struct {
 
 short                   selector;
 unsigned short  segment;                // segment of DOS memory block
-SWIFT_3DStatus  *cyberstat;
+SWIFT_3DStatus *cyberstat;
 int                             isCyberPresent;         // is CyberMan present?
 
 
@@ -110,7 +113,7 @@ void I_StartupCyberMan(void)
 	isCyberPresent = 0;
 
 	cyberstat = (SWIFT_3DStatus *)I_AllocLow (DOSMEMSIZE);
-	segment = (int)cyberstat>>4;
+	segment = (int)cyberstat >> 4;
 
 	pbuf = (StaticDeviceData *)cyberstat;
 	memset(pbuf, 0, sizeof (StaticDeviceData));
@@ -126,7 +129,7 @@ void I_StartupCyberMan(void)
 	regs.w.cx = 0;
 	regs.x.edi = FP_OFF(&RMI);
 	sregs.es = FP_SEG(&RMI);
-	int386x( DPMI_INT, &regs, &regs, &sregs );
+	int386x(DPMI_INT, &regs, &regs, &sregs);
 
 	if ((short)RMI.EAX != 1)
 	{
@@ -145,7 +148,7 @@ void I_StartupCyberMan(void)
 		else
 		{
 			sprintf(cyberMsg, "CyberMan: SWIFT device is not a CyberMan! (type=%d)\n", pbuf->deviceType);
-			tprintf(cyberMsg,1 );
+			tprintf(cyberMsg, 1);
 		}
 	}
 	else
@@ -185,12 +188,12 @@ void I_ReadCyberCmd (ticcmd_t *cmd)
 	regs.w.cx = 0;
 	regs.x.edi = FP_OFF(&RMI);
 	sregs.es = FP_SEG(&RMI);
-	int386x( DPMI_INT, &regs, &regs, &sregs );
+	int386x(DPMI_INT, &regs, &regs, &sregs);
 
 	if (cyberstat->y < -7900)
-		cmd->forwardmove = 0xc800/2048;
+		cmd->forwardmove = 0xc800 / 2048;
 	else if (cyberstat->y > 7900)
-		cmd->forwardmove = -0xc800/2048;
+		cmd->forwardmove = -0xc800 / 2048;
 
 	if (cyberstat->buttons & 4)
 		cmd->buttons |= BT_ATTACK;
@@ -203,11 +206,11 @@ void I_ReadCyberCmd (ticcmd_t *cmd)
 	if (cyberstat->buttons & 1)
 	{       // strafe
 		if (cyberstat->x < -7900)
-			cmd->sidemove = -0xc800/2048;
+			cmd->sidemove = -0xc800 / 2048;
 		else if (cyberstat->x > 7900)
-			cmd->sidemove = 0xc800/2048;
+			cmd->sidemove = 0xc800 / 2048;
 		else
-			cmd->sidemove = delta*40/2048;
+			cmd->sidemove = delta * 40 / 2048;
 	}
 	else
 	{
@@ -216,7 +219,7 @@ void I_ReadCyberCmd (ticcmd_t *cmd)
 		else if (cyberstat->x > 7900)
 			cmd->angleturn = -0x280;
 		else
-			cmd->angleturn = -delta*0xa/16;
+			cmd->angleturn = -delta * 0xa / 16;
 
 	}
 
@@ -240,7 +243,7 @@ void I_Tactile (int on, int off, int total)
 
 	memset(&RMI, 0, sizeof(RMI));
 	RMI.EAX = 0x5330;            // SWIFT: Get Position and Buttons
-	RMI.EBX = on*256+off;
+	RMI.EBX = on * 256 + off;
 	RMI.ECX = total;
 	memset(&sregs, 0, sizeof (sregs));
 	regs.w.ax = 0x0300;          // DPMI: simulate interrupt
@@ -248,5 +251,5 @@ void I_Tactile (int on, int off, int total)
 	regs.w.cx = 0;
 	regs.x.edi = FP_OFF(&RMI);
 	sregs.es = FP_SEG(&RMI);
-	int386x( DPMI_INT, &regs, &regs, &sregs );
+	int386x(DPMI_INT, &regs, &regs, &sregs);
 }
