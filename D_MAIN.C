@@ -34,7 +34,7 @@ int startmap;
 boolean autostart;
 extern boolean automapactive;
 extern int headBob; // FS: Head bob toggle
-extern boolean usePalFlash; // FS
+extern int usePalFlash; // FS
 extern int faststart; // FS: Always faststart if you want
 extern int novert; // FS: No vertical mouse movement
 

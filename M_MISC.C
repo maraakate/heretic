@@ -370,6 +370,7 @@ extern  int     viewwidth, viewheight;
 
 int mouseSensitivity;
 
+int usePalFlash; /* FS: Palette Flashing toggle */
 int headBob; // FS: Head bob toggle
 int	useIntGus; // FS: Internal HT_GUS1M.WAD
 int faststart; // FS: Always faststart if you want
@@ -416,7 +417,7 @@ extern int     snd_SBport, snd_SBirq, snd_SBdma;       // sound blaster variable
 extern int     snd_Mport;                              // midi variables
 #endif
 
-extern boolean usePalFlash; // FS
+extern int usePalFlash; // FS
 
 default_t defaults[] =
 {
@@ -650,6 +651,8 @@ void M_LoadDefaults (void)
 	int     parm;
 	boolean     isstring;
 
+	newstring = NULL;
+
 	//
 	// set everything to base values
 	//
@@ -692,6 +695,11 @@ void M_LoadDefaults (void)
 					isstring = true;
 					len = strlen(strparm);
 					newstring = (char *)malloc(len);
+					if (!newstring)
+					{
+						I_Error("M_LoadDefaults(): Out of memory.");
+						return;
+					}
 					strparm[len - 1] = 0;
 					strcpy(newstring, strparm + 1);
 				}
@@ -740,6 +748,8 @@ void M_LoadExtendedDefaults (void)
 	int     parm;
 	boolean     isstring;
 
+	newstring = NULL;
+
 	//
 	// set everything to base values
 	//
@@ -763,6 +773,11 @@ void M_LoadExtendedDefaults (void)
 					isstring = true;
 					len = strlen(strparm);
 					newstring = (char *)malloc(len);
+					if (!newstring)
+					{
+						I_Error("M_LoadExtendedDefaults(): Out of memory.");
+						return;
+					}
 					strparm[len - 1] = 0;
 					strcpy(newstring, strparm + 1);
 				}
@@ -929,7 +944,10 @@ void M_ScreenShot (void)
 			break;  // file doesn't exist
 	}
 	if (i == 100)
+	{
 		I_Error ("M_ScreenShot: Couldn't create a PCX");
+		return;
+	}
 
 	//
 	// save the pcx file

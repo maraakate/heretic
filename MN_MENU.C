@@ -690,7 +690,7 @@ static void DrawFileSlots(Menu_t *menu)
 
 static void DrawOptionsMenu(void)
 {
-	extern boolean usePalFlash;
+	extern int usePalFlash;
 	extern int headBob;
 
 	if (messageson)
@@ -842,7 +842,7 @@ static boolean SCMessages(int option)
 
 static boolean SCPalFlashes(int option) // FS: Palette Flashes Toggle
 {
-	extern boolean usePalFlash;
+	extern int usePalFlash;
 	usePalFlash ^= 1;
 	if (usePalFlash)
 	{
@@ -1115,7 +1115,7 @@ boolean MN_Responder(event_t *event)
 	MenuItem_t *item;
 	extern boolean automapactive;
 	static boolean shiftdown;
-	extern boolean usePalFlash; // FS: Use Palette Flashing
+	extern int usePalFlash; // FS: Use Palette Flashing
 	extern int alwaysrun;
 	extern void D_StartTitle(void);
 	extern void G_CheckDemoStatus(void);

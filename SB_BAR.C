@@ -64,7 +64,6 @@ static void CheatFinishLevelFunc(player_t *player, Cheat_t *cheat); /* FS */
 // Public Data
 
 boolean DebugSound; // debug flag for displaying sound info
-boolean usePalFlash; /*: Palette Flashing toggle */
 
 boolean inventory;
 int curpos;
@@ -848,6 +847,7 @@ void SB_PaletteFlash(void)
 	int palette;
 	byte *pal;
 	extern boolean usevrgoggles;
+	extern int usePalFlash;
 
 	CPlayer = &players[consoleplayer];
 
@@ -874,7 +874,7 @@ void SB_PaletteFlash(void)
 		palette = 0;
 	}
 
-	if (usePalFlash == false || usevrgoggles) /* FS: Palette flashing toggle or FIXME: No palette flashing with SimulEyes as it fucks up the shutters */
+	if (usePalFlash == 0 || usevrgoggles) /* FS: Palette flashing toggle or FIXME: No palette flashing with SimulEyes as it fucks up the shutters */
 		palette = 0;
 
 	if (palette != sb_palette)

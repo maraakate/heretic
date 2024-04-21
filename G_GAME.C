@@ -966,6 +966,8 @@ void G_Ticker (void)
 	int                     i, buf;
 	ticcmd_t *cmd;
 
+	cmd = NULL;
+
 	//
 	// do player reborns if needed
 	//
@@ -1095,7 +1097,10 @@ void G_Ticker (void)
 		players[consoleplayer].readyArtifact =
 			players[consoleplayer].inventory[inv_ptr].type;
 		inventory = false;
-		cmd->arti = 0;
+		if (cmd)
+		{
+			cmd->arti = 0;
+		}
 	}
 	//
 	// do main actions

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\DOS">
+      <UniqueIdentifier>{a8592f39-b34d-4364-9722-43bb31c48936}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AM_MAP.C">
@@ -67,12 +70,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="G_GAME.C">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="I_CYBER.C">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="I_SOUND.C">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IN_LUDE.C">
@@ -165,16 +162,10 @@
     <ClCompile Include="r_things.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="s_sound.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SB_BAR.C">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sounds.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sys_dosw.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tables.c">
@@ -191,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="z_zone.c">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="I_CYBER.C">
+      <Filter>Source Files\DOS</Filter>
+    </ClCompile>
+    <ClCompile Include="I_SOUND.C">
+      <Filter>Source Files\DOS</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_dosw.c">
+      <Filter>Source Files\DOS</Filter>
+    </ClCompile>
+    <ClCompile Include="s_sound.c">
+      <Filter>Source Files\DOS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
