@@ -126,6 +126,12 @@ deh_context_t *DEH_OpenLump(int lumpnum)
 	context->input_buffer_pos = 0;
 
 	context->filename = malloc(9);
+	if (!context->filename)
+	{
+		I_Error("DEH_OpenLump(): out of memory.");
+		return context;
+	}
+
 	strncpy(context->filename, lumpinfo[lumpnum].name, 8);
 	context->filename[8] = '\0';
 

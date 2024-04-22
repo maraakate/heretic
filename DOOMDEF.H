@@ -270,7 +270,7 @@ typedef struct
 } degenmobj_t;
 
 // Most damage defined using HITDICE
-#define HITDICE(a) ((1+(P_Random()&7))*a)
+#define HITDICE(a) ((1+(P_Random()&7))*(a))
 
 //
 // frame flags

@@ -13,7 +13,7 @@
 #define NUMREDPALS		8
 #define NUMBONUSPALS	4
 
-#define FOOTCLIPSIZE	10*FRACUNIT
+#define FOOTCLIPSIZE	(10*FRACUNIT)
 
 #define TOCENTER -8
 #define	FLOATSPEED (FRACUNIT*4)
@@ -30,12 +30,12 @@
 #define	MAPBTOFRAC		(MAPBLOCKSHIFT-FRACBITS)
 
 // player radius for movement checking
-#define PLAYERRADIUS 16*FRACUNIT
+#define PLAYERRADIUS (16*FRACUNIT)
 
 // MAXRADIUS is for precalculated sector block boxes
 // the spider demon is larger, but we don't have any moving sectors
 // nearby
-#define MAXRADIUS 32*FRACUNIT
+#define MAXRADIUS (32*FRACUNIT)
 
 #define	GRAVITY FRACUNIT
 #define	MAXMOVE (30*FRACUNIT)

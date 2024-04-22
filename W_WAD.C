@@ -178,7 +178,10 @@ void W_AddFile (char *filename)
 	//
 	lumpinfo = realloc (lumpinfo, numlumps * sizeof(lumpinfo_t));
 	if (!lumpinfo)
+	{
 		I_Error ("Couldn't realloc lumpinfo");
+		return;
+	}
 	lump_p = &lumpinfo[startlump];
 
 	for (i = startlump; i < numlumps; i++, lump_p++, fileinfo++)

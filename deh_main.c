@@ -173,7 +173,7 @@ boolean DEH_ParseAssignment(char *line, char **variable_name, char **value)
 
 	p = strchr(line, '=');
 
-	if (p == NULL && p - line > 2)
+	if (p == NULL && p - line > 2) /* FS: FIXME: Should this be || ? */
 	{
 		return false;
 	}

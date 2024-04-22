@@ -269,6 +269,11 @@ void M_FindResponseFile(void)
 			size = ftell(handle);
 			fseek (handle, 0, SEEK_SET);
 			file = malloc (size);
+			if (!file)
+			{
+				printf("\nM_FindResponseFile(): out of memory.");
+				exit(1);
+			}
 			fread (file, size, 1, handle);
 			fclose (handle);
 
@@ -278,6 +283,11 @@ void M_FindResponseFile(void)
 
 			firstargv = myargv[0];
 			myargv = malloc(sizeof(char *) * MAXARGVS);
+			if (!myargv)
+			{
+				printf("\nM_FindResponseFile(): out of memory.");
+				exit(1);
+			}
 			memset(myargv, 0, sizeof(char *) * MAXARGVS);
 			myargv[0] = firstargv;
 

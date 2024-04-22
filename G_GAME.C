@@ -225,7 +225,7 @@ void G_BuildTiccmd (ticcmd_t *cmd)
 	//printf ("cons: %i\n",cmd->consistancy);
 
 	strafe = gamekeydown[key_strafe] || mousebuttons[mousebstrafe] || joybuttons[joybstrafe];
-	speed = alwaysrun || gamekeydown[key_speed] || joybuttons[joybspeed] || joybuttons[joybspeed];
+	speed = alwaysrun || gamekeydown[key_speed] || joybuttons[joybspeed];
 
 #ifdef __WATCOMC__
 	if (useexterndriver)
@@ -1532,7 +1532,7 @@ void G_DoCompleted(void)
 
 			if (!netgame)
 				IN_PrintSingleStats();
-			else if (netgame && !deathmatch)
+			else if (!deathmatch)
 				IN_PrintCoopStats();
 			else
 				IN_PrintDMStats();

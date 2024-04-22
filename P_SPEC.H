@@ -258,7 +258,7 @@ typedef struct
 	int			topcountdown;	// when it reaches 0, start going down
 } vldoor_t;
 	
-#define	VDOORSPEED	FRACUNIT*2
+#define	VDOORSPEED	(FRACUNIT*2)
 #define	VDOORWAIT		150
 
 void	EV_VerticalDoor (line_t *line, mobj_t *thing);

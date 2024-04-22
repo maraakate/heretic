@@ -522,20 +522,21 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	player_t *player;
 	fixed_t delta;
 	int sound;
-	boolean respawn;
 
 	delta = special->z - toucher->z;
 	if (delta > toucher->height || delta < -32 * FRACUNIT)
 	{ // Out of reach
 		return;
 	}
+
 	if (toucher->health <= 0)
 	{ // Toucher is dead
 		return;
 	}
+
 	sound = sfx_itemup;
 	player = toucher->player;
-	respawn = true;
+
 	switch (special->sprite)
 	{
 		// Items
@@ -836,7 +837,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 	{
 		player->itemcount++;
 	}
-	if ((netgame && respawn && !(special->flags & MF_DROPPED) && !M_CheckParm("-oldrules")) || M_CheckParm("-respawnitems")) // FS: Respawning Items Was deathmatch
+	if ((netgame && !(special->flags & MF_DROPPED) && !M_CheckParm("-oldrules")) || M_CheckParm("-respawnitems")) // FS: Respawning Items Was deathmatch
 	{
 		P_HideSpecialThing(special);
 	}
@@ -861,7 +862,7 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 void P_KillMobj(mobj_t *source, mobj_t *target)
 {
 	int i, z; // FS: For Player Died message
-	player_t *player, *playermsg; // FS: For Player Died message
+	player_t *player; // FS: For Player Died message
 	int playnum; // FS: For Player Died message
 
 	target->flags &= ~(MF_SHOOTABLE | MF_FLOAT | MF_SKULLFLY | MF_NOGRAVITY);

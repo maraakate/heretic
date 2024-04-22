@@ -216,7 +216,7 @@ void IN_InitStats(void)
 		time -= minutes * 60;
 		seconds = time;
 	}
-	else if (netgame && !deathmatch)
+	else if (!deathmatch)
 	{
 		gametype = COOPERATIVE;
 		memset(killPercent, 0, MAXPLAYERS * sizeof(int));
@@ -677,7 +677,7 @@ void IN_DrawSingleStats(void)
 		sounds = 0;
 		return;
 	}
-	if (sounds < 1 && intertime >= 30)
+	if (sounds < 1)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -689,7 +689,7 @@ void IN_DrawSingleStats(void)
 	{
 		return;
 	}
-	if (sounds < 2 && intertime >= 60)
+	if (sounds < 2)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -701,7 +701,7 @@ void IN_DrawSingleStats(void)
 	{
 		return;
 	}
-	if (sounds < 3 && intertime >= 90)
+	if (sounds < 3)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -713,7 +713,7 @@ void IN_DrawSingleStats(void)
 	{
 		return;
 	}
-	if (sounds < 4 && intertime >= 150)
+	if (sounds < 4)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;
@@ -770,7 +770,7 @@ void IN_DrawCoopStats(void)
 				ypos += 37;
 				continue;
 			}
-			else if (intertime >= 40 && sounds < 1)
+			else if (sounds < 1)
 			{
 				S_StartSound(NULL, sfx_dorcls);
 				sounds++;
@@ -828,7 +828,7 @@ void IN_DrawDMStats(void)
 		sounds = 0;
 		return;
 	}
-	if (intertime >= 20 && sounds < 1)
+	if (sounds < 1)
 	{
 		S_StartSound(NULL, sfx_dorcls);
 		sounds++;

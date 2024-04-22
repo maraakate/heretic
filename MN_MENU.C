@@ -809,13 +809,12 @@ static boolean SCEndGame(int option)
 	{
 		return false;
 	}
+
 	MenuActive = false;
 	askforquit = true;
 	typeofask = 2; //endgame
-	if (!netgame && !demoplayback)
-	{
-		paused = true;
-	}
+	paused = true;
+
 	return true;
 }
 
@@ -1171,74 +1170,68 @@ boolean MN_Responder(event_t *event)
 		{
 			case KEY_ENTER: // FS: Wanted the option
 			case 'y':
-				if (askforquit)
+
+				switch (typeofask)
 				{
-					switch (typeofask)
-					{
-						case 1:
-							G_CheckDemoStatus();
-							I_Quit();
-							break;
-						case 2:
-							players[consoleplayer].messageTics = 0;
-							//set the msg to be cleared
-							players[consoleplayer].message = NULL;
-							typeofask = 0;
-							askforquit = false;
-							paused = false;
-							I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
-							D_StartTitle(); // go to intro/demo mode.
-							break;
-						case 3:
-							P_SetMessage(&players[consoleplayer], "QUICKSAVING....", false);
-							FileMenuKeySteal = true;
-							SCSaveGame(quicksave - 1);
-							askforquit = false;
-							typeofask = 0;
-							BorderNeedRefresh = true;
-							return true;
-						case 4:
-							P_SetMessage(&players[consoleplayer], "QUICKLOADING....", false);
-							SCLoadGame(quickload - 1);
-							askforquit = false;
-							typeofask = 0;
-							BorderNeedRefresh = true;
-							return true;
-						case 5: // FS: Delete saves
-							sprintf(savename, SAVEGAMENAME"%d.hsg", saveOn);
-							remove(savename);
-							S_StartSound(NULL, sfx_dorcls);
-							for (z = 0; z < SLOTTEXTLEN + 2; z++)
-							{
-								SlotText[saveOn][z] = 0; // empty the string
-								oldSlotText[z] = 0;
-							}
-							SlotStatus[saveOn] = 0;
-							askforquit = false;
-							paused = false;
-							typeofask = 0;
-							BorderNeedRefresh = true;
-							slottextloaded = false;
-							MenuActive = true;
-							return true;
-						default:
-							return true; // eat the 'y' keypress
-					}
+					case 1:
+						G_CheckDemoStatus();
+						I_Quit();
+						break;
+					case 2:
+						players[consoleplayer].messageTics = 0;
+						//set the msg to be cleared
+						players[consoleplayer].message = NULL;
+						typeofask = 0;
+						askforquit = false;
+						paused = false;
+						I_SetPalette(W_CacheLumpName("PLAYPAL", PU_CACHE));
+						D_StartTitle(); // go to intro/demo mode.
+						break;
+					case 3:
+						P_SetMessage(&players[consoleplayer], "QUICKSAVING....", false);
+						FileMenuKeySteal = true;
+						SCSaveGame(quicksave - 1);
+						askforquit = false;
+						typeofask = 0;
+						BorderNeedRefresh = true;
+						return true;
+					case 4:
+						P_SetMessage(&players[consoleplayer], "QUICKLOADING....", false);
+						SCLoadGame(quickload - 1);
+						askforquit = false;
+						typeofask = 0;
+						BorderNeedRefresh = true;
+						return true;
+					case 5: // FS: Delete saves
+						sprintf(savename, SAVEGAMENAME"%d.hsg", saveOn);
+						remove(savename);
+						S_StartSound(NULL, sfx_dorcls);
+						for (z = 0; z < SLOTTEXTLEN + 2; z++)
+						{
+							SlotText[saveOn][z] = 0; // empty the string
+							oldSlotText[z] = 0;
+						}
+						SlotStatus[saveOn] = 0;
+						askforquit = false;
+						paused = false;
+						typeofask = 0;
+						BorderNeedRefresh = true;
+						slottextloaded = false;
+						MenuActive = true;
+						return true;
+					default:
+						return true; // eat the 'y' keypress
 				}
 				return false;
 			case 'n':
 			case KEY_ESCAPE:
-				if (askforquit)
-				{
-					players[consoleplayer].messageTics = 1; //set the msg to be cleared
-					askforquit = false;
-					typeofask = 0;
-					paused = false;
-					UpdateState |= I_FULLSCRN;
-					BorderNeedRefresh = true;
-					return true;
-				}
-				return false;
+				players[consoleplayer].messageTics = 1; //set the msg to be cleared
+				askforquit = false;
+				typeofask = 0;
+				paused = false;
+				UpdateState |= I_FULLSCRN;
+				BorderNeedRefresh = true;
+				return true;
 		}
 		return false; // don't let the keys filter thru
 	}
@@ -1317,7 +1310,7 @@ boolean MN_Responder(event_t *event)
 					MenuTime = 0;
 					CurrentMenu = &SaveMenu;
 					CurrentItPos = CurrentMenu->oldItPos;
-					if (!netgame && !demoplayback)
+					if (!netgame)
 					{
 						paused = true;
 					}
@@ -1392,7 +1385,7 @@ boolean MN_Responder(event_t *event)
 					{
 						askforquit = true;
 						typeofask = 3;
-						if (!netgame && !demoplayback)
+						if (!netgame)
 						{
 							paused = true;
 						}
@@ -1401,7 +1394,7 @@ boolean MN_Responder(event_t *event)
 				}
 				return true;
 			case KEY_F7: // endgame
-				if (gamestate == GS_LEVEL && !demoplayback)
+				if (gamestate == GS_LEVEL)
 				{
 					S_StartSound(NULL, sfx_chat);
 					SCEndGame(0);
@@ -1656,7 +1649,7 @@ boolean MN_Responder(event_t *event)
 			}
 			return(true);
 		}
-		if (slotptr < SLOTTEXTLEN && key != KEY_BACKSPACE)
+		if (slotptr < SLOTTEXTLEN)
 		{
 			if ((key >= 'a' && key <= 'z'))
 			{

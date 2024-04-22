@@ -4,7 +4,7 @@
 #pragma once
 
 // For use if I do walls with outsides/insides
-#define REDS		12*8
+#define REDS		(12*8)
 #define REDRANGE	1//16
 #define BLUES		(256-4*16+8)
 #define BLUERANGE	1//8
@@ -14,11 +14,11 @@
 #define GRAYSRANGE	1//16
 #define BROWNS		(14*8)
 #define BROWNRANGE	1//16
-#define YELLOWS		10*8
+#define YELLOWS		(10*8)
 #define YELLOWRANGE	1
 #define BLACK		0
-#define WHITE		4*8
-#define PARCH		13*8-1
+#define WHITE		(4*8)
+#define PARCH		(13*8-1)
 #define BLOODRED  150
 #define BLUEKEY 	197
 #define YELLOWKEY 144
